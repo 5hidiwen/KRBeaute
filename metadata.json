@@ -1,0 +1,8 @@
+{
+  "name": "Karina Robart - Esthéticienne à Domicile",
+  "description": "Prestations de soins du visage, massages relaxants et beauté à domicile à Rennes et ses environs par une esthéticienne diplômée d'État (CAP Esthétique).",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
