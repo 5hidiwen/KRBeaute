@@ -3,7 +3,6 @@ import { Phone, Mail, Instagram } from 'lucide-react';
 import { LegalTab } from './LegalModal';
 import { NavTab } from './Navbar';
 import { useLanguage } from '../i18n/LanguageContext';
-import { LanguageSelector } from './LanguageSelector';
 
 interface FooterProps {
   onOpenLegal: (tab: LegalTab) => void;
@@ -33,13 +32,11 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
         {/* Sleek, lightweight single-tier bar */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 pb-4 border-b border-[#D1C4E9]/40">
           
-          {/* Identity & Language switch */}
-          <div className="flex items-center gap-3">
+          {/* Identity */}
+          <div>
             <span className="font-serif text-base font-bold text-[#512D6D]">
               Karina Robart
             </span>
-            <span className="text-[#D1C4E9]" aria-hidden="true">·</span>
-            <LanguageSelector compact />
           </div>
 
           {/* Quick Contacts & Socials */}

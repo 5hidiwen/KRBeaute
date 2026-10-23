@@ -18,17 +18,52 @@ interface NavLinkItem {
   icon: React.ReactNode;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab, onOpenBooking }) => {
+export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
   const { t, language } = useLanguage();
 
   const navLinks: NavLinkItem[] = [
-    { id: 'accueil', label: t.nav.tabs.accueil, shortLabel: t.nav.tabs.accueil, icon: <Home className="w-4 h-4" /> },
-    { id: 'soins', label: t.nav.tabs.soins, shortLabel: t.nav.tabs.soins, icon: <Sparkles className="w-4 h-4" /> },
-    { id: 'secteur', label: t.nav.tabs.secteur, shortLabel: t.nav.tabs.secteurShort, icon: <MapPin className="w-4 h-4" /> },
-    { id: 'marques', label: t.nav.tabs.marques, shortLabel: t.nav.tabs.marquesShort, icon: <Cpu className="w-4 h-4" /> },
-    { id: 'a-propos', label: t.nav.tabs.aPropos, shortLabel: t.nav.tabs.aProposShort, icon: <Award className="w-4 h-4" /> },
-    { id: 'faq', label: t.nav.tabs.faq, shortLabel: t.nav.tabs.faq, icon: <HelpCircle className="w-4 h-4" /> },
-    { id: 'contact', label: t.nav.tabs.contact, shortLabel: t.nav.tabs.contact, icon: <Mail className="w-4 h-4" /> },
+    { 
+      id: 'accueil', 
+      label: t.nav.tabs.accueil, 
+      shortLabel: t.nav.tabs.accueil, 
+      icon: <Home className="w-3.5 h-3.5" /> 
+    },
+    { 
+      id: 'soins', 
+      label: language === 'es' ? 'Tratamientos' : 'Soins & Tarifs', 
+      shortLabel: language === 'es' ? 'Tratamientos' : 'Soins', 
+      icon: <Sparkles className="w-3.5 h-3.5" /> 
+    },
+    { 
+      id: 'secteur', 
+      label: language === 'es' ? 'Zona (7 km)' : 'Secteur (7 km)', 
+      shortLabel: language === 'es' ? 'Radio 7 km' : 'Rayon 7 km', 
+      icon: <MapPin className="w-3.5 h-3.5" /> 
+    },
+    { 
+      id: 'marques', 
+      label: language === 'es' ? 'Tecnologías' : 'Technologies', 
+      shortLabel: language === 'es' ? 'Tecnologías' : 'Technologies', 
+      icon: <Cpu className="w-3.5 h-3.5" /> 
+    },
+    { 
+      id: 'a-propos', 
+      label: language === 'es' ? 'Sobre Mí' : 'À Propos', 
+      shortLabel: language === 'es' ? 'Sobre Mí' : 'À Propos', 
+      icon: <Award className="w-3.5 h-3.5" /> 
+    },
+    { 
+      id: 'faq', 
+      label: 'FAQ', 
+      shortLabel: 'FAQ', 
+      icon: <HelpCircle className="w-3.5 h-3.5" /> 
+    },
+    { 
+      id: 'contact', 
+      label: language === 'es' ? 'Contacto' : 'Contact', 
+      shortLabel: language === 'es' ? 'Contacto' : 'Contact', 
+      icon: <Mail className="w-3.5 h-3.5" /> 
+    },
   ];
 
   const handleTabClick = (tab: NavTab) => {
@@ -48,33 +83,33 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab, onOpenBo
       <header className="sticky top-0 z-40 bg-[#F9F6F0]/95 backdrop-blur-md border-b border-[#D1C4E9]/60 shadow-xs">
         
         {/* Top Tier: Wordmark & Direct Actions */}
-        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-14 sm:h-18 flex items-center justify-between gap-2 sm:gap-3">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between gap-2 sm:gap-4">
           
           {/* Brand Wordmark */}
           <button 
             onClick={() => handleTabClick('accueil')}
-            className="flex items-center gap-2 sm:gap-2.5 font-serif tracking-tight text-[#512D6D] whitespace-nowrap shrink-0 hover:opacity-90 transition-opacity cursor-pointer text-left"
+            className="flex items-center gap-2 font-serif tracking-tight text-[#512D6D] whitespace-nowrap shrink-0 hover:opacity-90 transition-opacity cursor-pointer text-left"
           >
             <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#512D6D] text-[#F9F6F0] flex items-center justify-center font-serif text-xs sm:text-sm font-bold tracking-tight shadow-xs">
               KR
             </span>
             <div className="flex flex-col sm:flex-row sm:items-baseline sm:gap-1.5">
-              <span className="text-sm sm:text-lg font-bold leading-tight">Karina Robart</span>
-              <span className="text-[11px] sm:text-xs text-[#5D4037]/80 font-sans hidden xs:inline">
+              <span className="text-sm sm:text-base font-bold leading-tight">Karina Robart</span>
+              <span className="text-[11px] text-[#5D4037]/70 font-sans hidden xl:inline">
                 {t.nav.brandRole}
               </span>
             </div>
           </button>
 
           {/* Desktop Navigation Links (Large screens) */}
-          <nav className="hidden lg:flex items-center gap-1 text-xs font-medium text-[#5D4037]">
+          <nav className="hidden lg:flex items-center gap-1 xl:gap-1.5 text-xs font-medium text-[#5D4037]">
             {navLinks.map((link) => {
               const isActive = activeTab === link.id;
               return (
                 <button
                   key={link.id}
                   onClick={() => handleTabClick(link.id)}
-                  className={`px-3 py-1.5 rounded-xl transition-all whitespace-nowrap shrink-0 cursor-pointer ${
+                  className={`px-2.5 xl:px-3 py-1.5 rounded-xl transition-all whitespace-nowrap shrink-0 cursor-pointer ${
                     isActive
                       ? 'bg-[#512D6D] text-[#F9F6F0] font-semibold shadow-xs'
                       : 'text-[#5D4037] hover:text-[#512D6D] hover:bg-[#D1C4E9]/30'
@@ -87,61 +122,50 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab, onOpenBo
           </nav>
 
           {/* Right Action: Language Selector & Direct Contact */}
-          <div className="flex items-center gap-2 shrink-0">
-            {/* Language Selector: Always accessible */}
+          <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+            {/* Micro Language Switcher [ FR | ES ] */}
             <LanguageSelector />
 
-            {/* Desktop Contact Buttons (visible on md+) */}
-            <div className="hidden sm:flex items-center gap-1.5">
-              <a
-                href="tel:+33665566702"
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-[#D1C4E9] text-[#512D6D] text-xs font-semibold shadow-2xs hover:bg-[#F9F6F0] transition-colors"
-                aria-label={t.nav.callAria}
-              >
-                <Phone className="w-3.5 h-3.5" />
-                <span>{t.nav.call}</span>
-              </a>
-              <a
-                href={whatsAppUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#512D6D] text-white text-xs font-bold shadow-2xs hover:bg-[#402257] active:scale-95 transition-all"
-                aria-label={t.nav.whatsappAria}
-              >
-                <MessageCircle className="w-3.5 h-3.5 text-emerald-300" />
-                <span>{t.nav.whatsapp}</span>
-              </a>
-            </div>
+            {/* Quick Phone Call (Desktop / Tablet) */}
+            <a
+              href="tel:+33665566702"
+              className="hidden md:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-[#D1C4E9] text-[#512D6D] text-xs font-semibold shadow-2xs hover:bg-[#F9F6F0] transition-colors"
+              aria-label={t.nav.callAria}
+              title="06 65 56 67 02"
+            >
+              <Phone className="w-3.5 h-3.5" />
+              <span className="hidden xl:inline">06 65 56 67 02</span>
+              <span className="xl:hidden">{t.nav.call}</span>
+            </a>
 
-            {/* Mobile Fast Contact Button */}
-            <div className="flex sm:hidden items-center gap-1">
-              <a
-                href={whatsAppUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-1 px-2.5 py-1.5 rounded-full bg-[#512D6D] text-white text-xs font-bold shadow-2xs active:scale-95"
-                aria-label={t.nav.whatsappAria}
-              >
-                <MessageCircle className="w-3.5 h-3.5 text-emerald-300" />
-                <span className="hidden xs:inline">{t.nav.whatsapp}</span>
-              </a>
-            </div>
+            {/* WhatsApp Booking CTA Button */}
+            <a
+              href={whatsAppUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 rounded-full bg-[#512D6D] hover:bg-[#402257] active:scale-95 text-white text-xs font-bold shadow-2xs transition-all"
+              aria-label={t.nav.whatsappAria}
+            >
+              <MessageCircle className="w-3.5 h-3.5 text-emerald-300" />
+              <span className="hidden sm:inline">{t.nav.bookWhatsApp}</span>
+              <span className="sm:hidden">{t.nav.whatsapp}</span>
+            </a>
           </div>
 
         </div>
 
-        {/* Mobile Horizontal Scrollable Tab Bar - Instant 1-tap switching without burger menu */}
-        <div className="lg:hidden border-t border-[#D1C4E9]/50 bg-[#F4EFE6]/70 px-2 py-1.5 overflow-x-auto scrollbar-none flex items-center gap-1.5">
+        {/* Mobile Horizontal Scrollable Tab Bar */}
+        <div className="lg:hidden border-t border-[#D1C4E9]/40 bg-[#F4EFE6]/60 px-2 py-1 overflow-x-auto scrollbar-none flex items-center gap-1">
           {navLinks.map((link) => {
             const isActive = activeTab === link.id;
             return (
               <button
                 key={link.id}
                 onClick={() => handleTabClick(link.id)}
-                className={`flex items-center gap-1 px-3 py-1.5 rounded-full text-xs whitespace-nowrap shrink-0 transition-all ${
+                className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] whitespace-nowrap shrink-0 transition-all ${
                   isActive
                     ? 'bg-[#512D6D] text-white font-bold shadow-xs'
-                    : 'bg-white/80 text-[#5D4037] border border-[#D1C4E9]/60 active:bg-[#D1C4E9]/40'
+                    : 'bg-white/80 text-[#5D4037] border border-[#D1C4E9]/50 active:bg-[#D1C4E9]/40'
                 }`}
               >
                 {link.icon}
@@ -153,7 +177,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab, onOpenBo
 
       </header>
 
-      {/* MOBILE STICKY BOTTOM DIRECT CONTACT BAR (Instant 1-Tap Access to Essentials) */}
+      {/* MOBILE STICKY BOTTOM DIRECT CONTACT BAR */}
       <div className="sm:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#F9F6F0]/95 backdrop-blur-md border-t border-[#D1C4E9] shadow-xl px-3 py-2 flex items-center gap-2">
         <a
           href="tel:+33665566702"
