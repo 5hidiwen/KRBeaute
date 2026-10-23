@@ -1,51 +1,94 @@
 import React, { useState, useEffect } from 'react';
 import { Phone, MessageCircle, Mail, MapPin, Send, CheckCircle2, Instagram } from 'lucide-react';
-import { SERVICES, ServiceItem } from '../data/servicesData';
+import { getServices, ServiceItem } from '../data/servicesData';
 import { COMMUNES_DATA } from '../data/communesData';
+import { useLanguage } from '../i18n/LanguageContext';
 
 interface ContactSectionProps {
   selectedService?: ServiceItem | null;
 }
 
 export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService }) => {
+  const { t, language } = useLanguage();
+  const currentServices = getServices(language);
+
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
     email: '',
     commune: 'Rennes Centre & Quartiers',
-    serviceTitle: selectedService ? selectedService.title : SERVICES[0].title,
+    serviceId: selectedService ? selectedService.id : currentServices[0].id,
+    serviceTitle: selectedService ? selectedService.title : currentServices[0].title,
     preferredDate: '',
-    preferredTimeSlot: 'Matin (9h - 12h)',
+    preferredTimeSlot: 'morning',
     message: ''
   });
 
   const [submitted, setSubmitted] = useState(false);
 
+  // Synchronize when selectedService changes
   useEffect(() => {
     if (selectedService) {
+      const match = currentServices.find(s => s.id === selectedService.id) || selectedService;
       setFormData(prev => ({
         ...prev,
-        serviceTitle: selectedService.title
+        serviceId: match.id,
+        serviceTitle: match.title
       }));
     }
-  }, [selectedService]);
+  }, [selectedService, currentServices]);
+
+  // Synchronize serviceTitle if language changes
+  useEffect(() => {
+    const matchedService = currentServices.find(s => s.id === formData.serviceId);
+    if (matchedService) {
+      setFormData(prev => ({
+        ...prev,
+        serviceTitle: matchedService.title
+      }));
+    }
+  }, [language, currentServices, formData.serviceId]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    const { name, value } = e.target;
+    if (name === 'serviceTitle') {
+      const matched = currentServices.find(s => s.title === value);
+      setFormData(prev => ({
+        ...prev,
+        serviceTitle: value,
+        serviceId: matched ? matched.id : prev.serviceId
+      }));
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        [name]: value
+      }));
+    }
+  };
+
+  const getSlotLabel = (slotKey: string) => {
+    const slots = t.contact.rightCard.slots;
+    if (slotKey === 'morning') return slots.morning;
+    if (slotKey === 'noon') return slots.noon;
+    if (slotKey === 'afternoon') return slots.afternoon;
+    if (slotKey === 'evening') return slots.evening;
+    return slotKey;
   };
 
   const generateWhatsAppUrl = () => {
+    const wt = t.contact.whatsappTemplate;
+    const slotText = getSlotLabel(formData.preferredTimeSlot);
+    const dateText = formData.preferredDate || wt.toAgree;
+    const nameText = formData.name || wt.clientDefault;
+
     const text = encodeURIComponent(
-      `Bonjour Karina,\n\nJe souhaite réserver un soin à domicile :\n` +
-      `• Soin souhaité : ${formData.serviceTitle}\n` +
-      `• Lieu / Commune : ${formData.commune}\n` +
-      `• Créneau souhaité : ${formData.preferredDate || 'À convenir'} (${formData.preferredTimeSlot})\n` +
-      `• Nom : ${formData.name || 'Client(e)'}\n` +
-      (formData.message ? `• Précision : ${formData.message}\n` : '') +
-      `\nMerci d'avance pour votre confirmation !`
+      `${wt.greeting}\n\n${wt.intro}\n` +
+      `${wt.service} ${formData.serviceTitle}\n` +
+      `${wt.location} ${formData.commune}\n` +
+      `${wt.slot} ${dateText} (${slotText})\n` +
+      `${wt.name} ${nameText}\n` +
+      (formData.message ? `${wt.precision} ${formData.message}\n` : '') +
+      `\n${wt.closing}`
     );
     return `https://wa.me/33665566702?text=${text}`;
   };
@@ -59,7 +102,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
     <section id="contact" className="pt-4 pb-8 sm:pt-6 sm:pb-12 bg-gradient-to-b from-[#F9F6F0] via-[#F3EDE2]/60 to-[#F9F6F0]">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         
-        {/* Harmonized 2-Column Grid (Equal height, visible without scrolling) */}
+        {/* Harmonized 2-Column Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6 items-stretch">
           
           {/* CARD 1 (LEFT): CONDITIONS DE RÉSERVATION & COORDONNÉES */}
@@ -68,96 +111,42 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
               {/* Card Header matching flyer */}
               <div className="text-center pb-3 mb-3 border-b border-[#D1C4E9]/60">
                 <span className="text-[10px] sm:text-xs font-bold tracking-wider uppercase text-[#8B2651] block mb-0.5">
-                  Prestations à Domicile · Rennes
+                  {t.contact.leftCard.kicker}
                 </span>
                 <h3 className="font-serif text-lg sm:text-2xl font-bold text-[#512D6D] tracking-tight">
-                  Conditions de Réservation
+                  {t.contact.leftCard.title}
                 </h3>
                 <p className="font-serif italic text-xs sm:text-sm text-[#8B2651] font-semibold mt-0.5">
-                  Soins à Domicile
+                  {t.contact.leftCard.sub}
                 </p>
                 <p className="text-[11px] sm:text-xs text-[#5D4037]/80 mt-1.5 leading-snug max-w-md mx-auto">
-                  Afin de vous garantir un moment de détente optimal et une organisation fluide, <strong>merci de prendre connaissance de nos conditions :</strong>
+                  {t.contact.leftCard.intro}
                 </p>
               </div>
 
               {/* 5 Points directly readable without scrolling */}
               <ol className="space-y-2.5 sm:space-y-3 text-xs sm:text-[13px] leading-relaxed text-[#5D4037]">
-                <li className="flex items-start gap-2.5">
-                  <span className="w-5 h-5 rounded-full bg-[#512D6D] text-white flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5 shadow-2xs">
-                    1
-                  </span>
-                  <div>
-                    <strong className="text-[#512D6D] uppercase font-bold text-[11px] sm:text-xs">
-                      Confirmation du RDV :
-                    </strong>
-                    <p className="text-[#5D4037]/90 text-[11px] sm:text-xs mt-0.5">
-                      Le paiement intégral (par lien de paiement ou virement) est demandé au moment de la réservation. Votre créneau est définitivement bloqué dès réception du règlement.
-                    </p>
-                  </div>
-                </li>
-
-                <li className="flex items-start gap-2.5">
-                  <span className="w-5 h-5 rounded-full bg-[#512D6D] text-white flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5 shadow-2xs">
-                    2
-                  </span>
-                  <div>
-                    <strong className="text-[#512D6D] uppercase font-bold text-[11px] sm:text-xs">
-                      Modification & Report :
-                    </strong>
-                    <p className="text-[#5D4037]/90 text-[11px] sm:text-xs mt-0.5">
-                      Possible sans frais au moins <strong>3 heures à l'avance</strong>. Passé ce délai, la séance ne pourra plus être reportée.
-                    </p>
-                  </div>
-                </li>
-
-                <li className="flex items-start gap-2.5">
-                  <span className="w-5 h-5 rounded-full bg-[#512D6D] text-white flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5 shadow-2xs">
-                    3
-                  </span>
-                  <div>
-                    <strong className="text-[#512D6D] uppercase font-bold text-[11px] sm:text-xs">
-                      Politique de Remboursement :
-                    </strong>
-                    <p className="text-[#5D4037]/90 text-[11px] sm:text-xs mt-0.5">
-                      Aucun remboursement n'est effectué après validation. La somme est conservée pour un report ultérieur (si prévenu + de 3h avant).
-                    </p>
-                  </div>
-                </li>
-
-                <li className="flex items-start gap-2.5">
-                  <span className="w-5 h-5 rounded-full bg-[#512D6D] text-white flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5 shadow-2xs">
-                    4
-                  </span>
-                  <div>
-                    <strong className="text-[#512D6D] uppercase font-bold text-[11px] sm:text-xs">
-                      Annulation par l'Esthéticienne :
-                    </strong>
-                    <p className="text-[#5D4037]/90 text-[11px] sm:text-xs mt-0.5">
-                      Un remboursement intégral sera effectué uniquement si je ne peux pas me déplacer à votre domicile pour assurer la prestation.
-                    </p>
-                  </div>
-                </li>
-
-                <li className="flex items-start gap-2.5">
-                  <span className="w-5 h-5 rounded-full bg-[#512D6D] text-white flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5 shadow-2xs">
-                    5
-                  </span>
-                  <div>
-                    <strong className="text-[#512D6D] uppercase font-bold text-[11px] sm:text-xs">
-                      Préparation chez vous :
-                    </strong>
-                    <p className="text-[#5D4037]/90 text-[11px] sm:text-xs mt-0.5">
-                      Merci de prévoir un espace calme et dégagé pour installer le matériel, ainsi qu'un accès à une prise et à un point d'eau.
-                    </p>
-                  </div>
-                </li>
+                {t.contact.leftCard.points.map((pt) => (
+                  <li key={pt.num} className="flex items-start gap-2.5">
+                    <span className="w-5 h-5 rounded-full bg-[#512D6D] text-white flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5 shadow-2xs">
+                      {pt.num}
+                    </span>
+                    <div>
+                      <strong className="text-[#512D6D] uppercase font-bold text-[11px] sm:text-xs">
+                        {pt.title}
+                      </strong>
+                      <p className="text-[#5D4037]/90 text-[11px] sm:text-xs mt-0.5">
+                        {pt.text}
+                      </p>
+                    </div>
+                  </li>
+                ))}
               </ol>
 
-              {/* Polite closing phrase from flyer */}
+              {/* Polite closing phrase */}
               <div className="mt-3.5 pt-2 border-t border-[#D1C4E9]/50 text-center">
                 <p className="font-serif italic text-xs text-[#512D6D] font-medium">
-                  « Merci de votre confiance et au plaisir de prendre soin de vous ! »
+                  {t.contact.leftCard.callout}
                 </p>
               </div>
             </div>
@@ -179,7 +168,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
               <div className="flex items-center gap-2">
                 <span className="inline-flex items-center gap-1 text-[11px] text-[#512D6D] font-semibold bg-[#D1C4E9]/30 px-2.5 py-0.5 rounded-full">
                   <MapPin className="w-3 h-3" />
-                  <span>Rennes (7 km offert)</span>
+                  <span>{t.contact.leftCard.freeZone}</span>
                 </span>
                 <a
                   href="https://instagram.com/karinarobart"
@@ -202,10 +191,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
               <div className="mb-4 p-3 sm:p-3.5 bg-gradient-to-r from-[#512D6D] via-[#633385] to-[#512D6D] text-white rounded-2xl shadow-xs flex flex-col sm:flex-row items-center justify-between gap-2.5">
                 <div className="text-center sm:text-left">
                   <span className="text-[10px] font-bold uppercase tracking-wider text-[#D1C4E9] block leading-tight">
-                    Le plus rapide
+                    {t.contact.rightCard.fastest}
                   </span>
                   <p className="font-serif font-bold text-sm sm:text-base leading-tight">
-                    Réservez directement sur WhatsApp
+                    {t.contact.rightCard.whatsappBanner}
                   </p>
                 </div>
                 <div className="flex items-center gap-2 w-full sm:w-auto">
@@ -216,12 +205,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                     className="min-h-[38px] flex-1 sm:flex-none inline-flex items-center justify-center gap-1.5 px-4 py-1.5 bg-white text-[#512D6D] hover:bg-[#F9F6F0] active:scale-98 rounded-full text-xs font-bold shadow-xs transition-transform"
                   >
                     <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
-                    <span>WhatsApp 1-clic</span>
+                    <span>{t.contact.rightCard.whatsappClick}</span>
                   </a>
                   <a
                     href="tel:+33665566702"
                     className="min-h-[38px] inline-flex items-center justify-center px-3 py-1.5 bg-white/15 hover:bg-white/25 rounded-full text-xs font-semibold text-white border border-white/25"
-                    title="Appeler"
+                    title={t.contact.rightCard.callTitle}
                   >
                     <Phone className="w-3.5 h-3.5" />
                   </a>
@@ -231,10 +220,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
               {/* Form Title & Instruction */}
               <div className="mb-3 flex items-center justify-between text-xs text-[#5D4037]">
                 <span className="font-serif font-bold text-sm sm:text-base text-[#5D4037]">
-                  Demande en ligne
+                  {t.contact.rightCard.formTitle}
                 </span>
                 <span className="text-[11px] text-[#5D4037]/70">
-                  Réponse rapide par message
+                  {t.contact.rightCard.formSub}
                 </span>
               </div>
 
@@ -244,10 +233,13 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                     <CheckCircle2 className="w-6 h-6" />
                   </div>
                   <h4 className="font-serif text-lg font-bold text-[#512D6D]">
-                    Merci {formData.name} !
+                    {t.contact.rightCard.success.thanks} {formData.name} !
                   </h4>
                   <p className="text-xs text-[#5D4037]/90 max-w-sm mx-auto leading-relaxed">
-                    Votre demande pour le <strong>{formData.serviceTitle}</strong> à <strong>{formData.commune}</strong> a bien été transmise. Karina vous contactera au <strong>{formData.phone}</strong>.
+                    {t.contact.rightCard.success.body
+                      .replace('{service}', formData.serviceTitle)
+                      .replace('{commune}', formData.commune)
+                      .replace('{phone}', formData.phone)}
                   </p>
                   <div className="pt-2 flex flex-wrap justify-center gap-2">
                     <a
@@ -257,14 +249,14 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                       className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#512D6D] text-white rounded-full text-xs font-semibold shadow-xs"
                     >
                       <MessageCircle className="w-3.5 h-3.5 text-emerald-300" />
-                      <span>Confirmer sur WhatsApp</span>
+                      <span>{t.contact.rightCard.success.confirmWhatsApp}</span>
                     </a>
                     <button
                       type="button"
                       onClick={() => setSubmitted(false)}
                       className="px-3.5 py-2 bg-white border border-[#D1C4E9] text-[#5D4037] rounded-full text-xs font-medium hover:bg-[#F9F6F0]"
                     >
-                      Nouvelle demande
+                      {t.contact.rightCard.success.newRequest}
                     </button>
                   </div>
                 </div>
@@ -275,13 +267,13 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     <div>
                       <label className="block text-[11px] font-semibold text-[#5D4037] mb-0.5">
-                        Nom complet *
+                        {t.contact.rightCard.nameLabel}
                       </label>
                       <input
                         type="text"
                         name="name"
                         required
-                        placeholder="Ex : Claire Martin"
+                        placeholder={t.contact.rightCard.namePlaceholder}
                         value={formData.name}
                         onChange={handleChange}
                         className="min-h-[40px] w-full px-3 py-1.5 bg-[#F9F6F0] border border-[#D1C4E9] rounded-xl text-[#5D4037] focus:outline-none focus:border-[#512D6D]"
@@ -289,13 +281,13 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                     </div>
                     <div>
                       <label className="block text-[11px] font-semibold text-[#5D4037] mb-0.5">
-                        Téléphone *
+                        {t.contact.rightCard.phoneLabel}
                       </label>
                       <input
                         type="tel"
                         name="phone"
                         required
-                        placeholder="Ex : 06 00 00 00 00"
+                        placeholder={t.contact.rightCard.phonePlaceholder}
                         value={formData.phone}
                         onChange={handleChange}
                         className="min-h-[40px] w-full px-3 py-1.5 bg-[#F9F6F0] border border-[#D1C4E9] rounded-xl text-[#5D4037] focus:outline-none focus:border-[#512D6D]"
@@ -307,13 +299,13 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     <div>
                       <label className="block text-[11px] font-semibold text-[#5D4037] mb-0.5">
-                        Email *
+                        {t.contact.rightCard.emailLabel}
                       </label>
                       <input
                         type="email"
                         name="email"
                         required
-                        placeholder="votre-email@exemple.fr"
+                        placeholder={t.contact.rightCard.emailPlaceholder}
                         value={formData.email}
                         onChange={handleChange}
                         className="min-h-[40px] w-full px-3 py-1.5 bg-[#F9F6F0] border border-[#D1C4E9] rounded-xl text-[#5D4037] focus:outline-none focus:border-[#512D6D]"
@@ -321,7 +313,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                     </div>
                     <div>
                       <label className="block text-[11px] font-semibold text-[#5D4037] mb-0.5">
-                        Commune de domicile *
+                        {t.contact.rightCard.communeLabel}
                       </label>
                       <select
                         name="commune"
@@ -331,7 +323,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                       >
                         {COMMUNES_DATA.map((c) => (
                           <option key={`${c.name}-${c.postalCode}`} value={c.name}>
-                            {c.name} {c.feeEuro === 0 ? '(7 km offert)' : `(+${c.feeEuro} €)`}
+                            {c.name} {c.feeEuro === 0 ? t.contact.rightCard.freeOffered : `(+${c.feeEuro} €)`}
                           </option>
                         ))}
                       </select>
@@ -341,7 +333,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                   {/* Service Selection */}
                   <div>
                     <label className="block text-[11px] font-semibold text-[#5D4037] mb-0.5">
-                      Soin souhaité *
+                      {t.contact.rightCard.serviceLabel}
                     </label>
                     <select
                       name="serviceTitle"
@@ -349,7 +341,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                       onChange={handleChange}
                       className="min-h-[40px] w-full px-3 py-1.5 bg-[#F9F6F0] border border-[#D1C4E9] rounded-xl text-[#5D4037] focus:outline-none focus:border-[#512D6D] font-medium"
                     >
-                      {SERVICES.map((s) => (
+                      {currentServices.map((s) => (
                         <option key={s.id} value={s.title}>
                           {s.title} — {s.duration} ({s.price} €)
                         </option>
@@ -361,7 +353,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     <div>
                       <label className="block text-[11px] font-semibold text-[#5D4037] mb-0.5">
-                        Date souhaitée
+                        {t.contact.rightCard.dateLabel}
                       </label>
                       <input
                         type="date"
@@ -373,7 +365,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                     </div>
                     <div>
                       <label className="block text-[11px] font-semibold text-[#5D4037] mb-0.5">
-                        Créneau préféré
+                        {t.contact.rightCard.slotLabel}
                       </label>
                       <select
                         name="preferredTimeSlot"
@@ -381,10 +373,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                         onChange={handleChange}
                         className="min-h-[40px] w-full px-3 py-1.5 bg-[#F9F6F0] border border-[#D1C4E9] rounded-xl text-[#5D4037] focus:outline-none focus:border-[#512D6D]"
                       >
-                        <option value="Matin (9h - 12h)">Matinée (9h - 12h)</option>
-                        <option value="Début d'après-midi (12h - 15h)">Début d'après-midi (12h - 15h)</option>
-                        <option value="Fin d'après-midi (15h - 18h)">Fin d'après-midi (15h - 18h)</option>
-                        <option value="Soirée (18h - 19h30)">Soirée (18h - 19h30)</option>
+                        <option value="morning">{t.contact.rightCard.slots.morning}</option>
+                        <option value="noon">{t.contact.rightCard.slots.noon}</option>
+                        <option value="afternoon">{t.contact.rightCard.slots.afternoon}</option>
+                        <option value="evening">{t.contact.rightCard.slots.evening}</option>
                       </select>
                     </div>
                   </div>
@@ -392,12 +384,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                   {/* Message / Details */}
                   <div>
                     <label className="block text-[11px] font-semibold text-[#5D4037] mb-0.5">
-                      Précisions éventuelles (facultatif)
+                      {t.contact.rightCard.msgLabel}
                     </label>
                     <input
                       type="text"
                       name="message"
-                      placeholder="Étage, sonnette, information particulière..."
+                      placeholder={t.contact.rightCard.msgPlaceholder}
                       value={formData.message}
                       onChange={handleChange}
                       className="min-h-[38px] w-full px-3 py-1.5 bg-[#F9F6F0] border border-[#D1C4E9] rounded-xl text-[#5D4037] focus:outline-none focus:border-[#512D6D]"
@@ -413,7 +405,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                         className="mt-0.5 rounded border-[#D1C4E9] text-[#512D6D] focus:ring-[#512D6D]"
                       />
                       <span className="leading-tight">
-                        J'ai pris connaissance des <strong>conditions de réservation</strong> ci-contre (paiement intégral pour valider le créneau, modification possible jusqu'à 3h avant, prise & point d'eau).
+                        {t.contact.rightCard.termsLabel}
                       </span>
                     </label>
                   </div>
@@ -425,7 +417,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                       className="min-h-[42px] flex-1 inline-flex items-center justify-center gap-2 px-5 py-2 text-xs font-bold text-white bg-[#512D6D] hover:bg-[#402257] active:scale-98 rounded-full shadow-xs transition-transform cursor-pointer"
                     >
                       <Send className="w-3.5 h-3.5" />
-                      <span>Envoyer ma demande</span>
+                      <span>{t.contact.rightCard.submitBtn}</span>
                     </button>
                     <a
                       href={generateWhatsAppUrl()}
@@ -434,7 +426,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                       className="min-h-[42px] inline-flex items-center justify-center gap-1.5 px-4 py-2 text-xs font-bold text-[#512D6D] bg-[#D1C4E9]/40 hover:bg-[#D1C4E9]/70 rounded-full transition-colors whitespace-nowrap"
                     >
                       <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
-                      <span>Via WhatsApp</span>
+                      <span>{t.contact.rightCard.whatsappBtn}</span>
                     </a>
                   </div>
 

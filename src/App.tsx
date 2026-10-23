@@ -10,8 +10,9 @@ import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { LegalModal, LegalTab } from './components/LegalModal';
 import { ServiceItem } from './data/servicesData';
+import { LanguageProvider } from './i18n/LanguageContext';
 
-export default function App() {
+function AppContent() {
   const [activeTab, setActiveTab] = useState<NavTab>('accueil');
   const [selectedService, setSelectedService] = useState<ServiceItem | null>(null);
   const [legalModalOpen, setLegalModalOpen] = useState(false);
@@ -48,7 +49,7 @@ export default function App() {
       {/* Main Content: Strictly limited to the selected tab, with safe bottom space on mobile for tab bar */}
       <main className="flex-1 pb-20 sm:pb-0">
         
-        {/* TAB 1: ACCUEIL */}
+        {/* TAB 1: ACCUEIL / INICIO */}
         {activeTab === 'accueil' && (
           <div className="animate-fadeIn">
             <Hero 
@@ -58,7 +59,7 @@ export default function App() {
           </div>
         )}
 
-        {/* TAB 2: SOINS & TARIFS */}
+        {/* TAB 2: SOINS & TARIFS / TRATAMIENTOS Y TARIFAS */}
         {activeTab === 'soins' && (
           <div className="animate-fadeIn">
             <ServicesMenu 
@@ -67,35 +68,35 @@ export default function App() {
           </div>
         )}
 
-        {/* TAB 3: TECHNOLOGIES & MARQUES */}
+        {/* TAB 3: TECHNOLOGIES & MARQUES / TECNOLOGÍAS Y MARCAS */}
         {activeTab === 'marques' && (
           <div className="animate-fadeIn">
             <BrandsEquipment />
           </div>
         )}
 
-        {/* TAB 4: À PROPOS */}
+        {/* TAB 4: À PROPOS / SOBRE MÍ */}
         {activeTab === 'a-propos' && (
           <div className="animate-fadeIn">
             <AboutSection />
           </div>
         )}
 
-        {/* TAB 5: RAYON D'ACTION */}
+        {/* TAB 5: RAYON D'ACTION / ZONA DE ATENCIÓN */}
         {activeTab === 'secteur' && (
           <div className="animate-fadeIn">
             <LogisticsCalculator />
           </div>
         )}
 
-        {/* TAB 6: FAQ */}
+        {/* TAB 6: FAQ / PREGUNTAS FRECUENTES */}
         {activeTab === 'faq' && (
           <div className="animate-fadeIn">
             <FAQSection />
           </div>
         )}
 
-        {/* TAB 7: CONTACT & RÉSERVATION */}
+        {/* TAB 7: CONTACT & RÉSERVATION / CONTACTO Y RESERVA */}
         {activeTab === 'contact' && (
           <div className="animate-fadeIn">
             <ContactSection selectedService={selectedService} />
@@ -111,7 +112,7 @@ export default function App() {
         onSelectTab={handleSelectTab}
       />
 
-      {/* Mandatory French Legal Pages Modal (Mentions Légales, CGV, RGPD) */}
+      {/* Legal Pages Modal (Mentions Légales, CGV, RGPD) */}
       <LegalModal
         isOpen={legalModalOpen}
         initialTab={legalTab}
@@ -119,5 +120,13 @@ export default function App() {
       />
 
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <LanguageProvider>
+      <AppContent />
+    </LanguageProvider>
   );
 }

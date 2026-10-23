@@ -2,6 +2,8 @@ import React from 'react';
 import { Phone, Mail, Instagram } from 'lucide-react';
 import { LegalTab } from './LegalModal';
 import { NavTab } from './Navbar';
+import { useLanguage } from '../i18n/LanguageContext';
+import { LanguageSelector } from './LanguageSelector';
 
 interface FooterProps {
   onOpenLegal: (tab: LegalTab) => void;
@@ -22,6 +24,8 @@ const ThreadsIcon = ({ className = "w-3.5 h-3.5" }: { className?: string }) => (
 );
 
 export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
+  const { t } = useLanguage();
+
   return (
     <footer className="bg-[#F9F6F0] border-t border-[#D1C4E9]/60 py-6 text-[#5D4037]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -29,11 +33,13 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
         {/* Sleek, lightweight single-tier bar */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 pb-4 border-b border-[#D1C4E9]/40">
           
-          {/* Identity */}
-          <div className="text-center md:text-left">
+          {/* Identity & Language switch */}
+          <div className="flex items-center gap-3">
             <span className="font-serif text-base font-bold text-[#512D6D]">
               Karina Robart
             </span>
+            <span className="text-[#D1C4E9]" aria-hidden="true">·</span>
+            <LanguageSelector compact />
           </div>
 
           {/* Quick Contacts & Socials */}
@@ -47,7 +53,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
                 <Phone className="w-3.5 h-3.5" />
                 <span>06 65 56 67 02</span>
               </a>
-              <span className="text-[#5D4037]/80 font-normal">— Sur rendez-vous uniquement</span>
+              <span className="text-[#5D4037]/80 font-normal">{t.footer.appointmentOnly}</span>
             </span>
             
             <span className="text-[#D1C4E9]" aria-hidden="true">·</span>
@@ -94,9 +100,9 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1 font-semibold text-[#512D6D] hover:underline"
-              title="Boutique en ligne Farmasi Karina Robart"
+              title="Boutique Farmasi Karina Robart"
             >
-              <span>Boutique Farmasi</span>
+              <span>{t.footer.farmasiShop}</span>
             </a>
           </div>
 
@@ -105,7 +111,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
         {/* Minimal Legal Links & Copyright */}
         <div className="pt-3.5 flex flex-col sm:flex-row items-center justify-between gap-2.5 text-[11px] text-[#5D4037]/75">
           <div>
-            © {new Date().getFullYear()} Karina Robart · SIRET 921 458 912 00018 · CAP Esthétique Cosmétique
+            © {new Date().getFullYear()} Karina Robart {t.footer.copyrightDiploma}
           </div>
 
           <div className="flex items-center gap-3">
@@ -113,21 +119,21 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
               onClick={() => onOpenLegal('mentions')}
               className="hover:text-[#512D6D] transition-colors cursor-pointer"
             >
-              Mentions Légales
+              {t.footer.mentions}
             </button>
             <span className="text-[#D1C4E9]" aria-hidden="true">·</span>
             <button
               onClick={() => onOpenLegal('cgv')}
               className="hover:text-[#512D6D] transition-colors cursor-pointer"
             >
-              CGV
+              {t.footer.cgv}
             </button>
             <span className="text-[#D1C4E9]" aria-hidden="true">·</span>
             <button
               onClick={() => onOpenLegal('rgpd')}
               className="hover:text-[#512D6D] transition-colors cursor-pointer"
             >
-              Confidentialité RGPD
+              {t.footer.rgpd}
             </button>
           </div>
         </div>
