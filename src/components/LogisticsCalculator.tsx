@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { MapPin, CheckCircle2, Car, Search, Info, Compass } from 'lucide-react';
+import { MapPin, Car, Search, Info, Compass } from 'lucide-react';
 import { COMMUNES_DATA, CommuneItem } from '../data/communesData';
+import { useLanguage } from '../i18n/LanguageContext';
 
 export const LogisticsCalculator: React.FC = () => {
+  const { t } = useLanguage();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCommune, setSelectedCommune] = useState<CommuneItem>(COMMUNES_DATA[0]);
 
@@ -20,23 +22,23 @@ export const LogisticsCalculator: React.FC = () => {
           <div>
             <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#512D6D]/10 text-[#512D6D] text-[11px] font-semibold tracking-wide mb-1.5">
               <Compass className="w-3 h-3 text-[#512D6D]" />
-              <span>Rennes &amp; Communes Voisines · Transparence</span>
+              <span>{t.logistics.kicker}</span>
             </div>
 
             <h2 className="text-2xl sm:text-3xl font-serif font-semibold text-[#5D4037] tracking-tight">
-              Rayon d'action &amp; Déplacement
+              {t.logistics.title}
             </h2>
             <p className="mt-1 text-xs sm:text-sm text-[#5D4037]/80 leading-relaxed max-w-xl">
-              Déplacement offert dans un rayon de 7 km autour de Rennes, puis forfait kilométrique transparent au-delà.
+              {t.logistics.subtitle}
             </p>
           </div>
 
           {/* Right Highlight Badge */}
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#D1C4E9]/30 rounded-2xl border border-[#D1C4E9]/60 shrink-0 self-start md:self-auto">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span className="text-xs font-semibold text-[#512D6D]">0 € offert jusqu'à 7 km</span>
+            <span className="text-xs font-semibold text-[#512D6D]">{t.logistics.badge.free}</span>
             <span className="text-xs text-[#5D4037]/50">·</span>
-            <span className="text-xs text-[#5D4037]/80 font-medium">dès 5 € au-delà</span>
+            <span className="text-xs text-[#5D4037]/80 font-medium">{t.logistics.badge.from5}</span>
           </div>
         </div>
 
@@ -49,12 +51,12 @@ export const LogisticsCalculator: React.FC = () => {
               <div className="flex items-center gap-2 min-w-0">
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0"></span>
                 <div>
-                  <div className="text-[11px] font-bold text-[#512D6D]">Zone 1 (≤ 7 km)</div>
-                  <div className="text-[10px] text-[#5D4037]/75">Rennes &amp; 1ère couronne</div>
+                  <div className="text-[11px] font-bold text-[#512D6D]">{t.logistics.zones.zone1Title}</div>
+                  <div className="text-[10px] text-[#5D4037]/75">{t.logistics.zones.zone1Sub}</div>
                 </div>
               </div>
               <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#D1C4E9] text-[#512D6D] shrink-0">
-                0 € OFFERT
+                {t.logistics.zones.zone1Tag}
               </span>
             </div>
 
@@ -62,12 +64,12 @@ export const LogisticsCalculator: React.FC = () => {
               <div className="flex items-center gap-2 min-w-0">
                 <Car className="w-3.5 h-3.5 text-[#512D6D] shrink-0" />
                 <div>
-                  <div className="text-[11px] font-bold text-[#5D4037]">Zone 2 (7 à 20 km)</div>
-                  <div className="text-[10px] text-[#5D4037]/75">Couronne élargie</div>
+                  <div className="text-[11px] font-bold text-[#5D4037]">{t.logistics.zones.zone2Title}</div>
+                  <div className="text-[10px] text-[#5D4037]/75">{t.logistics.zones.zone2Sub}</div>
                 </div>
               </div>
               <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#F9F6F0] border border-[#D1C4E9] text-[#5D4037] shrink-0">
-                + 5 € Forfait
+                {t.logistics.zones.zone2Tag}
               </span>
             </div>
 
@@ -75,22 +77,22 @@ export const LogisticsCalculator: React.FC = () => {
               <div className="flex items-center gap-2 min-w-0">
                 <Compass className="w-3.5 h-3.5 text-[#512D6D] shrink-0" />
                 <div>
-                  <div className="text-[11px] font-bold text-[#5D4037]">Zone 3 (20 à 30 km)</div>
-                  <div className="text-[10px] text-[#5D4037]/75">Bassin étendu</div>
+                  <div className="text-[11px] font-bold text-[#5D4037]">{t.logistics.zones.zone3Title}</div>
+                  <div className="text-[10px] text-[#5D4037]/75">{t.logistics.zones.zone3Sub}</div>
                 </div>
               </div>
               <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#F9F6F0] border border-[#D1C4E9] text-[#5D4037] shrink-0">
-                + 10 € Forfait
+                {t.logistics.zones.zone3Tag}
               </span>
             </div>
           </div>
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
             <div>
               <h3 className="font-serif text-lg sm:text-xl font-bold text-[#5D4037]">
-                Simulateur : vérifiez votre commune
+                {t.logistics.simulatorTitle}
               </h3>
               <p className="text-xs text-[#5D4037]/80">
-                Tapez votre ville ou sélectionnez-la dans la liste rapide :
+                {t.logistics.simulatorSub}
               </p>
             </div>
             
@@ -99,7 +101,7 @@ export const LogisticsCalculator: React.FC = () => {
               <Search className="w-4 h-4 text-[#5D4037]/60 absolute left-3 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
-                placeholder="Ex : Cesson, 35000, Bruz..."
+                placeholder={t.logistics.searchPlaceholder}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="min-h-[40px] w-full pl-9 pr-3 py-1.5 text-xs sm:text-sm bg-[#F9F6F0] border border-[#D1C4E9] rounded-xl text-[#5D4037] focus:outline-none focus:border-[#512D6D]"
@@ -141,15 +143,15 @@ export const LogisticsCalculator: React.FC = () => {
                     </span>
                   </div>
                   <p className="text-xs text-[#5D4037]/80">
-                    Distance centre de Rennes : ~{selectedCommune.distanceKm} km
+                    {t.logistics.distanceLabel} {selectedCommune.distanceKm} km
                   </p>
                 </div>
               </div>
 
               <div className="sm:border-l sm:border-[#D1C4E9] sm:pl-6 w-full sm:w-auto flex sm:flex-col justify-between items-center sm:items-end pt-2 sm:pt-0 border-t sm:border-t-0 border-[#D1C4E9]/50">
-                <span className="text-xs text-[#5D4037]/80 font-medium">Frais de déplacement :</span>
+                <span className="text-xs text-[#5D4037]/80 font-medium">{t.logistics.feeLabel}</span>
                 <span className="text-xl sm:text-2xl font-serif font-bold text-[#512D6D]">
-                  {selectedCommune.feeEuro === 0 ? '0 € (OFFERT)' : `+${selectedCommune.feeEuro} €`}
+                  {selectedCommune.feeEuro === 0 ? t.logistics.feeFree : `+${selectedCommune.feeEuro} €`}
                 </span>
               </div>
             </div>
@@ -160,13 +162,13 @@ export const LogisticsCalculator: React.FC = () => {
             <div className="flex items-start gap-2">
               <Info className="w-4 h-4 text-[#512D6D] shrink-0 mt-0.5" />
               <span>
-                <strong>Horaires & Arrivée :</strong> Arrivée 10-15 min avant pour l'installation sans décompte sur le soin.
+                <strong>{t.logistics.infoHoursBold}</strong> {t.logistics.infoHours}
               </span>
             </div>
             <div className="flex items-start gap-2">
               <Info className="w-4 h-4 text-[#512D6D] shrink-0 mt-0.5" />
               <span>
-                <strong>Espace nécessaire :</strong> Environ 2m × 1,5m dégagé et une prise électrique standard.
+                <strong>{t.logistics.infoSpaceBold}</strong> {t.logistics.infoSpace}
               </span>
             </div>
           </div>
