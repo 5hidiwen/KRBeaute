@@ -45,8 +45,8 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab, onOpenBo
             onClick={() => handleTabClick('accueil')}
             className="flex items-center gap-2 sm:gap-2.5 font-serif tracking-tight text-[#512D6D] whitespace-nowrap shrink-0 hover:opacity-90 transition-opacity cursor-pointer text-left"
           >
-            <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#512D6D] text-[#F9F6F0] flex items-center justify-center font-serif text-sm sm:text-base font-bold shadow-xs">
-              K
+            <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#512D6D] text-[#F9F6F0] flex items-center justify-center font-serif text-xs sm:text-sm font-bold tracking-tight shadow-xs">
+              KR
             </span>
             <div className="flex flex-col sm:flex-row sm:items-baseline sm:gap-1.5">
               <span className="text-sm sm:text-lg font-bold leading-tight">Karina Robart</span>
