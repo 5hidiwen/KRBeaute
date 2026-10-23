@@ -37,171 +37,154 @@ export const BrandsEquipment: React.FC = () => {
           </a>
         </div>
 
-        {/* Brands Showcase Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 mb-6 sm:mb-10">
+        {/* Brands Showcase Grid - Compact Luxury Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-5 sm:mb-6">
           
           {/* Nu Skin */}
-          <div className="bg-white rounded-2xl p-4 sm:p-6 border border-[#D1C4E9] shadow-xs flex flex-col justify-between">
+          <div className="bg-white rounded-2xl p-4 border border-[#D1C4E9]/70 shadow-2xs hover:shadow-xs transition-all flex flex-col justify-between">
             <div>
-              <div className="w-8 h-8 rounded-xl bg-[#D1C4E9]/40 flex items-center justify-center text-[#512D6D] mb-3">
-                <Sparkles className="w-4 h-4" />
+              <div className="flex items-center justify-between gap-2 mb-2">
+                <div className="w-7 h-7 rounded-lg bg-[#D1C4E9]/30 flex items-center justify-center text-[#512D6D]">
+                  <Sparkles className="w-3.5 h-3.5" />
+                </div>
+                <span className="text-[10px] font-bold text-[#512D6D] bg-[#D1C4E9]/30 px-2 py-0.5 rounded-full">
+                  Anti-Âge
+                </span>
               </div>
-              <h3 className="font-serif text-base sm:text-lg font-bold text-[#512D6D] mb-0.5">Nu Skin</h3>
-              <p className="text-[10px] font-bold text-[#5D4037]/70 uppercase tracking-wider mb-2">Cosméceutique Anti-Âge</p>
-              <p className="text-xs text-[#5D4037]/85 leading-relaxed">
-                Pionnier mondial de la bio-innovation cutanée. Formules ciblées restaurant fermeté et éclat naturel.
+              <h3 className="font-serif text-base font-bold text-[#512D6D]">Nu Skin</h3>
+              <p className="text-[10px] font-semibold text-[#5D4037]/70 uppercase tracking-wider mb-1.5">
+                Bio-Innovation Cutanée
+              </p>
+              <p className="text-xs text-[#5D4037]/80 leading-relaxed">
+                Formules d'avant-garde restaurant fermeté, éclat naturel et élasticité cellulaire.
               </p>
             </div>
-            <div className="mt-3 pt-2 border-t border-[#D1C4E9]/30 text-[11px] text-[#512D6D] font-bold">
-              Soins tenseurs & micro-courants
+            <div className="mt-3 pt-2 border-t border-[#D1C4E9]/30 text-[11px] text-[#512D6D] font-medium">
+              Soins tenseurs &amp; micro-courants
             </div>
           </div>
 
-          {/* Dr. Renaud */}
-          <div className="bg-white rounded-2xl p-4 sm:p-6 border border-[#D1C4E9] shadow-xs flex flex-col justify-between">
+          {/* Dr. Renaud Paris */}
+          <div className="bg-white rounded-2xl p-4 border border-[#D1C4E9]/70 shadow-2xs hover:shadow-xs transition-all flex flex-col justify-between">
             <div>
-              <div className="w-8 h-8 rounded-xl bg-[#D1C4E9]/40 flex items-center justify-center text-[#512D6D] mb-3">
-                <Feather className="w-4 h-4" />
+              <div className="flex items-center justify-between gap-2 mb-2">
+                <div className="w-7 h-7 rounded-lg bg-[#D1C4E9]/30 flex items-center justify-center text-[#512D6D]">
+                  <Feather className="w-3.5 h-3.5" />
+                </div>
+                <span className="text-[10px] font-bold text-[#512D6D] bg-[#D1C4E9]/30 px-2 py-0.5 rounded-full">
+                  Botanique
+                </span>
               </div>
-              <h3 className="font-serif text-base sm:text-lg font-bold text-[#512D6D] mb-0.5">Dr. Renaud Paris</h3>
-              <p className="text-[10px] font-bold text-[#5D4037]/70 uppercase tracking-wider mb-2">Botanique d'Institut</p>
-              <p className="text-xs text-[#5D4037]/85 leading-relaxed">
-                70 ans d’herboristerie d'exception. Textures gourmandes aux fleurs et fruits pour apaiser les peaux sensibles.
+              <h3 className="font-serif text-base font-bold text-[#512D6D]">Dr. Renaud Paris</h3>
+              <p className="text-[10px] font-semibold text-[#5D4037]/70 uppercase tracking-wider mb-1.5">
+                Herboristerie d'Institut
+              </p>
+              <p className="text-xs text-[#5D4037]/80 leading-relaxed">
+                70 ans d’expertise française aux actifs de fruits et fleurs pour apaiser et équilibrer l'épiderme.
               </p>
             </div>
-            <div className="mt-3 pt-2 border-t border-[#D1C4E9]/30 text-[11px] text-[#512D6D] font-bold">
-              Soins purifiants & apaisants
+            <div className="mt-3 pt-2 border-t border-[#D1C4E9]/30 text-[11px] text-[#512D6D] font-medium">
+              Soins purifiants &amp; apaisants
             </div>
           </div>
 
-          {/* Farmasi (With Affiliate Link) */}
-          <div className="bg-white rounded-2xl p-4 sm:p-6 border-2 border-[#512D6D]/40 shadow-xs flex flex-col justify-between relative overflow-hidden">
-            <div className="absolute top-2 right-2 px-2 py-0.5 bg-[#D1C4E9] text-[#512D6D] rounded-full text-[9px] font-bold">
-              Partenaire Officielle
-            </div>
+          {/* Farmasi */}
+          <div className="bg-white rounded-2xl p-4 border border-[#512D6D]/40 shadow-2xs hover:shadow-xs transition-all flex flex-col justify-between relative">
             <div>
-              <div className="w-8 h-8 rounded-xl bg-[#D1C4E9]/40 flex items-center justify-center text-[#512D6D] mb-3">
-                <HeartHandshake className="w-4 h-4" />
+              <div className="flex items-center justify-between gap-2 mb-2">
+                <div className="w-7 h-7 rounded-lg bg-[#D1C4E9]/30 flex items-center justify-center text-[#512D6D]">
+                  <HeartHandshake className="w-3.5 h-3.5" />
+                </div>
+                <span className="text-[10px] font-bold text-[#512D6D] bg-[#D1C4E9] px-2 py-0.5 rounded-full">
+                  Partenaire
+                </span>
               </div>
-              <h3 className="font-serif text-base sm:text-lg font-bold text-[#512D6D] mb-0.5">Farmasi</h3>
-              <p className="text-[10px] font-bold text-[#5D4037]/70 uppercase tracking-wider mb-2">Formules Pures & Vernis</p>
-              <p className="text-xs text-[#5D4037]/85 leading-relaxed mb-3">
-                Huiles bien-être relaxantes, baumes au marronnier d'Inde et vernis semi-permanents ultra-brillants respectueux de l’ongle.
+              <h3 className="font-serif text-base font-bold text-[#512D6D]">Farmasi</h3>
+              <p className="text-[10px] font-semibold text-[#5D4037]/70 uppercase tracking-wider mb-1.5">
+                Formules Pures &amp; Vernis
+              </p>
+              <p className="text-xs text-[#5D4037]/80 leading-relaxed">
+                Baumes bien-être décontractants, huiles de massage et vernis respectueux de l’ongle.
               </p>
             </div>
-            <div className="mt-3 pt-2 border-t border-[#D1C4E9]/30">
+            <div className="mt-3 pt-2 border-t border-[#D1C4E9]/30 flex items-center justify-between">
+              <span className="text-[11px] text-[#512D6D] font-medium">Beauté &amp; Détente</span>
               <a
                 href={farmasiAffiliateUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-[#512D6D] text-white rounded-xl text-xs font-semibold hover:bg-[#402257] transition-colors"
-                title="Visiter la boutique Farmasi de Karina Robart"
+                className="inline-flex items-center gap-1 text-[11px] font-bold text-[#512D6D] hover:underline"
               >
-                <ShoppingBag className="w-3.5 h-3.5" />
-                <span>Boutique Farmasi</span>
-                <ExternalLink className="w-3 h-3 text-[#D1C4E9]" />
+                <span>Boutique</span>
+                <ExternalLink className="w-2.5 h-2.5" />
               </a>
             </div>
           </div>
 
           {/* House of Peau */}
-          <div className="bg-white rounded-2xl p-4 sm:p-6 border border-[#D1C4E9] shadow-xs flex flex-col justify-between">
+          <div className="bg-white rounded-2xl p-4 border border-[#D1C4E9]/70 shadow-2xs hover:shadow-xs transition-all flex flex-col justify-between">
             <div>
-              <div className="w-8 h-8 rounded-xl bg-[#D1C4E9]/40 flex items-center justify-center text-[#512D6D] mb-3">
-                <ShieldCheck className="w-4 h-4" />
+              <div className="flex items-center justify-between gap-2 mb-2">
+                <div className="w-7 h-7 rounded-lg bg-[#D1C4E9]/30 flex items-center justify-center text-[#512D6D]">
+                  <ShieldCheck className="w-3.5 h-3.5" />
+                </div>
+                <span className="text-[10px] font-bold text-[#512D6D] bg-[#D1C4E9]/30 px-2 py-0.5 rounded-full">
+                  Bio-Cellulose
+                </span>
               </div>
-              <h3 className="font-serif text-base sm:text-lg font-bold text-[#512D6D] mb-0.5">House of Peau</h3>
-              <p className="text-[10px] font-bold text-[#5D4037]/70 uppercase tracking-wider mb-2">Bio-Cellulose & Sérums</p>
-              <p className="text-xs text-[#5D4037]/85 leading-relaxed">
-                Masques hydrogels concentrés en peptides biomimétiques pour une barrière cutanée intensément repulpée.
+              <h3 className="font-serif text-base font-bold text-[#512D6D]">House of Peau</h3>
+              <p className="text-[10px] font-semibold text-[#5D4037]/70 uppercase tracking-wider mb-1.5">
+                Sérums &amp; Peptides
+              </p>
+              <p className="text-xs text-[#5D4037]/80 leading-relaxed">
+                Masques hydrogels hautement concentrés pour repulper et protéger intensément la barrière cutanée.
               </p>
             </div>
-            <div className="mt-3 pt-2 border-t border-[#D1C4E9]/30 text-[11px] text-[#512D6D] font-bold">
+            <div className="mt-3 pt-2 border-t border-[#D1C4E9]/30 text-[11px] text-[#512D6D] font-medium">
               Rituels signatures
             </div>
           </div>
 
         </div>
 
-        {/* Farmasi Boutique Banner Callout */}
-        <div className="mb-10 sm:mb-14 bg-gradient-to-r from-[#D1C4E9]/50 via-white to-[#D1C4E9]/40 rounded-3xl p-5 sm:p-7 border border-[#512D6D]/30 shadow-xs flex flex-col md:flex-row items-center justify-between gap-5">
-          <div className="flex items-start gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-[#512D6D] text-white flex items-center justify-center shrink-0 shadow-sm mt-0.5">
-              <ShoppingBag className="w-6 h-6" />
-            </div>
-            <div>
-              <span className="inline-block px-2.5 py-0.5 bg-[#512D6D] text-white text-[10px] font-bold uppercase tracking-wider rounded-full mb-1">
-                Lien Partenaire Officiel · Karina Robart
-              </span>
-              <h3 className="font-serif text-lg sm:text-xl font-bold text-[#512D6D] mb-1">
-                Envie de prolonger vos rituels à domicile ?
-              </h3>
-              <p className="text-xs sm:text-sm text-[#5D4037]/85 leading-relaxed max-w-2xl">
-                Retrouvez l'intégralité des produits de soin, cosmétiques et bien-être de la gamme <strong>Farmasi</strong> utilisés lors des prestations directement sur mon espace boutique en ligne certifié.
-              </p>
-            </div>
-          </div>
-          
-          <a
-            href={farmasiAffiliateUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="min-h-[46px] w-full md:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#512D6D] hover:bg-[#402257] active:scale-98 text-white rounded-full text-xs sm:text-sm font-bold shadow-md transition-all whitespace-nowrap"
-          >
-            <ShoppingBag className="w-4 h-4 text-[#D1C4E9]" />
-            <span>Accéder à ma boutique Farmasi</span>
-            <ExternalLink className="w-3.5 h-3.5 text-white/80" />
-          </a>
-        </div>
-
-        {/* Specialized Technologies Spotlight */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
+        {/* Specialized Technologies Spotlight - Compact 2-column horizontal cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
           
           {/* Microcurrents */}
-          <div className="bg-[#D1C4E9]/30 rounded-2xl p-4 sm:p-6 border border-[#D1C4E9] flex flex-col sm:flex-row gap-4 items-start">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#512D6D] text-[#F9F6F0] flex items-center justify-center shrink-0">
-              <Cpu className="w-5 h-5 sm:w-6 sm:h-6" />
+          <div className="bg-white/90 hover:bg-white rounded-2xl p-4 border border-[#D1C4E9]/70 shadow-2xs flex items-center gap-3.5 transition-all">
+            <div className="w-10 h-10 rounded-xl bg-[#512D6D] text-white flex items-center justify-center shrink-0 shadow-2xs">
+              <Cpu className="w-5 h-5" />
             </div>
-            <div>
-              <div className="flex items-center gap-1.5 mb-1">
+            <div className="min-w-0 flex-1">
+              <div className="flex items-center gap-2 mb-0.5">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-[#512D6D]">Technologie Expert</span>
-                <span className="text-xs text-[#5D4037]/60">·</span>
-                <span className="text-xs text-[#5D4037]/80">Non invasif</span>
+                <span className="text-[10px] text-[#5D4037]/50">· Non invasif</span>
               </div>
-              <h4 className="font-serif text-base sm:text-lg font-bold text-[#5D4037] mb-1.5">
+              <h4 className="font-serif text-sm sm:text-base font-bold text-[#5D4037]">
                 Micro-Courants Liftants Doux
               </h4>
-              <p className="text-xs sm:text-sm text-[#5D4037]/85 leading-relaxed mb-2.5">
-                Micro-impulsions stimulant les 43 muscles du visage pour tonifier l'ovale, lisser les ridules et relancer l'ATP cellulaire sans douleur.
+              <p className="text-xs text-[#5D4037]/80 leading-snug mt-0.5 line-clamp-2">
+                Stimule les 43 muscles du visage pour tonifier l'ovale, lisser les ridules et relancer l'ATP cellulaire sans douleur.
               </p>
-              <ul className="text-xs text-[#5D4037] space-y-1">
-                <li>✓ Effet tenseur immédiat sur l'ovale</li>
-                <li>✓ Stimulation musculaire et microcirculation</li>
-              </ul>
             </div>
           </div>
 
           {/* LED Phototherapy */}
-          <div className="bg-[#D1C4E9]/30 rounded-2xl p-4 sm:p-6 border border-[#D1C4E9] flex flex-col sm:flex-row gap-4 items-start">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#512D6D] text-[#F9F6F0] flex items-center justify-center shrink-0">
-              <Sun className="w-5 h-5 sm:w-6 sm:h-6" />
+          <div className="bg-white/90 hover:bg-white rounded-2xl p-4 border border-[#D1C4E9]/70 shadow-2xs flex items-center gap-3.5 transition-all">
+            <div className="w-10 h-10 rounded-xl bg-[#512D6D] text-white flex items-center justify-center shrink-0 shadow-2xs">
+              <Sun className="w-5 h-5" />
             </div>
-            <div>
-              <div className="flex items-center gap-1.5 mb-1">
+            <div className="min-w-0 flex-1">
+              <div className="flex items-center gap-2 mb-0.5">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-[#512D6D]">Luminothérapie</span>
-                <span className="text-xs text-[#5D4037]/60">·</span>
-                <span className="text-xs text-[#5D4037]/80">Sans UV ni chaleur</span>
+                <span className="text-[10px] text-[#5D4037]/50">· Sans UV</span>
               </div>
-              <h4 className="font-serif text-base sm:text-lg font-bold text-[#5D4037] mb-1.5">
+              <h4 className="font-serif text-sm sm:text-base font-bold text-[#5D4037]">
                 Photothérapie LED Médicale Douce
               </h4>
-              <p className="text-xs sm:text-sm text-[#5D4037]/85 leading-relaxed mb-2.5">
-                Ondes de lumière rouge et proche infrarouge stimulant la fabrication naturelle de collagène et calmant durablement les rougeurs.
+              <p className="text-xs text-[#5D4037]/80 leading-snug mt-0.5 line-clamp-2">
+                Ondes de lumière rouge et proche infrarouge stimulant la régénération du collagène et calmant durablement les rougeurs.
               </p>
-              <ul className="text-xs text-[#5D4037] space-y-1">
-                <li>✓ Relance la synthèse de collagène naturel</li>
-                <li>✓ Apaise les rougeurs et calme les sensibilités</li>
-              </ul>
             </div>
           </div>
 
