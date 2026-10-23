@@ -40,85 +40,50 @@ export const LogisticsCalculator: React.FC = () => {
           </div>
         </div>
 
-        {/* 3 Tier Policy Cards (Compact on mobile) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 sm:gap-6 mb-6 sm:mb-8">
+        {/* Interactive Commune Checker with Integrated Tier Zones */}
+        <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-7 border border-[#D1C4E9] shadow-sm max-w-4xl mx-auto">
           
-          {/* Tier 1: 0 - 7 km (OFFERT) */}
-          <div className="bg-white rounded-2xl p-4 sm:p-6 border-2 border-[#512D6D] shadow-sm flex flex-col justify-between">
-            <div>
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-[#512D6D]">
-                  Zone Prioritaire
-                </span>
-                <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-[#D1C4E9] text-[#512D6D]">
-                  0 € OFFERT
-                </span>
+          {/* Integrated 3-Tier Legend Bar */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 mb-6 p-2 bg-[#F9F6F0] rounded-2xl border border-[#D1C4E9]/60">
+            <div className="flex items-center justify-between gap-2 bg-white px-3 py-2 rounded-xl border border-[#512D6D]/20 shadow-2xs">
+              <div className="flex items-center gap-2 min-w-0">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0"></span>
+                <div>
+                  <div className="text-[11px] font-bold text-[#512D6D]">Zone 1 (≤ 7 km)</div>
+                  <div className="text-[10px] text-[#5D4037]/75">Rennes &amp; 1ère couronne</div>
+                </div>
               </div>
-              <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#512D6D] mb-1">
-                Jusqu'à 7 km
-              </h3>
-              <p className="text-xs text-[#5D4037]/85 leading-relaxed mb-3">
-                Rennes (tous quartiers), Saint-Grégoire, Cesson-Sévigné, Chantepie, Vezin-le-Coquet, Saint-Jacques-de-la-Lande, Montgermont...
-              </p>
+              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#D1C4E9] text-[#512D6D] shrink-0">
+                0 € OFFERT
+              </span>
             </div>
-            <div className="pt-2.5 border-t border-[#D1C4E9]/50 flex items-center gap-1.5 text-xs font-bold text-[#512D6D]">
-              <CheckCircle2 className="w-4 h-4 text-[#512D6D] shrink-0" />
-              <span>Inclus sans aucun surcoût</span>
+
+            <div className="flex items-center justify-between gap-2 bg-white px-3 py-2 rounded-xl border border-[#D1C4E9]/70 shadow-2xs">
+              <div className="flex items-center gap-2 min-w-0">
+                <Car className="w-3.5 h-3.5 text-[#512D6D] shrink-0" />
+                <div>
+                  <div className="text-[11px] font-bold text-[#5D4037]">Zone 2 (7 à 20 km)</div>
+                  <div className="text-[10px] text-[#5D4037]/75">Couronne élargie</div>
+                </div>
+              </div>
+              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#F9F6F0] border border-[#D1C4E9] text-[#5D4037] shrink-0">
+                + 5 € Forfait
+              </span>
+            </div>
+
+            <div className="flex items-center justify-between gap-2 bg-white px-3 py-2 rounded-xl border border-[#D1C4E9]/70 shadow-2xs">
+              <div className="flex items-center gap-2 min-w-0">
+                <Compass className="w-3.5 h-3.5 text-[#512D6D] shrink-0" />
+                <div>
+                  <div className="text-[11px] font-bold text-[#5D4037]">Zone 3 (20 à 30 km)</div>
+                  <div className="text-[10px] text-[#5D4037]/75">Bassin étendu</div>
+                </div>
+              </div>
+              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-[#F9F6F0] border border-[#D1C4E9] text-[#5D4037] shrink-0">
+                + 10 € Forfait
+              </span>
             </div>
           </div>
-
-          {/* Tier 2: 7 - 20 km (5 €) */}
-          <div className="bg-white rounded-2xl p-4 sm:p-6 border border-[#D1C4E9] shadow-xs flex flex-col justify-between">
-            <div>
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-[#5D4037]/80">
-                  Zone Élargie
-                </span>
-                <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-[#F9F6F0] border border-[#D1C4E9] text-[#5D4037]">
-                  + 5 € Forfait
-                </span>
-              </div>
-              <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#5D4037] mb-1">
-                De 7 à 20 km
-              </h3>
-              <p className="text-xs text-[#5D4037]/85 leading-relaxed mb-3">
-                Pacé, Betton, Le Rheu, Noyal-Châtillon, Bruz, Chartres-de-Bretagne, Thorigné-Fouillard, Acigné, Mordelles, Vern-sur-Seiche, Châteaugiron...
-              </p>
-            </div>
-            <div className="pt-2.5 border-t border-[#D1C4E9]/50 flex items-center gap-1.5 text-xs font-medium text-[#5D4037]">
-              <Car className="w-4 h-4 text-[#512D6D] shrink-0" />
-              <span>Forfait unique par visite</span>
-            </div>
-          </div>
-
-          {/* Tier 3: 20 - 30 km (10 €) */}
-          <div className="bg-white rounded-2xl p-4 sm:p-6 border border-[#D1C4E9] shadow-xs flex flex-col justify-between">
-            <div>
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-[#5D4037]/80">
-                  Zone Confort
-                </span>
-                <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-[#F9F6F0] border border-[#D1C4E9] text-[#5D4037]">
-                  + 10 € Forfait
-                </span>
-              </div>
-              <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#5D4037] mb-1">
-                De 20 à 30 km
-              </h3>
-              <p className="text-xs text-[#5D4037]/85 leading-relaxed mb-3">
-                Liffré, Guichen, Janzé, Montfort-sur-Meu, etc. Au-delà : sur devis.
-              </p>
-            </div>
-            <div className="pt-2.5 border-t border-[#D1C4E9]/50 flex items-center gap-1.5 text-xs font-medium text-[#5D4037]">
-              <Compass className="w-4 h-4 text-[#512D6D] shrink-0" />
-              <span>Confort direct à votre porte</span>
-            </div>
-          </div>
-
-        </div>
-
-        {/* Interactive Commune Checker */}
-        <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 border border-[#D1C4E9] shadow-sm max-w-4xl mx-auto">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
             <div>
               <h3 className="font-serif text-lg sm:text-xl font-bold text-[#5D4037]">
