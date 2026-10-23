@@ -26,7 +26,7 @@ export const LogisticsCalculator: React.FC = () => {
             Rayon d'action & Déplacement
           </h2>
           <p className="text-xs sm:text-base text-[#5D4037]/80 leading-relaxed max-w-xl mx-auto">
-            Déplacement 100% offert dans un rayon de 7 km autour du centre de Rennes, et supplément forfaitaire modéré au-delà.
+            Déplacement offert dans un rayon de 7 km autour du centre de Rennes, et supplément forfaitaire modéré au-delà.
           </p>
         </div>
 

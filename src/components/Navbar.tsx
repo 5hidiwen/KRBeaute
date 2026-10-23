@@ -22,7 +22,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab, onOpenBo
     { id: 'soins', label: 'Soins & Tarifs', shortLabel: 'Soins & Tarifs', icon: <Sparkles className="w-4 h-4" /> },
     { id: 'secteur', label: "Rayon d'action (7 km offert)", shortLabel: 'Rayon 7 km', icon: <MapPin className="w-4 h-4" /> },
     { id: 'marques', label: 'Technologies & Marques', shortLabel: 'Technologies', icon: <Cpu className="w-4 h-4" /> },
-    { id: 'a-propos', label: 'À Propos (CAP)', shortLabel: 'À Propos', icon: <Award className="w-4 h-4" /> },
+    { id: 'a-propos', label: 'À Propos de moi', shortLabel: 'À Propos', icon: <Award className="w-4 h-4" /> },
     { id: 'faq', label: 'FAQ', shortLabel: 'FAQ', icon: <HelpCircle className="w-4 h-4" /> },
     { id: 'contact', label: 'Contact & Réservation', shortLabel: 'Contact', icon: <Mail className="w-4 h-4" /> },
   ];
