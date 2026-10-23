@@ -1,8 +1,11 @@
 import React from 'react';
 import { Award, Heart, Sparkles, ShieldCheck, UserCheck, Check } from 'lucide-react';
 import { KARINA_PHOTO_BASE64 } from '../karinaPhotoData';
+import { useLanguage } from '../i18n/LanguageContext';
 
 export const AboutSection: React.FC = () => {
+  const { t } = useLanguage();
+
   return (
     <section id="a-propos" className="py-8 sm:py-20 bg-[#F9F6F0]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -15,11 +18,11 @@ export const AboutSection: React.FC = () => {
               {/* Photo Frame Container */}
               <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#EAE2F2] via-[#F4EFF8] to-[#D1C4E9] border-2 border-[#D1C4E9] shadow-lg p-2.5 sm:p-3">
                 
-                {/* Photo Display Area (Emplacement carré 1:1 sans modification ni resize) */}
+                {/* Photo Display Area (Emplacement carré 1:1) */}
                 <div className="relative w-full aspect-square rounded-2xl overflow-hidden bg-[#2B1B36] shadow-inner">
                   <img 
                     src={KARINA_PHOTO_BASE64} 
-                    alt="Karina Robart - Esthéticienne Cosmétique & Parfumerie diplômée d'État à Rennes"
+                    alt={t.about.photoAlt}
                     onError={(e) => {
                       const target = e.currentTarget;
                       if (!target.src.endsWith('/Karina.jpg')) {
@@ -30,7 +33,7 @@ export const AboutSection: React.FC = () => {
                   />
                 </div>
 
-                {/* Identification de la Praticienne sous la photo carrée */}
+                {/* Identification de la Praticienne sous la photo */}
                 <div className="mt-2.5 p-3.5 bg-white rounded-2xl border border-[#D1C4E9] shadow-xs">
                   <div className="flex items-center justify-between gap-2 mb-1">
                     <h3 className="font-serif text-lg sm:text-xl font-bold text-[#512D6D] tracking-tight">
@@ -38,11 +41,11 @@ export const AboutSection: React.FC = () => {
                     </h3>
                     <div className="inline-flex items-center gap-1 px-2 py-0.5 bg-[#D1C4E9]/60 text-[#512D6D] rounded-full text-[10px] font-bold">
                       <Award className="w-3 h-3 text-[#512D6D]" />
-                      <span>CAP Esthétique</span>
+                      <span>{t.about.badgeCap}</span>
                     </div>
                   </div>
                   <p className="text-xs text-[#5D4037]/90 font-medium">
-                    Esthéticienne & Praticienne Soins et Massages à Domicile
+                    {t.about.roleSubtitle}
                   </p>
                 </div>
 
@@ -53,15 +56,15 @@ export const AboutSection: React.FC = () => {
                       <Award className="w-4 h-4" />
                     </div>
                     <div className="text-xs text-[#5D4037]">
-                      <p className="font-bold text-[#512D6D]">Certification Officielle Reconnue</p>
+                      <p className="font-bold text-[#512D6D]">{t.about.certTitle}</p>
                       <p className="text-[11px] text-[#5D4037]/80">
-                        Chambre des Métiers de Bretagne
+                        {t.about.certSub}
                       </p>
                     </div>
                   </div>
                   <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
                     <Check className="w-3 h-3" />
-                    <span>Vérifié</span>
+                    <span>{t.about.verified}</span>
                   </span>
                 </div>
 
@@ -75,24 +78,22 @@ export const AboutSection: React.FC = () => {
             
             <div className="flex items-center gap-2 text-xs font-semibold tracking-wider uppercase text-[#512D6D] mb-2">
               <Sparkles className="w-4 h-4" />
-              <span>Parcours & Philosophie</span>
-              <span aria-hidden="true">·</span>
-              <span>L'Écoute</span>
+              <span>{t.about.kicker}</span>
             </div>
 
             <h2 className="text-2xl sm:text-4xl font-serif font-medium text-[#5D4037] tracking-tight mb-4">
-              Prendre soin de vous chez vous, avec l'exigence d'un grand salon.
+              {t.about.title}
             </h2>
 
             <div className="space-y-3 text-xs sm:text-base text-[#5D4037]/85 leading-relaxed font-normal">
               <p>
-                Titulaire du <strong>CAP Esthétique Cosmétique et Parfumerie</strong>, diplôme d'État officiel garantissant la parfaite maîtrise des protocoles cutanés et des normes de dermo-hygiène, j'ai fait le choix de me consacrer entièrement à la prestation à domicile à Rennes et ses environs.
+                {t.about.paragraph1}
               </p>
               <p>
-                Finis le stress des bouchons rennais, la recherche d'une place de stationnement et la rupture de votre sérénité au moment de repartir. 
+                {t.about.paragraph2}
               </p>
               <p>
-                J'apporte chez vous ma <strong>chaise ergonomique de massage</strong> ainsi que tout le matériel professionnel nécessaire (spatule dermo-purifiante, appareil masseur pour les pieds, cosmétiques d'exception). Pour les soins du visage, des cils et des pieds, nous utilisons confortablement l'équipement de votre intérieur (canapé, fauteuil ou lit) pour une expérience d'institut sur-mesure.
+                {t.about.paragraph3}
               </p>
             </div>
 
@@ -104,10 +105,10 @@ export const AboutSection: React.FC = () => {
                   <Heart className="w-4 h-4" />
                 </div>
                 <h4 className="font-serif text-xs sm:text-sm font-semibold text-[#5D4037] mb-0.5">
-                  Bienveillance & Écoute
+                  {t.about.pillars.kindnessTitle}
                 </h4>
                 <p className="text-[11px] text-[#5D4037]/80 leading-relaxed">
-                  Diagnostic attentif pour adapter la pression et les principes actifs à votre peau.
+                  {t.about.pillars.kindnessDesc}
                 </p>
               </div>
 
@@ -116,10 +117,10 @@ export const AboutSection: React.FC = () => {
                   <ShieldCheck className="w-4 h-4" />
                 </div>
                 <h4 className="font-serif text-xs sm:text-sm font-semibold text-[#5D4037] mb-0.5">
-                  Hygiène Médicale
+                  {t.about.pillars.hygieneTitle}
                 </h4>
                 <p className="text-[11px] text-[#5D4037]/80 leading-relaxed">
-                  Désinfection virucide complète de la chaise de massage et du matériel entre chaque cliente.
+                  {t.about.pillars.hygieneDesc}
                 </p>
               </div>
 
@@ -128,10 +129,10 @@ export const AboutSection: React.FC = () => {
                   <UserCheck className="w-4 h-4" />
                 </div>
                 <h4 className="font-serif text-xs sm:text-sm font-semibold text-[#5D4037] mb-0.5">
-                  Intimité Respectée
+                  {t.about.pillars.privacyTitle}
                 </h4>
                 <p className="text-[11px] text-[#5D4037]/80 leading-relaxed">
-                  Discrétion et sérénité totale dans le respect absolu de votre intérieur.
+                  {t.about.pillars.privacyDesc}
                 </p>
               </div>
 
