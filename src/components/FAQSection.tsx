@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronDown, ChevronUp, HelpCircle, CreditCard, Clock, Home, ShieldCheck, AlertCircle, RefreshCw } from 'lucide-react';
+import { MessageCircle, ChevronDown, ChevronUp, HelpCircle, CreditCard, Clock, Home, ShieldCheck, AlertCircle, RefreshCw } from 'lucide-react';
 
 interface FAQItem {
   id: string;
@@ -55,23 +55,33 @@ export const FAQSection: React.FC = () => {
   };
 
   return (
-    <section id="faq" className="py-8 sm:py-20 bg-[#F9F6F0]">
+    <section id="faq" className="py-6 sm:py-12 bg-[#F9F6F0]">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header */}
-        <div className="text-center mb-6 sm:mb-12">
-          <div className="flex items-center justify-center gap-2 text-xs font-semibold tracking-wider uppercase text-[#512D6D] mb-2">
-            <HelpCircle className="w-4 h-4 text-[#512D6D]" />
-            <span>Conditions & Questions Fréquentes</span>
-            <span aria-hidden="true">·</span>
-            <span>Organisation</span>
+        {/* Section Header - Split Layout */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 sm:mb-8 pb-4 border-b border-[#D1C4E9]/40">
+          <div>
+            <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#512D6D]/10 text-[#512D6D] text-[11px] font-semibold tracking-wide mb-1.5">
+              <HelpCircle className="w-3 h-3 text-[#512D6D]" />
+              <span>Conditions &amp; Questions Fréquentes · Organisation</span>
+            </div>
+
+            <h2 className="text-2xl sm:text-3xl font-serif font-semibold text-[#5D4037] tracking-tight">
+              Conditions de Réservation &amp; FAQ
+            </h2>
+            <p className="mt-1 text-xs sm:text-sm text-[#5D4037]/80 leading-relaxed max-w-xl">
+              Modalités pratiques, hygiène et organisation pour un moment de bien-être serein à domicile.
+            </p>
           </div>
-          <h2 className="text-2xl sm:text-4xl font-serif font-medium text-[#5D4037] tracking-tight mb-2 sm:mb-3">
-            Conditions de Réservation & FAQ
-          </h2>
-          <p className="text-xs sm:text-base text-[#5D4037]/80 leading-relaxed max-w-xl mx-auto">
-            Afin de vous garantir un moment de détente optimal et une organisation fluide, retrouvez ci-dessous toutes les modalités.
-          </p>
+
+          {/* Right Action: Quick Question Link */}
+          <a
+            href="#contact"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-white hover:bg-[#FDF8FA] border border-[#512D6D]/30 text-[#512D6D] rounded-full text-xs font-semibold shadow-2xs hover:shadow-xs transition-all shrink-0 self-start md:self-auto cursor-pointer"
+          >
+            <MessageCircle className="w-3.5 h-3.5 text-[#512D6D]" />
+            <span>Poser une question</span>
+          </a>
         </div>
 
         {/* Accordion List with >=44px touch targets */}

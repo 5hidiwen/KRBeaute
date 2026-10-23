@@ -12,26 +12,36 @@ export const LogisticsCalculator: React.FC = () => {
   );
 
   return (
-    <section id="secteur" className="py-8 sm:py-20 bg-gradient-to-b from-[#F9F6F0] via-[#F4EDE2]/50 to-[#F9F6F0] border-t border-[#D1C4E9]/40">
+    <section id="secteur" className="py-6 sm:py-12 bg-gradient-to-b from-[#F9F6F0] via-[#F4EDE2]/50 to-[#F9F6F0] border-t border-[#D1C4E9]/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-12">
-          <div className="flex items-center justify-center gap-2 text-xs font-semibold tracking-wider uppercase text-[#512D6D] mb-2">
-            <span>Rennes & Alentours</span>
-            <span aria-hidden="true">·</span>
-            <span>Transparence</span>
+        {/* Section Header - Split Layout */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 sm:mb-8 pb-4 border-b border-[#D1C4E9]/40">
+          <div>
+            <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#512D6D]/10 text-[#512D6D] text-[11px] font-semibold tracking-wide mb-1.5">
+              <Compass className="w-3 h-3 text-[#512D6D]" />
+              <span>Rennes &amp; Communes Voisines · Transparence</span>
+            </div>
+
+            <h2 className="text-2xl sm:text-3xl font-serif font-semibold text-[#5D4037] tracking-tight">
+              Rayon d'action &amp; Déplacement
+            </h2>
+            <p className="mt-1 text-xs sm:text-sm text-[#5D4037]/80 leading-relaxed max-w-xl">
+              Déplacement offert dans un rayon de 7 km autour de Rennes, puis forfait kilométrique transparent au-delà.
+            </p>
           </div>
-          <h2 className="text-2xl sm:text-4xl font-serif font-medium text-[#5D4037] tracking-tight mb-2 sm:mb-3">
-            Rayon d'action & Déplacement
-          </h2>
-          <p className="text-xs sm:text-base text-[#5D4037]/80 leading-relaxed max-w-xl mx-auto">
-            Déplacement offert dans un rayon de 7 km autour du centre de Rennes, et supplément forfaitaire modéré au-delà.
-          </p>
+
+          {/* Right Highlight Badge */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-[#D1C4E9]/30 rounded-2xl border border-[#D1C4E9]/60 shrink-0 self-start md:self-auto">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span className="text-xs font-semibold text-[#512D6D]">0 € offert jusqu'à 7 km</span>
+            <span className="text-xs text-[#5D4037]/50">·</span>
+            <span className="text-xs text-[#5D4037]/80 font-medium">dès 5 € au-delà</span>
+          </div>
         </div>
 
         {/* 3 Tier Policy Cards (Compact on mobile) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 sm:gap-6 mb-8 sm:mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 sm:gap-6 mb-6 sm:mb-8">
           
           {/* Tier 1: 0 - 7 km (OFFERT) */}
           <div className="bg-white rounded-2xl p-4 sm:p-6 border-2 border-[#512D6D] shadow-sm flex flex-col justify-between">

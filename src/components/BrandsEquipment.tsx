@@ -5,26 +5,40 @@ export const BrandsEquipment: React.FC = () => {
   const farmasiAffiliateUrl = "https://www.fr.farmasi.com/karyrobart";
 
   return (
-    <section id="marques" className="py-8 sm:py-20 bg-gradient-to-b from-[#F9F6F0] via-[#F5EFE6] to-[#F9F6F0] border-y border-[#D1C4E9]/40">
+    <section id="marques" className="py-6 sm:py-12 bg-gradient-to-b from-[#F9F6F0] via-[#F5EFE6] to-[#F9F6F0] border-y border-[#D1C4E9]/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Title */}
-        <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-12">
-          <div className="flex items-center justify-center gap-2 text-xs font-semibold tracking-wider uppercase text-[#512D6D] mb-2">
-            <span>Excellence & Sécurité</span>
-            <span aria-hidden="true">·</span>
-            <span>Cosmétiques & Tech</span>
+        {/* Section Header - Split Layout */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 sm:mb-8 pb-4 border-b border-[#D1C4E9]/40">
+          <div>
+            <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#512D6D]/10 text-[#512D6D] text-[11px] font-semibold tracking-wide mb-1.5">
+              <Sparkles className="w-3 h-3 text-[#512D6D]" />
+              <span>Excellence &amp; Sécurité · Cosmétiques &amp; Tech</span>
+            </div>
+
+            <h2 className="text-2xl sm:text-3xl font-serif font-semibold text-[#5D4037] tracking-tight">
+              Technologies &amp; Grandes Maisons
+            </h2>
+            <p className="mt-1 text-xs sm:text-sm text-[#5D4037]/80 leading-relaxed max-w-xl">
+              Dispositifs certifiés CE et formulations professionnelles reconnues pour des résultats visibles dès la première séance.
+            </p>
           </div>
-          <h2 className="text-2xl sm:text-4xl font-serif font-medium text-[#5D4037] tracking-tight mb-2 sm:mb-3">
-            Technologies & Grandes Maisons
-          </h2>
-          <p className="text-xs sm:text-base text-[#5D4037]/80 leading-relaxed max-w-xl mx-auto">
-            Dispositifs certifiés CE et formulations professionnelles reconnues pour des résultats visibles dès la première séance.
-          </p>
+
+          {/* Right Action: Farmasi Partner Shop Link */}
+          <a
+            href={farmasiAffiliateUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-[#512D6D] hover:bg-[#402257] active:scale-98 text-white rounded-full text-xs font-semibold shadow-2xs hover:shadow-xs transition-all shrink-0 self-start md:self-auto cursor-pointer"
+          >
+            <ShoppingBag className="w-3.5 h-3.5 text-[#D1C4E9]" />
+            <span>Boutique Partenaire Farmasi</span>
+            <ExternalLink className="w-3 h-3 text-white/80" />
+          </a>
         </div>
 
         {/* Brands Showcase Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 mb-8 sm:mb-14">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 mb-6 sm:mb-10">
           
           {/* Nu Skin */}
           <div className="bg-white rounded-2xl p-4 sm:p-6 border border-[#D1C4E9] shadow-xs flex flex-col justify-between">
