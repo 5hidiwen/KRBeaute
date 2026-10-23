@@ -6,6 +6,10 @@
 - **Domaine officiel :** `www.krbeaute.com`
 - **Zone d'activité :** Rennes et communes environnantes.
 
+## Sécurité des Secrets & Fichier .env
+- **Règle absolue :** Le fichier `.env` doit **toujours rester strictement local** et ne jamais être ajouté, commité ou poussé sur Git ou GitHub.
+- Vérifier systématiquement que `.env` reste ignoré par `.gitignore` et ne jamais forcer son ajout (`git add -f .env` strictement interdit).
+
 ## Environnement Git & Déploiement
 - Git est installé sous : `$env:LOCALAPPDATA\Programs\Git\cmd`
 - **Règle impérative pour le push GitHub :**
