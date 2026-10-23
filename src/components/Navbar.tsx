@@ -1,5 +1,7 @@
 import React from 'react';
 import { Phone, MessageCircle, Home, Sparkles, MapPin, HelpCircle, Award, Cpu, Mail } from 'lucide-react';
+import { useLanguage } from '../i18n/LanguageContext';
+import { LanguageSelector } from './LanguageSelector';
 
 export type NavTab = 'accueil' | 'soins' | 'marques' | 'a-propos' | 'secteur' | 'faq' | 'contact';
 
@@ -17,14 +19,16 @@ interface NavLinkItem {
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab, onOpenBooking }) => {
+  const { t, language } = useLanguage();
+
   const navLinks: NavLinkItem[] = [
-    { id: 'accueil', label: 'Accueil', shortLabel: 'Accueil', icon: <Home className="w-4 h-4" /> },
-    { id: 'soins', label: 'Soins & Tarifs', shortLabel: 'Soins & Tarifs', icon: <Sparkles className="w-4 h-4" /> },
-    { id: 'secteur', label: "Rayon d'action (7 km offert)", shortLabel: 'Rayon 7 km', icon: <MapPin className="w-4 h-4" /> },
-    { id: 'marques', label: 'Technologies & Marques', shortLabel: 'Technologies', icon: <Cpu className="w-4 h-4" /> },
-    { id: 'a-propos', label: 'À Propos de moi', shortLabel: 'À Propos', icon: <Award className="w-4 h-4" /> },
-    { id: 'faq', label: 'FAQ', shortLabel: 'FAQ', icon: <HelpCircle className="w-4 h-4" /> },
-    { id: 'contact', label: 'Contact & Réservation', shortLabel: 'Contact', icon: <Mail className="w-4 h-4" /> },
+    { id: 'accueil', label: t.nav.tabs.accueil, shortLabel: t.nav.tabs.accueil, icon: <Home className="w-4 h-4" /> },
+    { id: 'soins', label: t.nav.tabs.soins, shortLabel: t.nav.tabs.soins, icon: <Sparkles className="w-4 h-4" /> },
+    { id: 'secteur', label: t.nav.tabs.secteur, shortLabel: t.nav.tabs.secteurShort, icon: <MapPin className="w-4 h-4" /> },
+    { id: 'marques', label: t.nav.tabs.marques, shortLabel: t.nav.tabs.marquesShort, icon: <Cpu className="w-4 h-4" /> },
+    { id: 'a-propos', label: t.nav.tabs.aPropos, shortLabel: t.nav.tabs.aProposShort, icon: <Award className="w-4 h-4" /> },
+    { id: 'faq', label: t.nav.tabs.faq, shortLabel: t.nav.tabs.faq, icon: <HelpCircle className="w-4 h-4" /> },
+    { id: 'contact', label: t.nav.tabs.contact, shortLabel: t.nav.tabs.contact, icon: <Mail className="w-4 h-4" /> },
   ];
 
   const handleTabClick = (tab: NavTab) => {
@@ -32,13 +36,19 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab, onOpenBo
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const whatsAppGreeting = language === 'es'
+    ? 'Hola Karina, deseo reservar un tratamiento a domicilio...'
+    : 'Bonjour Karina, je souhaite réserver un soin à domicile...';
+
+  const whatsAppUrl = `https://wa.me/33665566702?text=${encodeURIComponent(whatsAppGreeting)}`;
+
   return (
     <>
       {/* HEADER BAR */}
       <header className="sticky top-0 z-40 bg-[#F9F6F0]/95 backdrop-blur-md border-b border-[#D1C4E9]/60 shadow-xs">
         
         {/* Top Tier: Wordmark & Direct Actions */}
-        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-14 sm:h-18 flex items-center justify-between gap-3">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-14 sm:h-18 flex items-center justify-between gap-2 sm:gap-3">
           
           {/* Brand Wordmark */}
           <button 
@@ -51,7 +61,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab, onOpenBo
             <div className="flex flex-col sm:flex-row sm:items-baseline sm:gap-1.5">
               <span className="text-sm sm:text-lg font-bold leading-tight">Karina Robart</span>
               <span className="text-[11px] sm:text-xs text-[#5D4037]/80 font-sans hidden xs:inline">
-                · Esthéticienne à Domicile
+                {t.nav.brandRole}
               </span>
             </div>
           </button>
@@ -76,27 +86,46 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab, onOpenBo
             })}
           </nav>
 
+          {/* Right Action: Language Selector & Direct Contact */}
+          <div className="flex items-center gap-2 shrink-0">
+            {/* Language Selector: Always accessible */}
+            <LanguageSelector />
 
-          {/* Mobile Top Right Fast Action Buttons */}
-          <div className="flex sm:hidden items-center gap-1.5">
-            <a
-              href="tel:+33665566702"
-              className="flex items-center gap-1 px-2.5 py-1.5 rounded-full bg-white border border-[#D1C4E9] text-[#512D6D] text-xs font-semibold shadow-2xs active:scale-95"
-              aria-label="Appeler directement au 06 65 56 67 02"
-            >
-              <Phone className="w-3.5 h-3.5" />
-              <span>Appeler</span>
-            </a>
-            <a
-              href="https://wa.me/33665566702?text=Bonjour%20Karina,%20je%20souhaite%20r%C3%A9server%20un%20soin%20%C3%A0%20domicile..."
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-[#512D6D] text-white text-xs font-bold shadow-2xs active:scale-95"
-              aria-label="Contacter sur WhatsApp"
-            >
-              <MessageCircle className="w-3.5 h-3.5 text-emerald-300" />
-              <span>WhatsApp</span>
-            </a>
+            {/* Desktop Contact Buttons (visible on md+) */}
+            <div className="hidden sm:flex items-center gap-1.5">
+              <a
+                href="tel:+33665566702"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-[#D1C4E9] text-[#512D6D] text-xs font-semibold shadow-2xs hover:bg-[#F9F6F0] transition-colors"
+                aria-label={t.nav.callAria}
+              >
+                <Phone className="w-3.5 h-3.5" />
+                <span>{t.nav.call}</span>
+              </a>
+              <a
+                href={whatsAppUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#512D6D] text-white text-xs font-bold shadow-2xs hover:bg-[#402257] active:scale-95 transition-all"
+                aria-label={t.nav.whatsappAria}
+              >
+                <MessageCircle className="w-3.5 h-3.5 text-emerald-300" />
+                <span>{t.nav.whatsapp}</span>
+              </a>
+            </div>
+
+            {/* Mobile Fast Contact Button */}
+            <div className="flex sm:hidden items-center gap-1">
+              <a
+                href={whatsAppUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 px-2.5 py-1.5 rounded-full bg-[#512D6D] text-white text-xs font-bold shadow-2xs active:scale-95"
+                aria-label={t.nav.whatsappAria}
+              >
+                <MessageCircle className="w-3.5 h-3.5 text-emerald-300" />
+                <span className="hidden xs:inline">{t.nav.whatsapp}</span>
+              </a>
+            </div>
           </div>
 
         </div>
@@ -134,13 +163,13 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab, onOpenBo
           <span>06 65 56 67 02</span>
         </a>
         <a
-          href="https://wa.me/33665566702?text=Bonjour%20Karina,%20je%20souhaite%20r%C3%A9server%20un%20soin%20%C3%A0%20domicile..."
+          href={whatsAppUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="flex-[1.3] min-h-[44px] flex items-center justify-center gap-1.5 px-3 py-2 bg-[#512D6D] text-white rounded-xl text-xs font-bold shadow-md active:scale-98"
         >
           <MessageCircle className="w-4 h-4 text-emerald-400" />
-          <span>Réserver (WhatsApp)</span>
+          <span>{t.nav.bookWhatsApp}</span>
         </a>
       </div>
     </>

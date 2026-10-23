@@ -1,32 +1,35 @@
 import React, { useState } from 'react';
 import { Clock, MessageCircle, Sparkles, Heart, Eye, Footprints, ChevronDown, ChevronUp } from 'lucide-react';
-import { SERVICES, ServiceItem } from '../data/servicesData';
+import { getServices, ServiceItem } from '../data/servicesData';
+import { useLanguage } from '../i18n/LanguageContext';
 
 interface ServicesMenuProps {
   onSelectService: (service: ServiceItem) => void;
 }
 
 export const ServicesMenu: React.FC<ServicesMenuProps> = ({ onSelectService }) => {
+  const { t, language } = useLanguage();
   const [activeTab, setActiveTab] = useState<'all' | 'visage-regard' | 'pieds-corps'>('all');
   const [expandedSteps, setExpandedSteps] = useState<Record<string, boolean>>({});
+
+  const services = getServices(language);
 
   const toggleSteps = (id: string) => {
     setExpandedSteps(prev => ({ ...prev, [id]: !prev[id] }));
   };
 
-  const visageRegardCount = SERVICES.filter(s => s.group === 'visage-regard').length;
-  const piedsCorpsCount = SERVICES.filter(s => s.group === 'pieds-corps').length;
+  const visageRegardCount = services.filter(s => s.group === 'visage-regard').length;
+  const piedsCorpsCount = services.filter(s => s.group === 'pieds-corps').length;
 
   const renderServiceRow = (service: ServiceItem) => {
     const isExpanded = !!expandedSteps[service.id];
     const details = service.protocolSteps || service.comprend || [];
-    const isVisageGroup = service.group === 'visage-regard';
-    const detailLabel = service.protocolSteps ? 'le protocole' : 'ce qui est inclus';
+    const isProtocol = !!service.protocolSteps;
+    
+    const detailLabel = isProtocol ? t.services.viewProtocol : t.services.viewIncluded;
+    const hideLabel = isProtocol ? t.services.hideProtocol : t.services.hideIncluded;
 
-    const categoryLabel = 
-      service.category === 'regard' ? 'Sublimation du Regard' :
-      service.category === 'visage' ? 'Soin du Visage' :
-      service.category === 'pieds' ? 'Soin des Pieds' : 'Modelage Assis';
+    const categoryLabel = t.services.categories[service.category] || service.category;
 
     return (
       <div
@@ -75,7 +78,7 @@ export const ServicesMenu: React.FC<ServicesMenuProps> = ({ onSelectService }) =
                 onClick={() => toggleSteps(service.id)}
                 className="mt-2.5 inline-flex items-center gap-1.5 text-xs font-semibold text-[#8B2651] hover:text-[#512D6D] transition-colors cursor-pointer select-none"
               >
-                <span>{isExpanded ? `Masquer ${detailLabel}` : `Voir ${detailLabel} (${details.length} points)`}</span>
+                <span>{isExpanded ? hideLabel : `${detailLabel} (${details.length})`}</span>
                 {isExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
               </button>
             )}
@@ -99,7 +102,7 @@ export const ServicesMenu: React.FC<ServicesMenuProps> = ({ onSelectService }) =
               className="min-h-[40px] px-4 sm:px-5 py-2 rounded-full bg-[#7A2048] hover:bg-[#631839] active:scale-98 text-white text-xs sm:text-sm font-semibold flex items-center gap-2 shadow-2xs hover:shadow-xs transition-all cursor-pointer shrink-0"
             >
               <MessageCircle className="w-4 h-4 text-emerald-300" />
-              <span>Réserver</span>
+              <span>{t.services.reserveBtn}</span>
             </button>
           </div>
 
@@ -110,7 +113,7 @@ export const ServicesMenu: React.FC<ServicesMenuProps> = ({ onSelectService }) =
           <div className="mt-3.5 pt-3.5 border-t border-[#D1C4E9]/30 bg-[#FDF8FA] rounded-xl p-3.5">
             <div className="flex items-center gap-1.5 text-xs font-serif font-bold text-[#7A2048] uppercase tracking-wider mb-2">
               <Sparkles className="w-3.5 h-3.5 text-[#8B2651]" />
-              <span>{service.protocolSteps ? 'Déroulé & Protocole en cabine' : 'Détail des inclusions du rituel'}</span>
+              <span>{isProtocol ? t.services.protocolTitle : t.services.includedTitle}</span>
             </div>
             <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs text-[#5D4037]/90">
               {details.map((step, idx) => (
@@ -130,19 +133,19 @@ export const ServicesMenu: React.FC<ServicesMenuProps> = ({ onSelectService }) =
     <section id="soins" className="py-6 sm:py-12 bg-[#F9F6F0] relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header - Split Layout (Title on left, Filters on right) */}
+        {/* Section Header - Split Layout */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 sm:mb-8 pb-4 border-b border-[#D1C4E9]/40">
           <div>
             <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#8B2651]/10 text-[#8B2651] text-[11px] font-serif font-semibold tracking-wide mb-1.5">
               <Heart className="w-3 h-3 fill-[#8B2651]" />
-              <span>Pour votre confort et votre bien-être</span>
+              <span>{t.services.kicker}</span>
             </div>
 
             <h2 className="text-2xl sm:text-3xl font-serif font-semibold text-[#5D4037] tracking-tight">
-              Carte des Soins &amp; Tarifs
+              {t.services.title}
             </h2>
             <p className="mt-1 text-xs sm:text-sm text-[#5D4037]/80 leading-relaxed max-w-xl">
-              Prestations de beauté et de détente réalisées avec soin à votre domicile à Rennes • Déplacement offert dans un rayon de 7 km.
+              {t.services.subtitle}
             </p>
           </div>
 
@@ -157,7 +160,7 @@ export const ServicesMenu: React.FC<ServicesMenuProps> = ({ onSelectService }) =
                   : 'text-[#5D4037] hover:text-[#512D6D]'
               }`}
             >
-              Tous les soins ({SERVICES.length})
+              {t.services.filters.all} ({services.length})
             </button>
             <button
               type="button"
@@ -169,7 +172,7 @@ export const ServicesMenu: React.FC<ServicesMenuProps> = ({ onSelectService }) =
               }`}
             >
               <Eye className="w-3.5 h-3.5" />
-              <span>Visage &amp; Regard ({visageRegardCount})</span>
+              <span>{t.services.filters.visageRegard} ({visageRegardCount})</span>
             </button>
             <button
               type="button"
@@ -181,7 +184,7 @@ export const ServicesMenu: React.FC<ServicesMenuProps> = ({ onSelectService }) =
               }`}
             >
               <Footprints className="w-3.5 h-3.5" />
-              <span>Pieds &amp; Détente ({piedsCorpsCount})</span>
+              <span>{t.services.filters.piedsCorps} ({piedsCorpsCount})</span>
             </button>
           </div>
         </div>
@@ -193,16 +196,16 @@ export const ServicesMenu: React.FC<ServicesMenuProps> = ({ onSelectService }) =
               <div className="flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-[#8B2651]" />
                 <h3 className="font-serif text-base sm:text-lg font-bold text-[#5D4037]">
-                  Soins du Visage &amp; Sublimation du Regard
+                  {t.services.sectionVisage}
                 </h3>
               </div>
               <span className="text-[11px] text-[#8B2651] font-semibold bg-[#8B2651]/10 px-2.5 py-0.5 rounded-full">
-                4 soins
+                {t.services.sectionVisageCount}
               </span>
             </div>
 
             <div className="space-y-3">
-              {SERVICES.filter(s => s.group === 'visage-regard').map(renderServiceRow)}
+              {services.filter(s => s.group === 'visage-regard').map(renderServiceRow)}
             </div>
           </div>
         )}
@@ -214,16 +217,16 @@ export const ServicesMenu: React.FC<ServicesMenuProps> = ({ onSelectService }) =
               <div className="flex items-center gap-2">
                 <Footprints className="w-4 h-4 text-[#8B2651]" />
                 <h3 className="font-serif text-base sm:text-lg font-bold text-[#5D4037]">
-                  Beauté &amp; Soins des Pieds · Modelage en Chaise
+                  {t.services.sectionPieds}
                 </h3>
               </div>
               <span className="text-[11px] text-[#8B2651] font-semibold bg-[#8B2651]/10 px-2.5 py-0.5 rounded-full">
-                3 soins
+                {t.services.sectionPiedsCount}
               </span>
             </div>
 
             <div className="space-y-3">
-              {SERVICES.filter(s => s.group === 'pieds-corps').map(renderServiceRow)}
+              {services.filter(s => s.group === 'pieds-corps').map(renderServiceRow)}
             </div>
           </div>
         )}
@@ -236,18 +239,18 @@ export const ServicesMenu: React.FC<ServicesMenuProps> = ({ onSelectService }) =
             </div>
             <div>
               <h4 className="font-serif text-sm sm:text-base font-bold text-[#5D4037]">
-                Envie d'un rendez-vous beauté complet ?
+                {t.services.comboTitle}
               </h4>
               <p className="text-xs sm:text-sm text-[#5D4037]/80 leading-relaxed">
-                Combinez par exemple un <strong>Soin du Visage</strong> avec un <strong>Rehaussement de Cils</strong> ou un <strong>Soin des Pieds</strong> pour une séance cocooning totale à domicile.
+                {t.services.comboDesc}
               </p>
             </div>
           </div>
           <button
-            onClick={() => onSelectService(SERVICES[0])}
+            onClick={() => onSelectService(services[0])}
             className="min-h-[38px] w-full sm:w-auto px-5 py-2 text-xs sm:text-sm font-bold text-[#7A2048] bg-white border border-[#7A2048]/40 hover:bg-[#8B2651]/10 rounded-full shadow-xs transition-colors shrink-0 cursor-pointer"
           >
-            Personnaliser mon créneau
+            {t.services.comboBtn}
           </button>
         </div>
 

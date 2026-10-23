@@ -1,6 +1,7 @@
 import React from 'react';
 import { MessageCircle, Phone, Award, Sparkles, CheckCircle2, ArrowRight } from 'lucide-react';
 import { KARINA_PHOTO_BASE64 } from '../karinaPhotoData';
+import { useLanguage } from '../i18n/LanguageContext';
 
 interface HeroProps {
   onOpenBooking: () => void;
@@ -8,6 +9,8 @@ interface HeroProps {
 }
 
 export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onGoToServices }) => {
+  const { t } = useLanguage();
+
   return (
     <section className="relative overflow-hidden pt-6 pb-12 sm:pt-14 sm:pb-24 border-b border-[#D1C4E9]/40 bg-gradient-to-b from-[#F9F6F0] via-[#F9F6F0] to-[#F3EDE2]/60">
       {/* Subtle organic ambient glow */}
@@ -26,25 +29,25 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onGoToServices }) => 
             <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-semibold tracking-wider uppercase text-[#512D6D] mb-3">
               <span className="flex items-center gap-1">
                 <Award className="w-3.5 h-3.5 text-[#512D6D]" />
-                Esthéticienne Diplômée d'État (CAP)
+                {t.hero.certifiedKicker}
               </span>
             </div>
 
             {/* Main Headline - balanced for mobile and desktop */}
             <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-[3.1rem] font-serif font-medium text-[#5D4037] leading-[1.2] tracking-tight mb-3 sm:mb-6 text-balance">
-              L'institut de beauté d'exception dans le confort de votre domicile à Rennes.
+              {t.hero.title}
             </h1>
 
             {/* Subtitle / Value Proposition */}
             <p className="text-sm sm:text-lg text-[#5D4037]/85 font-normal leading-relaxed mb-6 sm:mb-8 max-w-2xl">
-              Détente et beauté sur-mesure à votre domicile : soins du visage ciblés (Pureté Absolue, Douceur Gelée, Detox), rehaussement et teinte de cils, beauté & soins des pieds, et modelage sur chaise ergonomique à Rennes.
+              {t.hero.description}
             </p>
 
             {/* MOBILE QUICK ACTION PANEL: Immediate 1-tap buttons */}
             <div className="w-full sm:hidden mb-6 bg-white/90 p-3.5 rounded-2xl border border-[#D1C4E9] shadow-sm flex flex-col gap-2.5">
               <div className="flex items-center justify-between text-xs font-semibold text-[#512D6D] px-1">
-                <span>Accès rapide :</span>
-                <span className="text-[11px] text-[#5D4037]/70 font-normal">Du lundi au samedi 9h-19h30</span>
+                <span>{t.hero.quickAccess}</span>
+                <span className="text-[11px] text-[#5D4037]/70 font-normal">{t.hero.hours}</span>
               </div>
               <div className="grid grid-cols-2 gap-2">
                 <button
@@ -52,14 +55,14 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onGoToServices }) => 
                   className="min-h-[46px] w-full flex items-center justify-center gap-1.5 px-3 py-2.5 bg-[#512D6D] text-[#F9F6F0] rounded-xl text-xs font-bold shadow-xs active:scale-98"
                 >
                   <MessageCircle className="w-4 h-4 text-emerald-300" />
-                  <span>Réserver (WhatsApp)</span>
+                  <span>{t.hero.bookWhatsApp}</span>
                 </button>
                 <a
                   href="tel:+33665566702"
                   className="min-h-[46px] w-full flex items-center justify-center gap-1.5 px-3 py-2.5 bg-[#D1C4E9]/40 border border-[#D1C4E9] text-[#512D6D] rounded-xl text-xs font-bold active:scale-98"
                 >
                   <Phone className="w-4 h-4 text-[#512D6D]" />
-                  <span>Appeler 06 65 56 67 02</span>
+                  <span>{t.hero.callNumber}</span>
                 </a>
               </div>
               {onGoToServices && (
@@ -68,20 +71,20 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onGoToServices }) => 
                   onClick={onGoToServices}
                   className="min-h-[40px] w-full flex items-center justify-center gap-1.5 py-2 text-xs font-semibold text-[#5D4037] hover:text-[#512D6D] border-t border-[#D1C4E9]/50 pt-2"
                 >
-                  <span>Consulter la carte des soins & tarifs</span>
+                  <span>{t.hero.viewServices}</span>
                   <ArrowRight className="w-3.5 h-3.5 text-[#512D6D]" />
                 </button>
               )}
             </div>
 
-            {/* Desktop Action Buttons (Hidden on mobile to avoid duplication with quick panel) */}
+            {/* Desktop Action Buttons */}
             <div className="hidden sm:flex flex-wrap items-center gap-4 w-full sm:w-auto mb-8">
               <button
                 onClick={onOpenBooking}
                 className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 text-sm font-semibold tracking-wide text-[#F9F6F0] bg-[#512D6D] hover:bg-[#402257] active:scale-[0.98] rounded-full shadow-md hover:shadow-lg transition-all cursor-pointer"
               >
                 <MessageCircle className="w-4 h-4" />
-                <span>Prendre rendez-vous</span>
+                <span>{t.hero.bookAppointment}</span>
               </button>
               
               {onGoToServices && (
@@ -90,7 +93,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onGoToServices }) => 
                   onClick={onGoToServices}
                   className="inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-medium text-[#5D4037] bg-[#D1C4E9]/35 hover:bg-[#D1C4E9]/60 border border-[#D1C4E9] rounded-full transition-colors cursor-pointer"
                 >
-                  <span>Découvrir la carte des soins</span>
+                  <span>{t.hero.exploreMenu}</span>
                   <ArrowRight className="w-4 h-4 text-[#512D6D]" />
                 </button>
               )}
@@ -109,26 +112,26 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onGoToServices }) => 
               <div className="flex items-center sm:items-start gap-2 bg-white/70 backdrop-blur-xs p-2.5 sm:p-3 rounded-xl border border-[#D1C4E9]/60">
                 <CheckCircle2 className="w-4 h-4 text-[#512D6D] shrink-0" />
                 <span className="leading-tight">
-                  <strong>Déplacement offert</strong> rayon 7 km Rennes
+                  <strong>{t.hero.advantages.freeTravelBold}</strong> {t.hero.advantages.freeTravel}
                 </span>
               </div>
               <div className="flex items-center sm:items-start gap-2 bg-white/70 backdrop-blur-xs p-2.5 sm:p-3 rounded-xl border border-[#D1C4E9]/60">
                 <CheckCircle2 className="w-4 h-4 text-[#512D6D] shrink-0" />
                 <span className="leading-tight">
-                  <strong>Chaise de massage</strong> ergonomique apportée
+                  <strong>{t.hero.advantages.massageChairBold}</strong> {t.hero.advantages.massageChair}
                 </span>
               </div>
               <div className="flex items-center sm:items-start gap-2 bg-white/70 backdrop-blur-xs p-2.5 sm:p-3 rounded-xl border border-[#D1C4E9]/60">
                 <CheckCircle2 className="w-4 h-4 text-[#512D6D] shrink-0" />
                 <span className="leading-tight">
-                  <strong>Soins visage, regard & pieds</strong> certifiés d'institut
+                  <strong>{t.hero.advantages.certifiedCareBold}</strong> {t.hero.advantages.certifiedCare}
                 </span>
               </div>
             </div>
 
           </div>
 
-          {/* Right Column: Visual Showcase (Hidden on small mobile to maximize speed, visible on lg) */}
+          {/* Right Column: Visual Showcase */}
           <div className="hidden lg:block lg:col-span-5 relative">
             <div className="relative mx-auto max-w-md lg:max-w-none">
               
@@ -139,10 +142,10 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onGoToServices }) => 
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2 px-3 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-semibold text-[#512D6D] shadow-xs">
                       <Sparkles className="w-3.5 h-3.5 text-[#512D6D]" />
-                      <span>Soin cocooning personnalisé</span>
+                      <span>{t.hero.showcase.tag}</span>
                     </div>
                     <span className="text-xs font-medium text-[#5D4037]/70 bg-white/70 px-2.5 py-1 rounded-full">
-                      Rennes Métropole
+                      {t.hero.showcase.city}
                     </span>
                   </div>
 
@@ -151,10 +154,10 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onGoToServices }) => 
                       <Sparkles className="w-8 h-8 text-[#512D6D]" />
                     </div>
                     <h3 className="font-serif text-xl font-semibold text-[#5D4037] mb-1">
-                      Votre Havre de Sérénité
+                      {t.hero.showcase.serenityTitle}
                     </h3>
                     <p className="text-xs text-[#5D4037]/80 max-w-xs mx-auto">
-                      Chaise ergonomique de massage, musique douce, matériel professionnel et senteurs relaxantes dans votre salon.
+                      {t.hero.showcase.serenityDesc}
                     </p>
                   </div>
 
@@ -178,9 +181,9 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onGoToServices }) => 
                     />
                   </div>
                   <div className="text-xs text-[#5D4037]">
-                    <p className="font-semibold text-[#512D6D]">Karina Robart · Esthéticienne</p>
+                    <p className="font-semibold text-[#512D6D]">{t.hero.showcase.authorRole}</p>
                     <p className="text-[#5D4037]/80 mt-0.5">
-                      « J’apporte chez vous toute l'exigence et la douceur d'un véritable institut. »
+                      {t.hero.showcase.quote}
                     </p>
                   </div>
                 </div>
