@@ -34,21 +34,21 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
             <span className="font-serif text-base font-bold text-[#512D6D]">
               Karina Robart
             </span>
-            <span className="text-xs text-[#5D4037]/80 ml-2 font-medium">
-              Esthéticienne à Domicile · Rennes & Alentours (7 km offert)
-            </span>
           </div>
 
           {/* Quick Contacts & Socials */}
           <div className="flex flex-wrap items-center justify-center gap-3.5 text-xs text-[#5D4037]">
-            <a 
-              href="tel:+33665566702" 
-              className="inline-flex items-center gap-1.5 font-semibold text-[#512D6D] hover:underline"
-              title="Appeler Karina"
-            >
-              <Phone className="w-3.5 h-3.5" />
-              <span>06 65 56 67 02</span>
-            </a>
+            <span className="inline-flex items-center gap-1.5">
+              <a 
+                href="tel:+33665566702" 
+                className="inline-flex items-center gap-1.5 font-semibold text-[#512D6D] hover:underline"
+                title="Appeler Karina"
+              >
+                <Phone className="w-3.5 h-3.5" />
+                <span>06 65 56 67 02</span>
+              </a>
+              <span className="text-[#5D4037]/80 font-normal">— Sur rendez-vous uniquement</span>
+            </span>
             
             <span className="text-[#D1C4E9]" aria-hidden="true">·</span>
 
