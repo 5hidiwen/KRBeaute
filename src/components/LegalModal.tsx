@@ -196,7 +196,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({
                   Article 5 — Préparation chez vous (Obligations d'accueil)
                 </h4>
                 <p>
-                  <strong>5. Préparation chez vous :</strong> Le client s'engage à prévoir un espace calme et dégagé pour installer le matériel professionnel (table de soin ou chaise ergonomique), ainsi qu'un accès sécurisé à une prise électrique et à un point d'eau. Le client signale avant le soin tout problème de santé, allergie cutanée ou état de grossesse.
+                  <strong>5. Préparation chez vous :</strong> Le client s'engage à prévoir un espace calme et dégagé pour installer la chaise de massage ergonomique apportée par l'esthéticienne, ou un équipement confortable à domicile (canapé, fauteuil ou lit pour les soins visage, cils et pieds), ainsi qu'un accès sécurisé à une prise électrique et à un point d'eau. Le client signale avant le soin tout problème de santé, allergie cutanée ou état de grossesse.
                 </p>
               </div>
 

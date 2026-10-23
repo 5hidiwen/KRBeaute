@@ -1,5 +1,5 @@
 import React from 'react';
-import { MessageCircle, Phone, Award, MapPin, Sparkles, CheckCircle2, ArrowRight } from 'lucide-react';
+import { MessageCircle, Phone, Award, Sparkles, CheckCircle2, ArrowRight } from 'lucide-react';
 import { KARINA_PHOTO_BASE64 } from '../karinaPhotoData';
 
 interface HeroProps {
@@ -27,11 +27,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onGoToServices }) => 
               <span className="flex items-center gap-1">
                 <Award className="w-3.5 h-3.5 text-[#512D6D]" />
                 Esthéticienne Diplômée d'État (CAP)
-              </span>
-              <span aria-hidden="true">·</span>
-              <span className="flex items-center gap-1 text-[#5D4037]/80">
-                <MapPin className="w-3 h-3 text-[#512D6D]" />
-                Rennes & Périphérie (7 km offert)
               </span>
             </div>
 
@@ -120,7 +115,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onGoToServices }) => 
               <div className="flex items-center sm:items-start gap-2 bg-white/70 backdrop-blur-xs p-2.5 sm:p-3 rounded-xl border border-[#D1C4E9]/60">
                 <CheckCircle2 className="w-4 h-4 text-[#512D6D] shrink-0" />
                 <span className="leading-tight">
-                  <strong>Table de soin & linge</strong> stérilisé apportés
+                  <strong>Chaise de massage</strong> ergonomique apportée
                 </span>
               </div>
               <div className="flex items-center sm:items-start gap-2 bg-white/70 backdrop-blur-xs p-2.5 sm:p-3 rounded-xl border border-[#D1C4E9]/60">
@@ -159,7 +154,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onGoToServices }) => 
                       Votre Havre de Sérénité
                     </h3>
                     <p className="text-xs text-[#5D4037]/80 max-w-xs mx-auto">
-                      Table de massage moelleuse, musique douce, linge frais et senteurs relaxantes dans votre salon.
+                      Chaise ergonomique de massage, musique douce, matériel professionnel et senteurs relaxantes dans votre salon.
                     </p>
                   </div>
 

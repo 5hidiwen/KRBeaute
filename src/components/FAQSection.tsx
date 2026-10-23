@@ -39,13 +39,13 @@ export const FAQSection: React.FC = () => {
     {
       id: 'preparation-domicile',
       question: '5. Que dois-je prévoir chez moi pour préparer la séance ?',
-      answer: 'Merci de prévoir un espace calme et dégagé pour installer le matériel (table ou chaise ergonomique), ainsi qu\'un accès facile à une prise électrique standard et à un point d\'eau.',
+      answer: 'Merci de prévoir un espace calme et confortable pour vous installer (canapé, fauteuil ou lit selon le soin), un espace pour la chaise de massage ergonomique que j\'apporte, ainsi qu\'un accès facile à une prise électrique et à un point d\'eau.',
       icon: <Home className="w-4 h-4 text-[#512D6D]" />
     },
     {
       id: 'hygiene-cap',
       question: 'Comment garantissez-vous l\'hygiène et la sécurité ?',
-      answer: 'Titulaire du CAP Esthétique Cosmétique et Parfumerie, Karina applique des normes hospitalières strictes : désinfection complète de la table / chaise au virucide entre chaque cliente, linge propre stérilisé et instruments sous sachet scellé.',
+      answer: 'Titulaire du CAP Esthétique Cosmétique et Parfumerie, Karina applique des normes hospitalières strictes : désinfection complète de la chaise de massage ergonomique au virucide entre chaque cliente, linge propre et instruments sous sachet scellé.',
       icon: <ShieldCheck className="w-4 h-4 text-[#512D6D]" />
     }
   ];

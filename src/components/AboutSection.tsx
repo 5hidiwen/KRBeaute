@@ -92,7 +92,7 @@ export const AboutSection: React.FC = () => {
                 Finis le stress des bouchons rennais, la recherche d'une place de stationnement et la rupture de votre sérénité au moment de repartir. 
               </p>
               <p>
-                J'apporte chez vous une <strong>table de massage ergonomique</strong> ou ma <strong>chaise de modelage professionnel</strong>, du linge stérilisé, une ambiance relaxante et tout le matériel nécessaire (spatule dermo-purifiante, appareil masseur pour les pieds, cosmétiques d'exception) pour une expérience d'institut sur-mesure.
+                J'apporte chez vous ma <strong>chaise ergonomique de massage</strong> ainsi que tout le matériel professionnel nécessaire (spatule dermo-purifiante, appareil masseur pour les pieds, cosmétiques d'exception). Pour les soins du visage, des cils et des pieds, nous utilisons confortablement l'équipement de votre intérieur (canapé, fauteuil ou lit) pour une expérience d'institut sur-mesure.
               </p>
             </div>
 
@@ -119,7 +119,7 @@ export const AboutSection: React.FC = () => {
                   Hygiène Médicale
                 </h4>
                 <p className="text-[11px] text-[#5D4037]/80 leading-relaxed">
-                  Désinfection virucide complète de la table et du matériel entre chaque cliente.
+                  Désinfection virucide complète de la chaise de massage et du matériel entre chaque cliente.
                 </p>
               </div>
 
