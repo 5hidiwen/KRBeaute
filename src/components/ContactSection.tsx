@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, MessageCircle, Mail, MapPin, Send, CheckCircle2, Instagram } from 'lucide-react';
+import { Phone, MessageCircle, Mail, MapPin, Send, CheckCircle2, Instagram, Loader2, AlertCircle } from 'lucide-react';
 import { getServices, ServiceItem } from '../data/servicesData';
 import { COMMUNES_DATA } from '../data/communesData';
 import { useLanguage } from '../i18n/LanguageContext';
+import { WEB3FORMS_ACCESS_KEY } from '../config/contact';
 
 interface ContactSectionProps {
   selectedService?: ServiceItem | null;
@@ -25,6 +26,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [termsAccepted, setTermsAccepted] = useState(false);
 
   // Synchronize when selectedService changes
   useEffect(() => {
@@ -93,9 +97,58 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
     return `https://wa.me/33665566702?text=${text}`;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    if (!termsAccepted) {
+      setSubmitError(t.contact.rightCard.termsLabel);
+      return;
+    }
+
+    setSubmitError(null);
+    setIsSubmitting(true);
+
+    const accessKey = WEB3FORMS_ACCESS_KEY;
+    if (!accessKey) {
+      setSubmitError("La clé Web3Forms n'est pas encore configurée. Renseignez VITE_WEB3FORMS_ACCESS_KEY.");
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          access_key: accessKey,
+          subject: `Demande de RDV : ${formData.serviceTitle} — ${formData.name}`,
+          from_name: 'KRbeauté Réservations',
+          name: formData.name,
+          phone: formData.phone,
+          email: formData.email,
+          commune: formData.commune,
+          prestation: formData.serviceTitle,
+          date_souhaitee: formData.preferredDate || 'À convenir',
+          creneau_prefere: getSlotLabel(formData.preferredTimeSlot),
+          precisions: formData.message || 'Aucune précision',
+          replyto: formData.email,
+          botcheck: false
+        })
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        setSubmitted(true);
+      } else {
+        setSubmitError(result.message || t.contact.rightCard.errorGeneric);
+      }
+    } catch {
+      setSubmitError(t.contact.rightCard.errorGeneric);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -396,12 +449,20 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                     />
                   </div>
 
+                  {/* Honeypot anti-spam */}
+                  <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
+
                   {/* Terms acceptance checkbox */}
                   <div className="pt-0.5">
                     <label className="flex items-start gap-2 text-[11px] text-[#5D4037] cursor-pointer select-none">
                       <input
                         type="checkbox"
                         required
+                        checked={termsAccepted}
+                        onChange={(e) => {
+                          setTermsAccepted(e.target.checked);
+                          if (e.target.checked && submitError) setSubmitError(null);
+                        }}
                         className="mt-0.5 rounded border-[#D1C4E9] text-[#512D6D] focus:ring-[#512D6D]"
                       />
                       <span className="leading-tight">
@@ -410,14 +471,37 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                     </label>
                   </div>
 
+                  {/* Error banner if submission failed */}
+                  {submitError && (
+                    <div className="p-3 bg-rose-50 border border-rose-200 rounded-xl text-rose-800 text-[11px] flex items-start gap-2 animate-fadeIn">
+                      <AlertCircle className="w-4 h-4 shrink-0 mt-0.5 text-rose-600" />
+                      <div className="flex-1">
+                        <p className="font-semibold">{t.contact.rightCard.errorTitle}</p>
+                        <p className="mt-0.5">{submitError}</p>
+                      </div>
+                    </div>
+                  )}
+
                   {/* Submit Action Buttons */}
                   <div className="pt-1.5 flex items-center gap-2.5">
                     <button
                       type="submit"
-                      className="min-h-[42px] flex-1 inline-flex items-center justify-center gap-2 px-5 py-2 text-xs font-bold text-white bg-[#512D6D] hover:bg-[#402257] active:scale-98 rounded-full shadow-xs transition-transform cursor-pointer"
+                      disabled={isSubmitting}
+                      className={`min-h-[42px] flex-1 inline-flex items-center justify-center gap-2 px-5 py-2 text-xs font-bold text-white bg-[#512D6D] hover:bg-[#402257] active:scale-98 rounded-full shadow-xs transition-transform cursor-pointer ${
+                        isSubmitting ? 'opacity-70 cursor-wait' : ''
+                      }`}
                     >
-                      <Send className="w-3.5 h-3.5" />
-                      <span>{t.contact.rightCard.submitBtn}</span>
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                          <span>{t.contact.rightCard.submittingBtn}</span>
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-3.5 h-3.5" />
+                          <span>{t.contact.rightCard.submitBtn}</span>
+                        </>
+                      )}
                     </button>
                     <a
                       href={generateWhatsAppUrl()}

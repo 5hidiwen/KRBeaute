@@ -170,8 +170,7 @@ export interface LogisticsTranslations {
     zone3Sub: string;
     zone3Tag: string;
   };
-  simulatorTitle: string;
-  simulatorSub: string;
+  searchPrompt: string;
   searchPlaceholder: string;
   distanceLabel: string;
   feeLabel: string;
@@ -180,6 +179,7 @@ export interface LogisticsTranslations {
   infoHoursBold: string;
   infoSpace: string;
   infoSpaceBold: string;
+  perTripNote: string;
 }
 
 export interface FAQItemTranslation {
@@ -240,6 +240,9 @@ export interface ContactTranslations {
     termsLabel: string;
     termsBold: string;
     submitBtn: string;
+    submittingBtn: string;
+    errorTitle: string;
+    errorGeneric: string;
     whatsappBtn: string;
     success: {
       thanks: string;

@@ -36,10 +36,13 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
     };
   }, [drawerOpen]);
 
-  // 3 Primary Quick Links for Desktop Floating Pill
+  // Desktop Primary Links (all main sections except Accueil, accessible via the KR brand mark)
   const primaryLinks: { id: NavTab; label: string }[] = [
-    { id: 'soins', label: isEs ? 'Tratamientos' : 'Soins & Tarifs' },
-    { id: 'secteur', label: isEs ? 'Secteur (7 km)' : 'Secteur (7 km)' },
+    { id: 'soins', label: isEs ? 'Tratamientos & Tarifas' : 'Soins & Tarifs' },
+    { id: 'secteur', label: isEs ? 'Zona (7 km)' : 'Secteur (7 km)' },
+    { id: 'marques', label: isEs ? 'Tecnologías' : 'Technologies & Marques' },
+    { id: 'a-propos', label: isEs ? 'Sobre Karina' : 'À Propos' },
+    { id: 'faq', label: isEs ? 'FAQ' : 'FAQ' },
     { id: 'contact', label: isEs ? 'Contacto' : 'Contact' },
   ];
 
@@ -104,8 +107,8 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
   return (
     <>
       {/* FLOATING PILL NAVBAR */}
-      <div className="sticky top-2 sm:top-3.5 z-40 px-3 sm:px-6 max-w-4xl mx-auto w-full transition-all">
-        <header className="bg-[#F9F6F0]/92 backdrop-blur-md border border-[#D1C4E9]/80 rounded-full shadow-sm hover:shadow-md transition-all px-3 sm:px-4 py-1.5 sm:py-2 flex items-center justify-between gap-2 sm:gap-3">
+      <div className="sticky top-2 sm:top-3.5 z-40 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full transition-all">
+        <header className="bg-[#F9F6F0]/92 backdrop-blur-md border border-[#D1C4E9]/80 rounded-full shadow-sm hover:shadow-md transition-all px-3.5 sm:px-5 py-1.5 sm:py-2 flex items-center justify-between gap-2 sm:gap-4">
           
           {/* Brand Mark (Left) */}
           <button 
@@ -122,16 +125,16 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
           </button>
 
           {/* Desktop Primary Links (Center) */}
-          <nav className="hidden md:flex items-center gap-1 lg:gap-2">
+          <nav className="hidden lg:flex items-center gap-1 xl:gap-1.5">
             {primaryLinks.map((link) => {
               const isActive = activeTab === link.id;
               return (
                 <button
                   key={link.id}
                   onClick={() => handleTabClick(link.id)}
-                  className={`px-3 py-1 text-xs font-medium rounded-full transition-all cursor-pointer ${
+                  className={`px-2.5 xl:px-3 py-1 text-xs font-medium rounded-full transition-colors cursor-pointer whitespace-nowrap ${
                     isActive
-                      ? 'bg-[#512D6D] text-white font-semibold shadow-2xs'
+                      ? 'bg-[#512D6D] text-white shadow-2xs'
                       : 'text-[#5D4037] hover:text-[#512D6D] hover:bg-[#D1C4E9]/30'
                   }`}
                 >
@@ -158,16 +161,16 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
               <span className="hidden sm:inline">{isEs ? 'Reservar' : 'Réserver'}</span>
             </a>
 
-            {/* Menu Drawer Toggle Button (☰) */}
+            {/* Menu Drawer Toggle Button (☰) - Mobile & Tablet only */}
             <button
               type="button"
               onClick={() => setDrawerOpen(true)}
-              className="p-1 sm:px-2.5 sm:py-1 rounded-full bg-white/80 hover:bg-white border border-[#D1C4E9]/80 text-[#512D6D] flex items-center gap-1 text-xs font-semibold shadow-2xs hover:shadow-xs transition-all cursor-pointer"
+              className="lg:hidden p-1 sm:px-2.5 sm:py-1 rounded-full bg-white/80 hover:bg-white border border-[#D1C4E9]/80 text-[#512D6D] flex items-center gap-1 text-xs font-semibold shadow-2xs hover:shadow-xs transition-all cursor-pointer"
               aria-label={isEs ? 'Abrir menú completo' : 'Ouvrir le menu complet'}
               title="Menu"
             >
               <Menu className="w-4 h-4 text-[#512D6D]" />
-              <span className="hidden md:inline text-[11px] font-bold">Menu</span>
+              <span className="hidden sm:inline text-[11px] font-bold">Menu</span>
             </button>
           </div>
 
