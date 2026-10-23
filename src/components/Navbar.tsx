@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Phone, MessageCircle, Home, Sparkles, MapPin, HelpCircle, Award, Cpu, Mail, Menu, X, ChevronRight, Clock } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { LanguageSelector } from './LanguageSelector';
@@ -23,6 +23,18 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const isEs = language === 'es';
+
+  // Prevent background scroll when mobile drawer is open
+  useEffect(() => {
+    if (drawerOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [drawerOpen]);
 
   // 3 Primary Quick Links for Desktop Floating Pill
   const primaryLinks: { id: NavTab; label: string }[] = [
@@ -162,28 +174,28 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
         </header>
       </div>
 
-      {/* FULL SLIDE-OVER DRAWER MENU (☰) */}
+      {/* FULLSCREEN RESPONSIVE DRAWER MENU (☰) */}
       {drawerOpen && (
         <div className="fixed inset-0 z-50 animate-fadeIn">
-          {/* Backdrop */}
+          {/* Backdrop (visible on desktop/tablet when slide-over is used) */}
           <div 
             onClick={() => setDrawerOpen(false)}
-            className="absolute inset-0 bg-black/45 backdrop-blur-xs transition-opacity"
+            className="hidden sm:block absolute inset-0 bg-black/50 backdrop-blur-xs transition-opacity"
             aria-hidden="true"
           />
 
-          {/* Side Drawer Panel */}
-          <div className="absolute top-0 right-0 bottom-0 w-full max-w-sm bg-[#F9F6F0] shadow-2xl flex flex-col justify-between p-5 sm:p-6 border-l border-[#D1C4E9]/80 overflow-y-auto z-10 animate-slideInRight">
+          {/* Drawer Container: 100% Fullscreen on mobile (< sm), Slide-over panel on sm+ */}
+          <div className="fixed inset-0 sm:left-auto sm:right-0 sm:w-full sm:max-w-sm bg-[#F9F6F0] shadow-2xl flex flex-col justify-between p-4 sm:p-6 sm:border-l sm:border-[#D1C4E9]/80 overflow-y-auto z-50 animate-slideInRight">
             
             {/* Drawer Top Header */}
             <div>
-              <div className="flex items-center justify-between pb-4 mb-4 border-b border-[#D1C4E9]/50">
-                <div className="flex items-center gap-2">
-                  <span className="w-8 h-8 rounded-full bg-[#512D6D] text-white flex items-center justify-center font-serif text-xs font-bold">
+              <div className="flex items-center justify-between pb-3 sm:pb-4 mb-3 sm:mb-4 border-b border-[#D1C4E9]/50">
+                <div className="flex items-center gap-2.5">
+                  <span className="w-8 h-8 rounded-full bg-[#512D6D] text-white flex items-center justify-center font-serif text-xs font-bold shadow-2xs">
                     KR
                   </span>
                   <div>
-                    <h3 className="font-serif text-base font-bold text-[#512D6D]">
+                    <h3 className="font-serif text-base font-bold text-[#512D6D] leading-tight">
                       Karina Robart
                     </h3>
                     <p className="text-[11px] text-[#5D4037]/75">
@@ -192,28 +204,35 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
                   </div>
                 </div>
 
-                <button
-                  type="button"
-                  onClick={() => setDrawerOpen(false)}
-                  className="p-2 text-[#5D4037]/70 hover:text-[#512D6D] hover:bg-[#D1C4E9]/30 rounded-full transition-colors cursor-pointer"
-                  aria-label={isEs ? 'Cerrar menú' : 'Fermer le menu'}
-                >
-                  <X className="w-5 h-5" />
-                </button>
+                <div className="flex items-center gap-2">
+                  {/* Language switch also available inside mobile drawer */}
+                  <div className="sm:hidden">
+                    <LanguageSelector />
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => setDrawerOpen(false)}
+                    className="w-9 h-9 rounded-full flex items-center justify-center bg-white border border-[#D1C4E9]/80 text-[#512D6D] active:scale-95 transition-all shadow-2xs cursor-pointer"
+                    aria-label={isEs ? 'Cerrar menú' : 'Fermer le menu'}
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
               </div>
 
               {/* Navigation Links List */}
-              <nav className="space-y-1">
+              <nav className="space-y-1.5 sm:space-y-1">
                 {allNavItems.map((item) => {
                   const isActive = activeTab === item.id;
                   return (
                     <button
                       key={item.id}
                       onClick={() => handleTabClick(item.id)}
-                      className={`w-full flex items-center justify-between p-2.5 rounded-2xl text-left transition-all cursor-pointer ${
+                      className={`w-full min-h-[48px] flex items-center justify-between p-2.5 sm:p-2.5 rounded-2xl text-left transition-all cursor-pointer ${
                         isActive
                           ? 'bg-white border border-[#512D6D]/30 shadow-xs'
-                          : 'hover:bg-white/70 hover:border-transparent'
+                          : 'hover:bg-white/70 active:bg-white/80'
                       }`}
                     >
                       <div className="flex items-center gap-3">
@@ -244,8 +263,8 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
             </div>
 
             {/* Drawer Bottom Quick Action */}
-            <div className="pt-4 mt-4 border-t border-[#D1C4E9]/50 space-y-3">
-              <div className="flex items-center gap-1.5 text-[11px] text-[#5D4037]/75">
+            <div className="pt-3 sm:pt-4 mt-3 sm:mt-4 border-t border-[#D1C4E9]/50 space-y-2.5 sm:space-y-3">
+              <div className="flex items-center justify-center sm:justify-start gap-1.5 text-[11px] text-[#5D4037]/75">
                 <Clock className="w-3.5 h-3.5 text-[#512D6D]" />
                 <span>{isEs ? 'Lun - Sáb: 9:00 - 19:30' : 'Du lundi au samedi : 9h00 - 19h30'}</span>
               </div>
@@ -253,7 +272,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
               <div className="grid grid-cols-2 gap-2">
                 <a
                   href="tel:+33665566702"
-                  className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-white border border-[#D1C4E9] text-[#512D6D] text-xs font-bold shadow-2xs hover:bg-[#F9F6F0] transition-colors"
+                  className="min-h-[44px] flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-white border border-[#D1C4E9] text-[#512D6D] text-xs font-bold shadow-2xs hover:bg-[#F9F6F0] active:scale-98 transition-all"
                 >
                   <Phone className="w-3.5 h-3.5" />
                   <span>06 65 56 67 02</span>
@@ -262,7 +281,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
                   href={whatsAppUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-[#512D6D] text-white text-xs font-bold shadow-2xs hover:bg-[#402257] transition-all"
+                  className="min-h-[44px] flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-[#512D6D] text-white text-xs font-bold shadow-2xs hover:bg-[#402257] active:scale-98 transition-all"
                 >
                   <MessageCircle className="w-3.5 h-3.5 text-emerald-300" />
                   <span>WhatsApp</span>
@@ -274,25 +293,27 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
         </div>
       )}
 
-      {/* MOBILE STICKY BOTTOM DIRECT CONTACT BAR (Instant 1-Tap Access) */}
-      <div className="sm:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#F9F6F0]/95 backdrop-blur-md border-t border-[#D1C4E9] shadow-xl px-3 py-2 flex items-center gap-2">
-        <a
-          href="tel:+33665566702"
-          className="flex-1 min-h-[44px] flex items-center justify-center gap-1.5 px-3 py-2 bg-white border border-[#D1C4E9] text-[#512D6D] rounded-xl text-xs font-bold shadow-2xs active:scale-98"
-        >
-          <Phone className="w-4 h-4 text-[#512D6D]" />
-          <span>06 65 56 67 02</span>
-        </a>
-        <a
-          href={whatsAppUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex-[1.3] min-h-[44px] flex items-center justify-center gap-1.5 px-3 py-2 bg-[#512D6D] text-white rounded-xl text-xs font-bold shadow-md active:scale-98"
-        >
-          <MessageCircle className="w-4 h-4 text-emerald-400" />
-          <span>{t.nav.bookWhatsApp}</span>
-        </a>
-      </div>
+      {/* MOBILE STICKY BOTTOM DIRECT CONTACT BAR (Hidden when drawer is open) */}
+      {!drawerOpen && (
+        <div className="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#F9F6F0]/95 backdrop-blur-md border-t border-[#D1C4E9] shadow-xl px-3 py-2 flex items-center gap-2">
+          <a
+            href="tel:+33665566702"
+            className="flex-1 min-h-[44px] flex items-center justify-center gap-1.5 px-3 py-2 bg-white border border-[#D1C4E9] text-[#512D6D] rounded-xl text-xs font-bold shadow-2xs active:scale-98"
+          >
+            <Phone className="w-4 h-4 text-[#512D6D]" />
+            <span>06 65 56 67 02</span>
+          </a>
+          <a
+            href={whatsAppUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex-[1.3] min-h-[44px] flex items-center justify-center gap-1.5 px-3 py-2 bg-[#512D6D] text-white rounded-xl text-xs font-bold shadow-md active:scale-98"
+          >
+            <MessageCircle className="w-4 h-4 text-emerald-400" />
+            <span>{t.nav.bookWhatsApp}</span>
+          </a>
+        </div>
+      )}
     </>
   );
 };
