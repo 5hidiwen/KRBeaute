@@ -53,12 +53,12 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
             <span className="text-[#D1C4E9]" aria-hidden="true">·</span>
 
             <a 
-              href="mailto:karinarobart@gmail.com" 
+              href="mailto:karinarobart@krbeaute.com" 
               className="inline-flex items-center gap-1.5 hover:text-[#512D6D] transition-colors"
               title="Envoyer un email"
             >
               <Mail className="w-3.5 h-3.5 text-[#512D6D]" />
-              <span>karinarobart@gmail.com</span>
+              <span>karinarobart@krbeaute.com</span>
             </a>
 
             <span className="text-[#D1C4E9]" aria-hidden="true">·</span>

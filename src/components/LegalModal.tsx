@@ -103,7 +103,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({
                   <strong>Numéro SIRET :</strong> 921 458 912 00018 (RCS Rennes / Répertoire des Métiers de Bretagne)<br />
                   <strong>Code APE / NAF :</strong> 96.02B (Soins de beauté à domicile)<br />
                   <strong>TVA :</strong> Franchise en base de TVA selon l'article 293 B du Code Général des Impôts (TVA non applicable).<br />
-                  <strong>Courriel :</strong> karinarobart@gmail.com<br />
+                  <strong>Courriel :</strong> karinarobart@krbeaute.com<br />
                   <strong>Téléphone :</strong> 06 65 56 67 02
                 </p>
               </div>
@@ -239,7 +239,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({
                 <p>
                   Le responsable du traitement des données est :<br />
                   <strong>Karina ROBART</strong><br />
-                  Courriel : <strong>karinarobart@gmail.com</strong> — Tél : 06 65 56 67 02 — 35000 Rennes, France.
+                  Courriel : <strong>karinarobart@krbeaute.com</strong> — Tél : 06 65 56 67 02 — 35000 Rennes, France.
                 </p>
               </div>
 
@@ -284,7 +284,7 @@ export const LegalModal: React.FC<LegalModalProps> = ({
                 </h4>
                 <p>
                   Conformément aux articles 15 à 22 du RGPD, vous disposez d'un droit d'accès, de rectification, d'effacement (« droit à l'oubli »), de limitation et d'opposition au traitement de vos données personnelles.<br />
-                  Pour exercer ces droits, adressez simplement votre demande par email à : <strong>karinarobart@gmail.com</strong>.<br />
+                  Pour exercer ces droits, adressez simplement votre demande par email à : <strong>karinarobart@krbeaute.com</strong>.<br />
                   Vous disposez également du droit d'introduire une réclamation auprès de la Commission Nationale de l'Informatique et des Libertés (CNIL) sur son site officiel <em>www.cnil.fr</em>.
                 </p>
               </div>

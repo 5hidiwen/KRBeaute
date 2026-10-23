@@ -170,9 +170,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                   <span>06 65 56 67 02</span>
                 </a>
                 <span className="text-[#D1C4E9]">·</span>
-                <a href="mailto:karinarobart@gmail.com" className="inline-flex items-center gap-1.5 text-[#5D4037]/90 hover:underline">
+                <a href="mailto:karinarobart@krbeaute.com" className="inline-flex items-center gap-1.5 text-[#5D4037]/90 hover:underline">
                   <Mail className="w-3.5 h-3.5 text-[#512D6D]" />
-                  <span>karinarobart@gmail.com</span>
+                  <span>karinarobart@krbeaute.com</span>
                 </a>
               </div>
 
