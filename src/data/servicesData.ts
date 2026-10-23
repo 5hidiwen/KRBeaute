@@ -1,3 +1,5 @@
+import { Language } from '../i18n/types';
+
 export interface ServiceItem {
   id: string;
   category: 'visage' | 'regard' | 'pieds' | 'corps';
@@ -14,8 +16,8 @@ export interface ServiceItem {
   colorTheme?: 'plum' | 'pink' | 'cyan';
 }
 
-export const SERVICES: ServiceItem[] = [
-  // --- PARTIE 1 : PIEDS & CORPS (Flyer 1) ---
+export const SERVICES_FR: ServiceItem[] = [
+  // --- PARTIE 1 : PIEDS & CORPS ---
   {
     id: 'beaute-des-pieds',
     category: 'pieds',
@@ -77,7 +79,7 @@ export const SERVICES: ServiceItem[] = [
     ]
   },
 
-  // --- PARTIE 2 : VISAGE & REGARD (Flyer 2) ---
+  // --- PARTIE 2 : VISAGE & REGARD ---
   {
     id: 'rehaussement-teinte-cils',
     category: 'regard',
@@ -157,3 +159,154 @@ export const SERVICES: ServiceItem[] = [
     ]
   }
 ];
+
+export const SERVICES_ES: ServiceItem[] = [
+  // --- PARTE 1 : PIES Y RELAJACIÓN ---
+  {
+    id: 'beaute-des-pieds',
+    category: 'pieds',
+    group: 'pieds-corps',
+    title: 'Belleza de pies',
+    tagline: 'Uñas perfectas, exfoliación e hidratación profunda',
+    description: 'Cuidado exprés y minucioso para lucir pies suaves, sanos y ligeros en su día a día.',
+    duration: '45 min',
+    durationMinutes: 45,
+    price: 35,
+    colorTheme: 'plum',
+    comprend: [
+      'Corte y limado de uñas',
+      'Eliminación de durezas y callosidades',
+      'Exfoliación suavizante',
+      'Hidratación profunda',
+      'Breve masaje con aparato de masaje profesional'
+    ]
+  },
+  {
+    id: 'soin-des-pieds',
+    category: 'pieds',
+    group: 'pieds-corps',
+    title: 'Cuidado completo de pies',
+    tagline: 'Limpieza profunda, mascarilla y masaje japonés de 10 min',
+    description: 'El ritual de excelencia para una renovación total de los pies y un alivio reparador.',
+    duration: '1 h',
+    durationMinutes: 60,
+    price: 50,
+    badge: 'Completo y Relajante',
+    colorTheme: 'plum',
+    comprend: [
+      'Limpieza en profundidad',
+      'Corte y limado de uñas',
+      'Eliminación de asperezas y callosidades',
+      'Exfoliación renovadora',
+      'Hidratación nutritiva intensiva',
+      'Mascarilla regeneradora',
+      'Masaje de pies de 10 min con técnica tradicional japonesa'
+    ]
+  },
+  {
+    id: 'modelage-en-chaise',
+    category: 'corps',
+    group: 'pieds-corps',
+    title: 'Masaje en silla ergonómica',
+    tagline: 'Masaje sentado ergonómico: hombros, cuello y brazos',
+    description: 'Masaje descontracturante en silla ergonómica profesional llevada a su domicilio para aliviar al instante la parte superior del cuerpo sin necesidad de desvestirse.',
+    duration: '20 min',
+    durationMinutes: 20,
+    price: 30,
+    badge: 'Relajación Exprés',
+    colorTheme: 'plum',
+    comprend: [
+      'Masaje suave en hombros, cuello y brazos',
+      'Alivio y relajación muscular',
+      'Liberación de tensiones acumuladas',
+      'Sensación inmediata de descanso y bienestar'
+    ]
+  },
+
+  // --- PARTE 2 : ROSTRO Y MIRADA ---
+  {
+    id: 'rehaussement-teinte-cils',
+    category: 'regard',
+    group: 'visage-regard',
+    title: 'Lifting + Tinte de Pestañas',
+    tagline: 'Mirada realzada, curvatura natural y tinte de larga duración',
+    description: 'Lifting delicado de pestañas naturales pelo a pelo desde la raíz, combinado con un tinte negro o castaño intenso para abrir la mirada sin máscara durante 6 a 8 semanas.',
+    duration: '60 min',
+    durationMinutes: 60,
+    price: 45,
+    badge: 'Realzador de Mirada',
+    colorTheme: 'pink',
+    protocolSteps: [
+      'Diagnóstico personalizado y elección de la curvatura adaptada a sus ojos',
+      'Limpieza y colocación suave de parches protectores de hidrogel',
+      'Fijación de la curvatura pestaña a pestaña sobre moldes ergonómicos de silicona',
+      'Aplicación de tinte suave para una mirada intensa y definida sin maquillaje',
+      'Tratamiento nutritivo fortalecedor y peinado cuidadoso'
+    ]
+  },
+  {
+    id: 'soin-visage-purete-absolue',
+    category: 'visage',
+    group: 'visage-regard',
+    title: 'Tratamiento Facial Pureza Absoluta',
+    tagline: 'Limpieza profunda, desincrustación y luminosidad pura',
+    description: 'Tratamiento limpiador, desincrustante y reequilibrante exprés para aclarar la textura de la piel, eliminar toxinas y cerrar los poros.',
+    duration: '30 min',
+    durationMinutes: 30,
+    price: 45,
+    colorTheme: 'cyan',
+    protocolSteps: [
+      'Doble limpieza suave adaptada a su tipología de piel',
+      'Exfoliación enzimática dermo-purificante',
+      'Desincrustación suave y extracción selectiva de impurezas',
+      'Mascarilla purificante y reequilibrante',
+      'Aplicación de crema hidratante matificante y protectora'
+    ]
+  },
+  {
+    id: 'soin-visage-douceur-gelee',
+    category: 'visage',
+    group: 'visage-regard',
+    title: 'Tratamiento Facial Suavidad Gelée',
+    tagline: 'Baño de frescura calmante con mascarilla hidro-gelée sensorial',
+    description: 'Tratamiento reconfortante ultra-fresco formulado para hidratar profundamente, aliviar rojeces y redensificar la epidermis gracias a la textura sensorial de la mascarilla gelée.',
+    duration: '45 min',
+    durationMinutes: 45,
+    price: 55,
+    badge: 'Burbuja Sensorial',
+    colorTheme: 'cyan',
+    protocolSteps: [
+      'Limpieza desmaquillante aterciopelada con extractos botánicos',
+      'Exfoliación suave para preparar la piel a la asimilación de activos',
+      'Masaje relajante descongestionante de rostro, cuello y trapecios',
+      'Aplicación de la mascarilla hidro-gelée ultra-fresca con pétalos activos',
+      'Crema final sedosa y regeneradora'
+    ]
+  },
+  {
+    id: 'soin-visage-detox',
+    category: 'visage',
+    group: 'visage-regard',
+    title: 'Tratamiento Facial Detox',
+    tagline: 'Oxigenación cutánea, dermo-purificación y luminosidad renovada',
+    description: 'Tratamiento desintoxicante con espátula dermo-purificadora ultrasónica para eliminar toxinas profundas, estimular la renovación celular y reavivar la luminosidad de la piel.',
+    duration: '45 min',
+    durationMinutes: 45,
+    price: 55,
+    colorTheme: 'pink',
+    protocolSteps: [
+      'Preparación desintoxicante y brumización tonificante',
+      'Paso suave de la espátula ultrasónica desincrustante',
+      'Drenaje manual tensor para facilitar la eliminación de toxinas',
+      'Mascarilla oxigenante de luminosidad inmediata',
+      'Sérum protector antioxidante y crema hidratante aterciopelada'
+    ]
+  }
+];
+
+export const getServices = (lang: Language): ServiceItem[] => {
+  return lang === 'es' ? SERVICES_ES : SERVICES_FR;
+};
+
+// Default export for backward compatibility
+export const SERVICES: ServiceItem[] = SERVICES_FR;

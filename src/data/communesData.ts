@@ -1,3 +1,5 @@
+import { Language } from '../i18n/types';
+
 export interface CommuneItem {
   name: string;
   postalCode: string;
@@ -8,7 +10,7 @@ export interface CommuneItem {
 }
 
 export const COMMUNES_DATA: CommuneItem[] = [
-  // Rayon 0 - 7 km : DÉPLACEMENT OFFERT
+  // Rayon 0 - 7 km : DÉPLACEMENT OFFERT / DESPLAZAMIENTO GRATIS
   { name: 'Rennes Centre & Quartiers', postalCode: '35000', distanceKm: 0, feeEuro: 0, isOffered: true },
   { name: 'Rennes Sud / Bréquigny', postalCode: '35200', distanceKm: 3, feeEuro: 0, isOffered: true },
   { name: 'Rennes Nord / Beauregard', postalCode: '35700', distanceKm: 4, feeEuro: 0, isOffered: true },
@@ -48,7 +50,20 @@ export const COMMUNES_DATA: CommuneItem[] = [
   { name: 'Bain-de-Bretagne', postalCode: '35470', distanceKm: 33, feeEuro: 15, isOffered: false, notes: 'Sur devis (> 30 km)' }
 ];
 
-export function getFeeForDistance(distanceKm: number): { fee: number; isOffered: boolean; label: string } {
+export function getFeeForDistance(distanceKm: number, lang: Language = 'fr'): { fee: number; isOffered: boolean; label: string } {
+  if (lang === 'es') {
+    if (distanceKm <= 7) {
+      return { fee: 0, isOffered: true, label: 'Desplazamiento gratis (hasta 7 km)' };
+    } else if (distanceKm <= 20) {
+      return { fee: 5, isOffered: false, label: '+5 € (Tarifa fija 7-20 km)' };
+    } else if (distanceKm <= 30) {
+      return { fee: 10, isOffered: false, label: '+10 € (Tarifa fija 20-30 km)' };
+    } else {
+      return { fee: 15, isOffered: false, label: 'Bajo presupuesto (> 30 km)' };
+    }
+  }
+
+  // French default
   if (distanceKm <= 7) {
     return { fee: 0, isOffered: true, label: 'Déplacement offert (jusqu\'à 7 km)' };
   } else if (distanceKm <= 20) {
