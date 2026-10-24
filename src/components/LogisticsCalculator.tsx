@@ -221,7 +221,7 @@ export const LogisticsCalculator: React.FC = () => {
               </h3>
               <p className="text-xs text-[#5D4037]/70">
                 {isEs 
-                  ? 'Escriba las primeras letras de su municipio o código postal para consultar la tarifa' 
+                  ? 'Escribe las primeras letras de tu municipio o código postal para consultar la tarifa' 
                   : 'Tapez les premières lettres de votre ville pour afficher son tarif précis'}
               </p>
             </div>

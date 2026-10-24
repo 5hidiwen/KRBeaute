@@ -158,7 +158,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
         {/* Semantic H2 for Search Engines & Assistive Technologies */}
         <h2 className="sr-only">
           {language === 'es' 
-            ? 'Contacto y Reservación de Citas de Estética a Domicilio en Rennes y Alrededores' 
+            ? 'Contacto y Citas de Estética a Domicilio en Rennes y Alrededores' 
             : 'Contact & Prise de Rendez-vous Esthétique à Domicile à Rennes et Alentours'}
         </h2>
         

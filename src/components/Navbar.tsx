@@ -57,13 +57,13 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
     {
       id: 'a-propos',
       label: isEs ? 'Sobre Karina Robart' : 'À Propos de Karina Robart',
-      sub: isEs ? 'Esteticista certificada con título oficial' : "Diplômée d'État & savoir-faire",
+      sub: isEs ? 'Cosmetóloga y Esteticista Oficial' : "Diplômée d'État & savoir-faire",
       icon: <Award className="w-4 h-4 text-[#512D6D]" />
     },
     {
       id: 'faq',
       label: isEs ? 'Preguntas Frecuentes & FAQ' : 'Conditions & FAQ',
-      sub: isEs ? 'Organización, higiene y reservaciones' : 'Réservation, hygiène & modalités',
+      sub: isEs ? 'Organización, higiene y citas' : 'Réservation, hygiène & modalités',
       icon: <HelpCircle className="w-4 h-4 text-[#512D6D]" />
     },
   ];
@@ -74,7 +74,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
   };
 
   const whatsAppGreeting = isEs
-    ? 'Hola Karina, deseo agendar un tratamiento a domicilio...'
+    ? '¡Hola Karina! Quiero agendar un tratamiento a domicilio...'
     : 'Bonjour Karina, je souhaite réserver un soin à domicile...';
 
   const whatsAppUrl = `https://wa.me/33665566702?text=${encodeURIComponent(whatsAppGreeting)}`;

@@ -128,12 +128,12 @@ function AppContent() {
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 sm:mt-12">
               <div className="bg-white p-6 sm:p-8 rounded-3xl border border-[#D1C4E9] shadow-xs text-center">
                 <h3 className="font-serif text-lg sm:text-xl font-bold text-[#5D4037] mb-2">
-                  {language === 'es' ? '¿Tiene alguna otra duda?' : 'Vous avez une question particulière ?'}
+                  {language === 'es' ? '¿Tienes alguna otra duda?' : 'Vous avez une question particulière ?'}
                 </h3>
                 <p className="text-xs sm:text-sm text-[#5D4037]/80 max-w-lg mx-auto mb-6 leading-relaxed">
                   {language === 'es'
-                    ? 'Karina le responde personalmente con calidez para resolver cualquier duda y preparar su cita en la comodidad de su hogar.'
-                    : 'Karina vous répond directement avec bienveillance pour lever le moindre doute et préparer au mieux votre soin à domicile.'}
+                    ? 'Karina te responde directamente con calidez para resolver cualquier duda y preparar tu cita en casa.'
+                    : 'Karina vous répond directement pour lever le moindre doute et préparer votre soin à domicile.'}
                 </p>
                 <div className="flex flex-wrap items-center justify-center gap-3">
                   <button
