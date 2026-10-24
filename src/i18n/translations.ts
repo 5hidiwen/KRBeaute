@@ -272,7 +272,7 @@ export const TRANSLATIONS_FR: SiteTranslations = {
       {
         id: 'confirmation-paiement',
         question: '1. Comment se confirme le rendez-vous ? (Paiement)',
-        answer: 'Le paiement intégral (par lien de paiement sécurisé ou par virement bancaire) est demandé au moment de la réservation. Votre créneau horaire est définitivement bloqué dès la réception effective de votre règlement.',
+        answer: "Le règlement intégral est demandé au moment de la réservation afin de bloquer définitivement votre créneau horaire. Vous pouvez régler en toute simplicité via Wero (paiement mobile instantané au 06 65 56 67 02) ou par virement bancaire SEPA (Revolut Pro). Les coordonnées complètes sont détaillées ci-dessous.",
       },
       {
         id: 'modification-report',
@@ -312,7 +312,7 @@ export const TRANSLATIONS_FR: SiteTranslations = {
         {
           num: 1,
           title: 'Confirmation du RDV :',
-          text: 'Le paiement intégral (par lien de paiement ou virement) est demandé au moment de la réservation. Votre créneau est définitivement bloqué dès réception du règlement.',
+          text: 'Le règlement intégral est demandé au moment de la réservation via Wero (06 65 56 67 02) ou virement bancaire instantané. Votre créneau est définitivement bloqué dès réception du règlement.',
         },
         {
           num: 2,
@@ -391,6 +391,25 @@ export const TRANSLATIONS_FR: SiteTranslations = {
       closing: "Merci d'avance pour votre confirmation !",
     },
   },
+  paymentDetails: {
+    kicker: 'KR ESTHÉTICIENNE · Karina ROBART',
+    title: 'Règlement de vos Prestations',
+    subtitle: 'Règlement demandé à la réservation afin de bloquer définitivement votre créneau horaire.',
+    weroTitle: 'Wero',
+    weroPhone: '06 65 56 67 02',
+    weroSub: 'Paiement mobile instantané sans frais (directement depuis votre application bancaire)',
+    weroAction: 'Copier le numéro',
+    weroCopied: 'Numéro copié !',
+    transferTitle: 'Virement Bancaire',
+    bankName: 'Revolut PRO',
+    beneficiaryLabel: 'Bénéficiaire :',
+    beneficiaryVal: 'Karina Minor Muñoz',
+    transferSub: 'IBAN transmis directement par WhatsApp lors de la confirmation de votre créneau horaire.',
+    transferAction: 'Demander le RIB sur WhatsApp',
+    transferWhatsAppMsg: 'Bonjour Karina, je souhaite réserver un soin et effectuer un virement bancaire. Pourriez-vous me transmettre votre RIB / IBAN ?',
+    siretText: 'SIRET : 944 026 806 00025',
+    trustNote: 'Merci pour votre confiance ✨',
+  },
   footer: {
     appointmentOnly: '— Sur rendez-vous uniquement',
     mentions: 'Mentions Légales',
@@ -455,7 +474,7 @@ export const TRANSLATIONS_FR: SiteTranslations = {
       art4Items: [
         {
           bold: '1. Confirmation du RDV :',
-          text: 'Le paiement intégral (par lien de paiement sécurisé ou virement bancaire) est demandé au moment de la réservation. Votre créneau est définitivement bloqué dès réception du règlement.',
+          text: 'Le paiement intégral (par paiement mobile instantané Wero au 06 65 56 67 02 ou virement bancaire SEPA Revolut Pro) est demandé au moment de la réservation. Votre créneau est définitivement bloqué dès réception du règlement.',
         },
         {
           bold: '2. Modification & Report :',
@@ -473,7 +492,7 @@ export const TRANSLATIONS_FR: SiteTranslations = {
       art5Title: 'Article 5 — Préparation chez vous (Obligations d\'accueil)',
       art5Val: "5. Préparation chez vous : Le client s'engage à prévoir un espace calme et dégagé pour installer la chaise de massage ergonomique apportée par l'esthéticienne, ou un équipement confortable à domicile (canapé, fauteuil ou lit pour les soins visage, cils et pieds), ainsi qu'un accès sécurisé à une prise électrique et à un point d'eau. Le client signale avant le soin tout problème de santé, allergie cutanée ou état de grossesse.",
       art6Title: 'Article 6 — Modalités de Paiement',
-      art6Val: 'Le paiement intégral est exigé lors de la réservation (lien de paiement sécurisé en ligne ou virement bancaire). Une facture acquittée est délivrée par voie électronique.',
+      art6Val: "Le règlement intégral des prestations est exigé au moment de la réservation afin de bloquer le créneau horaire. Les modes de règlement acceptés sont : le paiement mobile instantané Wero (au 06 65 56 67 02) et le virement bancaire SEPA (Revolut Pro, compte au nom de Karina Minor Muñoz). Une facture acquittée est délivrée par voie électronique sur demande.",
       art7Title: 'Article 7 — Droit de Rétractation & Médiation de la Consommation',
       art7Val: "Conformément à l'article L. 221-28 du Code de la consommation, le droit de rétractation ne peut être exercé pour les services pleinement exécutés avant la fin du délai de rétractation avec l'accord préalable du consommateur. En cas de litige, le consommateur peut recourir gratuitement au service de médiation de la consommation (Centre de Médiation de la Consommation de Conciliateurs de Justice - CM2C).",
     },
@@ -781,7 +800,7 @@ export const TRANSLATIONS_ES: SiteTranslations = {
       {
         id: 'confirmation-paiement',
         question: '1. ¿Cómo se confirma la cita? (Pago)',
-        answer: 'El pago total (por enlace seguro en línea o transferencia bancaria) se solicita al momento de reservar. Tu horario queda formalmente apartado en cuanto recibimos el pago.',
+        answer: 'El pago total se solicita al momento de reservar para apartar formalmente tu horario en agenda. Puedes pagar con total facilidad mediante Wero (pago móvil instantáneo al 06 65 56 67 02) o por transferencia bancaria SEPA (Revolut Pro). Los datos completos se detallan a continuación.',
       },
       {
         id: 'modification-report',
@@ -821,7 +840,7 @@ export const TRANSLATIONS_ES: SiteTranslations = {
         {
           num: 1,
           title: 'Confirmación de la cita:',
-          text: 'El pago total (por enlace seguro en línea o transferencia) se solicita al reservar para apartar formalmente tu horario.',
+          text: 'El pago total se solicita al reservar mediante Wero (06 65 56 67 02) o transferencia bancaria instantánea. Tu horario queda formalmente apartado en cuanto recibimos el pago.',
         },
         {
           num: 2,
@@ -900,6 +919,25 @@ export const TRANSLATIONS_ES: SiteTranslations = {
       closing: '¡Muchas gracias!',
     },
   },
+  paymentDetails: {
+    kicker: 'KR ESTHÉTICIENNE · Karina ROBART',
+    title: 'Pago de tus Tratamientos',
+    subtitle: 'Pago requerido al reservar para apartar definitivamente tu horario en agenda.',
+    weroTitle: 'Wero',
+    weroPhone: '06 65 56 67 02',
+    weroSub: 'Pago móvil instantáneo sin comisiones (desde tu aplicación bancaria europea)',
+    weroAction: 'Copiar número',
+    weroCopied: '¡Número copiado!',
+    transferTitle: 'Transferencia Bancaria',
+    bankName: 'Revolut PRO',
+    beneficiaryLabel: 'Beneficiaria:',
+    beneficiaryVal: 'Karina Minor Muñoz',
+    transferSub: 'IBAN transmitido directamente por WhatsApp al confirmar tu cita.',
+    transferAction: 'Solicitar IBAN por WhatsApp',
+    transferWhatsAppMsg: 'Hola Karina, quiero agendar un tratamiento y realizar una transferencia bancaria. ¿Podrías compartirme tu IBAN?',
+    siretText: 'SIRET: 944 026 806 00025',
+    trustNote: 'Gracias por tu confianza ✨',
+  },
   footer: {
     appointmentOnly: '— Previa cita únicamente',
     mentions: 'Aviso Legal',
@@ -964,7 +1002,7 @@ export const TRANSLATIONS_ES: SiteTranslations = {
       art4Items: [
         {
           bold: '1. Confirmación de la cita:',
-          text: 'El pago total (mediante enlace seguro en línea o transferencia bancaria) se requiere al reservar para apartar formalmente tu horario.',
+          text: 'El pago total (mediante pago móvil instantáneo Wero al 06 65 56 67 02 o transferencia bancaria SEPA Revolut Pro) se requiere al reservar para apartar formalmente tu horario.',
         },
         {
           bold: '2. Reprogramación y cambios:',
@@ -982,7 +1020,7 @@ export const TRANSLATIONS_ES: SiteTranslations = {
       art5Title: 'Artículo 5 — Preparación en tu Domicilio',
       art5Val: '5. Preparación en casa: El cliente se compromete a facilitar un espacio cómodo y despejado para colocar la silla de masaje ergonómica llevada por la profesional, o mobiliario adecuado (sillón, sofá o cama para faciales, pestañas y pies), así como acceso a un contacto de luz y agua corriente. El cliente informará previamente sobre cualquier condición de salud, alergia o estado de embarazo.',
       art6Title: 'Artículo 6 — Formas de Pago',
-      art6Val: 'El pago completo se requiere al momento de reservar (enlace de pago seguro en línea o transferencia bancaria). Se emite factura electrónica correspondiente.',
+      art6Val: 'El pago total de los servicios se exige al momento de apartar la cita para garantizar el horario. Los métodos de pago aceptados son: el pago móvil instantáneo Wero (al 06 65 56 67 02) y la transferencia bancaria SEPA (Revolut Pro, cuenta a nombre de Karina Minor Muñoz). Se emite factura electrónica bajo solicitud.',
       art7Title: 'Artículo 7 — Derecho de Desistimiento y Mediación',
       art7Val: 'De conformidad con el Código de Consumo de Francia, el derecho de desistimiento no es aplicable a prestaciones de servicios ejecutadas íntegramente con el consentimiento del consumidor antes de concluir el plazo legal. En caso de controversia, el consumidor puede recurrir sin costo al servicio oficial de mediación de consumo francés (CM2C).',
     },

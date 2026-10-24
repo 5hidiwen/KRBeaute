@@ -432,6 +432,26 @@ export interface HomeTranslations {
   };
 }
 
+export interface PaymentDetailsTranslations {
+  kicker: string;
+  title: string;
+  subtitle: string;
+  weroTitle: string;
+  weroPhone: string;
+  weroSub: string;
+  weroAction: string;
+  weroCopied: string;
+  transferTitle: string;
+  bankName: string;
+  beneficiaryLabel: string;
+  beneficiaryVal: string;
+  transferSub: string;
+  transferAction: string;
+  transferWhatsAppMsg: string;
+  siretText: string;
+  trustNote: string;
+}
+
 export interface SiteTranslations {
   htmlLang: string;
   metaTitle: string;
@@ -445,6 +465,7 @@ export interface SiteTranslations {
   logistics: LogisticsTranslations;
   faq: FAQTranslations;
   contact: ContactTranslations;
+  paymentDetails: PaymentDetailsTranslations;
   footer: FooterTranslations;
   legal: LegalTranslations;
 }

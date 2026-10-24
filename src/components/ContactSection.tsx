@@ -4,6 +4,7 @@ import { getServices, ServiceItem } from '../data/servicesData';
 import { COMMUNES_DATA } from '../data/communesData';
 import { useLanguage } from '../i18n/LanguageContext';
 import { WEB3FORMS_ACCESS_KEY } from '../config/contact';
+import { PaymentDetailsCard } from './PaymentDetailsCard';
 
 interface ContactSectionProps {
   selectedService?: ServiceItem | null;
@@ -319,6 +320,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                     >
                       {t.contact.rightCard.success.newRequest}
                     </button>
+                  </div>
+
+                  <div className="mt-4 pt-3 border-t border-[#D1C4E9]/60 text-left">
+                    <PaymentDetailsCard compact />
                   </div>
                 </div>
               ) : (

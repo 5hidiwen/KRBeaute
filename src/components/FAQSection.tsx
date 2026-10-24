@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { MessageCircle, ChevronDown, ChevronUp, HelpCircle, CreditCard, Clock, Home, ShieldCheck, AlertCircle, RefreshCw } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
+import { PaymentDetailsCard } from './PaymentDetailsCard';
 
 export const FAQSection: React.FC = () => {
   const { t } = useLanguage();
@@ -88,6 +89,11 @@ export const FAQSection: React.FC = () => {
                 {isOpen && (
                   <div className="px-4 pb-4 sm:px-5 sm:pb-5 pt-0 text-sm sm:text-base text-[#5D4037]/85 leading-relaxed border-t border-[#D1C4E9]/30 mt-1">
                     <p className="pt-3">{faq.answer}</p>
+                    {faq.id === 'confirmation-paiement' && (
+                      <div className="mt-4">
+                        <PaymentDetailsCard />
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
