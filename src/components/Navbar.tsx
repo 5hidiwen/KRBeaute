@@ -266,7 +266,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
             </div>
 
             {/* Drawer Bottom Quick Action */}
-            <div className="pt-3 sm:pt-4 mt-3 sm:mt-4 border-t border-[#D1C4E9]/50 space-y-2.5 sm:space-y-3">
+            <div className="pt-3 sm:pt-4 mt-3 sm:mt-4 border-t border-[#D1C4E9]/50 space-y-2.5 sm:space-y-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
               <div className="flex items-center justify-center sm:justify-start gap-1.5 text-[11px] text-[#5D4037]/75">
                 <Clock className="w-3.5 h-3.5 text-[#512D6D]" />
                 <span>{isEs ? 'Lun - Sáb: 9:00 - 19:30' : 'Du lundi au samedi : 9h00 - 19h30'}</span>
@@ -298,7 +298,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
 
       {/* MOBILE STICKY BOTTOM DIRECT CONTACT BAR (Hidden when drawer is open) */}
       {!drawerOpen && (
-        <div className="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#F9F6F0]/95 backdrop-blur-md border-t border-[#D1C4E9] shadow-xl px-3 py-2 flex items-center gap-2">
+        <div className="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#F9F6F0]/95 backdrop-blur-md border-t border-[#D1C4E9] shadow-xl px-3 pt-2 pb-[max(0.6rem,env(safe-area-inset-bottom))] flex items-center gap-2">
           <a
             href="tel:+33665566702"
             className="flex-1 min-h-[44px] flex items-center justify-center gap-1.5 px-3 py-2 bg-white border border-[#D1C4E9] text-[#512D6D] rounded-xl text-xs font-bold shadow-2xs active:scale-98"

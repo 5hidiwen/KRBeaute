@@ -53,39 +53,42 @@ export const LegalModal: React.FC<LegalModalProps> = ({
         </div>
 
         {/* Tab Navigation */}
-        <div className="flex border-b border-[#D1C4E9]/60 bg-[#D1C4E9]/20 px-6 gap-2 pt-2">
+        <div className="flex border-b border-[#D1C4E9]/60 bg-[#D1C4E9]/20 px-3 sm:px-6 gap-1.5 sm:gap-2 pt-2 overflow-x-auto">
           <button
             onClick={() => setActiveTab('mentions')}
-            className={`flex items-center gap-2 px-4 py-3 text-xs sm:text-sm font-semibold border-b-2 transition-all cursor-pointer whitespace-nowrap ${
+            className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold border-b-2 transition-all cursor-pointer whitespace-nowrap shrink-0 ${
               activeTab === 'mentions'
                 ? 'border-[#512D6D] text-[#512D6D] bg-[#F9F6F0] rounded-t-xl'
                 : 'border-transparent text-[#5D4037]/70 hover:text-[#512D6D]'
             }`}
           >
-            <FileText className="w-4 h-4" />
-            <span>{leg.tabs.mentions}</span>
+            <FileText className="w-4 h-4 shrink-0" />
+            <span className="sm:hidden">Mentions</span>
+            <span className="hidden sm:inline">{leg.tabs.mentions}</span>
           </button>
           <button
             onClick={() => setActiveTab('cgv')}
-            className={`flex items-center gap-2 px-4 py-3 text-xs sm:text-sm font-semibold border-b-2 transition-all cursor-pointer whitespace-nowrap ${
+            className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold border-b-2 transition-all cursor-pointer whitespace-nowrap shrink-0 ${
               activeTab === 'cgv'
                 ? 'border-[#512D6D] text-[#512D6D] bg-[#F9F6F0] rounded-t-xl'
                 : 'border-transparent text-[#5D4037]/70 hover:text-[#512D6D]'
             }`}
           >
-            <Scale className="w-4 h-4" />
-            <span>{leg.tabs.cgv}</span>
+            <Scale className="w-4 h-4 shrink-0" />
+            <span className="sm:hidden">CGV</span>
+            <span className="hidden sm:inline">{leg.tabs.cgv}</span>
           </button>
           <button
             onClick={() => setActiveTab('rgpd')}
-            className={`flex items-center gap-2 px-4 py-3 text-xs sm:text-sm font-semibold border-b-2 transition-all cursor-pointer whitespace-nowrap ${
+            className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold border-b-2 transition-all cursor-pointer whitespace-nowrap shrink-0 ${
               activeTab === 'rgpd'
                 ? 'border-[#512D6D] text-[#512D6D] bg-[#F9F6F0] rounded-t-xl'
                 : 'border-transparent text-[#5D4037]/70 hover:text-[#512D6D]'
             }`}
           >
-            <Lock className="w-4 h-4" />
-            <span>{leg.tabs.rgpd}</span>
+            <Lock className="w-4 h-4 shrink-0" />
+            <span className="sm:hidden">RGPD</span>
+            <span className="hidden sm:inline">{leg.tabs.rgpd}</span>
           </button>
         </div>
 

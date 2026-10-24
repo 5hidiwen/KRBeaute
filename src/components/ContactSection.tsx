@@ -319,10 +319,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                   {/* Name & Phone */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     <div>
-                      <label className="block text-[11px] font-semibold text-[#5D4037] mb-0.5">
+                      <label htmlFor="contact-name" className="block text-[11px] font-semibold text-[#5D4037] mb-0.5">
                         {t.contact.rightCard.nameLabel}
                       </label>
                       <input
+                        id="contact-name"
                         type="text"
                         name="name"
                         required
@@ -333,10 +334,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] font-semibold text-[#5D4037] mb-0.5">
+                      <label htmlFor="contact-phone" className="block text-[11px] font-semibold text-[#5D4037] mb-0.5">
                         {t.contact.rightCard.phoneLabel}
                       </label>
                       <input
+                        id="contact-phone"
                         type="tel"
                         name="phone"
                         required
@@ -351,10 +353,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                   {/* Email & Commune */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     <div>
-                      <label className="block text-[11px] font-semibold text-[#5D4037] mb-0.5">
+                      <label htmlFor="contact-email" className="block text-[11px] font-semibold text-[#5D4037] mb-0.5">
                         {t.contact.rightCard.emailLabel}
                       </label>
                       <input
+                        id="contact-email"
                         type="email"
                         name="email"
                         required
@@ -365,10 +368,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] font-semibold text-[#5D4037] mb-0.5">
+                      <label htmlFor="contact-commune" className="block text-[11px] font-semibold text-[#5D4037] mb-0.5">
                         {t.contact.rightCard.communeLabel}
                       </label>
                       <select
+                        id="contact-commune"
                         name="commune"
                         value={formData.commune}
                         onChange={handleChange}
@@ -385,10 +389,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
 
                   {/* Service Selection */}
                   <div>
-                    <label className="block text-[11px] font-semibold text-[#5D4037] mb-0.5">
+                    <label htmlFor="contact-service" className="block text-[11px] font-semibold text-[#5D4037] mb-0.5">
                       {t.contact.rightCard.serviceLabel}
                     </label>
                     <select
+                      id="contact-service"
                       name="serviceTitle"
                       value={formData.serviceTitle}
                       onChange={handleChange}
@@ -405,10 +410,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                   {/* Date & Time Slot */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     <div>
-                      <label className="block text-[11px] font-semibold text-[#5D4037] mb-0.5">
+                      <label htmlFor="contact-date" className="block text-[11px] font-semibold text-[#5D4037] mb-0.5">
                         {t.contact.rightCard.dateLabel}
                       </label>
                       <input
+                        id="contact-date"
                         type="date"
                         name="preferredDate"
                         value={formData.preferredDate}
@@ -417,10 +423,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                       />
                     </div>
                     <div>
-                      <label className="block text-[11px] font-semibold text-[#5D4037] mb-0.5">
+                      <label htmlFor="contact-slot" className="block text-[11px] font-semibold text-[#5D4037] mb-0.5">
                         {t.contact.rightCard.slotLabel}
                       </label>
                       <select
+                        id="contact-slot"
                         name="preferredTimeSlot"
                         value={formData.preferredTimeSlot}
                         onChange={handleChange}
@@ -436,10 +443,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
 
                   {/* Message / Details */}
                   <div>
-                    <label className="block text-[11px] font-semibold text-[#5D4037] mb-0.5">
+                    <label htmlFor="contact-message" className="block text-[11px] font-semibold text-[#5D4037] mb-0.5">
                       {t.contact.rightCard.msgLabel}
                     </label>
                     <input
+                      id="contact-message"
                       type="text"
                       name="message"
                       placeholder={t.contact.rightCard.msgPlaceholder}
@@ -450,12 +458,13 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                   </div>
 
                   {/* Honeypot anti-spam */}
-                  <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
+                  <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" aria-hidden="true" />
 
                   {/* Terms acceptance checkbox */}
                   <div className="pt-0.5">
-                    <label className="flex items-start gap-2 text-[11px] text-[#5D4037] cursor-pointer select-none">
+                    <label htmlFor="contact-terms" className="flex items-start gap-2 text-[11px] text-[#5D4037] cursor-pointer select-none">
                       <input
+                        id="contact-terms"
                         type="checkbox"
                         required
                         checked={termsAccepted}

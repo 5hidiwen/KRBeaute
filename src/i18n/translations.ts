@@ -281,7 +281,7 @@ export const TRANSLATIONS_FR: SiteTranslations = {
       },
       msgLabel: 'Précisions éventuelles (facultatif)',
       msgPlaceholder: 'Étage, sonnette, information particulière...',
-      termsLabel: "J'ai pris connaissance des conditions de réservation ci-contre (paiement intégral pour valider le créneau, modification possible jusqu'à 3h avant, prise & point d'eau).",
+      termsLabel: "J'ai pris connaissance des conditions de réservation (paiement intégral pour valider le créneau, modification possible jusqu'à 3h avant, prise & point d'eau).",
       termsBold: 'conditions de réservation',
       submitBtn: 'Envoyer ma demande',
       submittingBtn: 'Envoi en cours...',

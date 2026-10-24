@@ -8,7 +8,11 @@
     "build": "vite build",
     "preview": "vite preview",
     "clean": "rm -rf dist server.js",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "test:qa": "tsx .agents/skills/testeur-qa/scripts/run-qa-audit.ts",
+    "phone:bridge": "tsx .agents/skills/mobile-device-bridge/scripts/bridge.ts",
+    "phone:shot": "tsx .agents/skills/mobile-device-bridge/scripts/screenshot.ts",
+    "phone:cdp": "tsx .agents/skills/mobile-device-bridge/scripts/cdp.ts"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",

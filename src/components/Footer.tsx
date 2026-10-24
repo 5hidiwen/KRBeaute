@@ -26,7 +26,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
   const { t } = useLanguage();
 
   return (
-    <footer className="bg-[#F9F6F0] border-t border-[#D1C4E9]/60 py-6 text-[#5D4037]">
+    <footer className="bg-[#F9F6F0] border-t border-[#D1C4E9]/60 pt-6 pb-28 sm:py-6 text-[#5D4037]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Sleek, lightweight single-tier bar */}

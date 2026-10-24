@@ -131,13 +131,13 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onGoToServices }) => 
 
           </div>
 
-          {/* Right Column: Visual Showcase */}
-          <div className="hidden lg:block lg:col-span-5 relative">
+          {/* Right Column: Visual Showcase (Visible on both mobile & desktop) */}
+          <div className="w-full lg:col-span-5 relative mt-4 lg:mt-0">
             <div className="relative mx-auto max-w-md lg:max-w-none">
               
-              <div className="relative rounded-3xl p-4 bg-gradient-to-br from-[#D1C4E9]/60 via-[#F9F6F0] to-[#D1C4E9]/40 border border-[#D1C4E9] shadow-xl">
+              <div className="relative rounded-3xl p-3.5 sm:p-4 bg-gradient-to-br from-[#D1C4E9]/60 via-[#F9F6F0] to-[#D1C4E9]/40 border border-[#D1C4E9] shadow-lg sm:shadow-xl">
                 
-                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br from-[#EAE2F2] via-[#F4EFF8] to-[#E5DBEE] flex flex-col justify-between p-6 sm:p-8 border border-white/80">
+                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br from-[#EAE2F2] via-[#F4EFF8] to-[#E5DBEE] flex flex-col justify-between p-5 sm:p-8 border border-white/80">
                   
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2 px-3 py-1.5 bg-white/90 backdrop-blur-sm rounded-full text-xs font-semibold text-[#512D6D] shadow-xs">
