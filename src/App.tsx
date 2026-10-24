@@ -105,7 +105,7 @@ function AppContent() {
       />
 
       {/* Main Content Area */}
-      <main className="flex-1 pb-20 lg:pb-0">
+      <main className="flex-1">
         
         {/* VIEW 1: DEDICATED FAQ PAGE (Clean & Focused) */}
         {activeTab === 'faq' ? (

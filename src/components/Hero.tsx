@@ -69,14 +69,14 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onGoToServices }) => 
             <div className="flex flex-col gap-2">
               <button
                 onClick={onOpenBooking}
-                className="min-h-[46px] w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-[#512D6D] hover:bg-[#402257] text-[#F9F6F0] rounded-xl text-xs font-bold shadow-xs active:scale-98 cursor-pointer"
+                className="min-h-[46px] w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-[#512D6D] hover:bg-[#402257] text-[#F9F6F0] rounded-xl text-xs sm:text-sm font-bold shadow-xs active:scale-98 cursor-pointer"
               >
                 <MessageCircle className="w-4 h-4 text-emerald-300 shrink-0" />
                 <span>{t.hero.bookWhatsApp}</span>
               </button>
               <a
                 href="tel:+33665566702"
-                className="min-h-[46px] w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-[#D1C4E9]/40 hover:bg-[#D1C4E9]/60 border border-[#D1C4E9] text-[#512D6D] rounded-xl text-xs font-bold active:scale-98 whitespace-nowrap cursor-pointer"
+                className="min-h-[46px] w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-[#D1C4E9]/40 hover:bg-[#D1C4E9]/60 border border-[#D1C4E9] text-[#512D6D] rounded-xl text-xs sm:text-sm font-bold active:scale-98 whitespace-nowrap cursor-pointer"
               >
                 <Phone className="w-4 h-4 text-[#512D6D] shrink-0" />
                 <span>{t.hero.callNumber}</span>
@@ -86,7 +86,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onGoToServices }) => 
               <button
                 type="button"
                 onClick={onGoToServices}
-                className="min-h-[40px] w-full flex items-center justify-center gap-1.5 py-2 text-xs font-semibold text-[#5D4037] hover:text-[#512D6D] border-t border-[#D1C4E9]/50 pt-2"
+                className="min-h-[40px] w-full flex items-center justify-center gap-1.5 py-2 text-xs sm:text-[13px] font-semibold text-[#5D4037] hover:text-[#512D6D] border-t border-[#D1C4E9]/50 pt-2"
               >
                 <span>{t.hero.viewServices}</span>
                 <ArrowDown className="w-3.5 h-3.5 text-[#512D6D]" />
@@ -117,7 +117,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onGoToServices }) => 
 
             <a
               href="tel:+33665566702"
-              className="inline-flex items-center gap-2 px-5 py-3 text-xs font-semibold text-[#5D4037] hover:text-[#512D6D] transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-3 text-xs sm:text-sm font-semibold text-[#5D4037] hover:text-[#512D6D] transition-colors"
             >
               <Phone className="w-4 h-4 text-[#512D6D]" />
               <span>06 65 56 67 02</span>
@@ -131,9 +131,9 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onGoToServices }) => 
               <div className="w-8 h-8 rounded-xl bg-[#512D6D]/10 text-[#512D6D] flex items-center justify-center shrink-0 mt-0.5">
                 <Car className="w-4 h-4" />
               </div>
-              <div className="text-xs">
-                <p className="font-bold text-[#5D4037]">{t.hero.advantages.freeTravelBold}</p>
-                <p className="text-[#5D4037]/75 mt-0.5 leading-snug">{t.hero.advantages.freeTravel}</p>
+              <div>
+                <p className="text-[13px] sm:text-sm font-bold text-[#5D4037]">{t.hero.advantages.freeTravelBold}</p>
+                <p className="text-xs sm:text-[13px] text-[#5D4037]/80 mt-0.5 leading-snug">{t.hero.advantages.freeTravel}</p>
               </div>
             </div>
 
@@ -142,9 +142,9 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onGoToServices }) => 
               <div className="w-8 h-8 rounded-xl bg-[#512D6D]/10 text-[#512D6D] flex items-center justify-center shrink-0 mt-0.5">
                 <Heart className="w-4 h-4" />
               </div>
-              <div className="text-xs">
-                <p className="font-bold text-[#5D4037]">{t.hero.advantages.massageChairBold}</p>
-                <p className="text-[#5D4037]/75 mt-0.5 leading-snug">{t.hero.advantages.massageChair}</p>
+              <div>
+                <p className="text-[13px] sm:text-sm font-bold text-[#5D4037]">{t.hero.advantages.massageChairBold}</p>
+                <p className="text-xs sm:text-[13px] text-[#5D4037]/80 mt-0.5 leading-snug">{t.hero.advantages.massageChair}</p>
               </div>
             </div>
 
@@ -153,9 +153,9 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onGoToServices }) => 
               <div className="w-8 h-8 rounded-xl bg-[#512D6D]/10 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5">
                 <ShieldCheck className="w-4 h-4" />
               </div>
-              <div className="text-xs">
-                <p className="font-bold text-[#5D4037]">{t.hero.advantages.hygieneBold}</p>
-                <p className="text-[#5D4037]/75 mt-0.5 leading-snug">{t.hero.advantages.hygiene}</p>
+              <div>
+                <p className="text-[13px] sm:text-sm font-bold text-[#5D4037]">{t.hero.advantages.hygieneBold}</p>
+                <p className="text-xs sm:text-[13px] text-[#5D4037]/80 mt-0.5 leading-snug">{t.hero.advantages.hygiene}</p>
               </div>
             </div>
 
@@ -164,15 +164,15 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onGoToServices }) => 
               <div className="w-8 h-8 rounded-xl bg-[#512D6D]/10 text-[#512D6D] flex items-center justify-center shrink-0 mt-0.5">
                 <Award className="w-4 h-4" />
               </div>
-              <div className="text-xs">
-                <p className="font-bold text-[#5D4037]">{t.hero.advantages.certifiedCareBold}</p>
-                <p className="text-[#5D4037]/75 mt-0.5 leading-snug">{t.hero.advantages.certifiedCare}</p>
+              <div>
+                <p className="text-[13px] sm:text-sm font-bold text-[#5D4037]">{t.hero.advantages.certifiedCareBold}</p>
+                <p className="text-xs sm:text-[13px] text-[#5D4037]/80 mt-0.5 leading-snug">{t.hero.advantages.certifiedCare}</p>
               </div>
             </div>
           </div>
 
           {/* Partner Brands Ribbon (Centered) */}
-          <div className="mt-8 sm:mt-10 pt-4 border-t border-[#D1C4E9]/50 flex flex-wrap items-center justify-center gap-2 text-xs font-medium text-[#5D4037]/75">
+          <div className="mt-8 sm:mt-10 pt-4 border-t border-[#D1C4E9]/50 flex flex-wrap items-center justify-center gap-2 text-xs sm:text-sm font-medium text-[#5D4037]/80">
             <span className="font-semibold text-[#512D6D]">Partenaires d'excellence :</span>
             <span>{t.hero.showcase.brandsBar}</span>
           </div>

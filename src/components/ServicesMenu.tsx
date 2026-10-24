@@ -59,15 +59,15 @@ export const ServicesMenu: React.FC<ServicesMenuProps> = ({ onSelectService }) =
             </div>
 
             <div className="flex flex-wrap items-baseline gap-2">
-              <h4 className="font-serif text-base sm:text-lg font-bold text-[#5D4037] group-hover:text-[#7A2048] transition-colors">
+              <h4 className="font-serif text-lg sm:text-xl font-bold text-[#5D4037] group-hover:text-[#7A2048] transition-colors">
                 {service.title}
               </h4>
-              <span className="hidden sm:inline text-xs text-[#512D6D] font-medium">
+              <span className="hidden sm:inline text-xs sm:text-sm text-[#512D6D] font-medium">
                 — {service.tagline}
               </span>
             </div>
 
-            <p className="mt-1 text-xs sm:text-sm text-[#5D4037]/80 leading-relaxed max-w-2xl">
+            <p className="mt-1.5 text-[13px] sm:text-sm text-[#5D4037]/85 leading-relaxed max-w-2xl">
               {service.description}
             </p>
 
@@ -76,7 +76,7 @@ export const ServicesMenu: React.FC<ServicesMenuProps> = ({ onSelectService }) =
               <button
                 type="button"
                 onClick={() => toggleSteps(service.id)}
-                className="mt-2.5 inline-flex items-center gap-1.5 text-xs font-semibold text-[#8B2651] hover:text-[#512D6D] transition-colors cursor-pointer select-none"
+                className="mt-2.5 inline-flex items-center gap-1.5 text-xs sm:text-[13px] font-semibold text-[#8B2651] hover:text-[#512D6D] transition-colors cursor-pointer select-none"
               >
                 <span>{isExpanded ? hideLabel : `${detailLabel} (${details.length})`}</span>
                 {isExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
@@ -86,15 +86,15 @@ export const ServicesMenu: React.FC<ServicesMenuProps> = ({ onSelectService }) =
             {/* Expandable Protocol / Inclusions Drawer (directly under the toggle) */}
             {isExpanded && details.length > 0 && (
               <div className="mt-3 pt-3 border-t border-[#D1C4E9]/30 bg-[#FDF8FA] rounded-xl p-3 sm:p-3.5 animate-fadeIn">
-                <div className="flex items-center gap-1.5 text-xs font-serif font-bold text-[#7A2048] uppercase tracking-wider mb-2">
+                <div className="flex items-center gap-1.5 text-xs sm:text-[13px] font-serif font-bold text-[#7A2048] uppercase tracking-wider mb-2">
                   <Sparkles className="w-3.5 h-3.5 text-[#8B2651]" />
                   <span>{isProtocol ? t.services.protocolTitle : t.services.includedTitle}</span>
                 </div>
-                <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs text-[#5D4037]/90">
+                <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-[13px] sm:text-sm text-[#5D4037]/90">
                   {details.map((step, idx) => (
                     <li key={idx} className="flex items-start gap-2 bg-white/70 p-2 rounded-lg border border-[#E8DFD8]/50">
-                      <span className="text-[#8B2651] font-bold text-xs shrink-0 mt-0.5">•</span>
-                      <span className="leading-tight">{step}</span>
+                      <span className="text-[#8B2651] font-bold text-xs sm:text-[13px] shrink-0 mt-0.5">•</span>
+                      <span className="leading-snug">{step}</span>
                     </li>
                   ))}
                 </ul>
@@ -195,7 +195,7 @@ export const ServicesMenu: React.FC<ServicesMenuProps> = ({ onSelectService }) =
             <div className="flex items-center justify-between mb-3.5 pb-2 border-b border-[#D1C4E9]/40">
               <div className="flex items-center gap-2">
                 <Sparkles className="w-4 h-4 text-[#8B2651]" />
-                <h3 className="font-serif text-base sm:text-lg font-bold text-[#5D4037]">
+                <h3 className="font-serif text-lg sm:text-xl font-bold text-[#5D4037]">
                   {t.services.sectionVisage}
                 </h3>
               </div>
@@ -216,7 +216,7 @@ export const ServicesMenu: React.FC<ServicesMenuProps> = ({ onSelectService }) =
             <div className="flex items-center justify-between mb-3.5 pb-2 border-b border-[#D1C4E9]/40">
               <div className="flex items-center gap-2">
                 <Footprints className="w-4 h-4 text-[#8B2651]" />
-                <h3 className="font-serif text-base sm:text-lg font-bold text-[#5D4037]">
+                <h3 className="font-serif text-lg sm:text-xl font-bold text-[#5D4037]">
                   {t.services.sectionPieds}
                 </h3>
               </div>

@@ -168,27 +168,27 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
           2. MOBILE & TABLET BOTTOM TAB BAR (Thumb Zone - Native App Style)
          ========================================================================= */}
       <nav 
-        className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#F9F6F0]/95 backdrop-blur-md border-t border-[#D1C4E9]/80 shadow-[0_-4px_25px_rgba(81,45,109,0.08)] px-1 pt-1.5 pb-[max(0.6rem,env(safe-area-inset-bottom))]"
+        className="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#F9F6F0]/95 backdrop-blur-md border-t border-[#D1C4E9]/80 shadow-[0_-4px_25px_rgba(81,45,109,0.08)] px-1.5 pt-2 pb-[max(0.7rem,env(safe-area-inset-bottom))]"
         aria-label="Navigation mobile"
       >
-        <div className="grid grid-cols-5 items-center max-w-lg mx-auto">
+        <div className="grid grid-cols-5 items-center max-w-lg mx-auto gap-0.5">
           {/* Tab 1: Accueil */}
           <button
             type="button"
             onClick={() => handleTabClick('accueil')}
-            className={`min-h-[48px] flex flex-col items-center justify-center gap-0.5 py-1 px-1 rounded-xl transition-all cursor-pointer select-none active:scale-95 focus-visible:ring-2 focus-visible:ring-[#512D6D] focus-visible:outline-none ${
+            className={`min-h-[52px] flex flex-col items-center justify-center gap-1 py-1 px-1 rounded-xl transition-all cursor-pointer select-none active:scale-95 focus-visible:ring-2 focus-visible:ring-[#512D6D] focus-visible:outline-none ${
               activeTab === 'accueil' && !plusSheetOpen
                 ? 'text-[#512D6D] font-bold'
                 : 'text-[#5D4037]/75 hover:text-[#512D6D]'
             }`}
             aria-label={t.nav.tabs.accueil}
           >
-            <div className={`p-1 rounded-lg transition-colors ${
-              activeTab === 'accueil' && !plusSheetOpen ? 'bg-[#512D6D]/10' : ''
+            <div className={`p-1.5 rounded-xl transition-all ${
+              activeTab === 'accueil' && !plusSheetOpen ? 'bg-[#512D6D]/12 scale-105 shadow-2xs' : ''
             }`}>
-              <Home className="w-5 h-5" />
+              <Home className="w-5.5 h-5.5" />
             </div>
-            <span className="text-[10px] leading-tight tracking-tight truncate max-w-full">
+            <span className="text-[11px] leading-none tracking-tight truncate max-w-full font-medium">
               {t.nav.tabs.accueil}
             </span>
           </button>
@@ -197,19 +197,19 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
           <button
             type="button"
             onClick={() => handleTabClick('soins')}
-            className={`min-h-[48px] flex flex-col items-center justify-center gap-0.5 py-1 px-1 rounded-xl transition-all cursor-pointer select-none active:scale-95 focus-visible:ring-2 focus-visible:ring-[#512D6D] focus-visible:outline-none ${
+            className={`min-h-[52px] flex flex-col items-center justify-center gap-1 py-1 px-1 rounded-xl transition-all cursor-pointer select-none active:scale-95 focus-visible:ring-2 focus-visible:ring-[#512D6D] focus-visible:outline-none ${
               activeTab === 'soins' && !plusSheetOpen
                 ? 'text-[#512D6D] font-bold'
                 : 'text-[#5D4037]/75 hover:text-[#512D6D]'
             }`}
             aria-label={isEs ? 'Tratamientos y Tarifas' : 'Carte des Soins & Tarifs'}
           >
-            <div className={`p-1 rounded-lg transition-colors ${
-              activeTab === 'soins' && !plusSheetOpen ? 'bg-[#512D6D]/10' : ''
+            <div className={`p-1.5 rounded-xl transition-all ${
+              activeTab === 'soins' && !plusSheetOpen ? 'bg-[#512D6D]/12 scale-105 shadow-2xs' : ''
             }`}>
-              <Sparkles className="w-5 h-5 text-[#8B2651]" />
+              <Sparkles className="w-5.5 h-5.5 text-[#8B2651]" />
             </div>
-            <span className="text-[10px] leading-tight tracking-tight truncate max-w-full">
+            <span className="text-[11px] leading-none tracking-tight truncate max-w-full font-medium">
               {isEs ? 'Tratamientos' : 'Soins'}
             </span>
           </button>
@@ -218,19 +218,19 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
           <button
             type="button"
             onClick={() => handleTabClick('secteur')}
-            className={`min-h-[48px] flex flex-col items-center justify-center gap-0.5 py-1 px-1 rounded-xl transition-all cursor-pointer select-none active:scale-95 focus-visible:ring-2 focus-visible:ring-[#512D6D] focus-visible:outline-none ${
+            className={`min-h-[52px] flex flex-col items-center justify-center gap-1 py-1 px-1 rounded-xl transition-all cursor-pointer select-none active:scale-95 focus-visible:ring-2 focus-visible:ring-[#512D6D] focus-visible:outline-none ${
               activeTab === 'secteur' && !plusSheetOpen
                 ? 'text-[#512D6D] font-bold'
                 : 'text-[#5D4037]/75 hover:text-[#512D6D]'
             }`}
             aria-label={isEs ? 'Zona de Cobertura (7 km)' : "Rayon d'action (7 km offert)"}
           >
-            <div className={`p-1 rounded-lg transition-colors ${
-              activeTab === 'secteur' && !plusSheetOpen ? 'bg-[#512D6D]/10' : ''
+            <div className={`p-1.5 rounded-xl transition-all ${
+              activeTab === 'secteur' && !plusSheetOpen ? 'bg-[#512D6D]/12 scale-105 shadow-2xs' : ''
             }`}>
-              <MapPin className="w-5 h-5" />
+              <MapPin className="w-5.5 h-5.5" />
             </div>
-            <span className="text-[10px] leading-tight tracking-tight truncate max-w-full">
+            <span className="text-[11px] leading-none tracking-tight truncate max-w-full font-medium">
               {isEs ? 'Zona 7 km' : 'Secteur'}
             </span>
           </button>
@@ -239,19 +239,19 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
           <button
             type="button"
             onClick={() => handleTabClick('contact')}
-            className={`min-h-[48px] flex flex-col items-center justify-center gap-0.5 py-1 px-1 rounded-xl transition-all cursor-pointer select-none active:scale-95 focus-visible:ring-2 focus-visible:ring-[#512D6D] focus-visible:outline-none ${
+            className={`min-h-[52px] flex flex-col items-center justify-center gap-1 py-1 px-1 rounded-xl transition-all cursor-pointer select-none active:scale-95 focus-visible:ring-2 focus-visible:ring-[#512D6D] focus-visible:outline-none ${
               activeTab === 'contact' && !plusSheetOpen
                 ? 'text-[#512D6D] font-bold'
                 : 'text-[#5D4037]/75 hover:text-[#512D6D]'
             }`}
             aria-label={isEs ? 'Contacto y Citas' : 'Contact & Prise de RDV'}
           >
-            <div className={`p-1 rounded-lg transition-colors ${
-              activeTab === 'contact' && !plusSheetOpen ? 'bg-[#512D6D]/10' : ''
+            <div className={`p-1.5 rounded-xl transition-all ${
+              activeTab === 'contact' && !plusSheetOpen ? 'bg-[#512D6D]/12 scale-105 shadow-2xs' : ''
             }`}>
-              <Mail className="w-5 h-5 text-[#8B2651]" />
+              <Mail className="w-5.5 h-5.5 text-[#8B2651]" />
             </div>
-            <span className="text-[10px] leading-tight tracking-tight truncate max-w-full">
+            <span className="text-[11px] leading-none tracking-tight truncate max-w-full font-medium">
               {isEs ? 'Contacto' : 'Contact'}
             </span>
           </button>
@@ -260,7 +260,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
           <button
             type="button"
             onClick={() => setPlusSheetOpen(!plusSheetOpen)}
-            className={`min-h-[48px] flex flex-col items-center justify-center gap-0.5 py-1 px-1 rounded-xl transition-all cursor-pointer select-none active:scale-95 focus-visible:ring-2 focus-visible:ring-[#512D6D] focus-visible:outline-none ${
+            className={`min-h-[52px] flex flex-col items-center justify-center gap-1 py-1 px-1 rounded-xl transition-all cursor-pointer select-none active:scale-95 focus-visible:ring-2 focus-visible:ring-[#512D6D] focus-visible:outline-none ${
               plusSheetOpen || isSecondaryTabActive
                 ? 'text-[#512D6D] font-bold'
                 : 'text-[#5D4037]/75 hover:text-[#512D6D]'
@@ -268,15 +268,15 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
             aria-label={isEs ? 'Más opciones' : 'Plus d\'options'}
             aria-expanded={plusSheetOpen}
           >
-            <div className={`p-1 rounded-lg transition-colors relative ${
-              plusSheetOpen || isSecondaryTabActive ? 'bg-[#512D6D]/10' : ''
+            <div className={`p-1.5 rounded-xl transition-all relative ${
+              plusSheetOpen || isSecondaryTabActive ? 'bg-[#512D6D]/12 scale-105 shadow-2xs' : ''
             }`}>
-              <Menu className="w-5 h-5" />
+              <Menu className="w-5.5 h-5.5" />
               {isSecondaryTabActive && !plusSheetOpen && (
                 <span className="absolute top-1 right-1 w-2 h-2 rounded-full bg-[#8B2651]" />
               )}
             </div>
-            <span className="text-[10px] leading-tight tracking-tight truncate max-w-full">
+            <span className="text-[11px] leading-none tracking-tight truncate max-w-full font-medium">
               {isEs ? 'Más' : 'Plus'}
             </span>
           </button>

@@ -164,6 +164,13 @@ export interface AboutTranslations {
   stat3Val: string;
   stat3Label: string;
   signatureQuote: string;
+  workshopsBox: {
+    badge: string;
+    title: string;
+    desc: string;
+    cta: string;
+    whatsappMessage: string;
+  };
   pillars: {
     kindnessTitle: string;
     kindnessDesc: string;
@@ -228,6 +235,7 @@ export interface FAQTranslations {
   title: string;
   subtitle: string;
   askBtn: string;
+  whatsappGreeting: string;
   items: FAQItemTranslation[];
   callout: string;
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Cpu, ShieldCheck, Sun, Sparkles, HeartHandshake, Feather, ExternalLink, ShoppingBag } from 'lucide-react';
+import { Cpu, Sun, Sparkles, ExternalLink, ShoppingBag } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 
 export const BrandsEquipment: React.FC = () => {
@@ -45,23 +45,20 @@ export const BrandsEquipment: React.FC = () => {
           {/* Nu Skin */}
           <div className="bg-white rounded-2xl p-4 border border-[#D1C4E9]/70 shadow-2xs hover:shadow-xs transition-all flex flex-col justify-between">
             <div>
-              <div className="flex items-center justify-between gap-2 mb-2">
-                <div className="w-7 h-7 rounded-lg bg-[#D1C4E9]/30 flex items-center justify-center text-[#512D6D]">
-                  <Sparkles className="w-3.5 h-3.5" />
-                </div>
-                <span className="text-[10px] font-bold text-[#512D6D] bg-[#D1C4E9]/30 px-2 py-0.5 rounded-full">
+              <div className="mb-2.5">
+                <span className="inline-block text-[11px] font-bold text-[#512D6D] bg-[#D1C4E9]/40 px-2.5 py-0.5 rounded-full">
                   {t.brands.brands.nuSkin.badge}
                 </span>
               </div>
-              <h3 className="font-serif text-base font-bold text-[#512D6D]">Nu Skin</h3>
-              <p className="text-[10px] font-semibold text-[#5D4037]/70 uppercase tracking-wider mb-1.5">
+              <h3 className="font-serif text-base sm:text-lg font-bold text-[#512D6D]">Nu Skin</h3>
+              <p className="text-[11px] font-semibold text-[#5D4037]/70 uppercase tracking-wider mb-1.5">
                 {t.brands.brands.nuSkin.category}
               </p>
-              <p className="text-xs text-[#5D4037]/80 leading-relaxed">
+              <p className="text-xs sm:text-[13px] text-[#5D4037]/85 leading-relaxed">
                 {t.brands.brands.nuSkin.desc}
               </p>
             </div>
-            <div className="mt-3 pt-2 border-t border-[#D1C4E9]/30 text-[11px] text-[#512D6D] font-medium">
+            <div className="mt-3 pt-2 border-t border-[#D1C4E9]/30 text-xs text-[#512D6D] font-medium">
               {t.brands.brands.nuSkin.footer}
             </div>
           </div>
@@ -69,23 +66,20 @@ export const BrandsEquipment: React.FC = () => {
           {/* Dr. Renaud Paris */}
           <div className="bg-white rounded-2xl p-4 border border-[#D1C4E9]/70 shadow-2xs hover:shadow-xs transition-all flex flex-col justify-between">
             <div>
-              <div className="flex items-center justify-between gap-2 mb-2">
-                <div className="w-7 h-7 rounded-lg bg-[#D1C4E9]/30 flex items-center justify-center text-[#512D6D]">
-                  <Feather className="w-3.5 h-3.5" />
-                </div>
-                <span className="text-[10px] font-bold text-[#512D6D] bg-[#D1C4E9]/30 px-2 py-0.5 rounded-full">
+              <div className="mb-2.5">
+                <span className="inline-block text-[11px] font-bold text-[#512D6D] bg-[#D1C4E9]/40 px-2.5 py-0.5 rounded-full">
                   {t.brands.brands.drRenaud.badge}
                 </span>
               </div>
-              <h3 className="font-serif text-base font-bold text-[#512D6D]">Dr. Renaud Paris</h3>
-              <p className="text-[10px] font-semibold text-[#5D4037]/70 uppercase tracking-wider mb-1.5">
+              <h3 className="font-serif text-base sm:text-lg font-bold text-[#512D6D]">Dr. Renaud Paris</h3>
+              <p className="text-[11px] font-semibold text-[#5D4037]/70 uppercase tracking-wider mb-1.5">
                 {t.brands.brands.drRenaud.category}
               </p>
-              <p className="text-xs text-[#5D4037]/80 leading-relaxed">
+              <p className="text-xs sm:text-[13px] text-[#5D4037]/85 leading-relaxed">
                 {t.brands.brands.drRenaud.desc}
               </p>
             </div>
-            <div className="mt-3 pt-2 border-t border-[#D1C4E9]/30 text-[11px] text-[#512D6D] font-medium">
+            <div className="mt-3 pt-2 border-t border-[#D1C4E9]/30 text-xs text-[#512D6D] font-medium">
               {t.brands.brands.drRenaud.footer}
             </div>
           </div>
@@ -93,29 +87,26 @@ export const BrandsEquipment: React.FC = () => {
           {/* Farmasi */}
           <div className="bg-white rounded-2xl p-4 border border-[#512D6D]/40 shadow-2xs hover:shadow-xs transition-all flex flex-col justify-between relative">
             <div>
-              <div className="flex items-center justify-between gap-2 mb-2">
-                <div className="w-7 h-7 rounded-lg bg-[#D1C4E9]/30 flex items-center justify-center text-[#512D6D]">
-                  <HeartHandshake className="w-3.5 h-3.5" />
-                </div>
-                <span className="text-[10px] font-bold text-[#512D6D] bg-[#D1C4E9] px-2 py-0.5 rounded-full">
+              <div className="mb-2.5">
+                <span className="inline-block text-[11px] font-bold text-[#512D6D] bg-[#D1C4E9] px-2.5 py-0.5 rounded-full">
                   {t.brands.brands.farmasi.badge}
                 </span>
               </div>
-              <h3 className="font-serif text-base font-bold text-[#512D6D]">Farmasi</h3>
-              <p className="text-[10px] font-semibold text-[#5D4037]/70 uppercase tracking-wider mb-1.5">
+              <h3 className="font-serif text-base sm:text-lg font-bold text-[#512D6D]">Farmasi</h3>
+              <p className="text-[11px] font-semibold text-[#5D4037]/70 uppercase tracking-wider mb-1.5">
                 {t.brands.brands.farmasi.category}
               </p>
-              <p className="text-xs text-[#5D4037]/80 leading-relaxed">
+              <p className="text-xs sm:text-[13px] text-[#5D4037]/85 leading-relaxed">
                 {t.brands.brands.farmasi.desc}
               </p>
             </div>
             <div className="mt-3 pt-2 border-t border-[#D1C4E9]/30 flex items-center justify-between">
-              <span className="text-[11px] text-[#512D6D] font-medium">{t.brands.brands.farmasi.footer}</span>
+              <span className="text-xs text-[#512D6D] font-medium">{t.brands.brands.farmasi.footer}</span>
               <a
                 href={farmasiAffiliateUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-[11px] font-bold text-[#512D6D] hover:underline"
+                className="inline-flex items-center gap-1 text-xs font-bold text-[#512D6D] hover:underline"
               >
                 <span>{t.brands.brands.farmasi.shopBtn}</span>
                 <ExternalLink className="w-2.5 h-2.5" />
@@ -126,23 +117,20 @@ export const BrandsEquipment: React.FC = () => {
           {/* House of Peau */}
           <div className="bg-white rounded-2xl p-4 border border-[#D1C4E9]/70 shadow-2xs hover:shadow-xs transition-all flex flex-col justify-between">
             <div>
-              <div className="flex items-center justify-between gap-2 mb-2">
-                <div className="w-7 h-7 rounded-lg bg-[#D1C4E9]/30 flex items-center justify-center text-[#512D6D]">
-                  <ShieldCheck className="w-3.5 h-3.5" />
-                </div>
-                <span className="text-[10px] font-bold text-[#512D6D] bg-[#D1C4E9]/30 px-2 py-0.5 rounded-full">
+              <div className="mb-2.5">
+                <span className="inline-block text-[11px] font-bold text-[#512D6D] bg-[#D1C4E9]/40 px-2.5 py-0.5 rounded-full">
                   {t.brands.brands.houseOfPeau.badge}
                 </span>
               </div>
-              <h3 className="font-serif text-base font-bold text-[#512D6D]">House of Peau</h3>
-              <p className="text-[10px] font-semibold text-[#5D4037]/70 uppercase tracking-wider mb-1.5">
+              <h3 className="font-serif text-base sm:text-lg font-bold text-[#512D6D]">House of Peau</h3>
+              <p className="text-[11px] font-semibold text-[#5D4037]/70 uppercase tracking-wider mb-1.5">
                 {t.brands.brands.houseOfPeau.category}
               </p>
-              <p className="text-xs text-[#5D4037]/80 leading-relaxed">
+              <p className="text-xs sm:text-[13px] text-[#5D4037]/85 leading-relaxed">
                 {t.brands.brands.houseOfPeau.desc}
               </p>
             </div>
-            <div className="mt-3 pt-2 border-t border-[#D1C4E9]/30 text-[11px] text-[#512D6D] font-medium">
+            <div className="mt-3 pt-2 border-t border-[#D1C4E9]/30 text-xs text-[#512D6D] font-medium">
               {t.brands.brands.houseOfPeau.footer}
             </div>
           </div>
@@ -159,13 +147,13 @@ export const BrandsEquipment: React.FC = () => {
             </div>
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2 mb-0.5">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-[#512D6D]">{t.brands.tech.microcurrent.tag}</span>
-                <span className="text-[10px] text-[#5D4037]/50">{t.brands.tech.microcurrent.note}</span>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#512D6D]">{t.brands.tech.microcurrent.tag}</span>
+                <span className="text-[11px] text-[#5D4037]/60">{t.brands.tech.microcurrent.note}</span>
               </div>
-              <h3 className="font-serif text-sm sm:text-base font-bold text-[#5D4037]">
+              <h3 className="font-serif text-base sm:text-lg font-bold text-[#5D4037]">
                 {t.brands.tech.microcurrent.title}
               </h3>
-              <p className="text-xs text-[#5D4037]/80 leading-snug mt-0.5 line-clamp-2">
+              <p className="text-xs sm:text-[13px] text-[#5D4037]/85 leading-relaxed mt-0.5 line-clamp-2">
                 {t.brands.tech.microcurrent.desc}
               </p>
             </div>
@@ -178,13 +166,13 @@ export const BrandsEquipment: React.FC = () => {
             </div>
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2 mb-0.5">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-[#512D6D]">{t.brands.tech.led.tag}</span>
-                <span className="text-[10px] text-[#5D4037]/50">{t.brands.tech.led.note}</span>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#512D6D]">{t.brands.tech.led.tag}</span>
+                <span className="text-[11px] text-[#5D4037]/60">{t.brands.tech.led.note}</span>
               </div>
-              <h3 className="font-serif text-sm sm:text-base font-bold text-[#5D4037]">
+              <h3 className="font-serif text-base sm:text-lg font-bold text-[#5D4037]">
                 {t.brands.tech.led.title}
               </h3>
-              <p className="text-xs text-[#5D4037]/80 leading-snug mt-0.5 line-clamp-2">
+              <p className="text-xs sm:text-[13px] text-[#5D4037]/85 leading-relaxed mt-0.5 line-clamp-2">
                 {t.brands.tech.led.desc}
               </p>
             </div>

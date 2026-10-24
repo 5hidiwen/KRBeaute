@@ -6,6 +6,8 @@ export const FAQSection: React.FC = () => {
   const { t } = useLanguage();
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
+  const whatsAppUrl = `https://wa.me/33665566702?text=${encodeURIComponent(t.faq.whatsappGreeting)}`;
+
   const icons: Record<string, React.ReactNode> = {
     'confirmation-paiement': <CreditCard className="w-4 h-4 text-[#512D6D]" />,
     'modification-report': <Clock className="w-4 h-4 text-[#512D6D]" />,
@@ -39,12 +41,16 @@ export const FAQSection: React.FC = () => {
             </p>
           </div>
 
-          {/* Right Action: Quick Question Link */}
+          {/* Right Action: Quick Question Link -> WhatsApp */}
           <a
-            href="#contact"
-            className="inline-flex items-center gap-2 px-4 py-2 bg-white hover:bg-[#FDF8FA] border border-[#512D6D]/30 text-[#512D6D] rounded-full text-xs font-semibold shadow-2xs hover:shadow-xs transition-all shrink-0 self-start md:self-auto cursor-pointer"
+            href={whatsAppUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            title={`${t.faq.askBtn} sur WhatsApp`}
+            aria-label={`${t.faq.askBtn} sur WhatsApp`}
+            className="inline-flex items-center gap-2 px-4 py-2 min-h-[40px] bg-white hover:bg-[#FDF8FA] border border-[#512D6D]/30 text-[#512D6D] rounded-full text-xs sm:text-[13px] font-semibold shadow-2xs hover:shadow-xs transition-all shrink-0 self-start md:self-auto cursor-pointer"
           >
-            <MessageCircle className="w-3.5 h-3.5 text-[#512D6D]" />
+            <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
             <span>{t.faq.askBtn}</span>
           </a>
         </div>
@@ -70,7 +76,7 @@ export const FAQSection: React.FC = () => {
                     <div className="w-8 h-8 rounded-lg bg-[#D1C4E9]/40 flex items-center justify-center shrink-0">
                       {icon}
                     </div>
-                    <span className="font-serif text-sm sm:text-base font-semibold text-[#5D4037]">
+                    <span className="font-serif text-[15px] sm:text-base font-semibold text-[#5D4037]">
                       {faq.question}
                     </span>
                   </div>
@@ -80,7 +86,7 @@ export const FAQSection: React.FC = () => {
                 </button>
 
                 {isOpen && (
-                  <div className="px-4 pb-4 sm:px-5 sm:pb-5 pt-0 text-xs sm:text-sm text-[#5D4037]/85 leading-relaxed border-t border-[#D1C4E9]/30 mt-1">
+                  <div className="px-4 pb-4 sm:px-5 sm:pb-5 pt-0 text-sm sm:text-base text-[#5D4037]/85 leading-relaxed border-t border-[#D1C4E9]/30 mt-1">
                     <p className="pt-3">{faq.answer}</p>
                   </div>
                 )}

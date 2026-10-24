@@ -153,7 +153,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
   };
 
   return (
-    <section id="contact" className="scroll-mt-20 sm:scroll-mt-24 pt-8 pb-12 sm:pt-12 sm:pb-16 bg-white">
+    <section id="contact" className="scroll-mt-20 sm:scroll-mt-24 pt-8 pb-6 sm:pt-12 sm:pb-16 bg-white">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         
         {/* Semantic H2 for Search Engines & Assistive Technologies */}
@@ -180,23 +180,23 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                 <p className="font-serif italic text-xs sm:text-sm text-[#8B2651] font-semibold mt-0.5">
                   {t.contact.leftCard.sub}
                 </p>
-                <p className="text-[11px] sm:text-xs text-[#5D4037]/80 mt-1.5 leading-snug max-w-md mx-auto">
+                <p className="text-xs sm:text-[13px] text-[#5D4037]/85 mt-1.5 leading-relaxed max-w-md mx-auto">
                   {t.contact.leftCard.intro}
                 </p>
               </div>
 
               {/* 5 Points directly readable without scrolling */}
-              <ol className="space-y-2.5 sm:space-y-3 text-xs sm:text-[13px] leading-relaxed text-[#5D4037]">
+              <ol className="space-y-3 text-[13px] sm:text-sm leading-relaxed text-[#5D4037]">
                 {t.contact.leftCard.points.map((pt) => (
                   <li key={pt.num} className="flex items-start gap-2.5">
-                    <span className="w-5 h-5 rounded-full bg-[#512D6D] text-white flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5 shadow-2xs">
+                    <span className="w-5.5 h-5.5 rounded-full bg-[#512D6D] text-white flex items-center justify-center font-bold text-xs shrink-0 mt-0.5 shadow-2xs">
                       {pt.num}
                     </span>
                     <div>
-                      <strong className="text-[#512D6D] uppercase font-bold text-[11px] sm:text-xs">
+                      <strong className="text-[#512D6D] uppercase font-bold text-[12px] sm:text-[13px] tracking-wide">
                         {pt.title}
                       </strong>
-                      <p className="text-[#5D4037]/90 text-[11px] sm:text-xs mt-0.5">
+                      <p className="text-[#5D4037]/90 text-[13px] sm:text-sm mt-0.5 leading-relaxed">
                         {pt.text}
                       </p>
                     </div>
@@ -322,12 +322,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                   </div>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-2.5 text-xs">
+                <form onSubmit={handleSubmit} className="space-y-3 text-sm">
                   
                   {/* Name & Phone */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     <div>
-                      <label htmlFor="contact-name" className="block text-[11px] font-semibold text-[#5D4037] mb-0.5">
+                      <label htmlFor="contact-name" className="block text-xs sm:text-[13px] font-semibold text-[#5D4037] mb-1">
                         {t.contact.rightCard.nameLabel}
                       </label>
                       <input
@@ -338,11 +338,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                         placeholder={t.contact.rightCard.namePlaceholder}
                         value={formData.name}
                         onChange={handleChange}
-                        className="min-h-[40px] w-full px-3 py-1.5 bg-[#F9F6F0] border border-[#D1C4E9] rounded-xl text-[#5D4037] focus:outline-none focus:border-[#512D6D]"
+                        className="min-h-[42px] w-full px-3 py-2 bg-[#F9F6F0] border border-[#D1C4E9] rounded-xl text-sm text-[#5D4037] focus:outline-none focus:border-[#512D6D]"
                       />
                     </div>
                     <div>
-                      <label htmlFor="contact-phone" className="block text-[11px] font-semibold text-[#5D4037] mb-0.5">
+                      <label htmlFor="contact-phone" className="block text-xs sm:text-[13px] font-semibold text-[#5D4037] mb-1">
                         {t.contact.rightCard.phoneLabel}
                       </label>
                       <input
@@ -353,7 +353,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                         placeholder={t.contact.rightCard.phonePlaceholder}
                         value={formData.phone}
                         onChange={handleChange}
-                        className="min-h-[40px] w-full px-3 py-1.5 bg-[#F9F6F0] border border-[#D1C4E9] rounded-xl text-[#5D4037] focus:outline-none focus:border-[#512D6D]"
+                        className="min-h-[42px] w-full px-3 py-2 bg-[#F9F6F0] border border-[#D1C4E9] rounded-xl text-sm text-[#5D4037] focus:outline-none focus:border-[#512D6D]"
                       />
                     </div>
                   </div>
@@ -361,7 +361,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                   {/* Email & Commune */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     <div>
-                      <label htmlFor="contact-email" className="block text-[11px] font-semibold text-[#5D4037] mb-0.5">
+                      <label htmlFor="contact-email" className="block text-xs sm:text-[13px] font-semibold text-[#5D4037] mb-1">
                         {t.contact.rightCard.emailLabel}
                       </label>
                       <input
@@ -372,11 +372,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                         placeholder={t.contact.rightCard.emailPlaceholder}
                         value={formData.email}
                         onChange={handleChange}
-                        className="min-h-[40px] w-full px-3 py-1.5 bg-[#F9F6F0] border border-[#D1C4E9] rounded-xl text-[#5D4037] focus:outline-none focus:border-[#512D6D]"
+                        className="min-h-[42px] w-full px-3 py-2 bg-[#F9F6F0] border border-[#D1C4E9] rounded-xl text-sm text-[#5D4037] focus:outline-none focus:border-[#512D6D]"
                       />
                     </div>
                     <div>
-                      <label htmlFor="contact-commune" className="block text-[11px] font-semibold text-[#5D4037] mb-0.5">
+                      <label htmlFor="contact-commune" className="block text-xs sm:text-[13px] font-semibold text-[#5D4037] mb-1">
                         {t.contact.rightCard.communeLabel}
                       </label>
                       <select
@@ -384,7 +384,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                         name="commune"
                         value={formData.commune}
                         onChange={handleChange}
-                        className="min-h-[40px] w-full px-2.5 py-1.5 bg-[#F9F6F0] border border-[#D1C4E9] rounded-xl text-[#5D4037] focus:outline-none focus:border-[#512D6D] text-xs"
+                        className="min-h-[42px] w-full px-2.5 py-2 bg-[#F9F6F0] border border-[#D1C4E9] rounded-xl text-sm text-[#5D4037] focus:outline-none focus:border-[#512D6D]"
                       >
                         {COMMUNES_DATA.map((c) => (
                           <option key={`${c.name}-${c.postalCode}`} value={c.name}>
@@ -397,7 +397,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
 
                   {/* Service Selection */}
                   <div>
-                    <label htmlFor="contact-service" className="block text-[11px] font-semibold text-[#5D4037] mb-0.5">
+                    <label htmlFor="contact-service" className="block text-xs sm:text-[13px] font-semibold text-[#5D4037] mb-1">
                       {t.contact.rightCard.serviceLabel}
                     </label>
                     <select
@@ -405,7 +405,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                       name="serviceTitle"
                       value={formData.serviceTitle}
                       onChange={handleChange}
-                      className="min-h-[40px] w-full px-3 py-1.5 bg-[#F9F6F0] border border-[#D1C4E9] rounded-xl text-[#5D4037] focus:outline-none focus:border-[#512D6D] font-medium"
+                      className="min-h-[42px] w-full px-3 py-2 bg-[#F9F6F0] border border-[#D1C4E9] rounded-xl text-sm text-[#5D4037] focus:outline-none focus:border-[#512D6D] font-medium"
                     >
                       {currentServices.map((s) => (
                         <option key={s.id} value={s.title}>
@@ -418,7 +418,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                   {/* Date & Time Slot */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     <div>
-                      <label htmlFor="contact-date" className="block text-[11px] font-semibold text-[#5D4037] mb-0.5">
+                      <label htmlFor="contact-date" className="block text-xs sm:text-[13px] font-semibold text-[#5D4037] mb-1">
                         {t.contact.rightCard.dateLabel}
                       </label>
                       <div className="relative">
@@ -444,13 +444,13 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                             if (!formData.preferredDate) setDateFocused(false);
                           }}
                           onChange={handleChange}
-                          className="min-h-[40px] w-full px-3 py-1.5 pr-9 bg-[#F9F6F0] border border-[#D1C4E9] rounded-xl text-[#5D4037] focus:outline-none focus:border-[#512D6D]"
+                          className="min-h-[42px] w-full px-3 py-2 pr-9 bg-[#F9F6F0] border border-[#D1C4E9] rounded-xl text-sm text-[#5D4037] focus:outline-none focus:border-[#512D6D]"
                         />
                         <Calendar className="w-4 h-4 text-[#512D6D]/60 pointer-events-none absolute right-3 top-1/2 -translate-y-1/2" />
                       </div>
                     </div>
                     <div>
-                      <label htmlFor="contact-slot" className="block text-[11px] font-semibold text-[#5D4037] mb-0.5">
+                      <label htmlFor="contact-slot" className="block text-xs sm:text-[13px] font-semibold text-[#5D4037] mb-1">
                         {t.contact.rightCard.slotLabel}
                       </label>
                       <select
@@ -458,7 +458,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                         name="preferredTimeSlot"
                         value={formData.preferredTimeSlot}
                         onChange={handleChange}
-                        className="min-h-[40px] w-full px-3 py-1.5 bg-[#F9F6F0] border border-[#D1C4E9] rounded-xl text-[#5D4037] focus:outline-none focus:border-[#512D6D]"
+                        className="min-h-[42px] w-full px-3 py-2 bg-[#F9F6F0] border border-[#D1C4E9] rounded-xl text-sm text-[#5D4037] focus:outline-none focus:border-[#512D6D]"
                       >
                         <option value="morning">{t.contact.rightCard.slots.morning}</option>
                         <option value="noon">{t.contact.rightCard.slots.noon}</option>
@@ -470,7 +470,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
 
                   {/* Message / Details */}
                   <div>
-                    <label htmlFor="contact-message" className="block text-[11px] font-semibold text-[#5D4037] mb-0.5">
+                    <label htmlFor="contact-message" className="block text-xs sm:text-[13px] font-semibold text-[#5D4037] mb-1">
                       {t.contact.rightCard.msgLabel}
                     </label>
                     <input
@@ -480,7 +480,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                       placeholder={t.contact.rightCard.msgPlaceholder}
                       value={formData.message}
                       onChange={handleChange}
-                      className="min-h-[38px] w-full px-3 py-1.5 bg-[#F9F6F0] border border-[#D1C4E9] rounded-xl text-[#5D4037] focus:outline-none focus:border-[#512D6D]"
+                      className="min-h-[40px] w-full px-3 py-2 bg-[#F9F6F0] border border-[#D1C4E9] rounded-xl text-sm text-[#5D4037] focus:outline-none focus:border-[#512D6D]"
                     />
                   </div>
 
@@ -489,7 +489,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
 
                   {/* Terms acceptance checkbox */}
                   <div className="pt-0.5">
-                    <label htmlFor="contact-terms" className="flex items-start gap-2.5 text-[11px] text-[#5D4037] cursor-pointer select-none">
+                    <label htmlFor="contact-terms" className="flex items-start gap-2.5 text-xs sm:text-[13px] text-[#5D4037] cursor-pointer select-none">
                       <input
                         id="contact-terms"
                         type="checkbox"

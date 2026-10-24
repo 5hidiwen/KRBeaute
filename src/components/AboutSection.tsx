@@ -1,10 +1,12 @@
 import React from 'react';
-import { Award, Heart, Sparkles, ShieldCheck, UserCheck, Check } from 'lucide-react';
+import { Award, Heart, Sparkles, ShieldCheck, UserCheck, Check, Globe, MessageCircle } from 'lucide-react';
 import { KARINA_PHOTO_BASE64 } from '../karinaPhotoData';
 import { useLanguage } from '../i18n/LanguageContext';
 
 export const AboutSection: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+
+  const workshopsWhatsAppUrl = `https://wa.me/33665566702?text=${encodeURIComponent(t.about.workshopsBox.whatsappMessage)}`;
 
   return (
     <section id="a-propos" className="scroll-mt-20 sm:scroll-mt-24 py-8 sm:py-20 bg-[#F9F6F0]">
@@ -72,18 +74,15 @@ export const AboutSection: React.FC = () => {
                 <div className="grid grid-cols-3 gap-1.5 sm:gap-2 mt-2">
                   <div className="bg-white p-2 rounded-xl border border-[#D1C4E9] text-center shadow-2xs">
                     <p className="font-serif text-xs sm:text-sm font-bold text-[#512D6D]">{t.about.stat1Val}</p>
-                    <p className="text-[9px] sm:text-[10px] text-[#5D4037]/75 font-medium leading-tight mt-0.5">{t.about.stat1Label}</p>
+                    <p className="text-[10px] sm:text-[11px] text-[#5D4037]/75 font-medium leading-tight mt-0.5">{t.about.stat1Label}</p>
                   </div>
                   <div className="bg-white p-2 rounded-xl border border-[#D1C4E9] text-center shadow-2xs">
                     <p className="font-serif text-xs sm:text-sm font-bold text-[#512D6D]">{t.about.stat2Val}</p>
-                    <p className="text-[9px] sm:text-[10px] text-[#5D4037]/75 font-medium leading-tight mt-0.5">{t.about.stat2Label}</p>
+                    <p className="text-[10px] sm:text-[11px] text-[#5D4037]/75 font-medium leading-tight mt-0.5">{t.about.stat2Label}</p>
                   </div>
                   <div className="bg-white p-2 rounded-xl border border-[#D1C4E9] text-center shadow-2xs">
-                    <p className="font-serif text-xs sm:text-sm font-bold text-amber-600 flex items-center justify-center gap-0.5">
-                      <span aria-hidden="true">★</span>
-                      <span>{t.about.stat3Val}</span>
-                    </p>
-                    <p className="text-[9px] sm:text-[10px] text-[#5D4037]/75 font-medium leading-tight mt-0.5">{t.about.stat3Label}</p>
+                    <p className="font-serif text-xs sm:text-sm font-bold text-[#512D6D]">{t.about.stat3Val}</p>
+                    <p className="text-[10px] sm:text-[11px] text-[#5D4037]/75 font-medium leading-tight mt-0.5">{t.about.stat3Label}</p>
                   </div>
                 </div>
 
@@ -104,7 +103,7 @@ export const AboutSection: React.FC = () => {
               {t.about.title}
             </h2>
 
-            <div className="space-y-3 text-xs sm:text-base text-[#5D4037]/85 leading-relaxed font-normal">
+            <div className="space-y-3 text-sm sm:text-base text-[#5D4037]/85 leading-relaxed font-normal">
               <p>
                 {t.about.paragraph1}
               </p>
@@ -128,10 +127,10 @@ export const AboutSection: React.FC = () => {
                 <div className="w-7 h-7 rounded-lg bg-[#D1C4E9]/50 flex items-center justify-center text-[#512D6D] mb-2">
                   <Heart className="w-4 h-4" />
                 </div>
-                <h3 className="font-serif text-xs sm:text-sm font-semibold text-[#5D4037] mb-0.5">
+                <h3 className="font-serif text-sm sm:text-base font-semibold text-[#5D4037] mb-0.5">
                   {t.about.pillars.kindnessTitle}
                 </h3>
-                <p className="text-[11px] text-[#5D4037]/80 leading-relaxed">
+                <p className="text-xs sm:text-[13px] text-[#5D4037]/80 leading-relaxed">
                   {t.about.pillars.kindnessDesc}
                 </p>
               </div>
@@ -140,10 +139,10 @@ export const AboutSection: React.FC = () => {
                 <div className="w-7 h-7 rounded-lg bg-[#D1C4E9]/50 flex items-center justify-center text-[#512D6D] mb-2">
                   <ShieldCheck className="w-4 h-4" />
                 </div>
-                <h3 className="font-serif text-xs sm:text-sm font-semibold text-[#5D4037] mb-0.5">
+                <h3 className="font-serif text-sm sm:text-base font-semibold text-[#5D4037] mb-0.5">
                   {t.about.pillars.hygieneTitle}
                 </h3>
-                <p className="text-[11px] text-[#5D4037]/80 leading-relaxed">
+                <p className="text-xs sm:text-[13px] text-[#5D4037]/80 leading-relaxed">
                   {t.about.pillars.hygieneDesc}
                 </p>
               </div>
@@ -152,10 +151,10 @@ export const AboutSection: React.FC = () => {
                 <div className="w-7 h-7 rounded-lg bg-[#D1C4E9]/50 flex items-center justify-center text-[#512D6D] mb-2">
                   <UserCheck className="w-4 h-4" />
                 </div>
-                <h3 className="font-serif text-xs sm:text-sm font-semibold text-[#5D4037] mb-0.5">
+                <h3 className="font-serif text-sm sm:text-base font-semibold text-[#5D4037] mb-0.5">
                   {t.about.pillars.privacyTitle}
                 </h3>
-                <p className="text-[11px] text-[#5D4037]/80 leading-relaxed">
+                <p className="text-xs sm:text-[13px] text-[#5D4037]/80 leading-relaxed">
                   {t.about.pillars.privacyDesc}
                 </p>
               </div>
@@ -165,6 +164,44 @@ export const AboutSection: React.FC = () => {
           </div>
 
         </div>
+
+        {/* Dedicated Online Workshops Banner (Visible uniquement pour la version espagnole) */}
+        {language === 'es' && (
+          <div className="mt-8 sm:mt-12 bg-gradient-to-br from-white via-[#F9F6F0] to-[#EAE2F2]/70 rounded-3xl border border-[#D1C4E9] p-5 sm:p-7 shadow-xs">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 sm:gap-6">
+              <div className="flex items-start gap-3.5 sm:gap-4">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#512D6D] text-[#F9F6F0] flex items-center justify-center shrink-0 shadow-xs mt-0.5">
+                  <Globe className="w-5 h-5 sm:w-6 sm:h-6 text-[#EAE2F2]" />
+                </div>
+                <div className="space-y-1 max-w-2xl">
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#512D6D]/10 text-[#512D6D] text-[11px] font-bold uppercase tracking-wider">
+                    <Sparkles className="w-3 h-3 text-[#512D6D]" />
+                    <span>{t.about.workshopsBox.badge}</span>
+                  </div>
+                  <h3 className="font-serif text-lg sm:text-xl font-bold text-[#512D6D]">
+                    {t.about.workshopsBox.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-[#5D4037]/85 leading-relaxed">
+                    {t.about.workshopsBox.desc}
+                  </p>
+                </div>
+              </div>
+
+              <div className="shrink-0 self-start md:self-center">
+                <a
+                  href={workshopsWhatsAppUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-3 min-h-[44px] rounded-full bg-emerald-600 hover:bg-emerald-500 active:scale-98 text-white text-xs sm:text-sm font-bold shadow-xs hover:shadow-md transition-all cursor-pointer"
+                >
+                  <MessageCircle className="w-4 h-4 shrink-0" />
+                  <span>{t.about.workshopsBox.cta}</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        )}
+
       </div>
     </section>
   );
