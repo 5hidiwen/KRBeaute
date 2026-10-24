@@ -19,7 +19,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({ className = 
         type="button"
         onClick={() => setLanguage('fr')}
         aria-pressed={language === 'fr'}
-        className={`px-2 py-0.5 rounded-full text-[11px] font-bold tracking-wider transition-all cursor-pointer select-none active:scale-95 ${
+        className={`min-h-[32px] px-2.5 py-1 rounded-full text-xs font-bold tracking-wider transition-all cursor-pointer select-none active:scale-95 ${
           language === 'fr'
             ? 'bg-[#512D6D] text-white shadow-2xs'
             : 'text-[#5D4037]/75 hover:text-[#512D6D] hover:bg-[#D1C4E9]/30'
@@ -34,7 +34,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({ className = 
         type="button"
         onClick={() => setLanguage('es')}
         aria-pressed={language === 'es'}
-        className={`px-2 py-0.5 rounded-full text-[11px] font-bold tracking-wider transition-all cursor-pointer select-none active:scale-95 ${
+        className={`min-h-[32px] px-2.5 py-1 rounded-full text-xs font-bold tracking-wider transition-all cursor-pointer select-none active:scale-95 ${
           language === 'es'
             ? 'bg-[#512D6D] text-white shadow-2xs'
             : 'text-[#5D4037]/75 hover:text-[#512D6D] hover:bg-[#D1C4E9]/30'

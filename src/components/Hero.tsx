@@ -61,24 +61,24 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onGoToServices }) => 
           </p>
 
           {/* MOBILE QUICK ACTION PANEL: Immediate 1-tap buttons */}
-          <div className="w-full sm:hidden mb-8 bg-white/95 p-3.5 rounded-2xl border border-[#D1C4E9] shadow-xs flex flex-col gap-2.5 max-w-sm mx-auto">
+          <div className="w-full sm:hidden mb-8 bg-white/95 p-3.5 rounded-2xl border border-[#D1C4E9] shadow-xs flex flex-col gap-2.5 max-w-md mx-auto">
             <div className="flex items-center justify-between text-xs font-semibold text-[#512D6D] px-1">
               <span>{t.hero.quickAccess}</span>
               <span className="text-[11px] text-[#5D4037]/70 font-normal">{t.hero.hours}</span>
             </div>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="flex flex-col gap-2">
               <button
                 onClick={onOpenBooking}
-                className="min-h-[46px] w-full flex items-center justify-center gap-1.5 px-3 py-2.5 bg-[#512D6D] text-[#F9F6F0] rounded-xl text-xs font-bold shadow-xs active:scale-98"
+                className="min-h-[46px] w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-[#512D6D] hover:bg-[#402257] text-[#F9F6F0] rounded-xl text-xs font-bold shadow-xs active:scale-98 cursor-pointer"
               >
-                <MessageCircle className="w-4 h-4 text-emerald-300" />
+                <MessageCircle className="w-4 h-4 text-emerald-300 shrink-0" />
                 <span>{t.hero.bookWhatsApp}</span>
               </button>
               <a
                 href="tel:+33665566702"
-                className="min-h-[46px] w-full flex items-center justify-center gap-1.5 px-3 py-2.5 bg-[#D1C4E9]/40 border border-[#D1C4E9] text-[#512D6D] rounded-xl text-xs font-bold active:scale-98"
+                className="min-h-[46px] w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-[#D1C4E9]/40 hover:bg-[#D1C4E9]/60 border border-[#D1C4E9] text-[#512D6D] rounded-xl text-xs font-bold active:scale-98 whitespace-nowrap cursor-pointer"
               >
-                <Phone className="w-4 h-4 text-[#512D6D]" />
+                <Phone className="w-4 h-4 text-[#512D6D] shrink-0" />
                 <span>{t.hero.callNumber}</span>
               </a>
             </div>

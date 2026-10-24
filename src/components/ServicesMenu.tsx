@@ -82,10 +82,28 @@ export const ServicesMenu: React.FC<ServicesMenuProps> = ({ onSelectService }) =
                 {isExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
               </button>
             )}
+
+            {/* Expandable Protocol / Inclusions Drawer (directly under the toggle) */}
+            {isExpanded && details.length > 0 && (
+              <div className="mt-3 pt-3 border-t border-[#D1C4E9]/30 bg-[#FDF8FA] rounded-xl p-3 sm:p-3.5 animate-fadeIn">
+                <div className="flex items-center gap-1.5 text-xs font-serif font-bold text-[#7A2048] uppercase tracking-wider mb-2">
+                  <Sparkles className="w-3.5 h-3.5 text-[#8B2651]" />
+                  <span>{isProtocol ? t.services.protocolTitle : t.services.includedTitle}</span>
+                </div>
+                <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs text-[#5D4037]/90">
+                  {details.map((step, idx) => (
+                    <li key={idx} className="flex items-start gap-2 bg-white/70 p-2 rounded-lg border border-[#E8DFD8]/50">
+                      <span className="text-[#8B2651] font-bold text-xs shrink-0 mt-0.5">•</span>
+                      <span className="leading-tight">{step}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
 
-          {/* Right Action Block: Duration, Price, Reserve Button */}
-          <div className="flex items-center justify-between lg:justify-end gap-3 sm:gap-5 shrink-0 pt-3 lg:pt-0 border-t lg:border-t-0 border-[#E8DFD8]/70">
+          {/* Action Block: Duration, Price, Reserve Button */}
+          <div className="flex items-center justify-between gap-3 sm:gap-5 shrink-0 pt-3 border-t border-[#E8DFD8]/70">
             <div className="flex items-center gap-1.5 text-xs text-[#5D4037]/85 font-medium bg-[#F9F6F0] px-3 py-1.5 rounded-xl border border-[#E8DFD8]/60">
               <Clock className="w-3.5 h-3.5 text-[#8B2651]" />
               <span>{service.duration}</span>
@@ -107,24 +125,6 @@ export const ServicesMenu: React.FC<ServicesMenuProps> = ({ onSelectService }) =
           </div>
 
         </div>
-
-        {/* Expandable Protocol / Inclusions Drawer */}
-        {isExpanded && details.length > 0 && (
-          <div className="mt-3.5 pt-3.5 border-t border-[#D1C4E9]/30 bg-[#FDF8FA] rounded-xl p-3.5">
-            <div className="flex items-center gap-1.5 text-xs font-serif font-bold text-[#7A2048] uppercase tracking-wider mb-2">
-              <Sparkles className="w-3.5 h-3.5 text-[#8B2651]" />
-              <span>{isProtocol ? t.services.protocolTitle : t.services.includedTitle}</span>
-            </div>
-            <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs text-[#5D4037]/90">
-              {details.map((step, idx) => (
-                <li key={idx} className="flex items-start gap-2 bg-white/70 p-2 rounded-lg border border-[#E8DFD8]/50">
-                  <span className="text-[#8B2651] font-bold text-xs shrink-0 mt-0.5">•</span>
-                  <span className="leading-tight">{step}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
       </div>
     );
   };

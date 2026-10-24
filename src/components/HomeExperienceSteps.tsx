@@ -39,7 +39,7 @@ export const HomeExperienceSteps: React.FC<HomeExperienceStepsProps> = ({
   ];
 
   return (
-    <section className="py-12 sm:py-20 bg-white border-b border-[#D1C4E9]/40 relative overflow-hidden">
+    <section id="experience" className="scroll-mt-20 sm:scroll-mt-24 py-12 sm:py-20 bg-white border-b border-[#D1C4E9]/40 relative overflow-hidden">
       {/* Subtle background decoration */}
       <div 
         aria-hidden="true" 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, MessageCircle, Mail, MapPin, Send, CheckCircle2, Instagram, Loader2, AlertCircle } from 'lucide-react';
+import { Phone, MessageCircle, Mail, MapPin, Send, CheckCircle2, Instagram, Loader2, AlertCircle, Calendar } from 'lucide-react';
 import { getServices, ServiceItem } from '../data/servicesData';
 import { COMMUNES_DATA } from '../data/communesData';
 import { useLanguage } from '../i18n/LanguageContext';
@@ -29,6 +29,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [termsAccepted, setTermsAccepted] = useState(false);
+  const [dateFocused, setDateFocused] = useState(false);
 
   // Synchronize when selectedService changes
   useEffect(() => {
@@ -420,14 +421,33 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                       <label htmlFor="contact-date" className="block text-[11px] font-semibold text-[#5D4037] mb-0.5">
                         {t.contact.rightCard.dateLabel}
                       </label>
-                      <input
-                        id="contact-date"
-                        type="date"
-                        name="preferredDate"
-                        value={formData.preferredDate}
-                        onChange={handleChange}
-                        className="min-h-[40px] w-full px-3 py-1.5 bg-[#F9F6F0] border border-[#D1C4E9] rounded-xl text-[#5D4037] focus:outline-none focus:border-[#512D6D]"
-                      />
+                      <div className="relative">
+                        <input
+                          id="contact-date"
+                          type={dateFocused || formData.preferredDate ? 'date' : 'text'}
+                          name="preferredDate"
+                          placeholder={language === 'es' ? 'dd/mm/aaaa' : 'jj/mm/aaaa'}
+                          value={formData.preferredDate}
+                          onFocus={(e) => {
+                            setDateFocused(true);
+                            try {
+                              e.currentTarget.showPicker?.();
+                            } catch {}
+                          }}
+                          onClick={(e) => {
+                            setDateFocused(true);
+                            try {
+                              e.currentTarget.showPicker?.();
+                            } catch {}
+                          }}
+                          onBlur={() => {
+                            if (!formData.preferredDate) setDateFocused(false);
+                          }}
+                          onChange={handleChange}
+                          className="min-h-[40px] w-full px-3 py-1.5 pr-9 bg-[#F9F6F0] border border-[#D1C4E9] rounded-xl text-[#5D4037] focus:outline-none focus:border-[#512D6D]"
+                        />
+                        <Calendar className="w-4 h-4 text-[#512D6D]/60 pointer-events-none absolute right-3 top-1/2 -translate-y-1/2" />
+                      </div>
                     </div>
                     <div>
                       <label htmlFor="contact-slot" className="block text-[11px] font-semibold text-[#5D4037] mb-0.5">
@@ -469,7 +489,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
 
                   {/* Terms acceptance checkbox */}
                   <div className="pt-0.5">
-                    <label htmlFor="contact-terms" className="flex items-start gap-2 text-[11px] text-[#5D4037] cursor-pointer select-none">
+                    <label htmlFor="contact-terms" className="flex items-start gap-2.5 text-[11px] text-[#5D4037] cursor-pointer select-none">
                       <input
                         id="contact-terms"
                         type="checkbox"
@@ -479,9 +499,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
                           setTermsAccepted(e.target.checked);
                           if (e.target.checked && submitError) setSubmitError(null);
                         }}
-                        className="mt-0.5 rounded border-[#D1C4E9] text-[#512D6D] focus:ring-[#512D6D]"
+                        className="w-5 h-5 rounded-md border-[#D1C4E9] text-[#512D6D] accent-[#512D6D] focus:ring-[#512D6D] shrink-0 mt-0.5 cursor-pointer"
                       />
-                      <span className="leading-tight">
+                      <span className="leading-snug">
                         {t.contact.rightCard.termsLabel}
                       </span>
                     </label>

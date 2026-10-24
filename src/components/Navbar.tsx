@@ -87,7 +87,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
       {/* =========================================================================
           1. TOP FLOATING NAVBAR (Desktop full menu + Mobile/Tablet streamlined)
          ========================================================================= */}
-      <div className="sticky top-2 sm:top-3.5 z-40 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full transition-all">
+      <div className="sticky top-0 sm:top-3.5 z-40 pt-2 sm:pt-0 pb-1 sm:pb-0 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full transition-all bg-[#F9F6F0]/95 sm:bg-transparent backdrop-blur-xs sm:backdrop-blur-none">
         <header className="bg-[#F9F6F0]/95 backdrop-blur-md border border-[#D1C4E9]/80 rounded-full shadow-xs hover:shadow-sm transition-all px-3 sm:px-5 py-1.5 sm:py-2 flex items-center justify-between gap-2 sm:gap-4">
           
           {/* Brand Mark (Left) */}
@@ -140,11 +140,11 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
             {/* Direct Phone Call Button (Mobile & Tablet fast access) */}
             <a
               href="tel:+33665566702"
-              className="lg:hidden min-h-[36px] min-w-[36px] p-2 rounded-full bg-white/90 hover:bg-white border border-[#D1C4E9]/80 text-[#512D6D] flex items-center justify-center active:scale-95 transition-all shadow-2xs focus-visible:ring-2 focus-visible:ring-[#512D6D] focus-visible:outline-none"
+              className="lg:hidden min-h-[40px] min-w-[40px] p-2 rounded-full bg-white/90 hover:bg-white border border-[#D1C4E9]/80 text-[#512D6D] flex items-center justify-center active:scale-95 transition-all shadow-2xs focus-visible:ring-2 focus-visible:ring-[#512D6D] focus-visible:outline-none"
               aria-label={t.nav.callAria}
               title={t.nav.callAria}
             >
-              <Phone className="w-3.5 h-3.5 text-[#512D6D]" />
+              <Phone className="w-4 h-4 text-[#512D6D]" />
             </a>
 
             {/* Direct WhatsApp CTA Button */}
@@ -152,11 +152,11 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
               href={whatsAppUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 rounded-full bg-[#512D6D] hover:bg-[#402257] active:scale-95 text-white text-xs font-semibold shadow-2xs transition-all focus-visible:ring-2 focus-visible:ring-[#512D6D] focus-visible:outline-none"
+              className="min-h-[40px] min-w-[40px] inline-flex items-center justify-center gap-1.5 px-3 sm:px-3.5 py-2 rounded-full bg-[#512D6D] hover:bg-[#402257] active:scale-95 text-white text-xs font-semibold shadow-2xs transition-all focus-visible:ring-2 focus-visible:ring-[#512D6D] focus-visible:outline-none"
               aria-label={t.nav.whatsappAria}
               title={t.nav.whatsappAria}
             >
-              <MessageCircle className="w-3.5 h-3.5 text-emerald-300" />
+              <MessageCircle className="w-4 h-4 text-emerald-300" />
               <span className="hidden sm:inline">{isEs ? 'Agendar' : 'Réserver'}</span>
             </a>
           </div>
