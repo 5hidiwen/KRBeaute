@@ -33,7 +33,7 @@ export const LogisticsCalculator: React.FC = () => {
       );
 
   return (
-    <section id="secteur" className="py-6 sm:py-12 bg-gradient-to-b from-[#F9F6F0] via-[#F4EDE2]/50 to-[#F9F6F0] border-t border-[#D1C4E9]/40">
+    <section id="secteur" className="scroll-mt-20 sm:scroll-mt-24 py-6 sm:py-12 bg-white border-y border-[#D1C4E9]/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
         
         {/* =========================================================================

@@ -7,7 +7,7 @@ export const BrandsEquipment: React.FC = () => {
   const farmasiAffiliateUrl = "https://www.fr.farmasi.com/karyrobart";
 
   return (
-    <section id="marques" className="py-6 sm:py-12 bg-gradient-to-b from-[#F9F6F0] via-[#F5EFE6] to-[#F9F6F0] border-y border-[#D1C4E9]/40">
+    <section id="marques" className="scroll-mt-20 sm:scroll-mt-24 py-6 sm:py-12 bg-white border-y border-[#D1C4E9]/40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header - Split Layout */}

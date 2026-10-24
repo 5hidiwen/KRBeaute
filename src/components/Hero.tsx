@@ -12,7 +12,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onGoToServices }) => 
   const { t } = useLanguage();
 
   return (
-    <section className="relative overflow-hidden pt-6 pb-12 sm:pt-14 sm:pb-24 border-b border-[#D1C4E9]/40 bg-gradient-to-b from-[#F9F6F0] via-[#F9F6F0] to-[#F3EDE2]/60">
+    <section id="accueil" className="scroll-mt-20 sm:scroll-mt-24 relative overflow-hidden pt-6 pb-12 sm:pt-14 sm:pb-24 border-b border-[#D1C4E9]/40 bg-gradient-to-b from-[#F9F6F0] via-[#F9F6F0] to-[#F3EDE2]/60">
       {/* Subtle organic ambient glow */}
       <div 
         aria-hidden="true" 
@@ -25,12 +25,23 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onGoToServices }) => 
           {/* Main Content (7 cols on desktop, 12 cols on mobile) */}
           <div className="lg:col-span-7 flex flex-col items-start">
             
-            {/* Trust Kicker: clean unboxed text */}
-            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-semibold tracking-wider uppercase text-[#512D6D] mb-3">
-              <span className="flex items-center gap-1">
+            {/* Trust Kickers: certified + Google Maps 5.0 */}
+            <div className="flex flex-wrap items-center gap-2 text-[11px] sm:text-xs font-semibold tracking-wider text-[#512D6D] mb-3">
+              <span className="flex items-center gap-1 uppercase">
                 <Award className="w-3.5 h-3.5 text-[#512D6D]" />
                 {t.hero.certifiedKicker}
               </span>
+              <span className="text-[#512D6D]/40">·</span>
+              <a
+                href="https://maps.app.goo.gl/LA6mRurL1Dnmb4Vn8"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Consulter les avis Google Maps de Karina Robart"
+                className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/80 border border-[#D1C4E9] text-[#512D6D] hover:bg-white transition-colors"
+              >
+                <span className="flex text-amber-500 font-bold tracking-tighter text-xs" aria-hidden="true">★★★★★</span>
+                <span className="font-bold">{t.hero.googleReviewsBadge}</span>
+              </a>
             </div>
 
             {/* Main Headline - balanced for mobile and desktop */}

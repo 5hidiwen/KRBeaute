@@ -7,7 +7,7 @@ export const AboutSection: React.FC = () => {
   const { t } = useLanguage();
 
   return (
-    <section id="a-propos" className="py-8 sm:py-20 bg-[#F9F6F0]">
+    <section id="a-propos" className="scroll-mt-20 sm:scroll-mt-24 py-8 sm:py-20 bg-[#F9F6F0]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-12 items-center">
           

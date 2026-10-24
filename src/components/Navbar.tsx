@@ -36,12 +36,12 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
     };
   }, [plusSheetOpen]);
 
-  // Desktop Primary Links (≥ lg)
+  // Desktop Primary Links (≥ lg) - Synchronized with physical page order from top to bottom
   const primaryLinks: { id: NavTab; label: string }[] = [
     { id: 'soins', label: isEs ? 'Tratamientos & Tarifas' : 'Soins & Tarifs' },
-    { id: 'secteur', label: isEs ? 'Zona (7 km)' : 'Secteur (7 km)' },
     { id: 'marques', label: isEs ? 'Tecnologías' : 'Technologies & Marques' },
     { id: 'a-propos', label: isEs ? 'Sobre Karina' : 'À Propos' },
+    { id: 'secteur', label: isEs ? 'Zona (7 km)' : 'Secteur (7 km)' },
     { id: 'faq', label: isEs ? 'FAQ' : 'FAQ' },
     { id: 'contact', label: isEs ? 'Contacto' : 'Contact' },
   ];
@@ -71,7 +71,6 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
   const handleTabClick = (tab: NavTab) => {
     onSelectTab(tab);
     setPlusSheetOpen(false);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const whatsAppGreeting = isEs

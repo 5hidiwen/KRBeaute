@@ -152,7 +152,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
   };
 
   return (
-    <section id="contact" className="pt-4 pb-8 sm:pt-6 sm:pb-12 bg-gradient-to-b from-[#F9F6F0] via-[#F3EDE2]/60 to-[#F9F6F0]">
+    <section id="contact" className="scroll-mt-20 sm:scroll-mt-24 pt-8 pb-12 sm:pt-12 sm:pb-16 bg-white">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         
         {/* Harmonized 2-Column Grid */}

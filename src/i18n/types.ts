@@ -23,6 +23,7 @@ export interface NavTranslations {
 
 export interface HeroTranslations {
   certifiedKicker: string;
+  googleReviewsBadge: string;
   title: string;
   description: string;
   quickAccess: string;
@@ -348,12 +349,53 @@ export interface LegalTranslations {
   };
 }
 
+export interface HomeTranslations {
+  experience: {
+    kicker: string;
+    title: string;
+    subtitle: string;
+    step1Num: string;
+    step1Title: string;
+    step1Desc: string;
+    step2Num: string;
+    step2Title: string;
+    step2Desc: string;
+    step3Num: string;
+    step3Title: string;
+    step3Desc: string;
+  };
+  testimonials: {
+    kicker: string;
+    title: string;
+    subtitle: string;
+    googleRatingText: string;
+    googleRatingSub: string;
+    transparencyNotice: string;
+    openGoogleBtn: string;
+    leaveReviewBtn: string;
+    pillar1Title: string;
+    pillar1Desc: string;
+    pillar2Title: string;
+    pillar2Desc: string;
+    pillar3Title: string;
+    pillar3Desc: string;
+  };
+  ctaBanner: {
+    title: string;
+    subtitle: string;
+    hours: string;
+    whatsappBtn: string;
+    callBtn: string;
+  };
+}
+
 export interface SiteTranslations {
   htmlLang: string;
   metaTitle: string;
   metaDescription: string;
   nav: NavTranslations;
   hero: HeroTranslations;
+  home: HomeTranslations;
   services: ServicesTranslations;
   brands: BrandsTranslations;
   about: AboutTranslations;

@@ -130,7 +130,7 @@ export const ServicesMenu: React.FC<ServicesMenuProps> = ({ onSelectService }) =
   };
 
   return (
-    <section id="soins" className="py-6 sm:py-12 bg-[#F9F6F0] relative">
+    <section id="soins" className="scroll-mt-20 sm:scroll-mt-24 py-6 sm:py-12 bg-[#F9F6F0] relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header - Split Layout */}

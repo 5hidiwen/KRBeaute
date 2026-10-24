@@ -20,7 +20,7 @@ export const FAQSection: React.FC = () => {
   };
 
   return (
-    <section id="faq" className="py-6 sm:py-12 bg-[#F9F6F0]">
+    <section id="faq" className="scroll-mt-20 sm:scroll-mt-24 py-6 sm:py-12 bg-[#F9F6F0]">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header - Split Layout */}
