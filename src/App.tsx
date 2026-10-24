@@ -167,6 +167,7 @@ function AppContent() {
             {/* 2. RITUEL EN 3 ÉTAPES (Blanc bg-white) */}
             <HomeExperienceSteps 
               onOpenBooking={() => handleOpenBooking()} 
+              onGoToServices={() => handleSelectTab('soins')}
             />
 
             {/* 3. SOINS & TARIFS (Beige #F9F6F0) */}

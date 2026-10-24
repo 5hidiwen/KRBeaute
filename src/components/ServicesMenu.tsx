@@ -238,9 +238,9 @@ export const ServicesMenu: React.FC<ServicesMenuProps> = ({ onSelectService }) =
               <Sparkles className="w-4 h-4 text-white" />
             </div>
             <div>
-              <h4 className="font-serif text-sm sm:text-base font-bold text-[#5D4037]">
+              <h3 className="font-serif text-sm sm:text-base font-bold text-[#5D4037]">
                 {t.services.comboTitle}
-              </h4>
+              </h3>
               <p className="text-xs sm:text-sm text-[#5D4037]/80 leading-relaxed">
                 {t.services.comboDesc}
               </p>

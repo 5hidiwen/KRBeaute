@@ -22,6 +22,7 @@ export interface NavTranslations {
 }
 
 export interface HeroTranslations {
+  photoAlt: string;
   certifiedKicker: string;
   googleReviewsBadge: string;
   title: string;
@@ -38,6 +39,8 @@ export interface HeroTranslations {
     freeTravelBold: string;
     massageChair: string;
     massageChairBold: string;
+    hygiene: string;
+    hygieneBold: string;
     certifiedCare: string;
     certifiedCareBold: string;
   };
@@ -48,6 +51,18 @@ export interface HeroTranslations {
     serenityDesc: string;
     authorRole: string;
     quote: string;
+    pillChair: string;
+    pillScent: string;
+    pillHygiene: string;
+    brandsBar: string;
+    itemChairTitle: string;
+    itemChairDesc: string;
+    itemProductsTitle: string;
+    itemProductsDesc: string;
+    itemScentTitle: string;
+    itemScentDesc: string;
+    itemHygieneTitle: string;
+    itemHygieneDesc: string;
   };
 }
 
@@ -382,6 +397,7 @@ export interface HomeTranslations {
     step3Num: string;
     step3Title: string;
     step3Desc: string;
+    viewMenuBtn: string;
   };
   testimonials: {
     kicker: string;

@@ -155,6 +155,13 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
     <section id="contact" className="scroll-mt-20 sm:scroll-mt-24 pt-8 pb-12 sm:pt-12 sm:pb-16 bg-white">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         
+        {/* Semantic H2 for Search Engines & Assistive Technologies */}
+        <h2 className="sr-only">
+          {language === 'es' 
+            ? 'Contacto y Reserva de Citas de Estética a Domicilio en Rennes y Alrededores' 
+            : 'Contact & Prise de Rendez-vous Esthétique à Domicile à Rennes et Alentours'}
+        </h2>
+        
         {/* Harmonized 2-Column Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6 items-stretch">
           
@@ -272,9 +279,9 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
 
               {/* Form Title & Instruction */}
               <div className="mb-3 flex items-center justify-between text-xs text-[#5D4037]">
-                <span className="font-serif font-bold text-sm sm:text-base text-[#5D4037]">
+                <h3 className="font-serif font-bold text-sm sm:text-base text-[#5D4037]">
                   {t.contact.rightCard.formTitle}
-                </span>
+                </h3>
                 <span className="text-[11px] text-[#5D4037]/70">
                   {t.contact.rightCard.formSub}
                 </span>

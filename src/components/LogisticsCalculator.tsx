@@ -85,9 +85,9 @@ export const LogisticsCalculator: React.FC = () => {
                 <span className="text-[11px] font-semibold text-[#5D4037]/60">0 - 7 km</span>
               </div>
 
-              <h2 className="font-serif text-lg sm:text-xl font-bold text-[#5D4037] mb-1">
+              <h3 className="font-serif text-lg sm:text-xl font-bold text-[#5D4037] mb-1">
                 {t.logistics.zones.zone1Title}
-              </h2>
+              </h3>
               <p className="text-xs text-[#5D4037]/75 mb-4">
                 {t.logistics.zones.zone1Sub}
               </p>
@@ -130,9 +130,9 @@ export const LogisticsCalculator: React.FC = () => {
                 <span className="text-[11px] font-semibold text-[#5D4037]/60">7 - 20 km</span>
               </div>
 
-              <h2 className="font-serif text-lg sm:text-xl font-bold text-[#5D4037] mb-1">
+              <h3 className="font-serif text-lg sm:text-xl font-bold text-[#5D4037] mb-1">
                 {t.logistics.zones.zone2Title}
-              </h2>
+              </h3>
               <p className="text-xs text-[#5D4037]/75 mb-4">
                 {t.logistics.zones.zone2Sub}
               </p>
@@ -175,9 +175,9 @@ export const LogisticsCalculator: React.FC = () => {
                 <span className="text-[11px] font-semibold text-[#5D4037]/60">20 - 30 km</span>
               </div>
 
-              <h2 className="font-serif text-lg sm:text-xl font-bold text-[#5D4037] mb-1">
+              <h3 className="font-serif text-lg sm:text-xl font-bold text-[#5D4037] mb-1">
                 {t.logistics.zones.zone3Title}
-              </h2>
+              </h3>
               <p className="text-xs text-[#5D4037]/75 mb-4">
                 {t.logistics.zones.zone3Sub}
               </p>
@@ -216,9 +216,9 @@ export const LogisticsCalculator: React.FC = () => {
         <div className="bg-white rounded-3xl p-5 sm:p-7 border border-[#D1C4E9] shadow-xs">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
             <div>
-              <h2 className="font-serif text-base sm:text-lg font-bold text-[#5D4037]">
+              <h3 className="font-serif text-base sm:text-lg font-bold text-[#5D4037]">
                 {t.logistics.searchPrompt}
-              </h2>
+              </h3>
               <p className="text-xs text-[#5D4037]/70">
                 {isEs 
                   ? 'Escriba las primeras letras de su ciudad para ver el resultado exacto' 

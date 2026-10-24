@@ -52,6 +52,22 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
     if (metaDescription) {
       metaDescription.setAttribute('content', currentTrans.metaDescription);
     }
+
+    // Update Open Graph and Twitter Card tags dynamically
+    const ogTitle = document.querySelector('meta[property="og:title"]');
+    if (ogTitle) ogTitle.setAttribute('content', currentTrans.metaTitle);
+
+    const ogDesc = document.querySelector('meta[property="og:description"]');
+    if (ogDesc) ogDesc.setAttribute('content', currentTrans.metaDescription);
+
+    const ogLocale = document.querySelector('meta[property="og:locale"]');
+    if (ogLocale) ogLocale.setAttribute('content', language === 'es' ? 'es_ES' : 'fr_FR');
+
+    const twTitle = document.querySelector('meta[name="twitter:title"]');
+    if (twTitle) twTitle.setAttribute('content', currentTrans.metaTitle);
+
+    const twDesc = document.querySelector('meta[name="twitter:description"]');
+    if (twDesc) twDesc.setAttribute('content', currentTrans.metaDescription);
   }, [language]);
 
   const value: LanguageContextType = {

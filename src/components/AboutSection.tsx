@@ -36,9 +36,9 @@ export const AboutSection: React.FC = () => {
                 {/* Identification de la Praticienne sous la photo */}
                 <div className="mt-2.5 p-3.5 bg-white rounded-2xl border border-[#D1C4E9] shadow-xs">
                   <div className="flex items-center justify-between gap-2 mb-1">
-                    <h3 className="font-serif text-lg sm:text-xl font-bold text-[#512D6D] tracking-tight">
+                    <p className="font-serif text-lg sm:text-xl font-bold text-[#512D6D] tracking-tight">
                       Karina Robart
-                    </h3>
+                    </p>
                     <div className="inline-flex items-center gap-1 px-2 py-0.5 bg-[#D1C4E9]/60 text-[#512D6D] rounded-full text-[10px] font-bold">
                       <Award className="w-3 h-3 text-[#512D6D]" />
                       <span>{t.about.badgeCap}</span>
@@ -128,9 +128,9 @@ export const AboutSection: React.FC = () => {
                 <div className="w-7 h-7 rounded-lg bg-[#D1C4E9]/50 flex items-center justify-center text-[#512D6D] mb-2">
                   <Heart className="w-4 h-4" />
                 </div>
-                <h4 className="font-serif text-xs sm:text-sm font-semibold text-[#5D4037] mb-0.5">
+                <h3 className="font-serif text-xs sm:text-sm font-semibold text-[#5D4037] mb-0.5">
                   {t.about.pillars.kindnessTitle}
-                </h4>
+                </h3>
                 <p className="text-[11px] text-[#5D4037]/80 leading-relaxed">
                   {t.about.pillars.kindnessDesc}
                 </p>
@@ -140,9 +140,9 @@ export const AboutSection: React.FC = () => {
                 <div className="w-7 h-7 rounded-lg bg-[#D1C4E9]/50 flex items-center justify-center text-[#512D6D] mb-2">
                   <ShieldCheck className="w-4 h-4" />
                 </div>
-                <h4 className="font-serif text-xs sm:text-sm font-semibold text-[#5D4037] mb-0.5">
+                <h3 className="font-serif text-xs sm:text-sm font-semibold text-[#5D4037] mb-0.5">
                   {t.about.pillars.hygieneTitle}
-                </h4>
+                </h3>
                 <p className="text-[11px] text-[#5D4037]/80 leading-relaxed">
                   {t.about.pillars.hygieneDesc}
                 </p>
@@ -152,9 +152,9 @@ export const AboutSection: React.FC = () => {
                 <div className="w-7 h-7 rounded-lg bg-[#D1C4E9]/50 flex items-center justify-center text-[#512D6D] mb-2">
                   <UserCheck className="w-4 h-4" />
                 </div>
-                <h4 className="font-serif text-xs sm:text-sm font-semibold text-[#5D4037] mb-0.5">
+                <h3 className="font-serif text-xs sm:text-sm font-semibold text-[#5D4037] mb-0.5">
                   {t.about.pillars.privacyTitle}
-                </h4>
+                </h3>
                 <p className="text-[11px] text-[#5D4037]/80 leading-relaxed">
                   {t.about.pillars.privacyDesc}
                 </p>

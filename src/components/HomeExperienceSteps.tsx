@@ -1,12 +1,16 @@
 import React from 'react';
-import { MessageCircle, Sparkles, HeartHandshake, ArrowRight, Check } from 'lucide-react';
+import { MessageCircle, HeartHandshake, ArrowRight, ArrowDown, Heart, Award } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 
 interface HomeExperienceStepsProps {
   onOpenBooking: () => void;
+  onGoToServices?: () => void;
 }
 
-export const HomeExperienceSteps: React.FC<HomeExperienceStepsProps> = ({ onOpenBooking }) => {
+export const HomeExperienceSteps: React.FC<HomeExperienceStepsProps> = ({ 
+  onOpenBooking, 
+  onGoToServices 
+}) => {
   const { t } = useLanguage();
   const { experience } = t.home;
 
@@ -22,7 +26,7 @@ export const HomeExperienceSteps: React.FC<HomeExperienceStepsProps> = ({ onOpen
       num: experience.step2Num,
       title: experience.step2Title,
       desc: experience.step2Desc,
-      icon: <Sparkles className="w-5 h-5 text-[#512D6D]" />,
+      icon: <Award className="w-5 h-5 text-[#512D6D]" />,
       badge: 'Étape 2',
     },
     {
@@ -46,7 +50,7 @@ export const HomeExperienceSteps: React.FC<HomeExperienceStepsProps> = ({ onOpen
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#D1C4E9]/35 border border-[#D1C4E9] text-[11px] sm:text-xs font-semibold tracking-wider uppercase text-[#512D6D] mb-3">
-            <Sparkles className="w-3.5 h-3.5" />
+            <Heart className="w-3.5 h-3.5 text-[#512D6D]" />
             {experience.kicker}
           </span>
           <h2 className="text-2xl sm:text-4xl font-serif font-bold text-[#5D4037] tracking-tight mb-3">
@@ -93,16 +97,25 @@ export const HomeExperienceSteps: React.FC<HomeExperienceStepsProps> = ({ onOpen
           ))}
         </div>
 
-        {/* Bottom Fast Action Prompt */}
-        <div className="mt-10 sm:mt-12 text-center">
+        {/* Bottom Fast Action Prompt: Dual Action (Discover Services + Book) */}
+        <div className="mt-10 sm:mt-12 flex flex-col sm:flex-row items-center justify-center gap-3.5 max-w-lg mx-auto">
+          {onGoToServices && (
+            <button
+              type="button"
+              onClick={onGoToServices}
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 min-h-[48px] rounded-full bg-[#512D6D] text-[#F9F6F0] hover:bg-[#402257] active:scale-98 text-xs sm:text-sm font-semibold shadow-xs hover:shadow transition-all cursor-pointer"
+            >
+              <ArrowDown className="w-4 h-4 text-[#F9F6F0]" />
+              <span>{experience.viewMenuBtn}</span>
+            </button>
+          )}
           <button
             type="button"
             onClick={onOpenBooking}
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 min-h-[48px] rounded-full bg-[#512D6D] text-[#F9F6F0] hover:bg-[#402257] active:scale-98 text-xs sm:text-sm font-semibold shadow-xs hover:shadow transition-all cursor-pointer"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 min-h-[48px] rounded-full bg-white hover:bg-[#F9F6F0] border border-[#D1C4E9] text-[#512D6D] active:scale-98 text-xs sm:text-sm font-semibold transition-all cursor-pointer"
           >
-            <MessageCircle className="w-4 h-4 text-emerald-300" />
-            <span>Réserver votre séance à domicile</span>
-            <ArrowRight className="w-4 h-4" />
+            <MessageCircle className="w-4 h-4 text-emerald-600" />
+            <span>{t.hero.bookAppointment}</span>
           </button>
         </div>
       </div>

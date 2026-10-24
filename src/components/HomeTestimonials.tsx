@@ -96,9 +96,9 @@ export const HomeTestimonials: React.FC = () => {
             <div className="w-9 h-9 rounded-xl bg-[#D1C4E9]/30 text-[#512D6D] flex items-center justify-center mx-auto mb-3">
               <ShieldCheck className="w-5 h-5" />
             </div>
-            <h4 className="font-serif text-sm font-bold text-[#5D4037] mb-1">
+            <h3 className="font-serif text-sm font-bold text-[#5D4037] mb-1">
               {testimonials.pillar1Title}
-            </h4>
+            </h3>
             <p className="text-xs text-[#5D4037]/75 leading-relaxed">
               {testimonials.pillar1Desc}
             </p>
@@ -108,9 +108,9 @@ export const HomeTestimonials: React.FC = () => {
             <div className="w-9 h-9 rounded-xl bg-[#D1C4E9]/30 text-[#512D6D] flex items-center justify-center mx-auto mb-3">
               <HeartHandshake className="w-5 h-5 text-rose-600" />
             </div>
-            <h4 className="font-serif text-sm font-bold text-[#5D4037] mb-1">
+            <h3 className="font-serif text-sm font-bold text-[#5D4037] mb-1">
               {testimonials.pillar2Title}
-            </h4>
+            </h3>
             <p className="text-xs text-[#5D4037]/75 leading-relaxed">
               {testimonials.pillar2Desc}
             </p>
@@ -120,9 +120,9 @@ export const HomeTestimonials: React.FC = () => {
             <div className="w-9 h-9 rounded-xl bg-[#D1C4E9]/30 text-[#512D6D] flex items-center justify-center mx-auto mb-3">
               <Clock className="w-5 h-5 text-emerald-600" />
             </div>
-            <h4 className="font-serif text-sm font-bold text-[#5D4037] mb-1">
+            <h3 className="font-serif text-sm font-bold text-[#5D4037] mb-1">
               {testimonials.pillar3Title}
-            </h4>
+            </h3>
             <p className="text-xs text-[#5D4037]/75 leading-relaxed">
               {testimonials.pillar3Desc}
             </p>

@@ -7,6 +7,10 @@
     <!-- SEO & Référencement Local Rennes (35) -->
     <title>Karina Robart · Esthéticienne à Domicile à Rennes & Alentours</title>
     <meta name="description" content="Esthéticienne diplômée d'État à domicile à Rennes et ses environs. Soins du visage sur-mesure, anti-âge haute technologie et massages bien-être dans votre cocon." />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="author" content="Karina Robart" />
+    <meta name="publisher" content="KR Beauté" />
+    <meta name="keywords" content="esthéticienne à domicile rennes, soin du visage rennes, massage bien-être rennes, beauté des pieds rennes, rehaussement de cils rennes, esthéticienne cesson-sévigné, esthéticienne saint-grégoire, esthéticienne bruz, karina robart, kr beauté" />
     <link rel="canonical" href="https://krbeaute.com/" />
     <link rel="alternate" hreflang="fr" href="https://krbeaute.com/" />
     <link rel="alternate" hreflang="es" href="https://krbeaute.com/" />
@@ -44,174 +48,274 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..800;1,400..800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Données Structurées JSON-LD (Schema.org: BeautySalon & LocalBusiness) -->
+    <!-- Données Structurées JSON-LD (Schema.org: BeautySalon, LocalBusiness, WebSite & FAQPage) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": ["BeautySalon", "LocalBusiness"],
-      "@id": "https://krbeaute.com/#beautysalon",
-      "name": "Karina Robart - Esthéticienne à Domicile",
-      "alternateName": "KR Beauté",
-      "description": "Esthéticienne diplômée d'État proposant des soins du visage d'exception, soins anti-âge haute technologie, massages bien-être et beauté des pieds à domicile à Rennes et ses communes avoisinantes.",
-      "url": "https://krbeaute.com",
-      "telephone": "+33665566702",
-      "email": "karinarobart@krbeaute.com",
-      "image": "https://krbeaute.com/karina_photo_1.jpg",
-      "logo": "https://krbeaute.com/favicon.svg",
-      "priceRange": "€€",
-      "currenciesAccepted": "EUR",
-      "paymentAccepted": "Lien de paiement sécurisé, Virement bancaire, Espèces",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Rennes et agglomération",
-        "addressLocality": "Rennes",
-        "postalCode": "35000",
-        "addressRegion": "Bretagne",
-        "addressCountry": "FR"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 48.117268,
-        "longitude": -1.677793
-      },
-      "areaServed": [
-        { "@type": "City", "name": "Rennes", "postalCode": "35000" },
-        { "@type": "City", "name": "Saint-Grégoire", "postalCode": "35760" },
-        { "@type": "City", "name": "Saint-Jacques-de-la-Lande", "postalCode": "35136" },
-        { "@type": "City", "name": "Cesson-Sévigné", "postalCode": "35510" },
-        { "@type": "City", "name": "Chantepie", "postalCode": "35135" },
-        { "@type": "City", "name": "Vezin-le-Coquet", "postalCode": "35132" },
-        { "@type": "City", "name": "Montgermont", "postalCode": "35760" },
-        { "@type": "City", "name": "Pacé", "postalCode": "35740" },
-        { "@type": "City", "name": "Betton", "postalCode": "35830" },
-        { "@type": "City", "name": "Le Rheu", "postalCode": "35650" },
-        { "@type": "City", "name": "Noyal-Châtillon-sur-Seiche", "postalCode": "35230" },
-        { "@type": "City", "name": "Chartres-de-Bretagne", "postalCode": "35131" },
-        { "@type": "City", "name": "Thorigné-Fouillard", "postalCode": "35235" },
-        { "@type": "City", "name": "Vern-sur-Seiche", "postalCode": "35770" },
-        { "@type": "City", "name": "Bruz", "postalCode": "35170" },
+      "@graph": [
         {
-          "@type": "GeoCircle",
-          "geoMidpoint": {
+          "@type": ["BeautySalon", "LocalBusiness", "HealthAndBeautyBusiness"],
+          "@id": "https://krbeaute.com/#beautysalon",
+          "name": "Karina Robart - Esthéticienne à Domicile",
+          "alternateName": "KR Beauté",
+          "description": "Esthéticienne diplômée d'État (CAP) proposant des soins du visage sur-mesure, soins anti-âge haute technologie, massages bien-être décontracturants et beauté des pieds à domicile à Rennes et ses communes avoisinantes.",
+          "url": "https://krbeaute.com",
+          "telephone": "+33665566702",
+          "email": "karinarobart@krbeaute.com",
+          "image": [
+            "https://krbeaute.com/karina_photo_1.jpg",
+            "https://krbeaute.com/Karina.jpg"
+          ],
+          "logo": "https://krbeaute.com/favicon.svg",
+          "priceRange": "€€",
+          "currenciesAccepted": "EUR",
+          "paymentAccepted": "Lien de paiement sécurisé, Virement bancaire, Espèces",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Rennes et agglomération",
+            "addressLocality": "Rennes",
+            "postalCode": "35000",
+            "addressRegion": "Bretagne",
+            "addressCountry": "FR"
+          },
+          "geo": {
             "@type": "GeoCoordinates",
             "latitude": 48.117268,
             "longitude": -1.677793
           },
-          "geoRadius": "30000"
-        }
-      ],
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday"
+          "sameAs": [
+            "https://maps.app.goo.gl/LA6mRurL1Dnmb4Vn8",
+            "https://www.instagram.com/karinarobart",
+            "https://www.threads.net/@karinarobart",
+            "https://www.fr.farmasi.com/karyrobart"
           ],
-          "opens": "09:00",
-          "closes": "19:30"
-        }
-      ],
-      "founder": {
-        "@type": "Person",
-        "name": "Karina Robart",
-        "jobTitle": "Esthéticienne diplômée d'État (CAP Esthétique Cosmétique)",
-        "email": "karinarobart@krbeaute.com",
-        "telephone": "+33665566702"
-      },
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Prestations d'esthétique et de bien-être à domicile",
-        "itemListElement": [
-          {
-            "@type": "OfferCatalog",
-            "name": "Soins du Visage",
-            "itemListElement": [
-              {
-                "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "Soin Visage Pureté Absolue",
-                  "description": "Soin purifiant, nettoyage profond et éclat du teint."
-                }
-              },
-              {
-                "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "Soin Visage Douceur Gelée",
-                  "description": "Hydratation intense et apaisement pour peaux sensibles."
-                }
-              },
-              {
-                "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "Soin Détox & Anti-Âge Haute Technologie",
-                  "description": "Technologie Nu Skin LumiSpa et micro-courants galvaniques."
-                }
-              }
-            ]
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5.0",
+            "reviewCount": "9",
+            "bestRating": "5",
+            "worstRating": "1"
           },
-          {
-            "@type": "OfferCatalog",
-            "name": "Massages Bien-Être & Corps",
-            "itemListElement": [
-              {
-                "@type": "Offer",
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "Modelage Décontracturant sur Chaise Ergonomique",
-                  "description": "Massage ciblé du dos, de la nuque et des trapèzes."
-                }
-              }
-            ]
+          "areaServed": [
+            { "@type": "City", "name": "Rennes", "postalCode": "35000" },
+            { "@type": "City", "name": "Saint-Grégoire", "postalCode": "35760" },
+            { "@type": "City", "name": "Saint-Jacques-de-la-Lande", "postalCode": "35136" },
+            { "@type": "City", "name": "Cesson-Sévigné", "postalCode": "35510" },
+            { "@type": "City", "name": "Chantepie", "postalCode": "35135" },
+            { "@type": "City", "name": "Vezin-le-Coquet", "postalCode": "35132" },
+            { "@type": "City", "name": "Montgermont", "postalCode": "35760" },
+            { "@type": "City", "name": "Pacé", "postalCode": "35740" },
+            { "@type": "City", "name": "Betton", "postalCode": "35830" },
+            { "@type": "City", "name": "Le Rheu", "postalCode": "35650" },
+            { "@type": "City", "name": "Noyal-Châtillon-sur-Seiche", "postalCode": "35230" },
+            { "@type": "City", "name": "Chartres-de-Bretagne", "postalCode": "35131" },
+            { "@type": "City", "name": "Thorigné-Fouillard", "postalCode": "35235" },
+            { "@type": "City", "name": "La Chapelle-des-Fougeretz", "postalCode": "35520" },
+            { "@type": "City", "name": "Vern-sur-Seiche", "postalCode": "35770" },
+            { "@type": "City", "name": "Bruz", "postalCode": "35170" },
+            { "@type": "City", "name": "Acigné", "postalCode": "35690" },
+            { "@type": "City", "name": "Pont-Péan", "postalCode": "35131" },
+            { "@type": "City", "name": "L'Hermitage", "postalCode": "35590" },
+            { "@type": "City", "name": "Saint-Erblon", "postalCode": "35230" },
+            { "@type": "City", "name": "Mordelles", "postalCode": "35310" },
+            { "@type": "City", "name": "Chevaigné", "postalCode": "35250" },
+            { "@type": "City", "name": "Orgères", "postalCode": "35230" },
+            { "@type": "City", "name": "Melesse", "postalCode": "35520" },
+            { "@type": "City", "name": "La Mézière", "postalCode": "35520" },
+            { "@type": "City", "name": "Châteaugiron", "postalCode": "35410" },
+            { "@type": "City", "name": "Liffré", "postalCode": "35340" },
+            { "@type": "City", "name": "Guichen", "postalCode": "35580" },
+            { "@type": "City", "name": "Janzé", "postalCode": "35150" },
+            { "@type": "City", "name": "Montfort-sur-Meu", "postalCode": "35160" },
+            {
+              "@type": "GeoCircle",
+              "geoMidpoint": {
+                "@type": "GeoCoordinates",
+                "latitude": 48.117268,
+                "longitude": -1.677793
+              },
+              "geoRadius": "30000"
+            }
+          ],
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday"
+              ],
+              "opens": "09:00",
+              "closes": "19:30"
+            }
+          ],
+          "founder": {
+            "@type": "Person",
+            "name": "Karina Robart",
+            "jobTitle": "Esthéticienne diplômée d'État (CAP Esthétique Cosmétique)",
+            "email": "karinarobart@krbeaute.com",
+            "telephone": "+33665566702"
           },
-          {
+          "hasOfferCatalog": {
             "@type": "OfferCatalog",
-            "name": "Beauté & Soin des Pieds",
+            "name": "Carte des Soins d'Institut à Domicile KRbeauté",
             "itemListElement": [
               {
                 "@type": "Offer",
-                "price": "35",
+                "name": "Beauté des pieds",
+                "price": "35.00",
                 "priceCurrency": "EUR",
                 "itemOffered": {
                   "@type": "Service",
-                  "name": "Beauté des Pieds",
-                  "description": "Coupe des ongles, élimination des callosités, gommage et hydratation."
+                  "name": "Beauté des pieds à domicile",
+                  "description": "Coupe des ongles, élimination des callosités, exfoliation, hydratation profonde et massage avec appareil masseur.",
+                  "timeRequired": "PT45M"
                 }
               },
               {
                 "@type": "Offer",
-                "price": "50",
+                "name": "Soin des pieds",
+                "price": "50.00",
                 "priceCurrency": "EUR",
                 "itemOffered": {
                   "@type": "Service",
-                  "name": "Soin des Pieds Rituel Japonais",
-                  "description": "Soin rénovateur complet avec masque nourrissant et massage des pieds de 10 minutes."
+                  "name": "Soin des pieds & Rituel Japonais",
+                  "description": "Rituel rénovateur complet des pieds, nettoyage en profondeur, râpe douce, masque nourrissant et massage des pieds de 10 min avec technique japonaise.",
+                  "timeRequired": "PT60M"
                 }
-              }
-            ]
-          },
-          {
-            "@type": "OfferCatalog",
-            "name": "Regard",
-            "itemListElement": [
+              },
               {
                 "@type": "Offer",
+                "name": "Modelage en chaise",
+                "price": "30.00",
+                "priceCurrency": "EUR",
                 "itemOffered": {
                   "@type": "Service",
-                  "name": "Rehaussement et Teinture des Cils",
-                  "description": "Courbure et intensité naturelle du regard."
+                  "name": "Modelage en chaise ergonomique",
+                  "description": "Massage assis relaxant et décontractant du dos, des épaules, de la nuque et des bras sur chaise ergonomique professionnelle apportée à domicile.",
+                  "timeRequired": "PT20M"
+                }
+              },
+              {
+                "@type": "Offer",
+                "name": "Rehaussement + Teinte de Cils",
+                "price": "45.00",
+                "priceCurrency": "EUR",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Rehaussement + Teinte de Cils",
+                  "description": "Sublimation délicate du regard, courbure naturelle cil à cil et teinture noire ou brune intense durable 6 à 8 semaines sans mascara.",
+                  "timeRequired": "PT60M"
+                }
+              },
+              {
+                "@type": "Offer",
+                "name": "Soin du Visage Pureté Absolue",
+                "price": "45.00",
+                "priceCurrency": "EUR",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Soin du Visage Pureté Absolue",
+                  "description": "Nettoyage profond, désincrustation des impuretés, gommage enzymatique et masque purifiant éclat du teint.",
+                  "timeRequired": "PT30M"
+                }
+              },
+              {
+                "@type": "Offer",
+                "name": "Soin du Visage Douceur Gelée",
+                "price": "55.00",
+                "priceCurrency": "EUR",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Soin du Visage Douceur Gelée",
+                  "description": "Bain de fraîcheur apaisant au masque hydro-gelée sensoriel, hydratation intense et modelage relaxant décongestionnant pour peaux sensibles.",
+                  "timeRequired": "PT45M"
+                }
+              },
+              {
+                "@type": "Offer",
+                "name": "Soin du Visage Detox",
+                "price": "55.00",
+                "priceCurrency": "EUR",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Soin du Visage Detox",
+                  "description": "Soin détoxifiant aux vibrations de spatule dermo-purifiante ultrasonique, drainage manuel liftant et masque oxygénant éclat du teint.",
+                  "timeRequired": "PT45M"
                 }
               }
             ]
           }
-        ]
-      }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://krbeaute.com/#website",
+          "url": "https://krbeaute.com",
+          "name": "KR Beauté - Esthéticienne à Domicile à Rennes",
+          "description": "Institut de beauté nomade d'exception : soins du visage, regard, beauté des pieds et massages bien-être à Rennes et en périphérie.",
+          "publisher": {
+            "@id": "https://krbeaute.com/#beautysalon"
+          },
+          "inLanguage": ["fr-FR", "es-ES"]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://krbeaute.com/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Comment se confirme le rendez-vous ? (Paiement)",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Le paiement intégral (par lien de paiement sécurisé ou par virement bancaire) est demandé au moment de la réservation. Votre créneau horaire est définitivement bloqué dès la réception effective de votre règlement."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Est-il possible de modifier ou reporter la séance ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Oui, une modification ou un report est possible sans aucun frais au moins 3 heures à l'avance. Passé ce délai strict de 3 heures, la séance ne pourra plus être reportée."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Quelle est la politique de remboursement ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Aucun remboursement n'est effectué après validation. La somme réglée est intégralement conservée pour un report ultérieur (si vous avez prévenu plus de 3 heures avant l'heure prévue)."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Que se passe-t-il en cas d'annulation par l'esthéticienne ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Un remboursement intégral sera effectué immédiatement si je ne peux pas me déplacer à votre domicile pour assurer la prestation (cas de force majeure, impératif de santé)."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Que dois-je prévoir chez moi pour préparer la séance ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Merci de prévoir un espace calme et confortable pour vous installer (canapé, fauteuil ou lit selon le soin), un espace pour la chaise de massage ergonomique que j'apporte, ainsi qu'un accès facile à une prise électrique et à un point d'eau."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Comment garantissez-vous l'hygiène et la sécurité ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Titulaire du CAP Esthétique Cosmétique et Parfumerie, Karina applique des normes hospitalières strictes : désinfection complète de la chaise de massage ergonomique au virucide entre chaque cliente, linge propre et instruments sous sachet scellé."
+              }
+            }
+          ]
+        }
+      ]
     }
     </script>
   </head>

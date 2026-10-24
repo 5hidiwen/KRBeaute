@@ -162,9 +162,9 @@ export const BrandsEquipment: React.FC = () => {
                 <span className="text-[10px] font-bold uppercase tracking-wider text-[#512D6D]">{t.brands.tech.microcurrent.tag}</span>
                 <span className="text-[10px] text-[#5D4037]/50">{t.brands.tech.microcurrent.note}</span>
               </div>
-              <h4 className="font-serif text-sm sm:text-base font-bold text-[#5D4037]">
+              <h3 className="font-serif text-sm sm:text-base font-bold text-[#5D4037]">
                 {t.brands.tech.microcurrent.title}
-              </h4>
+              </h3>
               <p className="text-xs text-[#5D4037]/80 leading-snug mt-0.5 line-clamp-2">
                 {t.brands.tech.microcurrent.desc}
               </p>
@@ -181,9 +181,9 @@ export const BrandsEquipment: React.FC = () => {
                 <span className="text-[10px] font-bold uppercase tracking-wider text-[#512D6D]">{t.brands.tech.led.tag}</span>
                 <span className="text-[10px] text-[#5D4037]/50">{t.brands.tech.led.note}</span>
               </div>
-              <h4 className="font-serif text-sm sm:text-base font-bold text-[#5D4037]">
+              <h3 className="font-serif text-sm sm:text-base font-bold text-[#5D4037]">
                 {t.brands.tech.led.title}
-              </h4>
+              </h3>
               <p className="text-xs text-[#5D4037]/80 leading-snug mt-0.5 line-clamp-2">
                 {t.brands.tech.led.desc}
               </p>
