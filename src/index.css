@@ -40,6 +40,21 @@ body {
   }
 }
 
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0.4;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 .animate-fadeIn {
   animation: fadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slideUp {
+  animation: slideUp 0.26s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }

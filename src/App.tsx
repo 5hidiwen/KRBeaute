@@ -46,8 +46,8 @@ function AppContent() {
         onOpenBooking={() => handleOpenBooking()} 
       />
 
-      {/* Main Content: Strictly limited to the selected tab, with safe bottom space on mobile for tab bar */}
-      <main className="flex-1 pb-20 sm:pb-0">
+      {/* Main Content: Strictly limited to the selected tab, with safe bottom space on mobile/tablet for tab bar */}
+      <main className="flex-1 pb-20 lg:pb-0">
         
         {/* TAB 1: ACCUEIL / INICIO */}
         {activeTab === 'accueil' && (
