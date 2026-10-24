@@ -36,14 +36,14 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
     };
   }, [plusSheetOpen]);
 
-  // Desktop Primary Links (≥ lg) - Synchronized with physical page order from top to bottom
+  // Desktop Primary Links (≥ lg) - Synchronized with One-Page flow, with dedicated FAQ at the end
   const primaryLinks: { id: NavTab; label: string }[] = [
     { id: 'soins', label: isEs ? 'Tratamientos & Tarifas' : 'Soins & Tarifs' },
     { id: 'marques', label: isEs ? 'Tecnologías' : 'Technologies & Marques' },
     { id: 'a-propos', label: isEs ? 'Sobre Karina' : 'À Propos' },
     { id: 'secteur', label: isEs ? 'Zona (7 km)' : 'Secteur (7 km)' },
-    { id: 'faq', label: isEs ? 'FAQ' : 'FAQ' },
     { id: 'contact', label: isEs ? 'Contacto' : 'Contact' },
+    { id: 'faq', label: isEs ? 'FAQ' : 'FAQ' },
   ];
 
   // Secondary items displayed inside the "Plus" Bottom Sheet on mobile/tablet

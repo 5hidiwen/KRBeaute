@@ -68,6 +68,25 @@ export const AboutSection: React.FC = () => {
                   </span>
                 </div>
 
+                {/* 3 Key Credentials / Numbers */}
+                <div className="grid grid-cols-3 gap-1.5 sm:gap-2 mt-2">
+                  <div className="bg-white p-2 rounded-xl border border-[#D1C4E9] text-center shadow-2xs">
+                    <p className="font-serif text-xs sm:text-sm font-bold text-[#512D6D]">{t.about.stat1Val}</p>
+                    <p className="text-[9px] sm:text-[10px] text-[#5D4037]/75 font-medium leading-tight mt-0.5">{t.about.stat1Label}</p>
+                  </div>
+                  <div className="bg-white p-2 rounded-xl border border-[#D1C4E9] text-center shadow-2xs">
+                    <p className="font-serif text-xs sm:text-sm font-bold text-[#512D6D]">{t.about.stat2Val}</p>
+                    <p className="text-[9px] sm:text-[10px] text-[#5D4037]/75 font-medium leading-tight mt-0.5">{t.about.stat2Label}</p>
+                  </div>
+                  <div className="bg-white p-2 rounded-xl border border-[#D1C4E9] text-center shadow-2xs">
+                    <p className="font-serif text-xs sm:text-sm font-bold text-amber-600 flex items-center justify-center gap-0.5">
+                      <span aria-hidden="true">★</span>
+                      <span>{t.about.stat3Val}</span>
+                    </p>
+                    <p className="text-[9px] sm:text-[10px] text-[#5D4037]/75 font-medium leading-tight mt-0.5">{t.about.stat3Label}</p>
+                  </div>
+                </div>
+
               </div>
 
             </div>
@@ -95,6 +114,11 @@ export const AboutSection: React.FC = () => {
               <p>
                 {t.about.paragraph3}
               </p>
+
+              {/* Personal Signature Note */}
+              <div className="p-3.5 sm:p-4 rounded-2xl bg-white/80 border border-[#D1C4E9]/70 italic text-xs sm:text-sm text-[#512D6D] font-medium leading-relaxed mt-2 shadow-2xs">
+                {t.about.signatureQuote}
+              </div>
             </div>
 
             {/* Philosophy Pillars */}

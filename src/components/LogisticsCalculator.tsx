@@ -7,7 +7,10 @@ import {
   Car, 
   Info,
   Users,
-  X
+  X,
+  Sparkles,
+  Home,
+  Heart
 } from 'lucide-react';
 import { COMMUNES_DATA, CommuneItem } from '../data/communesData';
 import { useLanguage } from '../i18n/LanguageContext';
@@ -46,9 +49,9 @@ export const LogisticsCalculator: React.FC = () => {
               <span>{t.logistics.kicker}</span>
             </div>
 
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-semibold text-[#5D4037] tracking-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-semibold text-[#5D4037] tracking-tight">
               {t.logistics.title}
-            </h1>
+            </h2>
             <p className="mt-1.5 text-xs sm:text-sm text-[#5D4037]/80 leading-relaxed max-w-2xl">
               {t.logistics.subtitle}
             </p>
@@ -315,6 +318,73 @@ export const LogisticsCalculator: React.FC = () => {
               <Info className="w-3 h-3 text-[#512D6D]" />
               <span>{t.logistics.infoHours}</span>
             </div>
+          </div>
+        </div>
+
+        {/* =========================================================================
+            CHECK-LIST SÉRÉNITÉ POUR M'ACCUEILLIR (Bienveillant & Rassurant)
+           ========================================================================= */}
+        <div className="bg-[#F9F6F0] rounded-3xl p-6 sm:p-8 border border-[#D1C4E9]/80 shadow-xs">
+          <div className="text-center max-w-xl mx-auto mb-6">
+            <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#512D6D]/10 text-[#512D6D] text-[11px] font-semibold tracking-wide mb-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-[#512D6D]" />
+              <span>{t.logistics.checklist.kicker}</span>
+            </span>
+            <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#5D4037]">
+              {t.logistics.checklist.title}
+            </h3>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            
+            <div className="bg-white p-4 rounded-2xl border border-[#D1C4E9]/60 shadow-2xs">
+              <div className="w-8 h-8 rounded-xl bg-[#D1C4E9]/30 text-[#512D6D] flex items-center justify-center mb-2.5">
+                <Home className="w-4 h-4" />
+              </div>
+              <h4 className="font-serif text-xs sm:text-sm font-bold text-[#5D4037] mb-1">
+                {t.logistics.checklist.item1Title}
+              </h4>
+              <p className="text-[11px] sm:text-xs text-[#5D4037]/75 leading-relaxed">
+                {t.logistics.checklist.item1Desc}
+              </p>
+            </div>
+
+            <div className="bg-white p-4 rounded-2xl border border-[#D1C4E9]/60 shadow-2xs">
+              <div className="w-8 h-8 rounded-xl bg-[#D1C4E9]/30 text-[#512D6D] flex items-center justify-center mb-2.5">
+                <Car className="w-4 h-4" />
+              </div>
+              <h4 className="font-serif text-xs sm:text-sm font-bold text-[#5D4037] mb-1">
+                {t.logistics.checklist.item2Title}
+              </h4>
+              <p className="text-[11px] sm:text-xs text-[#5D4037]/75 leading-relaxed">
+                {t.logistics.checklist.item2Desc}
+              </p>
+            </div>
+
+            <div className="bg-white p-4 rounded-2xl border border-[#D1C4E9]/60 shadow-2xs">
+              <div className="w-8 h-8 rounded-xl bg-[#D1C4E9]/30 text-[#512D6D] flex items-center justify-center mb-2.5">
+                <Sparkles className="w-4 h-4 text-amber-600" />
+              </div>
+              <h4 className="font-serif text-xs sm:text-sm font-bold text-[#5D4037] mb-1">
+                {t.logistics.checklist.item3Title}
+              </h4>
+              <p className="text-[11px] sm:text-xs text-[#5D4037]/75 leading-relaxed">
+                {t.logistics.checklist.item3Desc}
+              </p>
+            </div>
+
+            <div className="bg-white p-4 rounded-2xl border border-[#D1C4E9]/60 shadow-2xs">
+              <div className="w-8 h-8 rounded-xl bg-[#D1C4E9]/30 text-[#512D6D] flex items-center justify-center mb-2.5">
+                <Heart className="w-4 h-4 text-rose-600" />
+              </div>
+              <h4 className="font-serif text-xs sm:text-sm font-bold text-[#5D4037] mb-1">
+                {t.logistics.checklist.item4Title}
+              </h4>
+              <p className="text-[11px] sm:text-xs text-[#5D4037]/75 leading-relaxed">
+                {t.logistics.checklist.item4Desc}
+              </p>
+            </div>
+
           </div>
         </div>
 

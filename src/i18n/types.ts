@@ -142,6 +142,13 @@ export interface AboutTranslations {
   paragraph1: string;
   paragraph2: string;
   paragraph3: string;
+  stat1Val: string;
+  stat1Label: string;
+  stat2Val: string;
+  stat2Label: string;
+  stat3Val: string;
+  stat3Label: string;
+  signatureQuote: string;
   pillars: {
     kindnessTitle: string;
     kindnessDesc: string;
@@ -181,6 +188,18 @@ export interface LogisticsTranslations {
   infoSpace: string;
   infoSpaceBold: string;
   perTripNote: string;
+  checklist: {
+    kicker: string;
+    title: string;
+    item1Title: string;
+    item1Desc: string;
+    item2Title: string;
+    item2Desc: string;
+    item3Title: string;
+    item3Desc: string;
+    item4Title: string;
+    item4Desc: string;
+  };
 }
 
 export interface FAQItemTranslation {
