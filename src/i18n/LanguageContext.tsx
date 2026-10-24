@@ -41,11 +41,12 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
   };
 
   useEffect(() => {
-    // Update HTML lang attribute
-    document.documentElement.lang = language;
+    const currentTrans = TRANSLATIONS[language];
+
+    // Update HTML lang attribute (es-MX for Mexican / Latin American Spanish)
+    document.documentElement.lang = currentTrans.htmlLang || (language === 'es' ? 'es-MX' : 'fr');
 
     // Update document title and meta description dynamically
-    const currentTrans = TRANSLATIONS[language];
     document.title = currentTrans.metaTitle;
 
     const metaDescription = document.querySelector('meta[name="description"]');
@@ -61,7 +62,7 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
     if (ogDesc) ogDesc.setAttribute('content', currentTrans.metaDescription);
 
     const ogLocale = document.querySelector('meta[property="og:locale"]');
-    if (ogLocale) ogLocale.setAttribute('content', language === 'es' ? 'es_ES' : 'fr_FR');
+    if (ogLocale) ogLocale.setAttribute('content', language === 'es' ? 'es_MX' : 'fr_FR');
 
     const twTitle = document.querySelector('meta[name="twitter:title"]');
     if (twTitle) twTitle.setAttribute('content', currentTrans.metaTitle);

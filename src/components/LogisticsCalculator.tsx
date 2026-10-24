@@ -114,7 +114,7 @@ export const LogisticsCalculator: React.FC = () => {
             {/* Bottom Note */}
             <div className="pt-3 border-t border-[#D1C4E9]/50 flex items-center gap-2 text-xs font-medium text-emerald-800">
               <Check className="w-4 h-4 text-emerald-600 shrink-0" />
-              <span>{isEs ? 'Desplazamiento 100% gratuito' : 'Déplacement systématiquement offert'}</span>
+              <span>{isEs ? 'Traslado 100% sin costo' : 'Déplacement systématiquement offert'}</span>
             </div>
           </div>
 
@@ -159,7 +159,7 @@ export const LogisticsCalculator: React.FC = () => {
             {/* Bottom Note */}
             <div className="pt-3 border-t border-[#D1C4E9]/50 flex items-center gap-2 text-xs font-medium text-[#5D4037]/80">
               <Check className="w-4 h-4 text-[#512D6D] shrink-0" />
-              <span>{isEs ? 'Tarifa única por desplazamiento' : 'Forfait fixe par déplacement'}</span>
+              <span>{isEs ? 'Tarifa fija por traslado' : 'Forfait fixe par déplacement'}</span>
             </div>
           </div>
 
@@ -204,7 +204,7 @@ export const LogisticsCalculator: React.FC = () => {
             {/* Bottom Note */}
             <div className="pt-3 border-t border-[#D1C4E9]/50 flex items-center gap-2 text-xs font-medium text-[#5D4037]/80">
               <Check className="w-4 h-4 text-[#8B2651] shrink-0" />
-              <span>{isEs ? 'Más de 30 km: bajo presupuesto' : 'Au-delà de 30 km : sur devis'}</span>
+              <span>{isEs ? 'Más de 30 km: cotización previa' : 'Au-delà de 30 km : sur devis'}</span>
             </div>
           </div>
 
@@ -221,7 +221,7 @@ export const LogisticsCalculator: React.FC = () => {
               </h3>
               <p className="text-xs text-[#5D4037]/70">
                 {isEs 
-                  ? 'Escriba las primeras letras de su ciudad para ver el resultado exacto' 
+                  ? 'Escriba las primeras letras de su municipio o código postal para consultar la tarifa' 
                   : 'Tapez les premières lettres de votre ville pour afficher son tarif précis'}
               </p>
             </div>

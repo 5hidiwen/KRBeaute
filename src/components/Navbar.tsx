@@ -57,13 +57,13 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
     {
       id: 'a-propos',
       label: isEs ? 'Sobre Karina Robart' : 'À Propos de Karina Robart',
-      sub: isEs ? 'Esteticista certificada CAP' : "Diplômée d'État & savoir-faire",
+      sub: isEs ? 'Esteticista certificada con título oficial' : "Diplômée d'État & savoir-faire",
       icon: <Award className="w-4 h-4 text-[#512D6D]" />
     },
     {
       id: 'faq',
       label: isEs ? 'Preguntas Frecuentes & FAQ' : 'Conditions & FAQ',
-      sub: isEs ? 'Organización, higiene y reservas' : 'Réservation, hygiène & modalités',
+      sub: isEs ? 'Organización, higiene y reservaciones' : 'Réservation, hygiène & modalités',
       icon: <HelpCircle className="w-4 h-4 text-[#512D6D]" />
     },
   ];
@@ -74,7 +74,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
   };
 
   const whatsAppGreeting = isEs
-    ? 'Hola Karina, deseo reservar un tratamiento a domicilio...'
+    ? 'Hola Karina, deseo agendar un tratamiento a domicilio...'
     : 'Bonjour Karina, je souhaite réserver un soin à domicile...';
 
   const whatsAppUrl = `https://wa.me/33665566702?text=${encodeURIComponent(whatsAppGreeting)}`;
@@ -157,7 +157,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
               title={t.nav.whatsappAria}
             >
               <MessageCircle className="w-3.5 h-3.5 text-emerald-300" />
-              <span className="hidden sm:inline">{isEs ? 'Reservar' : 'Réserver'}</span>
+              <span className="hidden sm:inline">{isEs ? 'Agendar' : 'Réserver'}</span>
             </a>
           </div>
 
@@ -223,7 +223,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
                 ? 'text-[#512D6D] font-bold'
                 : 'text-[#5D4037]/75 hover:text-[#512D6D]'
             }`}
-            aria-label={isEs ? 'Zona de Atención (7 km)' : "Rayon d'action (7 km offert)"}
+            aria-label={isEs ? 'Zona de Cobertura (7 km)' : "Rayon d'action (7 km offert)"}
           >
             <div className={`p-1 rounded-lg transition-colors ${
               activeTab === 'secteur' && !plusSheetOpen ? 'bg-[#512D6D]/10' : ''
@@ -244,7 +244,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
                 ? 'text-[#512D6D] font-bold'
                 : 'text-[#5D4037]/75 hover:text-[#512D6D]'
             }`}
-            aria-label={isEs ? 'Contacto y Reserva' : 'Contact & Prise de RDV'}
+            aria-label={isEs ? 'Contacto y Citas' : 'Contact & Prise de RDV'}
           >
             <div className={`p-1 rounded-lg transition-colors ${
               activeTab === 'contact' && !plusSheetOpen ? 'bg-[#512D6D]/10' : ''
@@ -375,7 +375,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
             <div className="pt-3 border-t border-[#D1C4E9]/60 space-y-2.5">
               <div className="flex items-center justify-center gap-1.5 text-[11px] text-[#5D4037]/75">
                 <Clock className="w-3.5 h-3.5 text-[#512D6D]" />
-                <span>{isEs ? 'De lunes a sábado de 9:00 a 19:30' : 'Du lundi au samedi : 9h00 - 19h30'}</span>
+                <span>{isEs ? 'Lunes a sábado de 9:00 a 19:30' : 'Du lundi au samedi : 9h00 - 19h30'}</span>
               </div>
 
               <div className="grid grid-cols-2 gap-2">

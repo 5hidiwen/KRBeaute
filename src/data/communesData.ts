@@ -53,13 +53,13 @@ export const COMMUNES_DATA: CommuneItem[] = [
 export function getFeeForDistance(distanceKm: number, lang: Language = 'fr'): { fee: number; isOffered: boolean; label: string } {
   if (lang === 'es') {
     if (distanceKm <= 7) {
-      return { fee: 0, isOffered: true, label: 'Desplazamiento gratis (hasta 7 km)' };
+      return { fee: 0, isOffered: true, label: 'Traslado sin costo (hasta 7 km)' };
     } else if (distanceKm <= 20) {
       return { fee: 5, isOffered: false, label: '+5 € (Tarifa fija 7-20 km)' };
     } else if (distanceKm <= 30) {
       return { fee: 10, isOffered: false, label: '+10 € (Tarifa fija 20-30 km)' };
     } else {
-      return { fee: 15, isOffered: false, label: 'Bajo presupuesto (> 30 km)' };
+      return { fee: 15, isOffered: false, label: 'Cotización previa (> 30 km)' };
     }
   }
 

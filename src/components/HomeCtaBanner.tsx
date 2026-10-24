@@ -12,7 +12,7 @@ export const HomeCtaBanner: React.FC<HomeCtaBannerProps> = ({ onOpenBooking }) =
 
   const isEs = language === 'es';
   const whatsAppGreeting = isEs
-    ? 'Hola Karina, deseo reservar un tratamiento a domicilio...'
+    ? 'Hola Karina, deseo agendar un tratamiento a domicilio...'
     : 'Bonjour Karina, je souhaite réserver un soin à domicile...';
 
   const whatsAppUrl = `https://wa.me/33665566702?text=${encodeURIComponent(whatsAppGreeting)}`;

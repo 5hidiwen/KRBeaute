@@ -132,7 +132,7 @@ function AppContent() {
                 </h3>
                 <p className="text-xs sm:text-sm text-[#5D4037]/80 max-w-lg mx-auto mb-6 leading-relaxed">
                   {language === 'es'
-                    ? 'Karina le responde personalmente con amabilidad para resolver cualquier consulta y preparar su cita a domicilio.'
+                    ? 'Karina le responde personalmente con calidez para resolver cualquier duda y preparar su cita en la comodidad de su hogar.'
                     : 'Karina vous répond directement avec bienveillance pour lever le moindre doute et préparer au mieux votre soin à domicile.'}
                 </p>
                 <div className="flex flex-wrap items-center justify-center gap-3">
@@ -141,7 +141,7 @@ function AppContent() {
                     onClick={() => handleOpenBooking()}
                     className="inline-flex items-center gap-2 px-6 py-3 min-h-[46px] rounded-full bg-[#512D6D] text-white text-xs font-bold shadow-xs hover:bg-[#402257] active:scale-98 cursor-pointer"
                   >
-                    <span>{language === 'es' ? 'Reservar o consultar' : 'Poser une question / Réserver'}</span>
+                    <span>{language === 'es' ? 'Agendar o consultar' : 'Poser une question / Réserver'}</span>
                   </button>
                   <a
                     href="tel:+33665566702"

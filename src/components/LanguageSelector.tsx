@@ -29,7 +29,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({ className = 
         FR
       </button>
 
-      {/* Español */}
+      {/* Español (ES-MX) */}
       <button
         type="button"
         onClick={() => setLanguage('es')}
@@ -39,7 +39,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({ className = 
             ? 'bg-[#512D6D] text-white shadow-2xs'
             : 'text-[#5D4037]/75 hover:text-[#512D6D] hover:bg-[#D1C4E9]/30'
         }`}
-        title="Cambiar a Español"
+        title="Cambiar a Español (Latinoamérica / México)"
       >
         ES
       </button>
