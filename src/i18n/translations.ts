@@ -228,7 +228,7 @@ export const TRANSLATIONS_FR: SiteTranslations = {
     subtitle: 'Déplacement offert dans un rayon de 7 km autour de Rennes, puis forfait kilométrique transparent au-delà.',
     badge: {
       free: "0 € offert jusqu'à 7 km",
-      from5: "+5 € jusqu'à 12 km",
+      from5: "+8,50 € jusqu'à 12 km",
     },
     zones: {
       zone1Title: 'Zone 1 (≤ 7 km)',
@@ -236,7 +236,7 @@ export const TRANSLATIONS_FR: SiteTranslations = {
       zone1Tag: '0 € OFFERT',
       zone2Title: 'Zone 2 (7 à 12 km)',
       zone2Sub: 'Couronne immédiate',
-      zone2Tag: '+ 5 € Forfait',
+      zone2Tag: '+ 8,50 € Forfait',
       zone3Title: 'Zone 3 (20 à 30 km)',
       zone3Sub: 'Bassin étendu',
       zone3Tag: '+ 10 € Forfait',
@@ -244,7 +244,7 @@ export const TRANSLATIONS_FR: SiteTranslations = {
     updateNotice: {
       badge: 'Information importante · Périmètre d’intervention',
       title: 'Mes modalités de déplacement en cours d’ajustement',
-      message: 'J’interviens à votre domicile sur Rennes et sa première couronne (jusqu’à 12 km). Votre déplacement reste systématiquement offert jusqu’à 7 km et forfaitaire à 5 € entre 7 et 12 km (les communes au-delà de 12 km ne sont pas desservies actuellement). Pour toute question sur votre adresse exacte ou convenir de votre soin, échangez directement avec moi sur WhatsApp ou par téléphone.',
+      message: 'J’interviens à votre domicile sur Rennes et sa première couronne (jusqu’à 12 km). Votre déplacement reste systématiquement offert jusqu’à 7 km et forfaitaire à 8,50 € entre 7 et 12 km (les communes au-delà de 12 km ne sont pas desservies actuellement). Pour toute question sur votre adresse exacte ou convenir de votre soin, échangez directement avec moi sur WhatsApp ou par téléphone.',
       whatsappBtn: 'Me contacter sur WhatsApp',
       callBtn: 'M’appeler au 06 65 56 67 02',
       whatsappGreeting: 'Bonjour Karina, je souhaite vérifier avec vous si vous intervenez à mon adresse pour un soin à domicile :',
@@ -565,7 +565,7 @@ export const TRANSLATIONS_FR: SiteTranslations = {
       art3Intro: "Les tarifs des soins sont indiqués en Euros (€) et correspondent à des montants nets (TVA non applicable, art. 293 B du CGI). Politique de déplacement :",
       art3Items: [
         "0 à 7 km autour du centre de Rennes : Déplacement offert.",
-        "7 à 12 km : Supplément forfaitaire de 5 € par visite.",
+        "7 à 12 km : Supplément forfaitaire de 8,50 € par visite.",
         "Au-delà de 12 km : Non desservi actuellement (ou sur demande spécifique acceptée).",
       ],
       art4Title: 'Article 4 — Conditions de Réservation, Modification & Report',
@@ -854,7 +854,7 @@ export const TRANSLATIONS_ES: SiteTranslations = {
     subtitle: 'Traslado sin costo en un radio de 7 km alrededor de Rennes, con tarifa fija por tramos para distancias mayores.',
     badge: {
       free: '0 € sin costo hasta 7 km',
-      from5: '+5 € hasta 12 km',
+      from5: '+8,50 € hasta 12 km',
     },
     zones: {
       zone1Title: 'Zona 1 (≤ 7 km)',
@@ -862,7 +862,7 @@ export const TRANSLATIONS_ES: SiteTranslations = {
       zone1Tag: '0 € GRATIS',
       zone2Title: 'Zona 2 (7 a 12 km)',
       zone2Sub: 'Primer anillo metropolitano',
-      zone2Tag: '+ 5 € Tarifa fija',
+      zone2Tag: '+ 8,50 € Tarifa fija',
       zone3Title: 'Zona 3 (20 a 30 km)',
       zone3Sub: 'Área metropolitana extendida',
       zone3Tag: '+ 10 € Tarifa fija',
@@ -870,7 +870,7 @@ export const TRANSLATIONS_ES: SiteTranslations = {
     updateNotice: {
       badge: 'Aviso importante · Zonas de cobertura',
       title: 'Mis condiciones de traslado en proceso de ajuste',
-      message: 'Me desplazo a tu domicilio en Rennes y su primer anillo metropolitano (hasta 12 km). El traslado te lo ofrezco 100% sin costo hasta 7 km y con tarifa fija de 5 € entre 7 y 12 km (los municipios a más de 12 km no están cubiertos por el momento). Para confirmar tu dirección exacta o agendar juntas tu sesión, escríbeme directamente por WhatsApp o llámame por teléfono.',
+      message: 'Me desplazo a tu domicilio en Rennes y su primer anillo metropolitano (hasta 12 km). El traslado te lo ofrezco 100% sin costo hasta 7 km y con tarifa fija de 8,50 € entre 7 y 12 km (los municipios a más de 12 km no están cubiertos por el momento). Para confirmar tu dirección exacta o agendar juntas tu sesión, escríbeme directamente por WhatsApp o llámame por teléfono.',
       whatsappBtn: 'Escribirme por WhatsApp',
       callBtn: 'Llamarme al 06 65 56 67 02',
       whatsappGreeting: 'Hola Karina, me gustaría consultar si acudes a mi dirección para un tratamiento a domicilio:',
@@ -1191,7 +1191,7 @@ export const TRANSLATIONS_ES: SiteTranslations = {
       art3Intro: 'Las tarifas de los tratamientos se expresan en Euros (€) y corresponden a montos netos (IVA no aplicable, art. 293 B del CGI francés). Política de traslado:',
       art3Items: [
         'De 0 a 7 km alrededor del centro de Rennes: Traslado sin costo.',
-        'De 7 a 12 km: Tarifa fija de 5 € por visita.',
+        'De 7 a 12 km: Tarifa fija de 8,50 € por visita.',
         'Más de 12 km: No cubierto actualmente (o bajo solicitud especial aceptada).',
       ],
       art4Title: 'Artículo 4 — Políticas de Reservación, Cambios y Cancelaciones',

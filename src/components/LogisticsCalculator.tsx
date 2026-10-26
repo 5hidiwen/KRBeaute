@@ -269,7 +269,7 @@ export const LogisticsCalculator: React.FC = () => {
                 >
                   <span className="font-semibold truncate">{c.name}</span>
                   <span className="text-[11px] font-bold text-[#512D6D] shrink-0 ml-1">
-                    {c.feeEuro === 0 ? '0 €' : `+${c.feeEuro} €`}
+                    {c.feeEuro === 0 ? '0 €' : `+${c.feeEuro.toString().replace('.', ',')} €`}
                   </span>
                 </button>
               ))}
@@ -301,7 +301,7 @@ export const LogisticsCalculator: React.FC = () => {
               <div className="flex items-center gap-4 w-full sm:w-auto justify-between sm:justify-end pt-2 sm:pt-0 border-t sm:border-t-0 border-[#D1C4E9]/50">
                 <span className="text-xs text-[#5D4037]/80 font-medium">{t.logistics.feeLabel}</span>
                 <span className="text-xl sm:text-2xl font-serif font-bold text-[#512D6D]">
-                  {selectedCommune.feeEuro === 0 ? t.logistics.feeFree : `+${selectedCommune.feeEuro} €`}
+                  {selectedCommune.feeEuro === 0 ? t.logistics.feeFree : `+${selectedCommune.feeEuro.toString().replace('.', ',')} €`}
                 </span>
               </div>
             </div>

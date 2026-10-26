@@ -416,7 +416,7 @@ export const ClientSheetSection: React.FC = () => {
                           >
                             {COMMUNES_DATA.map((c) => (
                               <option key={`${c.name}-${c.postalCode}`} value={c.name}>
-                                {c.name} {c.feeEuro === 0 ? cs.freeOffered : `(+${c.feeEuro} €)`}
+                                {c.name} {c.feeEuro === 0 ? cs.freeOffered : `(+${c.feeEuro.toString().replace('.', ',')} €)`}
                               </option>
                             ))}
                           </select>
