@@ -302,6 +302,18 @@ export interface ContactTranslations {
       body: string;
       confirmWhatsApp: string;
       newRequest: string;
+      recapTitle: string;
+      recapSubtitle: string;
+      printBtn: string;
+      emailCopyBtn: string;
+      serviceLabel: string;
+      locationLabel: string;
+      dateLabel: string;
+      slotLabel: string;
+      phoneLabel: string;
+      emailLabel: string;
+      notesLabel: string;
+      noneLabel: string;
     };
   };
   whatsappTemplate: {
@@ -539,6 +551,14 @@ export interface ClientSheetTranslations {
     whatsappCta: string;
     mailtoCta: string;
     newSheetBtn: string;
+    recapTitle: string;
+    recapSubtitle: string;
+    printBtn: string;
+    sectionIdentity: string;
+    sectionSkin: string;
+    sectionHealth: string;
+    sectionGoals: string;
+    confidentialNotice: string;
   };
   whatsappTemplate: {
     header: string;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   ClipboardCheck,
   User,
@@ -12,14 +12,15 @@ import {
   CheckCircle2,
   Loader2,
   AlertCircle,
-  Check
+  Check,
+  Printer
 } from 'lucide-react';
 import { COMMUNES_DATA } from '../data/communesData';
 import { useLanguage } from '../i18n/LanguageContext';
 import { WEB3FORMS_ACCESS_KEY } from '../config/contact';
+import { updateContraindications, ContraindicationKey } from '../utils/clientSheetUtils';
 
 type SkinTypeKey = 'seche' | 'mixte' | 'grasse' | 'sensible' | 'mature' | 'deshydratee';
-type ContraindicationKey = 'aucune' | 'grossesse' | 'pacemaker' | 'allergies' | 'traitement' | 'soleil';
 type GoalKey = 'eclat' | 'antiAge' | 'hydratation' | 'purete' | 'regard' | 'detente';
 
 export const ClientSheetSection: React.FC = () => {
@@ -61,17 +62,7 @@ export const ClientSheetSection: React.FC = () => {
   };
 
   const toggleContraindication = (key: ContraindicationKey) => {
-    setSelectedContraindications((prev) => {
-      if (key === 'aucune') {
-        return ['aucune'];
-      }
-      const withoutAucune = prev.filter((k) => k !== 'aucune');
-      if (withoutAucune.includes(key)) {
-        const next = withoutAucune.filter((k) => k !== key);
-        return next.length === 0 ? ['aucune'] : next;
-      }
-      return [...withoutAucune, key];
-    });
+    setSelectedContraindications((prev) => updateContraindications(prev, key));
   };
 
   const toggleGoal = (key: GoalKey) => {
@@ -145,6 +136,25 @@ export const ClientSheetSection: React.FC = () => {
     return `https://wa.me/33665566702?text=${encodeURIComponent(lines.join('\n'))}`;
   };
 
+  const handlePrint = () => {
+    const source = document.getElementById('clientsheet-summary-ticket');
+    const printRoot = document.getElementById('print-root');
+    if (source && printRoot) {
+      printRoot.innerHTML = source.outerHTML;
+    }
+    window.print();
+  };
+
+  useEffect(() => {
+    if (submitted) {
+      const source = document.getElementById('clientsheet-summary-ticket');
+      const printRoot = document.getElementById('print-root');
+      if (source && printRoot) {
+        printRoot.innerHTML = source.outerHTML;
+      }
+    }
+  }, [submitted]);
+
   const generateMailtoUrl = () => {
     const wt = cs.whatsappTemplate;
     const subject = `Fiche Cliente & Diagnostic Beauté — ${formData.fullName || 'Cliente'} (${formData.commune})`;
@@ -174,8 +184,14 @@ export const ClientSheetSection: React.FC = () => {
       `- Routine actuelle & attentes : ${formData.routine || wt.none}`,
       '',
       wt.closing,
+      '',
+      'Coordonnées Karina Robart :',
+      'Téléphone : 06 65 56 67 02',
+      'E-mail : karinarobart@krbeaute.com',
+      'Site web : https://www.krbeaute.com',
     ];
-    return `mailto:karinarobart@krbeaute.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
+    const targetEmail = formData.email || 'karinarobart@krbeaute.com';
+    return `mailto:${targetEmail}?cc=karinarobart@krbeaute.com&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -259,21 +275,141 @@ export const ClientSheetSection: React.FC = () => {
         {/* Main Card Container */}
         <div className="bg-white rounded-3xl p-5 sm:p-8 border border-[#D1C4E9] shadow-sm">
           {submitted ? (
-            <div className="max-w-xl mx-auto py-8 px-4 text-center space-y-4 animate-fadeIn">
-              <div className="w-14 h-14 mx-auto rounded-full bg-[#512D6D] text-white flex items-center justify-center shadow-md">
-                <CheckCircle2 className="w-7 h-7" />
+            <div className="max-w-3xl mx-auto py-6 px-2 sm:px-4 space-y-4 animate-fadeIn">
+              {/* Success Header */}
+              <div className="text-center space-y-2.5">
+                <div className="w-14 h-14 mx-auto rounded-full bg-[#512D6D] text-white flex items-center justify-center shadow-md">
+                  <CheckCircle2 className="w-7 h-7" />
+                </div>
+                <span className="inline-block px-3 py-1 rounded-full bg-[#D1C4E9]/40 text-[#512D6D] text-xs font-bold uppercase tracking-wider">
+                  {cs.success.badge}
+                </span>
+                <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#512D6D]">
+                  {cs.success.title.replace('{name}', formData.fullName)}
+                </h3>
+                <p className="text-xs sm:text-sm text-[#5D4037]/90 leading-relaxed max-w-xl mx-auto">
+                  {cs.success.body.replace('{commune}', formData.commune)}
+                </p>
               </div>
-              <span className="inline-block px-3 py-1 rounded-full bg-[#D1C4E9]/40 text-[#512D6D] text-xs font-bold uppercase tracking-wider">
-                {cs.success.badge}
-              </span>
-              <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#512D6D]">
-                {cs.success.title.replace('{name}', formData.fullName)}
-              </h3>
-              <p className="text-xs sm:text-sm text-[#5D4037]/90 leading-relaxed">
-                {cs.success.body.replace('{commune}', formData.commune)}
-              </p>
 
-              <div className="pt-4 flex flex-wrap items-center justify-center gap-3">
+              {/* Printable & On-screen Complete Consultation Sheet Recap */}
+              <div
+                id="clientsheet-summary-ticket"
+                className="printable-summary bg-[#F9F6F0]/80 rounded-2xl p-4 sm:p-6 border border-[#D1C4E9] shadow-2xs text-xs space-y-3.5 text-left"
+              >
+                {/* Print Header */}
+                <div className="hidden print:block border-b border-[#D1C4E9] pb-3 mb-2">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="font-serif text-base font-bold text-[#512D6D]">KRbeauté · Fiche Cliente & Bilan Beauté</p>
+                      <p className="text-[11px] text-[#5D4037]">Esthéticienne d'Exception à Domicile · Karina Robart</p>
+                    </div>
+                    <div className="text-right text-[10px] text-[#5D4037]/80">
+                      <p>06 65 56 67 02</p>
+                      <p>karinarobart@krbeaute.com</p>
+                      <p>www.krbeaute.com</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between border-b border-[#D1C4E9]/60 pb-2.5">
+                  <div className="flex items-center gap-2">
+                    <ClipboardCheck className="w-4 h-4 text-[#512D6D]" />
+                    <span className="font-serif font-bold text-sm sm:text-base text-[#512D6D]">
+                      {cs.success.recapTitle}
+                    </span>
+                  </div>
+                  <span className="text-[10px] uppercase tracking-wider font-bold px-2.5 py-0.5 rounded-full bg-[#512D6D] text-white">
+                    {formData.commune}
+                  </span>
+                </div>
+
+                {/* 4 Summary Blocks */}
+                <div className="summary-grid grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-[11px] sm:text-xs">
+                  {/* 1. Coordonnées */}
+                  <div className="summary-card-item bg-white p-2.5 sm:p-3 rounded-xl border border-[#D1C4E9]/50 space-y-1">
+                    <span className="text-[10px] uppercase font-bold text-[#512D6D] block border-b border-[#D1C4E9]/30 pb-1">
+                      {cs.success.sectionIdentity}
+                    </span>
+                    <p className="font-medium text-[#5D4037]"><span className="text-[#5D4037]/70">Nom :</span> {formData.fullName || cs.whatsappTemplate.none}</p>
+                    <p className="text-[#5D4037]"><span className="text-[#5D4037]/70">Âge / Naissance :</span> {formData.birthDate || cs.whatsappTemplate.none}</p>
+                    <p className="text-[#5D4037]"><span className="text-[#5D4037]/70">Téléphone :</span> {formData.phone || cs.whatsappTemplate.none}</p>
+                    <p className="text-[#5D4037]"><span className="text-[#5D4037]/70">Email :</span> {formData.email || cs.whatsappTemplate.none}</p>
+                    <p className="text-[#5D4037]"><span className="text-[#5D4037]/70">Commune :</span> {formData.commune}</p>
+                    {formData.addressNote && (
+                      <p className="text-[#5D4037]"><span className="text-[#5D4037]/70">Adresse/Accès :</span> {formData.addressNote}</p>
+                    )}
+                  </div>
+
+                  {/* 2. Profil Cutané */}
+                  <div className="summary-card-item bg-white p-2.5 sm:p-3 rounded-xl border border-[#D1C4E9]/50 space-y-1">
+                    <span className="text-[10px] uppercase font-bold text-[#512D6D] block border-b border-[#D1C4E9]/30 pb-1">
+                      {cs.success.sectionSkin}
+                    </span>
+                    <p className="font-medium text-[#512D6D]">{formatSkinSummary()}</p>
+                    {formData.skinZones && (
+                      <p className="text-[#5D4037] text-[11px] pt-1">
+                        <span className="text-[#5D4037]/70 block">Zones sensibles / Particularités :</span>
+                        {formData.skinZones}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* 3. Santé & Contre-indications */}
+                  <div className="summary-card-item bg-white p-2.5 sm:p-3 rounded-xl border border-[#D1C4E9]/50 space-y-1">
+                    <span className="text-[10px] uppercase font-bold text-[#512D6D] block border-b border-[#D1C4E9]/30 pb-1">
+                      {cs.success.sectionHealth}
+                    </span>
+                    <p className="font-medium text-[#5D4037]">{formatHealthSummary()}</p>
+                    {formData.healthNotes && (
+                      <p className="text-[#5D4037] text-[11px] pt-1">
+                        <span className="text-[#5D4037]/70 block">Précisions santé / allergies :</span>
+                        {formData.healthNotes}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* 4. Routine & Objectifs */}
+                  <div className="summary-card-item bg-white p-2.5 sm:p-3 rounded-xl border border-[#D1C4E9]/50 space-y-1">
+                    <span className="text-[10px] uppercase font-bold text-[#512D6D] block border-b border-[#D1C4E9]/30 pb-1">
+                      {cs.success.sectionGoals}
+                    </span>
+                    <p className="font-medium text-[#512D6D]">{formatGoalsSummary()}</p>
+                    {formData.routine && (
+                      <p className="text-[#5D4037] text-[11px] pt-1">
+                        <span className="text-[#5D4037]/70 block">Routine & Attentes :</span>
+                        {formData.routine}
+                      </p>
+                    )}
+                  </div>
+                </div>
+
+                <p className="text-[10px] text-[#5D4037]/75 pt-1 text-center italic">
+                  {cs.success.confidentialNotice}
+                </p>
+              </div>
+
+              {/* Quick Action Buttons */}
+              <div className="no-print pt-2 flex flex-wrap items-center justify-center gap-2.5">
+                <button
+                  type="button"
+                  onClick={handlePrint}
+                  className="min-h-[48px] inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-white hover:bg-[#F9F6F0] border border-[#D1C4E9] text-[#512D6D] text-xs sm:text-sm font-semibold shadow-2xs transition-all active:scale-98 cursor-pointer"
+                  title={cs.success.printBtn}
+                >
+                  <Printer className="w-4 h-4 text-[#512D6D]" />
+                  <span>{cs.success.printBtn}</span>
+                </button>
+
+                <a
+                  href={generateMailtoUrl()}
+                  className="min-h-[48px] inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-[#F9F6F0] hover:bg-[#D1C4E9]/35 border border-[#D1C4E9] text-[#512D6D] text-xs sm:text-sm font-semibold transition-all active:scale-98"
+                  title={cs.success.mailtoCta}
+                >
+                  <Mail className="w-4 h-4 text-[#512D6D]" />
+                  <span>{cs.success.mailtoCta}</span>
+                </a>
+
                 <a
                   href={generateWhatsAppUrl()}
                   target="_blank"
@@ -283,13 +419,7 @@ export const ClientSheetSection: React.FC = () => {
                   <MessageCircle className="w-4 h-4 text-emerald-300" />
                   <span>{cs.success.whatsappCta}</span>
                 </a>
-                <a
-                  href={generateMailtoUrl()}
-                  className="min-h-[48px] inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-[#F9F6F0] hover:bg-[#D1C4E9]/35 border border-[#D1C4E9] text-[#512D6D] text-xs sm:text-sm font-semibold transition-all active:scale-98"
-                >
-                  <Mail className="w-4 h-4 text-[#512D6D]" />
-                  <span>{cs.success.mailtoCta}</span>
-                </a>
+
                 <button
                   type="button"
                   onClick={() => setSubmitted(false)}

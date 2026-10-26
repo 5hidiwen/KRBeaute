@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { COMMUNES_DATA, CommuneItem } from '../data/communesData';
 import { useLanguage } from '../i18n/LanguageContext';
+import { filterCommunes } from '../utils/logisticsUtils';
 
 export const LogisticsCalculator: React.FC = () => {
   const { t, language } = useLanguage();
@@ -29,12 +30,7 @@ export const LogisticsCalculator: React.FC = () => {
   const zone2Communes = COMMUNES_DATA.filter(c => c.distanceKm > 7 && c.distanceKm <= 12);
 
   // Search filtered communes
-  const searchResults = searchQuery.trim() === '' 
-    ? [] 
-    : COMMUNES_DATA.filter(c => 
-        c.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-        c.postalCode.includes(searchQuery)
-      );
+  const searchResults = filterCommunes(searchQuery);
 
   return (
     <section id="secteur" className="scroll-mt-20 sm:scroll-mt-24 py-6 sm:py-12 bg-white border-y border-[#D1C4E9]/40">

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, MessageCircle, Mail, MapPin, Send, CheckCircle2, Instagram, Loader2, AlertCircle, Calendar, ClipboardCheck } from 'lucide-react';
+import { Phone, MessageCircle, Mail, MapPin, Send, CheckCircle2, Instagram, Loader2, AlertCircle, Calendar, ClipboardCheck, Printer, FileText } from 'lucide-react';
 import { getServices, ServiceItem } from '../data/servicesData';
 import { COMMUNES_DATA } from '../data/communesData';
 import { useLanguage } from '../i18n/LanguageContext';
 import { WEB3FORMS_ACCESS_KEY } from '../config/contact';
 import { PaymentDetailsCard } from './PaymentDetailsCard';
+import { buildWhatsAppBookingUrl, getSlotLabel } from '../utils/bookingUtils';
 
 interface ContactSectionProps {
   selectedService?: ServiceItem | null;
@@ -73,31 +74,79 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService,
     }
   };
 
-  const getSlotLabel = (slotKey: string) => {
-    const slots = t.contact.rightCard.slots;
-    if (slotKey === 'morning') return slots.morning;
-    if (slotKey === 'noon') return slots.noon;
-    if (slotKey === 'afternoon') return slots.afternoon;
-    if (slotKey === 'evening') return slots.evening;
-    return slotKey;
-  };
+  const getSlotLabelValue = (slotKey: string) => getSlotLabel(slotKey, t.contact.rightCard.slots);
 
   const generateWhatsAppUrl = () => {
-    const wt = t.contact.whatsappTemplate;
-    const slotText = getSlotLabel(formData.preferredTimeSlot);
-    const dateText = formData.preferredDate || wt.toAgree;
-    const nameText = formData.name || wt.clientDefault;
+    return buildWhatsAppBookingUrl(formData, t);
+  };
 
-    const text = encodeURIComponent(
-      `${wt.greeting}\n\n${wt.intro}\n` +
-      `${wt.service} ${formData.serviceTitle}\n` +
-      `${wt.location} ${formData.commune}\n` +
-      `${wt.slot} ${dateText} (${slotText})\n` +
-      `${wt.name} ${nameText}\n` +
-      (formData.message ? `${wt.precision} ${formData.message}\n` : '') +
-      `\n${wt.closing}`
-    );
-    return `https://wa.me/33665566702?text=${text}`;
+  const handlePrint = () => {
+    const source = document.getElementById('contact-summary-ticket');
+    const printRoot = document.getElementById('print-root');
+    if (source && printRoot) {
+      printRoot.innerHTML = source.outerHTML;
+    }
+    window.print();
+  };
+
+  useEffect(() => {
+    if (submitted) {
+      const source = document.getElementById('contact-summary-ticket');
+      const printRoot = document.getElementById('print-root');
+      if (source && printRoot) {
+        printRoot.innerHTML = source.outerHTML;
+      }
+    }
+  }, [submitted]);
+
+  const generateSelfCopyMailto = () => {
+    const isEs = language === 'es';
+    const subject = isEs
+      ? `Copia de mi solicitud de cita KRbeauté — ${formData.serviceTitle}`
+      : `Copie de ma demande de RDV KRbeauté — ${formData.serviceTitle}`;
+    const slotLabel = getSlotLabelValue(formData.preferredTimeSlot);
+    const dateLabel = formData.preferredDate || (isEs ? 'Por definir' : 'À convenir');
+    const bodyLines = isEs ? [
+      `¡Hola Karina!`,
+      ``,
+      `Aquí tienes una copia de mi solicitud de cita enviada desde www.krbeaute.com :`,
+      ``,
+      `• Tratamiento : ${formData.serviceTitle}`,
+      `• Municipio / Zona : ${formData.commune}`,
+      `• Fecha preferida : ${dateLabel}`,
+      `• Horario : ${slotLabel}`,
+      `• Mi nombre : ${formData.name}`,
+      `• Teléfono : ${formData.phone}`,
+      `• Correo : ${formData.email}`,
+      formData.message ? `• Notas adicionales : ${formData.message}` : `• Notas : Ninguna`,
+      ``,
+      `Datos de contacto de Karina Robart :`,
+      `Estética a domicilio en Rennes y alrededores`,
+      `Teléfono : 06 65 56 67 02`,
+      `Correo : karinarobart@krbeaute.com`,
+      `Sitio web : https://www.krbeaute.com`,
+    ] : [
+      `Bonjour Karina,`,
+      ``,
+      `Voici la copie de ma demande de rendez-vous transmise depuis www.krbeaute.com :`,
+      ``,
+      `• Prestation souhaitée : ${formData.serviceTitle}`,
+      `• Lieu / Commune : ${formData.commune}`,
+      `• Date souhaitée : ${dateLabel}`,
+      `• Créneau horaire : ${slotLabel}`,
+      `• Mon nom : ${formData.name}`,
+      `• Téléphone : ${formData.phone}`,
+      `• E-mail : ${formData.email}`,
+      formData.message ? `• Précisions éventuelles : ${formData.message}` : `• Précisions : Aucune`,
+      ``,
+      `Coordonnées officielles de Karina Robart :`,
+      `Soins esthétiques d'exception à domicile — Rennes et alentours`,
+      `Téléphone : 06 65 56 67 02`,
+      `E-mail : karinarobart@krbeaute.com`,
+      `Site web : https://www.krbeaute.com`,
+    ];
+    const targetEmail = formData.email || 'karinarobart@krbeaute.com';
+    return `mailto:${targetEmail}?cc=karinarobart@krbeaute.com&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -134,7 +183,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService,
           commune: formData.commune,
           prestation: formData.serviceTitle,
           date_souhaitee: formData.preferredDate || 'À convenir',
-          creneau_prefere: getSlotLabel(formData.preferredTimeSlot),
+          creneau_prefere: getSlotLabelValue(formData.preferredTimeSlot),
           precisions: formData.message || 'Aucune précision',
           replyto: formData.email,
           botcheck: false
@@ -301,39 +350,140 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService,
               </div>
 
               {submitted ? (
-                <div className="p-6 bg-[#D1C4E9]/30 rounded-2xl border border-[#512D6D]/30 text-center space-y-3 animate-fadeIn my-auto">
-                  <div className="w-12 h-12 mx-auto rounded-full bg-[#512D6D] text-white flex items-center justify-center shadow-md">
-                    <CheckCircle2 className="w-6 h-6" />
+                <div className="p-4 sm:p-5 bg-[#D1C4E9]/20 rounded-2xl border border-[#512D6D]/30 space-y-3.5 animate-fadeIn my-auto text-left">
+                  {/* Success Header */}
+                  <div className="text-center space-y-2">
+                    <div className="w-12 h-12 mx-auto rounded-full bg-[#512D6D] text-white flex items-center justify-center shadow-md">
+                      <CheckCircle2 className="w-6 h-6" />
+                    </div>
+                    <h4 className="font-serif text-lg sm:text-xl font-bold text-[#512D6D]">
+                      {t.contact.rightCard.success.thanks} {formData.name} !
+                    </h4>
+                    <p className="text-xs text-[#5D4037]/90 max-w-sm mx-auto leading-relaxed">
+                      {t.contact.rightCard.success.body
+                        .replace('{service}', formData.serviceTitle)
+                        .replace('{commune}', formData.commune)
+                        .replace('{phone}', formData.phone)}
+                    </p>
                   </div>
-                  <h4 className="font-serif text-lg font-bold text-[#512D6D]">
-                    {t.contact.rightCard.success.thanks} {formData.name} !
-                  </h4>
-                  <p className="text-xs text-[#5D4037]/90 max-w-sm mx-auto leading-relaxed">
-                    {t.contact.rightCard.success.body
-                      .replace('{service}', formData.serviceTitle)
-                      .replace('{commune}', formData.commune)
-                      .replace('{phone}', formData.phone)}
-                  </p>
-                  <div className="pt-2 flex flex-wrap justify-center gap-2">
+
+                  {/* Printable & On-screen Summary Receipt Card */}
+                  <div
+                    id="contact-summary-ticket"
+                    className="printable-summary bg-white rounded-xl p-3.5 sm:p-4 border border-[#D1C4E9] shadow-2xs text-xs space-y-2.5"
+                  >
+                    {/* Header in print only */}
+                    <div className="hidden print:block border-b border-[#D1C4E9] pb-3 mb-2">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="font-serif text-base font-bold text-[#512D6D]">KRbeauté</p>
+                          <p className="text-[11px] text-[#5D4037]">Soins Esthétiques d'Exception à Domicile · Karina Robart</p>
+                        </div>
+                        <div className="text-right text-[10px] text-[#5D4037]/80">
+                          <p>06 65 56 67 02</p>
+                          <p>karinarobart@krbeaute.com</p>
+                          <p>www.krbeaute.com</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between border-b border-[#D1C4E9]/60 pb-2">
+                      <div className="flex items-center gap-1.5">
+                        <FileText className="w-4 h-4 text-[#512D6D]" />
+                        <span className="font-serif font-bold text-xs sm:text-sm text-[#512D6D]">
+                          {t.contact.rightCard.success.recapTitle}
+                        </span>
+                      </div>
+                      <span className="text-[10px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded-full bg-[#D1C4E9]/40 text-[#512D6D]">
+                        {formData.commune}
+                      </span>
+                    </div>
+
+                    <div className="summary-grid grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px] sm:text-xs">
+                      <div className="summary-card-item bg-[#F9F6F0] p-2 rounded-lg border border-[#D1C4E9]/40">
+                        <span className="text-[10px] uppercase font-bold text-[#512D6D]/80 block">
+                          {t.contact.rightCard.success.serviceLabel}
+                        </span>
+                        <span className="font-semibold text-[#512D6D]">{formData.serviceTitle}</span>
+                      </div>
+
+                      <div className="summary-card-item bg-[#F9F6F0] p-2 rounded-lg border border-[#D1C4E9]/40">
+                        <span className="text-[10px] uppercase font-bold text-[#512D6D]/80 block">
+                          {t.contact.rightCard.success.locationLabel}
+                        </span>
+                        <span className="font-medium text-[#5D4037]">{formData.commune}</span>
+                      </div>
+
+                      <div className="summary-card-item bg-[#F9F6F0] p-2 rounded-lg border border-[#D1C4E9]/40">
+                        <span className="text-[10px] uppercase font-bold text-[#512D6D]/80 block">
+                          {t.contact.rightCard.success.dateLabel} & {t.contact.rightCard.success.slotLabel}
+                        </span>
+                        <span className="font-medium text-[#5D4037]">
+                          {formData.preferredDate || t.contact.whatsappTemplate.toAgree} · {getSlotLabelValue(formData.preferredTimeSlot)}
+                        </span>
+                      </div>
+
+                      <div className="summary-card-item bg-[#F9F6F0] p-2 rounded-lg border border-[#D1C4E9]/40">
+                        <span className="text-[10px] uppercase font-bold text-[#512D6D]/80 block">
+                          {t.contact.rightCard.success.phoneLabel} & {t.contact.rightCard.success.emailLabel}
+                        </span>
+                        <span className="font-medium text-[#5D4037]">
+                          {formData.phone} {formData.email ? `· ${formData.email}` : ''}
+                        </span>
+                      </div>
+                    </div>
+
+                    {formData.message && (
+                      <div className="summary-card-item bg-[#F9F6F0] p-2 rounded-lg border border-[#D1C4E9]/40 text-[11px]">
+                        <span className="text-[10px] uppercase font-bold text-[#512D6D]/80 block">
+                          {t.contact.rightCard.success.notesLabel}
+                        </span>
+                        <span className="text-[#5D4037] italic">{formData.message}</span>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Quick Action Buttons */}
+                  <div className="no-print pt-1 flex flex-wrap items-center justify-center gap-2">
+                    <button
+                      type="button"
+                      onClick={handlePrint}
+                      className="min-h-[44px] inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-white hover:bg-[#F9F6F0] border border-[#D1C4E9] text-[#512D6D] rounded-full text-xs font-semibold shadow-2xs transition-all active:scale-98 cursor-pointer"
+                      title={t.contact.rightCard.success.printBtn}
+                    >
+                      <Printer className="w-3.5 h-3.5 text-[#512D6D]" />
+                      <span>{t.contact.rightCard.success.printBtn}</span>
+                    </button>
+
+                    <a
+                      href={generateSelfCopyMailto()}
+                      className="min-h-[44px] inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-white hover:bg-[#F9F6F0] border border-[#D1C4E9] text-[#512D6D] rounded-full text-xs font-semibold shadow-2xs transition-all active:scale-98"
+                      title={t.contact.rightCard.success.emailCopyBtn}
+                    >
+                      <Mail className="w-3.5 h-3.5 text-[#512D6D]" />
+                      <span>{t.contact.rightCard.success.emailCopyBtn}</span>
+                    </a>
+
                     <a
                       href={generateWhatsAppUrl()}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 px-4 py-2 bg-[#512D6D] text-white rounded-full text-xs font-semibold shadow-xs"
+                      className="min-h-[44px] inline-flex items-center justify-center gap-1.5 px-3.5 py-2 bg-[#512D6D] hover:bg-[#402257] text-white rounded-full text-xs font-semibold shadow-xs transition-all active:scale-98"
                     >
                       <MessageCircle className="w-3.5 h-3.5 text-emerald-300" />
                       <span>{t.contact.rightCard.success.confirmWhatsApp}</span>
                     </a>
+
                     <button
                       type="button"
                       onClick={() => setSubmitted(false)}
-                      className="px-3.5 py-2 bg-white border border-[#D1C4E9] text-[#5D4037] rounded-full text-xs font-medium hover:bg-[#F9F6F0]"
+                      className="min-h-[44px] px-3.5 py-2 bg-white border border-[#D1C4E9] text-[#5D4037] rounded-full text-xs font-medium hover:bg-[#F9F6F0] transition-colors cursor-pointer"
                     >
                       {t.contact.rightCard.success.newRequest}
                     </button>
                   </div>
 
-                  <div className="mt-4 pt-3 border-t border-[#D1C4E9]/60 text-left">
+                  <div className="no-print mt-3 pt-3 border-t border-[#D1C4E9]/60 text-left">
                     <PaymentDetailsCard compact />
                   </div>
                 </div>

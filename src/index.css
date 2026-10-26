@@ -58,3 +58,80 @@ body {
 .animate-slideUp {
   animation: slideUp 0.26s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
+#print-root {
+  display: none;
+}
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 12mm 15mm;
+  }
+
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    color: #1a1a1a !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  /* 1. Masquer INTÉGRALEMENT #root pour supprimer les 11 pages de l'application web */
+  #root {
+    display: none !important;
+  }
+
+  /* 2. Rendre visible UNIQUEMENT le conteneur d'impression dédié */
+  #print-root {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+  }
+
+  /* 3. Style du récépissé imprimable dans #print-root (flux normal, JAMAIS fixed) */
+  #print-root .printable-summary {
+    position: static !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 20px 24px !important;
+    background: #ffffff !important;
+    color: #1a1a1a !important;
+    border: 1.5px solid #512D6D !important;
+    border-radius: 8px !important;
+    box-sizing: border-box !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* 4. Grille 2 colonnes forcée dans #print-root */
+  #print-root .summary-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  /* 5. Éviter toute coupure interne sur les blocs */
+  #print-root .summary-card-item {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    padding: 10px 12px !important;
+    background: #ffffff !important;
+    border: 1px solid #D1C4E9 !important;
+    border-radius: 6px !important;
+    font-size: 11px !important;
+    line-height: 1.45 !important;
+  }
+
+  /* 6. Masquer tous les boutons interactifs lors de l'impression */
+  .no-print,
+  .no-print * {
+    display: none !important;
+    visibility: hidden !important;
+  }
+}

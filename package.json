@@ -10,6 +10,9 @@
     "clean": "rm -rf dist server.js",
     "lint": "tsc --noEmit",
     "test:qa": "tsx .agents/skills/testeur-qa/scripts/run-qa-audit.ts",
+    "test:functional": "tsx .agents/skills/testeur-qa/scripts/run-functional-tests.ts",
+    "test": "npm run test:qa && npm run test:functional",
+    "tnr": "npm test",
     "phone:bridge": "tsx .agents/skills/mobile-device-bridge/scripts/bridge.ts",
     "phone:shot": "tsx .agents/skills/mobile-device-bridge/scripts/screenshot.ts",
     "phone:cdp": "tsx .agents/skills/mobile-device-bridge/scripts/cdp.ts"
