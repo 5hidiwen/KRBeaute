@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, MessageCircle, Mail, MapPin, Send, CheckCircle2, Instagram, Loader2, AlertCircle, Calendar } from 'lucide-react';
+import { Phone, MessageCircle, Mail, MapPin, Send, CheckCircle2, Instagram, Loader2, AlertCircle, Calendar, ClipboardCheck } from 'lucide-react';
 import { getServices, ServiceItem } from '../data/servicesData';
 import { COMMUNES_DATA } from '../data/communesData';
 import { useLanguage } from '../i18n/LanguageContext';
@@ -8,9 +8,10 @@ import { PaymentDetailsCard } from './PaymentDetailsCard';
 
 interface ContactSectionProps {
   selectedService?: ServiceItem | null;
+  onOpenClientSheet?: () => void;
 }
 
-export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService }) => {
+export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService, onOpenClientSheet }) => {
   const { t, language } = useLanguage();
   const currentServices = getServices(language);
 
@@ -206,10 +207,20 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService 
               </ol>
 
               {/* Polite closing phrase */}
-              <div className="mt-3.5 pt-2 border-t border-[#D1C4E9]/50 text-center">
+              <div className="mt-3.5 pt-2 border-t border-[#D1C4E9]/50 text-center space-y-2">
                 <p className="font-serif italic text-xs text-[#512D6D] font-medium">
                   {t.contact.leftCard.callout}
                 </p>
+                {onOpenClientSheet && (
+                  <button
+                    type="button"
+                    onClick={onOpenClientSheet}
+                    className="min-h-[40px] inline-flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-full bg-[#F9F6F0] hover:bg-[#D1C4E9]/40 border border-[#D1C4E9] text-[#512D6D] text-xs font-bold transition-colors cursor-pointer"
+                  >
+                    <ClipboardCheck className="w-3.5 h-3.5 text-[#8B2651]" />
+                    <span>{t.nav.tabs.ficheCliente} →</span>
+                  </button>
+                )}
               </div>
             </div>
 

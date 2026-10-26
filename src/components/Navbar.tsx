@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, MessageCircle, Home, Sparkles, MapPin, HelpCircle, Award, Cpu, Mail, Menu, X, ChevronRight, Clock } from 'lucide-react';
+import { Phone, MessageCircle, Home, Sparkles, MapPin, HelpCircle, Award, Cpu, Mail, Menu, X, ChevronRight, Clock, ClipboardCheck } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { LanguageSelector } from './LanguageSelector';
 
-export type NavTab = 'accueil' | 'soins' | 'marques' | 'a-propos' | 'secteur' | 'faq' | 'contact';
+export type NavTab = 'accueil' | 'soins' | 'marques' | 'a-propos' | 'secteur' | 'fiche-cliente' | 'faq' | 'contact';
 
 interface NavbarProps {
   activeTab: NavTab;
@@ -43,11 +43,18 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
     { id: 'a-propos', label: isEs ? 'Sobre Karina' : 'À Propos' },
     { id: 'secteur', label: isEs ? 'Zona (7 km)' : 'Secteur (7 km)' },
     { id: 'contact', label: isEs ? 'Contacto' : 'Contact' },
+    { id: 'fiche-cliente', label: t.nav.tabs.ficheClienteShort },
     { id: 'faq', label: isEs ? 'FAQ' : 'FAQ' },
   ];
 
   // Secondary items displayed inside the "Plus" Bottom Sheet on mobile/tablet
   const secondaryNavItems: SecondaryNavItem[] = [
+    {
+      id: 'fiche-cliente',
+      label: t.nav.tabs.ficheCliente,
+      sub: isEs ? 'Pre-diagnóstico de piel y salud enviado a Karina' : 'Pré-diagnostic peau & santé transmis à Karina',
+      icon: <ClipboardCheck className="w-4 h-4 text-[#8B2651]" />
+    },
     {
       id: 'marques',
       label: isEs ? 'Tecnologías y Marcas' : 'Technologies & Grandes Maisons',
@@ -80,7 +87,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
   const whatsAppUrl = `https://wa.me/33665566702?text=${encodeURIComponent(whatsAppGreeting)}`;
 
   // Whether a secondary tab (displayed inside "Plus" sheet) is currently active
-  const isSecondaryTabActive = activeTab === 'marques' || activeTab === 'a-propos' || activeTab === 'faq';
+  const isSecondaryTabActive = activeTab === 'fiche-cliente' || activeTab === 'marques' || activeTab === 'a-propos' || activeTab === 'faq';
 
   return (
     <>

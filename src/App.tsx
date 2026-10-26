@@ -11,6 +11,7 @@ import { HomeTestimonials } from './components/HomeTestimonials';
 import { FAQSection } from './components/FAQSection';
 import { HomeCtaBanner } from './components/HomeCtaBanner';
 import { ContactSection } from './components/ContactSection';
+import { ClientSheetSection } from './components/ClientSheetSection';
 import { Footer } from './components/Footer';
 import { LegalModal, LegalTab } from './components/LegalModal';
 import { ServiceItem } from './data/servicesData';
@@ -25,7 +26,7 @@ function AppContent() {
 
   // ScrollSpy on main page scroll to keep activeTab synchronized with current viewport
   useEffect(() => {
-    if (activeTab === 'faq') return;
+    if (activeTab === 'faq' || activeTab === 'fiche-cliente') return;
 
     const sectionIds: NavTab[] = ['accueil', 'soins', 'marques', 'a-propos', 'secteur', 'contact'];
     
@@ -49,14 +50,14 @@ function AppContent() {
   }, [activeTab]);
 
   const handleSelectTab = (tab: NavTab) => {
-    if (tab === 'faq') {
-      setActiveTab('faq');
+    if (tab === 'faq' || tab === 'fiche-cliente') {
+      setActiveTab(tab);
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
 
-    // If currently on dedicated FAQ page, transition back to home first
-    if (activeTab === 'faq') {
+    // If currently on dedicated FAQ or Fiche Cliente page, transition back to home first
+    if (activeTab === 'faq' || activeTab === 'fiche-cliente') {
       setActiveTab(tab);
       setTimeout(() => {
         if (tab === 'accueil') {
@@ -154,8 +155,25 @@ function AppContent() {
               </div>
             </div>
           </div>
+        ) : activeTab === 'fiche-cliente' ? (
+          /* VIEW 2: DEDICATED FICHE CLIENTE PAGE (Clean & Focused like FAQ) */
+          <div className="animate-fadeIn py-8 sm:py-14 bg-[#F9F6F0]">
+            <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 mb-4">
+              <button
+                type="button"
+                onClick={() => handleSelectTab('accueil')}
+                className="inline-flex items-center gap-2 px-4 py-2 min-h-[44px] rounded-full bg-white hover:bg-white/90 border border-[#D1C4E9] text-xs font-semibold text-[#512D6D] shadow-xs cursor-pointer transition-all active:scale-95"
+              >
+                <ArrowLeft className="w-4 h-4 text-[#512D6D]" />
+                <span>{language === 'es' ? 'Volver al inicio' : "Retour à l'accueil"}</span>
+              </button>
+            </div>
+
+            {/* The Dedicated Fiche Cliente Component */}
+            <ClientSheetSection />
+          </div>
         ) : (
-          /* VIEW 2: UNIFIED ONE-PAGE FLOW WITH PERFECT COLOR ALTERNATION */
+          /* VIEW 3: UNIFIED ONE-PAGE FLOW WITH PERFECT COLOR ALTERNATION */
           <div className="space-y-0">
             
             {/* 1. HERO HEADER (Beige #F9F6F0) */}
@@ -193,7 +211,10 @@ function AppContent() {
             />
 
             {/* 9. CONTACT & RÉSERVATION (Blanc bg-white) */}
-            <ContactSection selectedService={selectedService} />
+            <ContactSection 
+              selectedService={selectedService} 
+              onOpenClientSheet={() => handleSelectTab('fiche-cliente')}
+            />
 
           </div>
         )}

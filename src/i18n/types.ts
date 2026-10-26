@@ -11,6 +11,8 @@ export interface NavTranslations {
     marquesShort: string;
     aPropos: string;
     aProposShort: string;
+    ficheCliente: string;
+    ficheClienteShort: string;
     faq: string;
     contact: string;
   };
@@ -452,6 +454,96 @@ export interface PaymentDetailsTranslations {
   trustNote: string;
 }
 
+export interface ClientSheetTranslations {
+  kicker: string;
+  title: string;
+  subtitle: string;
+  confidentialBadge: string;
+  confidentialText: string;
+  step1Title: string;
+  step1Sub: string;
+  fullNameLabel: string;
+  fullNamePlaceholder: string;
+  birthDateLabel: string;
+  birthDatePlaceholder: string;
+  phoneLabel: string;
+  phonePlaceholder: string;
+  emailLabel: string;
+  emailPlaceholder: string;
+  communeLabel: string;
+  freeOffered: string;
+  addressNoteLabel: string;
+  addressNotePlaceholder: string;
+  step2Title: string;
+  step2Sub: string;
+  skinTypesLabel: string;
+  skinTypesHint: string;
+  skinTypes: {
+    seche: string;
+    mixte: string;
+    grasse: string;
+    sensible: string;
+    mature: string;
+    deshydratee: string;
+  };
+  skinZonesLabel: string;
+  skinZonesPlaceholder: string;
+  step3Title: string;
+  step3Sub: string;
+  contraindicationsLabel: string;
+  contraindicationsHint: string;
+  contraindications: {
+    aucune: string;
+    grossesse: string;
+    pacemaker: string;
+    allergies: string;
+    traitement: string;
+    soleil: string;
+  };
+  healthNotesLabel: string;
+  healthNotesPlaceholder: string;
+  step4Title: string;
+  step4Sub: string;
+  goalsLabel: string;
+  goalsHint: string;
+  goals: {
+    eclat: string;
+    antiAge: string;
+    hydratation: string;
+    purete: string;
+    regard: string;
+    detente: string;
+  };
+  routineLabel: string;
+  routinePlaceholder: string;
+  consentLabel: string;
+  submitEmailBtn: string;
+  submittingBtn: string;
+  whatsappSimultaneousBtn: string;
+  mailtoFallbackBtn: string;
+  errorTitle: string;
+  errorGeneric: string;
+  errorConsent: string;
+  success: {
+    badge: string;
+    title: string;
+    body: string;
+    whatsappCta: string;
+    mailtoCta: string;
+    newSheetBtn: string;
+  };
+  whatsappTemplate: {
+    header: string;
+    identity: string;
+    skin: string;
+    health: string;
+    goals: string;
+    routine: string;
+    none: string;
+    closing: string;
+  };
+}
+
 export interface SiteTranslations {
   htmlLang: string;
   metaTitle: string;
@@ -465,6 +557,7 @@ export interface SiteTranslations {
   logistics: LogisticsTranslations;
   faq: FAQTranslations;
   contact: ContactTranslations;
+  clientSheet: ClientSheetTranslations;
   paymentDetails: PaymentDetailsTranslations;
   footer: FooterTranslations;
   legal: LegalTranslations;
