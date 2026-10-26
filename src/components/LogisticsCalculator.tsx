@@ -10,7 +10,9 @@ import {
   X,
   Sparkles,
   Home,
-  Heart
+  Heart,
+  MessageCircle,
+  Phone
 } from 'lucide-react';
 import { COMMUNES_DATA, CommuneItem } from '../data/communesData';
 import { useLanguage } from '../i18n/LanguageContext';
@@ -24,8 +26,7 @@ export const LogisticsCalculator: React.FC = () => {
 
   // Communes by zone
   const zone1Communes = COMMUNES_DATA.filter(c => c.distanceKm <= 7);
-  const zone2Communes = COMMUNES_DATA.filter(c => c.distanceKm > 7 && c.distanceKm <= 20);
-  const zone3Communes = COMMUNES_DATA.filter(c => c.distanceKm > 20);
+  const zone2Communes = COMMUNES_DATA.filter(c => c.distanceKm > 7 && c.distanceKm <= 12);
 
   // Search filtered communes
   const searchResults = searchQuery.trim() === '' 
@@ -69,9 +70,52 @@ export const LogisticsCalculator: React.FC = () => {
         </div>
 
         {/* =========================================================================
-            THE 3 CLEAR COLUMNS (Zone 1, Zone 2, Zone 3)
+            OPTION 1: BANNIÈRE BIENVEILLANTE MISE À JOUR EN COURS
            ========================================================================= */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6 items-stretch">
+        <div className="bg-gradient-to-r from-[#D1C4E9]/35 via-white to-[#D1C4E9]/35 p-5 sm:p-6 rounded-3xl border border-[#512D6D]/30 shadow-xs">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div className="flex items-start gap-3.5">
+              <div className="w-10 h-10 rounded-2xl bg-[#512D6D] text-white flex items-center justify-center shrink-0 shadow-xs mt-0.5">
+                <Compass className="w-5 h-5" />
+              </div>
+              <div className="space-y-1">
+                <span className="inline-block px-2.5 py-0.5 rounded-full bg-[#512D6D]/15 text-[#512D6D] text-[10px] sm:text-[11px] font-bold uppercase tracking-wider">
+                  {t.logistics.updateNotice.badge}
+                </span>
+                <h3 className="font-serif text-base sm:text-lg font-bold text-[#512D6D]">
+                  {t.logistics.updateNotice.title}
+                </h3>
+                <p className="text-xs sm:text-[13px] text-[#5D4037]/90 max-w-3xl leading-relaxed">
+                  {t.logistics.updateNotice.message}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-2.5 w-full md:w-auto shrink-0 pt-2 md:pt-0 border-t md:border-t-0 border-[#D1C4E9]/60">
+              <a
+                href={`https://wa.me/33665566702?text=${encodeURIComponent(t.logistics.updateNotice.whatsappGreeting)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="min-h-[44px] flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-[#512D6D] hover:bg-[#402257] active:scale-98 text-white text-xs font-bold shadow-xs transition-all"
+              >
+                <MessageCircle className="w-3.5 h-3.5 text-emerald-300" />
+                <span>{t.logistics.updateNotice.whatsappBtn}</span>
+              </a>
+              <a
+                href="tel:+33665566702"
+                className="min-h-[44px] inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-white hover:bg-[#F9F6F0] border border-[#D1C4E9] text-[#512D6D] text-xs font-semibold shadow-2xs transition-all active:scale-98"
+              >
+                <Phone className="w-3.5 h-3.5" />
+                <span>{t.logistics.updateNotice.callBtn}</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* =========================================================================
+            THE 2 CLEAR COLUMNS (Zone 1, Zone 2)
+           ========================================================================= */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6 items-stretch">
           
           {/* COLUMN 1 : ZONE 1 (≤ 7 km) - 0 € OFFERT */}
           <div className="bg-white rounded-3xl p-5 sm:p-6 border-2 border-emerald-500/30 shadow-xs flex flex-col justify-between hover:shadow-md transition-shadow">
@@ -127,7 +171,7 @@ export const LogisticsCalculator: React.FC = () => {
                   <Car className="w-3.5 h-3.5 text-[#512D6D]" />
                   <span>{t.logistics.zones.zone2Tag}</span>
                 </div>
-                <span className="text-[11px] font-semibold text-[#5D4037]/60">7 - 20 km</span>
+                <span className="text-[11px] font-semibold text-[#5D4037]/60">7 - 12 km</span>
               </div>
 
               <h3 className="font-serif text-lg sm:text-xl font-bold text-[#5D4037] mb-1">
@@ -160,51 +204,6 @@ export const LogisticsCalculator: React.FC = () => {
             <div className="pt-3 border-t border-[#D1C4E9]/50 flex items-center gap-2 text-xs font-medium text-[#5D4037]/80">
               <Check className="w-4 h-4 text-[#512D6D] shrink-0" />
               <span>{isEs ? 'Tarifa fija por traslado' : 'Forfait fixe par déplacement'}</span>
-            </div>
-          </div>
-
-          {/* COLUMN 3 : ZONE 3 (20 à 30 km) - +10 € */}
-          <div className="bg-white rounded-3xl p-5 sm:p-6 border border-[#D1C4E9] shadow-xs flex flex-col justify-between hover:shadow-md transition-shadow">
-            <div>
-              {/* Card Header */}
-              <div className="flex items-center justify-between gap-2 mb-4">
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#F5E6EC] border border-[#8B2651]/20 text-[#8B2651] text-xs font-bold">
-                  <Compass className="w-3.5 h-3.5 text-[#8B2651]" />
-                  <span>{t.logistics.zones.zone3Tag}</span>
-                </div>
-                <span className="text-[11px] font-semibold text-[#5D4037]/60">20 - 30 km</span>
-              </div>
-
-              <h3 className="font-serif text-lg sm:text-xl font-bold text-[#5D4037] mb-1">
-                {t.logistics.zones.zone3Title}
-              </h3>
-              <p className="text-xs text-[#5D4037]/75 mb-4">
-                {t.logistics.zones.zone3Sub}
-              </p>
-
-              {/* Commune Pills */}
-              <div className="flex flex-wrap gap-1.5 mb-6">
-                {zone3Communes.map((commune) => (
-                  <button
-                    key={commune.name}
-                    type="button"
-                    onClick={() => setSelectedCommune(commune)}
-                    className={`px-2.5 py-1 text-xs rounded-lg transition-colors cursor-pointer text-left ${
-                      selectedCommune?.name === commune.name
-                        ? 'bg-[#512D6D] text-white font-bold'
-                        : 'bg-[#F9F6F0] text-[#5D4037] hover:bg-[#D1C4E9]/40 border border-[#D1C4E9]/50'
-                    }`}
-                  >
-                    {commune.name}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Bottom Note */}
-            <div className="pt-3 border-t border-[#D1C4E9]/50 flex items-center gap-2 text-xs font-medium text-[#5D4037]/80">
-              <Check className="w-4 h-4 text-[#8B2651] shrink-0" />
-              <span>{isEs ? 'Más de 30 km: cotización previa' : 'Au-delà de 30 km : sur devis'}</span>
             </div>
           </div>
 

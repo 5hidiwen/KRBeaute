@@ -202,6 +202,14 @@ export interface LogisticsTranslations {
     zone3Sub: string;
     zone3Tag: string;
   };
+  updateNotice: {
+    badge: string;
+    title: string;
+    message: string;
+    whatsappBtn: string;
+    callBtn: string;
+    whatsappGreeting: string;
+  };
   searchPrompt: string;
   searchPlaceholder: string;
   distanceLabel: string;
