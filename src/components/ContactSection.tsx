@@ -6,6 +6,7 @@ import { useLanguage } from '../i18n/LanguageContext';
 import { WEB3FORMS_ACCESS_KEY } from '../config/contact';
 import { PaymentDetailsCard } from './PaymentDetailsCard';
 import { buildWhatsAppBookingUrl, getSlotLabel } from '../utils/bookingUtils';
+import { BookingConditionsModal } from './BookingConditionsModal';
 
 interface ContactSectionProps {
   selectedService?: ServiceItem | null;
@@ -33,6 +34,34 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService,
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [dateFocused, setDateFocused] = useState(false);
+  const [isConditionsModalOpen, setIsConditionsModalOpen] = useState(false);
+
+  const renderTermsLabel = () => {
+    const fullText = t.contact.rightCard.termsLabel;
+    const boldText = t.contact.rightCard.termsBold;
+    if (!fullText.includes(boldText)) {
+      return fullText;
+    }
+    const parts = fullText.split(boldText);
+    return (
+      <>
+        {parts[0]}
+        <button
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            setIsConditionsModalOpen(true);
+          }}
+          className="text-[#512D6D] font-bold underline hover:text-[#8B2651] cursor-pointer inline-flex items-center gap-0.5"
+          title={t.contact.leftCard.viewConditionsBtn}
+        >
+          <span>{boldText}</span>
+        </button>
+        {parts.slice(1).join(boldText)}
+      </>
+    );
+  };
 
   // Synchronize when selectedService changes
   useEffect(() => {
@@ -218,42 +247,107 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService,
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6 items-stretch">
           
           {/* CARD 1 (LEFT): CONDITIONS DE RÉSERVATION & COORDONNÉES */}
-          <div className="bg-white/95 rounded-3xl p-5 sm:p-6 border border-[#D1C4E9] shadow-sm flex flex-col justify-between h-full">
+          <div className="order-2 lg:order-1 bg-white/95 rounded-3xl p-5 sm:p-6 border border-[#D1C4E9] shadow-sm flex flex-col justify-between h-full">
             <div>
-              {/* Card Header matching flyer */}
-              <div className="text-center pb-3 mb-3 border-b border-[#D1C4E9]/60">
-                <span className="text-[10px] sm:text-xs font-bold tracking-wider uppercase text-[#8B2651] block mb-0.5">
-                  {t.contact.leftCard.kicker}
-                </span>
-                <h3 className="font-serif text-lg sm:text-2xl font-bold text-[#512D6D] tracking-tight">
-                  {t.contact.leftCard.title}
-                </h3>
-                <p className="font-serif italic text-xs sm:text-sm text-[#8B2651] font-semibold mt-0.5">
-                  {t.contact.leftCard.sub}
-                </p>
-                <p className="text-xs sm:text-[13px] text-[#5D4037]/85 mt-1.5 leading-relaxed max-w-md mx-auto">
-                  {t.contact.leftCard.intro}
-                </p>
+              {/* DESKTOP VIEW: Full flyer layout */}
+              <div className="hidden lg:block">
+                <div className="text-center pb-3 mb-3 border-b border-[#D1C4E9]/60">
+                  <span className="text-[10px] sm:text-xs font-bold tracking-wider uppercase text-[#8B2651] block mb-0.5">
+                    {t.contact.leftCard.kicker}
+                  </span>
+                  <h3 className="font-serif text-lg sm:text-2xl font-bold text-[#512D6D] tracking-tight">
+                    {t.contact.leftCard.title}
+                  </h3>
+                  <p className="font-serif italic text-xs sm:text-sm text-[#8B2651] font-semibold mt-0.5">
+                    {t.contact.leftCard.sub}
+                  </p>
+                  <p className="text-xs sm:text-[13px] text-[#5D4037]/85 mt-1.5 leading-relaxed max-w-md mx-auto">
+                    {t.contact.leftCard.intro}
+                  </p>
+                </div>
+
+                {/* 5 Points directly readable without scrolling */}
+                <ol className="space-y-3 text-[13px] sm:text-sm leading-relaxed text-[#5D4037]">
+                  {t.contact.leftCard.points.map((pt) => (
+                    <li key={pt.num} className="flex items-start gap-2.5">
+                      <span className="w-5.5 h-5.5 rounded-full bg-[#512D6D] text-white flex items-center justify-center font-bold text-xs shrink-0 mt-0.5 shadow-2xs">
+                        {pt.num}
+                      </span>
+                      <div>
+                        <strong className="text-[#512D6D] uppercase font-bold text-[12px] sm:text-[13px] tracking-wide">
+                          {pt.title}
+                        </strong>
+                        <p className="text-[#5D4037]/90 text-[13px] sm:text-sm mt-0.5 leading-relaxed">
+                          {pt.text}
+                        </p>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
               </div>
 
-              {/* 5 Points directly readable without scrolling */}
-              <ol className="space-y-3 text-[13px] sm:text-sm leading-relaxed text-[#5D4037]">
-                {t.contact.leftCard.points.map((pt) => (
-                  <li key={pt.num} className="flex items-start gap-2.5">
-                    <span className="w-5.5 h-5.5 rounded-full bg-[#512D6D] text-white flex items-center justify-center font-bold text-xs shrink-0 mt-0.5 shadow-2xs">
-                      {pt.num}
-                    </span>
-                    <div>
-                      <strong className="text-[#512D6D] uppercase font-bold text-[12px] sm:text-[13px] tracking-wide">
-                        {pt.title}
-                      </strong>
-                      <p className="text-[#5D4037]/90 text-[13px] sm:text-sm mt-0.5 leading-relaxed">
-                        {pt.text}
+              {/* MOBILE VIEW: Ultra-compact Reassurance Card & Modal Trigger */}
+              <div className="block lg:hidden">
+                <div className="text-center pb-2.5 mb-2.5 border-b border-[#D1C4E9]/60">
+                  <span className="text-[10px] font-bold tracking-wider uppercase text-[#8B2651] block mb-0.5">
+                    {t.contact.leftCard.kicker}
+                  </span>
+                  <h3 className="font-serif text-base sm:text-lg font-bold text-[#512D6D] tracking-tight">
+                    {t.contact.leftCard.title}
+                  </h3>
+                  <p className="font-serif italic text-xs text-[#8B2651] font-semibold mt-0.5">
+                    {t.contact.leftCard.sub}
+                  </p>
+                </div>
+
+                {/* Compact Highlights: Horizontal Snap Slider */}
+                <div className="my-2">
+                  <p className="text-[11px] font-bold uppercase tracking-wider text-[#512D6D]/80 mb-2">
+                    {t.contact.leftCard.compactSummaryTitle}
+                  </p>
+
+                  <div className="flex gap-2.5 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-1.5 -mx-1 px-1">
+                    <div className="w-[82vw] max-w-[280px] shrink-0 snap-center flex items-start gap-2.5 p-2.5 bg-[#F9F6F0] rounded-xl border border-[#D1C4E9]/50 shadow-2xs">
+                      <span className="w-5 h-5 rounded-full bg-[#512D6D] text-white flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5 shadow-2xs">
+                        1
+                      </span>
+                      <p className="text-xs text-[#5D4037]/90 leading-snug">
+                        {t.contact.leftCard.compactPoint1}
                       </p>
                     </div>
-                  </li>
-                ))}
-              </ol>
+
+                    <div className="w-[82vw] max-w-[280px] shrink-0 snap-center flex items-start gap-2.5 p-2.5 bg-[#F9F6F0] rounded-xl border border-[#D1C4E9]/50 shadow-2xs">
+                      <span className="w-5 h-5 rounded-full bg-[#512D6D] text-white flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5 shadow-2xs">
+                        2
+                      </span>
+                      <p className="text-xs text-[#5D4037]/90 leading-snug">
+                        {t.contact.leftCard.compactPoint2}
+                      </p>
+                    </div>
+
+                    <div className="w-[82vw] max-w-[280px] shrink-0 snap-center flex items-start gap-2.5 p-2.5 bg-[#F9F6F0] rounded-xl border border-[#D1C4E9]/50 shadow-2xs">
+                      <span className="w-5 h-5 rounded-full bg-[#512D6D] text-white flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5 shadow-2xs">
+                        3
+                      </span>
+                      <p className="text-xs text-[#5D4037]/90 leading-snug">
+                        {t.contact.leftCard.compactPoint3}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Modal Trigger Button */}
+                <div className="pt-1">
+                  <button
+                    type="button"
+                    onClick={() => setIsConditionsModalOpen(true)}
+                    className="w-full min-h-[44px] inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-2xl bg-[#512D6D]/10 hover:bg-[#512D6D]/15 active:scale-98 border border-[#512D6D]/25 text-[#512D6D] text-xs font-bold transition-all cursor-pointer shadow-2xs"
+                  >
+                    <FileText className="w-4 h-4 text-[#8B2651]" />
+                    <span>{t.contact.leftCard.viewConditionsBtn} →</span>
+                  </button>
+                </div>
+              </div>
 
               {/* Polite closing phrase */}
               <div className="mt-3.5 pt-2 border-t border-[#D1C4E9]/50 text-center space-y-2">
@@ -273,8 +367,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService,
               </div>
             </div>
 
-            {/* Direct Contact & Social Footer Bar */}
-            <div className="mt-4 pt-3 border-t border-[#D1C4E9]/60 flex flex-wrap items-center justify-between gap-2.5 text-xs text-[#5D4037]">
+            {/* Direct Contact & Social Footer Bar (Desktop only, avoids duplication with mobile footer) */}
+            <div className="hidden lg:flex mt-4 pt-3 border-t border-[#D1C4E9]/60 flex-wrap items-center justify-between gap-2.5 text-xs text-[#5D4037]">
               <div className="flex flex-wrap items-center gap-3">
                 <a href="tel:+33665566702" className="inline-flex items-center gap-1.5 font-bold text-[#512D6D] hover:underline">
                   <Phone className="w-3.5 h-3.5" />
@@ -307,7 +401,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService,
           </div>
 
           {/* CARD 2 (RIGHT): PRENDRE RENDEZ-VOUS (WHATSAPP + FORMULAIRE) */}
-          <div className="bg-white/95 rounded-3xl p-5 sm:p-6 border border-[#D1C4E9] shadow-sm flex flex-col justify-between h-full">
+          <div className="order-1 lg:order-2 bg-white/95 rounded-3xl p-5 sm:p-6 border border-[#D1C4E9] shadow-sm flex flex-col justify-between h-full">
             <div>
               {/* Quick WhatsApp Action Banner */}
               <div className="mb-4 p-3 sm:p-3.5 bg-gradient-to-r from-[#512D6D] via-[#633385] to-[#512D6D] text-white rounded-2xl shadow-xs flex flex-col sm:flex-row items-center justify-between gap-2.5">
@@ -668,7 +762,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService,
                         className="w-5 h-5 rounded-md border-[#D1C4E9] text-[#512D6D] accent-[#512D6D] focus:ring-[#512D6D] shrink-0 mt-0.5 cursor-pointer"
                       />
                       <span className="leading-snug">
-                        {t.contact.rightCard.termsLabel}
+                        {renderTermsLabel()}
                       </span>
                     </label>
                   </div>
@@ -725,6 +819,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService,
         </div>
 
       </div>
+
+      {/* Dedicated Booking Conditions Modal */}
+      <BookingConditionsModal
+        isOpen={isConditionsModalOpen}
+        onClose={() => setIsConditionsModalOpen(false)}
+      />
     </section>
   );
 };

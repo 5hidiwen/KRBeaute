@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { 
   MapPin, 
   Search, 
@@ -22,6 +22,25 @@ export const LogisticsCalculator: React.FC = () => {
   const { t, language } = useLanguage();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCommune, setSelectedCommune] = useState<CommuneItem | null>(null);
+  const [activeChecklistIndex, setActiveChecklistIndex] = useState(0);
+  const checklistSliderRef = useRef<HTMLDivElement>(null);
+
+  const handleChecklistScroll = () => {
+    if (checklistSliderRef.current) {
+      const scrollLeft = checklistSliderRef.current.scrollLeft;
+      const cardWidth = checklistSliderRef.current.offsetWidth * 0.75;
+      const index = Math.round(scrollLeft / cardWidth);
+      setActiveChecklistIndex(Math.min(Math.max(index, 0), 3));
+    }
+  };
+
+  const scrollToChecklist = (idx: number) => {
+    if (checklistSliderRef.current) {
+      const card = checklistSliderRef.current.children[idx] as HTMLElement;
+      card?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      setActiveChecklistIndex(idx);
+    }
+  };
 
   const isEs = language === 'es';
 
@@ -41,10 +60,9 @@ export const LogisticsCalculator: React.FC = () => {
            ========================================================================= */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-[#D1C4E9]/50">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#512D6D]/10 text-[#512D6D] text-[11px] font-semibold tracking-wide mb-2">
-              <Compass className="w-3.5 h-3.5 text-[#512D6D]" />
-              <span>{t.logistics.kicker}</span>
-            </div>
+            <span className="block text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#8B2651] mb-2">
+              {t.logistics.kicker}
+            </span>
 
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-semibold text-[#5D4037] tracking-tight">
               {t.logistics.title}
@@ -319,67 +337,91 @@ export const LogisticsCalculator: React.FC = () => {
         {/* =========================================================================
             CHECK-LIST SÉRÉNITÉ POUR M'ACCUEILLIR (Bienveillant & Rassurant)
            ========================================================================= */}
-        <div className="bg-[#F9F6F0] rounded-3xl p-6 sm:p-8 border border-[#D1C4E9]/80 shadow-xs">
-          <div className="text-center max-w-xl mx-auto mb-6">
-            <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#512D6D]/10 text-[#512D6D] text-[11px] font-semibold tracking-wide mb-1.5">
-              <Sparkles className="w-3.5 h-3.5 text-[#512D6D]" />
-              <span>{t.logistics.checklist.kicker}</span>
-            </span>
-            <h3 className="font-serif text-xl sm:text-2xl font-bold text-[#5D4037]">
+        <div className="bg-[#F9F6F0] rounded-3xl p-5 sm:p-8 border border-[#D1C4E9]/80 shadow-xs">
+          <div className="text-center max-w-xl mx-auto mb-4 sm:mb-6">
+            <h3 className="font-serif text-lg sm:text-2xl font-bold text-[#5D4037]">
               {t.logistics.checklist.title}
             </h3>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            
-            <div className="bg-white p-4 rounded-2xl border border-[#D1C4E9]/60 shadow-2xs">
-              <div className="w-8 h-8 rounded-xl bg-[#D1C4E9]/30 text-[#512D6D] flex items-center justify-center mb-2.5">
-                <Home className="w-4 h-4" />
+          {/* Horizontal Snap Slider on Mobile (< sm), Grid on Tablet & Desktop (sm+) */}
+          <div 
+            ref={checklistSliderRef}
+            onScroll={handleChecklistScroll}
+            className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4 overflow-x-auto sm:overflow-visible snap-x snap-mandatory no-scrollbar pb-2 pt-1 -mx-2 px-2 sm:mx-0 sm:px-0"
+          >
+            <div className="w-[80vw] max-w-[280px] shrink-0 snap-center sm:w-auto sm:max-w-none sm:shrink bg-white p-4 sm:p-5 rounded-2xl border border-[#D1C4E9]/60 shadow-2xs flex flex-col justify-between">
+              <div>
+                <div className="w-8 h-8 rounded-xl bg-[#D1C4E9]/30 text-[#512D6D] flex items-center justify-center mb-2.5">
+                  <Home className="w-4 h-4" />
+                </div>
+                <h4 className="font-serif text-xs sm:text-sm font-bold text-[#5D4037] mb-1">
+                  {t.logistics.checklist.item1Title}
+                </h4>
+                <p className="text-[11px] sm:text-xs text-[#5D4037]/75 leading-relaxed">
+                  {t.logistics.checklist.item1Desc}
+                </p>
               </div>
-              <h4 className="font-serif text-xs sm:text-sm font-bold text-[#5D4037] mb-1">
-                {t.logistics.checklist.item1Title}
-              </h4>
-              <p className="text-[11px] sm:text-xs text-[#5D4037]/75 leading-relaxed">
-                {t.logistics.checklist.item1Desc}
-              </p>
             </div>
 
-            <div className="bg-white p-4 rounded-2xl border border-[#D1C4E9]/60 shadow-2xs">
-              <div className="w-8 h-8 rounded-xl bg-[#D1C4E9]/30 text-[#512D6D] flex items-center justify-center mb-2.5">
-                <Car className="w-4 h-4" />
+            <div className="w-[80vw] max-w-[280px] shrink-0 snap-center sm:w-auto sm:max-w-none sm:shrink bg-white p-4 sm:p-5 rounded-2xl border border-[#D1C4E9]/60 shadow-2xs flex flex-col justify-between">
+              <div>
+                <div className="w-8 h-8 rounded-xl bg-[#D1C4E9]/30 text-[#512D6D] flex items-center justify-center mb-2.5">
+                  <Car className="w-4 h-4" />
+                </div>
+                <h4 className="font-serif text-xs sm:text-sm font-bold text-[#5D4037] mb-1">
+                  {t.logistics.checklist.item2Title}
+                </h4>
+                <p className="text-[11px] sm:text-xs text-[#5D4037]/75 leading-relaxed">
+                  {t.logistics.checklist.item2Desc}
+                </p>
               </div>
-              <h4 className="font-serif text-xs sm:text-sm font-bold text-[#5D4037] mb-1">
-                {t.logistics.checklist.item2Title}
-              </h4>
-              <p className="text-[11px] sm:text-xs text-[#5D4037]/75 leading-relaxed">
-                {t.logistics.checklist.item2Desc}
-              </p>
             </div>
 
-            <div className="bg-white p-4 rounded-2xl border border-[#D1C4E9]/60 shadow-2xs">
-              <div className="w-8 h-8 rounded-xl bg-[#D1C4E9]/30 text-[#512D6D] flex items-center justify-center mb-2.5">
-                <Sparkles className="w-4 h-4 text-amber-600" />
+            <div className="w-[80vw] max-w-[280px] shrink-0 snap-center sm:w-auto sm:max-w-none sm:shrink bg-white p-4 sm:p-5 rounded-2xl border border-[#D1C4E9]/60 shadow-2xs flex flex-col justify-between">
+              <div>
+                <div className="w-8 h-8 rounded-xl bg-[#D1C4E9]/30 text-[#512D6D] flex items-center justify-center mb-2.5">
+                  <Sparkles className="w-4 h-4 text-amber-600" />
+                </div>
+                <h4 className="font-serif text-xs sm:text-sm font-bold text-[#5D4037] mb-1">
+                  {t.logistics.checklist.item3Title}
+                </h4>
+                <p className="text-[11px] sm:text-xs text-[#5D4037]/75 leading-relaxed">
+                  {t.logistics.checklist.item3Desc}
+                </p>
               </div>
-              <h4 className="font-serif text-xs sm:text-sm font-bold text-[#5D4037] mb-1">
-                {t.logistics.checklist.item3Title}
-              </h4>
-              <p className="text-[11px] sm:text-xs text-[#5D4037]/75 leading-relaxed">
-                {t.logistics.checklist.item3Desc}
-              </p>
             </div>
 
-            <div className="bg-white p-4 rounded-2xl border border-[#D1C4E9]/60 shadow-2xs">
-              <div className="w-8 h-8 rounded-xl bg-[#D1C4E9]/30 text-[#512D6D] flex items-center justify-center mb-2.5">
-                <Heart className="w-4 h-4 text-rose-600" />
+            <div className="w-[80vw] max-w-[280px] shrink-0 snap-center sm:w-auto sm:max-w-none sm:shrink bg-white p-4 sm:p-5 rounded-2xl border border-[#D1C4E9]/60 shadow-2xs flex flex-col justify-between">
+              <div>
+                <div className="w-8 h-8 rounded-xl bg-[#D1C4E9]/30 text-[#512D6D] flex items-center justify-center mb-2.5">
+                  <Heart className="w-4 h-4 text-rose-600" />
+                </div>
+                <h4 className="font-serif text-xs sm:text-sm font-bold text-[#5D4037] mb-1">
+                  {t.logistics.checklist.item4Title}
+                </h4>
+                <p className="text-[11px] sm:text-xs text-[#5D4037]/75 leading-relaxed">
+                  {t.logistics.checklist.item4Desc}
+                </p>
               </div>
-              <h4 className="font-serif text-xs sm:text-sm font-bold text-[#5D4037] mb-1">
-                {t.logistics.checklist.item4Title}
-              </h4>
-              <p className="text-[11px] sm:text-xs text-[#5D4037]/75 leading-relaxed">
-                {t.logistics.checklist.item4Desc}
-              </p>
             </div>
+          </div>
 
+          {/* Mobile Swipe Pagination Dots (< sm) */}
+          <div className="flex sm:hidden items-center justify-center gap-1.5 mt-3">
+            {[0, 1, 2, 3].map((idx) => (
+              <button
+                key={idx}
+                type="button"
+                onClick={() => scrollToChecklist(idx)}
+                className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                  activeChecklistIndex === idx
+                    ? 'w-6 bg-[#512D6D]'
+                    : 'w-2 bg-[#D1C4E9] hover:bg-[#512D6D]/40'
+                }`}
+                aria-label={`Conseil ${idx + 1}`}
+              />
+            ))}
           </div>
         </div>
 

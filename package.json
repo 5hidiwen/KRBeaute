@@ -15,7 +15,8 @@
     "tnr": "npm test",
     "phone:bridge": "tsx .agents/skills/mobile-device-bridge/scripts/bridge.ts",
     "phone:shot": "tsx .agents/skills/mobile-device-bridge/scripts/screenshot.ts",
-    "phone:cdp": "tsx .agents/skills/mobile-device-bridge/scripts/cdp.ts"
+    "phone:cdp": "tsx .agents/skills/mobile-device-bridge/scripts/cdp.ts",
+    "sync:reviews": "tsx scripts/sync-google-reviews.ts"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",

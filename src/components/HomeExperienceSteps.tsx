@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { MessageCircle, HeartHandshake, ArrowRight, ArrowDown, Heart, Award } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 
@@ -13,6 +13,25 @@ export const HomeExperienceSteps: React.FC<HomeExperienceStepsProps> = ({
 }) => {
   const { t } = useLanguage();
   const { experience } = t.home;
+  const [activeStepIndex, setActiveStepIndex] = useState(0);
+  const sliderRef = useRef<HTMLDivElement>(null);
+
+  const handleScroll = () => {
+    if (sliderRef.current) {
+      const scrollLeft = sliderRef.current.scrollLeft;
+      const cardWidth = sliderRef.current.offsetWidth * 0.75;
+      const index = Math.round(scrollLeft / cardWidth);
+      setActiveStepIndex(Math.min(Math.max(index, 0), 2));
+    }
+  };
+
+  const scrollToStep = (idx: number) => {
+    if (sliderRef.current) {
+      const card = sliderRef.current.children[idx] as HTMLElement;
+      card?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      setActiveStepIndex(idx);
+    }
+  };
 
   const steps = [
     {
@@ -49,8 +68,7 @@ export const HomeExperienceSteps: React.FC<HomeExperienceStepsProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#D1C4E9]/35 border border-[#D1C4E9] text-[11px] sm:text-xs font-semibold tracking-wider uppercase text-[#512D6D] mb-3">
-            <Heart className="w-3.5 h-3.5 text-[#512D6D]" />
+          <span className="block text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#8B2651] mb-2">
             {experience.kicker}
           </span>
           <h2 className="text-2xl sm:text-4xl font-serif font-bold text-[#5D4037] tracking-tight mb-3">
@@ -61,30 +79,36 @@ export const HomeExperienceSteps: React.FC<HomeExperienceStepsProps> = ({
           </p>
         </div>
 
-        {/* 3 Steps Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 relative">
+        {/* 3 Steps: Horizontal Snap Slider on Mobile (< md), Grid on Desktop (md+) */}
+        <div 
+          ref={sliderRef}
+          onScroll={handleScroll}
+          className="flex md:grid md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 overflow-x-auto md:overflow-visible snap-x snap-mandatory no-scrollbar pb-3 pt-1 -mx-4 px-4 sm:mx-0 sm:px-0 relative"
+        >
           {steps.map((step, idx) => (
             <div 
               key={step.num}
-              className="relative flex flex-col bg-gradient-to-b from-[#F9F6F0] to-[#F3EDE2]/50 p-6 sm:p-7 rounded-3xl border border-[#D1C4E9]/70 shadow-xs hover:shadow-md transition-all group"
+              className="w-[84vw] max-w-[320px] shrink-0 snap-center md:w-auto md:max-w-none md:shrink relative flex flex-col justify-between bg-gradient-to-b from-[#F9F6F0] to-[#F3EDE2]/50 p-6 sm:p-7 rounded-3xl border border-[#D1C4E9]/70 shadow-xs hover:shadow-md transition-all group"
             >
-              {/* Step indicator top bar */}
-              <div className="flex items-center justify-between mb-5">
-                <span className="font-serif text-3xl sm:text-4xl font-bold text-[#512D6D]/25 group-hover:text-[#512D6D]/40 transition-colors">
-                  {step.num}
-                </span>
-                <div className="w-10 h-10 rounded-2xl bg-white border border-[#D1C4E9] shadow-xs flex items-center justify-center group-hover:scale-105 transition-transform">
-                  {step.icon}
+              <div>
+                {/* Step indicator top bar */}
+                <div className="flex items-center justify-between mb-4 sm:mb-5">
+                  <span className="font-serif text-3xl sm:text-4xl font-bold text-[#512D6D]/25 group-hover:text-[#512D6D]/40 transition-colors">
+                    {step.num}
+                  </span>
+                  <div className="w-10 h-10 rounded-2xl bg-white border border-[#D1C4E9] shadow-xs flex items-center justify-center group-hover:scale-105 transition-transform">
+                    {step.icon}
+                  </div>
                 </div>
-              </div>
 
-              {/* Step Title & Description */}
-              <h3 className="font-serif text-lg sm:text-xl font-bold text-[#5D4037] mb-2.5">
-                {step.title}
-              </h3>
-              <p className="text-xs sm:text-sm text-[#5D4037]/80 leading-relaxed flex-1">
-                {step.desc}
-              </p>
+                {/* Step Title & Description */}
+                <h3 className="font-serif text-base sm:text-xl font-bold text-[#5D4037] mb-2 sm:mb-2.5">
+                  {step.title}
+                </h3>
+                <p className="text-xs sm:text-sm text-[#5D4037]/80 leading-relaxed">
+                  {step.desc}
+                </p>
+              </div>
 
               {/* Progress connector line on desktop */}
               {idx < steps.length - 1 && (
@@ -94,6 +118,23 @@ export const HomeExperienceSteps: React.FC<HomeExperienceStepsProps> = ({
                 />
               )}
             </div>
+          ))}
+        </div>
+
+        {/* Mobile Swipe Pagination Dots (< md) */}
+        <div className="flex md:hidden items-center justify-center gap-1.5 mt-3">
+          {steps.map((step, idx) => (
+            <button
+              key={step.num}
+              type="button"
+              onClick={() => scrollToStep(idx)}
+              className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                activeStepIndex === idx
+                  ? 'w-6 bg-[#512D6D]'
+                  : 'w-2 bg-[#D1C4E9] hover:bg-[#512D6D]/40'
+              }`}
+              aria-label={`Étape ${idx + 1}`}
+            />
           ))}
         </div>
 

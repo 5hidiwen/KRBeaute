@@ -25,6 +25,15 @@ body {
   overflow-x: hidden;
 }
 
+/* Masquer les barres de défilement tout en préservant le scroll tactile */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 .font-serif {
   font-family: var(--font-serif);
 }

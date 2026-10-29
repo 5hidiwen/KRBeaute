@@ -87,6 +87,8 @@ export interface ServicesTranslations {
   sectionVisageCount: string;
   sectionPieds: string;
   sectionPiedsCount: string;
+  viewDetails: string;
+  hideDetails: string;
   viewProtocol: string;
   hideProtocol: string;
   viewIncluded: string;
@@ -263,6 +265,12 @@ export interface ContactTranslations {
     }>;
     callout: string;
     freeZone: string;
+    viewConditionsBtn: string;
+    modalCloseBtn: string;
+    compactSummaryTitle: string;
+    compactPoint1: string;
+    compactPoint2: string;
+    compactPoint3: string;
   };
   rightCard: {
     fastest: string;

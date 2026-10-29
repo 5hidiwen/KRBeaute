@@ -254,9 +254,8 @@ export const ClientSheetSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#D1C4E9]/40 text-[#512D6D] text-[11px] sm:text-xs font-bold uppercase tracking-wider mb-2.5">
-            <ClipboardCheck className="w-3.5 h-3.5 text-[#8B2651]" />
-            <span>{cs.kicker}</span>
+          <span className="block text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#8B2651] mb-2.5">
+            {cs.kicker}
           </span>
           <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold text-[#512D6D] tracking-tight">
             {cs.title}

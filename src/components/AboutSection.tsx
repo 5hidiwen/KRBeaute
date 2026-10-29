@@ -94,10 +94,9 @@ export const AboutSection: React.FC = () => {
           {/* Right Column: Philosophy & Bio (7 cols) */}
           <div className="lg:col-span-7 flex flex-col items-start">
             
-            <div className="flex items-center gap-2 text-xs font-semibold tracking-wider uppercase text-[#512D6D] mb-2">
-              <Sparkles className="w-4 h-4" />
-              <span>{t.about.kicker}</span>
-            </div>
+            <span className="block text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#8B2651] mb-2">
+              {t.about.kicker}
+            </span>
 
             <h2 className="text-2xl sm:text-4xl font-serif font-medium text-[#5D4037] tracking-tight mb-4">
               {t.about.title}
@@ -174,10 +173,9 @@ export const AboutSection: React.FC = () => {
                   <Globe className="w-5 h-5 sm:w-6 sm:h-6 text-[#EAE2F2]" />
                 </div>
                 <div className="space-y-1 max-w-2xl">
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#512D6D]/10 text-[#512D6D] text-[11px] font-bold uppercase tracking-wider">
-                    <Sparkles className="w-3 h-3 text-[#512D6D]" />
-                    <span>{t.about.workshopsBox.badge}</span>
-                  </div>
+                  <span className="inline-block text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.18em] text-[#8B2651] mb-0.5">
+                    {t.about.workshopsBox.badge}
+                  </span>
                   <h3 className="font-serif text-lg sm:text-xl font-bold text-[#512D6D]">
                     {t.about.workshopsBox.title}
                   </h3>

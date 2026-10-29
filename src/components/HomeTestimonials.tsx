@@ -1,10 +1,30 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { ExternalLink, ShieldCheck, HeartHandshake, Clock, Sparkles } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
+import googleReviews from '../data/googleReviews.json';
 
 export const HomeTestimonials: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const { testimonials } = t.home;
+  const [activePillarIndex, setActivePillarIndex] = useState(0);
+  const pillarsSliderRef = useRef<HTMLDivElement>(null);
+
+  const handlePillarsScroll = () => {
+    if (pillarsSliderRef.current) {
+      const scrollLeft = pillarsSliderRef.current.scrollLeft;
+      const cardWidth = pillarsSliderRef.current.offsetWidth * 0.75;
+      const index = Math.round(scrollLeft / cardWidth);
+      setActivePillarIndex(Math.min(Math.max(index, 0), 2));
+    }
+  };
+
+  const scrollToPillar = (idx: number) => {
+    if (pillarsSliderRef.current) {
+      const card = pillarsSliderRef.current.children[idx] as HTMLElement;
+      card?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      setActivePillarIndex(idx);
+    }
+  };
 
   return (
     <section id="avis" className="scroll-mt-20 sm:scroll-mt-24 py-12 sm:py-20 bg-[#F9F6F0] border-b border-[#D1C4E9]/40 relative overflow-hidden">
@@ -12,8 +32,7 @@ export const HomeTestimonials: React.FC = () => {
         
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#D1C4E9]/40 border border-[#D1C4E9] text-[11px] sm:text-xs font-semibold tracking-wider uppercase text-[#512D6D] mb-3">
-            <Sparkles className="w-3.5 h-3.5" />
+          <span className="block text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#8B2651] mb-2">
             {testimonials.kicker}
           </span>
           <h2 className="text-2xl sm:text-4xl font-serif font-bold text-[#5D4037] tracking-tight mb-3">
@@ -48,16 +67,25 @@ export const HomeTestimonials: React.FC = () => {
             </svg>
           </div>
 
-          <div className="flex items-center justify-center gap-1.5 text-amber-500 text-2xl font-bold mb-1 tracking-wide" aria-label="5 étoiles sur 5">
-            ★★★★★
+          <div
+            className="flex items-center justify-center gap-1.5 text-amber-500 text-2xl font-bold mb-1 tracking-wide"
+            aria-label={`${googleReviews.rating} étoiles sur 5`}
+          >
+            {'★'.repeat(Math.round(googleReviews.rating))}
           </div>
 
           <p className="font-serif text-3xl sm:text-4xl font-bold text-[#512D6D] mb-1">
-            5,0 / 5
+            {googleReviews.rating.toFixed(1).replace('.', ',')} / 5
           </p>
 
           <p className="text-sm font-semibold text-[#5D4037] mb-2">
-            {testimonials.googleRatingSub}
+            {googleReviews.rating >= 5.0
+              ? (language === 'es'
+                  ? `Puntuación máxima en Google · ${googleReviews.userRatingsTotal} opiniones certificadas`
+                  : `Note maximale sur Google · ${googleReviews.userRatingsTotal} avis clients certifiés`)
+              : (language === 'es'
+                  ? `Puntuación verificada en Google · ${googleReviews.userRatingsTotal} opiniones certificadas`
+                  : `Note Google vérifiée · ${googleReviews.userRatingsTotal} avis clients certifiés`)}
           </p>
 
           <p className="text-xs sm:text-sm text-[#5D4037]/75 max-w-md mx-auto mb-6 leading-relaxed">
@@ -66,18 +94,22 @@ export const HomeTestimonials: React.FC = () => {
 
           <div className="flex flex-wrap items-center justify-center gap-3">
             <a
-              href="https://maps.app.goo.gl/LA6mRurL1Dnmb4Vn8"
+              href={googleReviews.placeUrl || "https://maps.app.goo.gl/LA6mRurL1Dnmb4Vn8"}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 min-h-[46px] rounded-full bg-[#512D6D] text-white text-xs sm:text-sm font-bold shadow-xs hover:bg-[#402257] active:scale-98 transition-all"
-              title="Consulter les 9 avis réels sur Google Maps"
+              title={language === 'es' ? `Consultar las ${googleReviews.userRatingsTotal} opiniones reales en Google Maps` : `Consulter les ${googleReviews.userRatingsTotal} avis réels sur Google Maps`}
             >
-              <span>{testimonials.openGoogleBtn}</span>
+              <span>
+                {language === 'es'
+                  ? `Ver las ${googleReviews.userRatingsTotal} opiniones en Google Maps`
+                  : `Lire les ${googleReviews.userRatingsTotal} avis sur Google Maps`}
+              </span>
               <ExternalLink className="w-4 h-4" />
             </a>
 
             <a
-              href="https://maps.app.goo.gl/LA6mRurL1Dnmb4Vn8"
+              href={googleReviews.placeUrl || "https://maps.app.goo.gl/LA6mRurL1Dnmb4Vn8"}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-5 py-3 min-h-[46px] rounded-full bg-white hover:bg-[#F9F6F0] border border-[#D1C4E9] text-[#512D6D] text-xs sm:text-sm font-semibold transition-all active:scale-98"
@@ -89,45 +121,70 @@ export const HomeTestimonials: React.FC = () => {
 
         </div>
 
-        {/* 3 Real Service Commitments (Clear, Factual, Transparent) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 text-center">
-          
-          <div className="bg-white p-5 rounded-2xl border border-[#D1C4E9]/60 shadow-2xs">
-            <div className="w-9 h-9 rounded-xl bg-[#D1C4E9]/30 text-[#512D6D] flex items-center justify-center mx-auto mb-3">
-              <ShieldCheck className="w-5 h-5" />
+        {/* 3 Real Service Commitments: Horizontal Snap Slider on Mobile (< md), Grid on Desktop (md+) */}
+        <div 
+          ref={pillarsSliderRef}
+          onScroll={handlePillarsScroll}
+          className="flex md:grid md:grid-cols-3 gap-3.5 sm:gap-6 text-center overflow-x-auto md:overflow-visible snap-x snap-mandatory no-scrollbar pb-2 pt-1 -mx-4 px-4 sm:mx-0 sm:px-0"
+        >
+          <div className="w-[78vw] max-w-[280px] shrink-0 snap-center md:w-auto md:max-w-none md:shrink bg-white p-5 rounded-2xl border border-[#D1C4E9]/60 shadow-2xs flex flex-col justify-between">
+            <div>
+              <div className="w-9 h-9 rounded-xl bg-[#D1C4E9]/30 text-[#512D6D] flex items-center justify-center mx-auto mb-3">
+                <ShieldCheck className="w-5 h-5" />
+              </div>
+              <h3 className="font-serif text-sm font-bold text-[#5D4037] mb-1">
+                {testimonials.pillar1Title}
+              </h3>
+              <p className="text-xs text-[#5D4037]/75 leading-relaxed">
+                {testimonials.pillar1Desc}
+              </p>
             </div>
-            <h3 className="font-serif text-sm font-bold text-[#5D4037] mb-1">
-              {testimonials.pillar1Title}
-            </h3>
-            <p className="text-xs text-[#5D4037]/75 leading-relaxed">
-              {testimonials.pillar1Desc}
-            </p>
           </div>
 
-          <div className="bg-white p-5 rounded-2xl border border-[#D1C4E9]/60 shadow-2xs">
-            <div className="w-9 h-9 rounded-xl bg-[#D1C4E9]/30 text-[#512D6D] flex items-center justify-center mx-auto mb-3">
-              <HeartHandshake className="w-5 h-5 text-rose-600" />
+          <div className="w-[78vw] max-w-[280px] shrink-0 snap-center md:w-auto md:max-w-none md:shrink bg-white p-5 rounded-2xl border border-[#D1C4E9]/60 shadow-2xs flex flex-col justify-between">
+            <div>
+              <div className="w-9 h-9 rounded-xl bg-[#D1C4E9]/30 text-[#512D6D] flex items-center justify-center mx-auto mb-3">
+                <HeartHandshake className="w-5 h-5 text-rose-600" />
+              </div>
+              <h3 className="font-serif text-sm font-bold text-[#5D4037] mb-1">
+                {testimonials.pillar2Title}
+              </h3>
+              <p className="text-xs text-[#5D4037]/75 leading-relaxed">
+                {testimonials.pillar2Desc}
+              </p>
             </div>
-            <h3 className="font-serif text-sm font-bold text-[#5D4037] mb-1">
-              {testimonials.pillar2Title}
-            </h3>
-            <p className="text-xs text-[#5D4037]/75 leading-relaxed">
-              {testimonials.pillar2Desc}
-            </p>
           </div>
 
-          <div className="bg-white p-5 rounded-2xl border border-[#D1C4E9]/60 shadow-2xs">
-            <div className="w-9 h-9 rounded-xl bg-[#D1C4E9]/30 text-[#512D6D] flex items-center justify-center mx-auto mb-3">
-              <Clock className="w-5 h-5 text-emerald-600" />
+          <div className="w-[78vw] max-w-[280px] shrink-0 snap-center md:w-auto md:max-w-none md:shrink bg-white p-5 rounded-2xl border border-[#D1C4E9]/60 shadow-2xs flex flex-col justify-between">
+            <div>
+              <div className="w-9 h-9 rounded-xl bg-[#D1C4E9]/30 text-[#512D6D] flex items-center justify-center mx-auto mb-3">
+                <Clock className="w-5 h-5 text-emerald-600" />
+              </div>
+              <h3 className="font-serif text-sm font-bold text-[#5D4037] mb-1">
+                {testimonials.pillar3Title}
+              </h3>
+              <p className="text-xs text-[#5D4037]/75 leading-relaxed">
+                {testimonials.pillar3Desc}
+              </p>
             </div>
-            <h3 className="font-serif text-sm font-bold text-[#5D4037] mb-1">
-              {testimonials.pillar3Title}
-            </h3>
-            <p className="text-xs text-[#5D4037]/75 leading-relaxed">
-              {testimonials.pillar3Desc}
-            </p>
           </div>
+        </div>
 
+        {/* Mobile Swipe Pagination Dots (< md) */}
+        <div className="flex md:hidden items-center justify-center gap-1.5 mt-3">
+          {[0, 1, 2].map((idx) => (
+            <button
+              key={idx}
+              type="button"
+              onClick={() => scrollToPillar(idx)}
+              className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                activePillarIndex === idx
+                  ? 'w-6 bg-[#512D6D]'
+                  : 'w-2 bg-[#D1C4E9] hover:bg-[#512D6D]/40'
+              }`}
+              aria-label={`Engagement ${idx + 1}`}
+            />
+          ))}
         </div>
 
       </div>

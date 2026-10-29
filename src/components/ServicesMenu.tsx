@@ -10,122 +10,172 @@ interface ServicesMenuProps {
 export const ServicesMenu: React.FC<ServicesMenuProps> = ({ onSelectService }) => {
   const { t, language } = useLanguage();
   const [activeTab, setActiveTab] = useState<'all' | 'visage-regard' | 'pieds-corps'>('all');
-  const [expandedSteps, setExpandedSteps] = useState<Record<string, boolean>>({});
+  const [expandedServices, setExpandedServices] = useState<Record<string, boolean>>({});
 
   const services = getServices(language);
 
-  const toggleSteps = (id: string) => {
-    setExpandedSteps(prev => ({ ...prev, [id]: !prev[id] }));
+  const toggleService = (id: string) => {
+    setExpandedServices(prev => ({ ...prev, [id]: !prev[id] }));
   };
 
   const visageRegardCount = services.filter(s => s.group === 'visage-regard').length;
   const piedsCorpsCount = services.filter(s => s.group === 'pieds-corps').length;
 
   const renderServiceRow = (service: ServiceItem) => {
-    const isExpanded = !!expandedSteps[service.id];
+    const isExpanded = !!expandedServices[service.id];
     const details = service.protocolSteps || service.comprend || [];
     const isProtocol = !!service.protocolSteps;
-    
-    const detailLabel = isProtocol ? t.services.viewProtocol : t.services.viewIncluded;
-    const hideLabel = isProtocol ? t.services.hideProtocol : t.services.hideIncluded;
-
     const categoryLabel = t.services.categories[service.category] || service.category;
 
     return (
-      <div
+      <article
         key={service.id}
-        className="bg-white hover:bg-[#FFFDFB] border border-[#E8DFD8] hover:border-[#8B2651]/40 rounded-2xl p-4 sm:p-5 transition-all duration-200 shadow-2xs hover:shadow-xs group"
+        className={`bg-white rounded-2xl border transition-all duration-200 overflow-hidden shadow-2xs hover:shadow-xs ${
+          isExpanded
+            ? 'border-[#8B2651]/50 ring-1 ring-[#8B2651]/20 bg-[#FFFDFB]'
+            : 'border-[#E8DFD8] hover:border-[#8B2651]/30'
+        }`}
       >
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 sm:gap-4">
-          
-          {/* Main Info: Category, Badges, Title, Descriptions */}
-          <div className="flex-1 min-w-0">
-            <div className="flex flex-wrap items-center gap-2 mb-1.5">
-              <span className={`px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-bold uppercase tracking-wider ${
-                service.colorTheme === 'pink'
-                  ? 'bg-[#F472B6]/15 text-[#BE185D]'
-                  : service.colorTheme === 'cyan'
-                  ? 'bg-[#38BDF8]/15 text-[#0369A1]'
-                  : 'bg-[#8B2651]/15 text-[#7A2048]'
-              }`}>
+        {/* COMPACT MASTER HEADER ROW (Interactive Accordion Trigger) */}
+        <button
+          type="button"
+          onClick={() => toggleService(service.id)}
+          aria-expanded={isExpanded}
+          aria-controls={`service-panel-${service.id}`}
+          className="w-full text-left p-3.5 sm:p-4.5 flex items-center justify-between gap-3 sm:gap-4 transition-colors cursor-pointer select-none group"
+        >
+          {/* Left Col: Badges + Title + Duration/Tagline */}
+          <div className="flex-1 min-w-0 pr-2">
+            {/* Top meta: Category pill + optional highlight badge */}
+            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 mb-1">
+              <span
+                className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${
+                  service.colorTheme === 'pink'
+                    ? 'bg-[#F472B6]/15 text-[#BE185D]'
+                    : service.colorTheme === 'cyan'
+                    ? 'bg-[#38BDF8]/15 text-[#0369A1]'
+                    : 'bg-[#8B2651]/15 text-[#7A2048]'
+                }`}
+              >
                 {categoryLabel}
               </span>
 
               {service.badge && (
-                <span className="px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] font-semibold bg-[#F5EBE1] text-[#7A2048] border border-[#C29D59]/30">
+                <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-[#F5EBE1] text-[#7A2048] border border-[#C29D59]/30">
                   ★ {service.badge}
                 </span>
               )}
             </div>
 
-            <div className="flex flex-wrap items-baseline gap-2">
-              <h4 className="font-serif text-lg sm:text-xl font-bold text-[#5D4037] group-hover:text-[#7A2048] transition-colors">
+            {/* Title + Tagline */}
+            <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+              <h4 className="font-serif text-base sm:text-lg font-bold text-[#5D4037] group-hover:text-[#7A2048] transition-colors leading-snug">
                 {service.title}
               </h4>
-              <span className="hidden sm:inline text-xs sm:text-sm text-[#512D6D] font-medium">
+              <span className="hidden sm:inline text-xs text-[#5D4037]/70 font-normal">
                 — {service.tagline}
               </span>
             </div>
 
-            <p className="mt-1.5 text-[13px] sm:text-sm text-[#5D4037]/85 leading-relaxed max-w-2xl">
+            {/* Collapsed duration pill on mobile / compact info */}
+            <div className="flex items-center gap-2 mt-1 sm:mt-1.5">
+              <span className="inline-flex items-center gap-1 text-[11px] sm:text-xs text-[#5D4037]/80 font-medium">
+                <Clock className="w-3 h-3 text-[#8B2651]" />
+                <span>{service.duration}</span>
+              </span>
+              <span className="text-[#5D4037]/30 text-xs">·</span>
+              <span className="text-[11px] sm:text-xs font-semibold text-[#8B2651] group-hover:underline">
+                {isExpanded ? t.services.hideDetails : t.services.viewDetails}
+              </span>
+            </div>
+          </div>
+
+          {/* Right Col: Price + Chevron */}
+          <div className="flex items-center gap-2.5 sm:gap-4 shrink-0">
+            <div className="text-right">
+              <span className="font-serif text-xl sm:text-2xl font-bold text-[#7A2048] block leading-none">
+                {service.price}€
+              </span>
+              <span className="text-[10px] sm:text-[11px] text-[#5D4037]/60 font-medium">
+                à domicile
+              </span>
+            </div>
+
+            {/* Chevron Indicator */}
+            <div
+              className={`w-8 h-8 rounded-full flex items-center justify-center border transition-all ${
+                isExpanded
+                  ? 'bg-[#7A2048] text-white border-[#7A2048]'
+                  : 'bg-[#F9F6F0] text-[#7A2048] border-[#E8DFD8] group-hover:bg-[#8B2651]/10 group-hover:border-[#8B2651]/30'
+              }`}
+            >
+              {isExpanded ? (
+                <ChevronUp className="w-4 h-4" />
+              ) : (
+                <ChevronDown className="w-4 h-4" />
+              )}
+            </div>
+          </div>
+        </button>
+
+        {/* EXPANDED CONTENT DRAWER (Smooth Accordion Panel) */}
+        {isExpanded && (
+          <div
+            id={`service-panel-${service.id}`}
+            className="px-4 sm:px-6 pb-4 sm:pb-5 pt-1 border-t border-[#E8DFD8]/70 bg-[#FCFAF8] animate-fadeIn"
+          >
+            {/* Tagline on mobile (since it was hidden in collapsed state) */}
+            <p className="sm:hidden text-xs font-medium text-[#7A2048] mt-2 mb-1.5">
+              {service.tagline}
+            </p>
+
+            {/* Full Sensory Description */}
+            <p className="text-xs sm:text-sm text-[#5D4037]/85 leading-relaxed mt-2 mb-3.5 max-w-3xl">
               {service.description}
             </p>
 
-            {/* Micro Toggle for Details */}
+            {/* Protocol Steps / What's Included */}
             {details.length > 0 && (
-              <button
-                type="button"
-                onClick={() => toggleSteps(service.id)}
-                className="mt-2.5 inline-flex items-center gap-1.5 text-xs sm:text-[13px] font-semibold text-[#8B2651] hover:text-[#512D6D] transition-colors cursor-pointer select-none"
-              >
-                <span>{isExpanded ? hideLabel : `${detailLabel} (${details.length})`}</span>
-                {isExpanded ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
-              </button>
-            )}
-
-            {/* Expandable Protocol / Inclusions Drawer (directly under the toggle) */}
-            {isExpanded && details.length > 0 && (
-              <div className="mt-3 pt-3 border-t border-[#D1C4E9]/30 bg-[#FDF8FA] rounded-xl p-3 sm:p-3.5 animate-fadeIn">
-                <div className="flex items-center gap-1.5 text-xs sm:text-[13px] font-serif font-bold text-[#7A2048] uppercase tracking-wider mb-2">
+              <div className="bg-white p-3.5 sm:p-4 rounded-xl border border-[#E8DFD8] mb-4 shadow-2xs">
+                <div className="flex items-center gap-1.5 text-xs font-serif font-bold text-[#7A2048] uppercase tracking-wider mb-2.5">
                   <Sparkles className="w-3.5 h-3.5 text-[#8B2651]" />
                   <span>{isProtocol ? t.services.protocolTitle : t.services.includedTitle}</span>
                 </div>
-                <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-[13px] sm:text-sm text-[#5D4037]/90">
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-[13px] text-[#5D4037]/90">
                   {details.map((step, idx) => (
-                    <li key={idx} className="flex items-start gap-2 bg-white/70 p-2 rounded-lg border border-[#E8DFD8]/50">
-                      <span className="text-[#8B2651] font-bold text-xs sm:text-[13px] shrink-0 mt-0.5">•</span>
+                    <li
+                      key={idx}
+                      className="flex items-start gap-2 bg-[#F9F6F0]/60 p-2 sm:p-2.5 rounded-lg border border-[#E8DFD8]/50"
+                    >
+                      <span className="text-[#8B2651] font-bold text-xs shrink-0 mt-0.5">•</span>
                       <span className="leading-snug">{step}</span>
                     </li>
                   ))}
                 </ul>
               </div>
             )}
-          </div>
 
-          {/* Action Block: Duration, Price, Reserve Button */}
-          <div className="flex items-center justify-between gap-3 sm:gap-5 shrink-0 pt-3 border-t border-[#E8DFD8]/70">
-            <div className="flex items-center gap-1.5 text-xs text-[#5D4037]/85 font-medium bg-[#F9F6F0] px-3 py-1.5 rounded-xl border border-[#E8DFD8]/60">
-              <Clock className="w-3.5 h-3.5 text-[#8B2651]" />
-              <span>{service.duration}</span>
+            {/* Action Row: Reassurance pill + Big CTA Reserve Button */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2.5 border-t border-[#E8DFD8]/60">
+              <div className="flex items-center gap-2 text-xs text-[#5D4037]/80">
+                <Clock className="w-3.5 h-3.5 text-[#8B2651] shrink-0" />
+                <span>
+                  Séance de <strong>{service.duration}</strong> · Matériel professionnel inclus
+                </span>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => onSelectService(service)}
+                className="min-h-[44px] px-5 sm:px-6 py-2.5 rounded-full bg-[#7A2048] hover:bg-[#631839] active:scale-98 text-white text-xs sm:text-sm font-bold flex items-center justify-center gap-2 shadow-xs hover:shadow-md transition-all cursor-pointer shrink-0"
+              >
+                <MessageCircle className="w-4 h-4 text-emerald-300" />
+                <span>{t.services.reserveBtn} — {service.price}€</span>
+              </button>
             </div>
-
-            <div className="text-right min-w-[70px]">
-              <span className="font-serif text-2xl sm:text-3xl font-bold text-[#7A2048]">
-                {service.price}€
-              </span>
-            </div>
-
-            <button
-              onClick={() => onSelectService(service)}
-              className="min-h-[40px] px-4 sm:px-5 py-2 rounded-full bg-[#7A2048] hover:bg-[#631839] active:scale-98 text-white text-xs sm:text-sm font-semibold flex items-center gap-2 shadow-2xs hover:shadow-xs transition-all cursor-pointer shrink-0"
-            >
-              <MessageCircle className="w-4 h-4 text-emerald-300" />
-              <span>{t.services.reserveBtn}</span>
-            </button>
           </div>
-
-        </div>
-      </div>
+        )}
+      </article>
     );
   };
 
@@ -136,10 +186,9 @@ export const ServicesMenu: React.FC<ServicesMenuProps> = ({ onSelectService }) =
         {/* Section Header - Split Layout */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 sm:mb-8 pb-4 border-b border-[#D1C4E9]/40">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#8B2651]/10 text-[#8B2651] text-[11px] font-serif font-semibold tracking-wide mb-1.5">
-              <Heart className="w-3 h-3 fill-[#8B2651]" />
-              <span>{t.services.kicker}</span>
-            </div>
+            <span className="block text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#8B2651] mb-1.5">
+              {t.services.kicker}
+            </span>
 
             <h2 className="text-2xl sm:text-3xl font-serif font-semibold text-[#5D4037] tracking-tight">
               {t.services.title}
@@ -199,7 +248,7 @@ export const ServicesMenu: React.FC<ServicesMenuProps> = ({ onSelectService }) =
                   {t.services.sectionVisage}
                 </h3>
               </div>
-              <span className="text-[11px] text-[#8B2651] font-semibold bg-[#8B2651]/10 px-2.5 py-0.5 rounded-full">
+              <span className="text-xs font-semibold text-[#8B2651]">
                 {t.services.sectionVisageCount}
               </span>
             </div>
@@ -220,7 +269,7 @@ export const ServicesMenu: React.FC<ServicesMenuProps> = ({ onSelectService }) =
                   {t.services.sectionPieds}
                 </h3>
               </div>
-              <span className="text-[11px] text-[#8B2651] font-semibold bg-[#8B2651]/10 px-2.5 py-0.5 rounded-full">
+              <span className="text-xs font-semibold text-[#8B2651]">
                 {t.services.sectionPiedsCount}
               </span>
             </div>

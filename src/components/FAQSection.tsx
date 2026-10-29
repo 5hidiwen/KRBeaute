@@ -29,10 +29,9 @@ export const FAQSection: React.FC = () => {
         {/* Section Header - Split Layout */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 sm:mb-8 pb-4 border-b border-[#D1C4E9]/40">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#512D6D]/10 text-[#512D6D] text-[11px] font-semibold tracking-wide mb-1.5">
-              <HelpCircle className="w-3 h-3 text-[#512D6D]" />
-              <span>{t.faq.kicker}</span>
-            </div>
+            <span className="block text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#8B2651] mb-1.5">
+              {t.faq.kicker}
+            </span>
 
             <h2 className="text-2xl sm:text-3xl font-serif font-semibold text-[#5D4037] tracking-tight">
               {t.faq.title}

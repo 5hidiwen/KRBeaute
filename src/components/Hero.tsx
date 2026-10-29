@@ -9,6 +9,7 @@ import {
   Car
 } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
+import googleReviews from '../data/googleReviews.json';
 
 interface HeroProps {
   onOpenBooking: () => void;
@@ -16,7 +17,7 @@ interface HeroProps {
 }
 
 export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onGoToServices }) => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   return (
     <section id="accueil" className="scroll-mt-20 sm:scroll-mt-24 relative overflow-hidden pt-8 pb-12 sm:pt-16 sm:pb-20 border-b border-[#D1C4E9]/40 bg-gradient-to-b from-[#F9F6F0] via-[#F9F6F0] to-[#F3EDE2]/60">
@@ -39,14 +40,20 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onGoToServices }) => 
             </span>
             <span className="text-[#512D6D]/40">·</span>
             <a
-              href="https://maps.app.goo.gl/LA6mRurL1Dnmb4Vn8"
+              href={googleReviews.placeUrl || "https://maps.app.goo.gl/LA6mRurL1Dnmb4Vn8"}
               target="_blank"
               rel="noopener noreferrer"
-              title="Consulter les avis Google Maps de Karina Robart"
+              title={language === 'es' ? "Consultar las opiniones Google Maps de Karina Robart" : "Consulter les avis Google Maps de Karina Robart"}
               className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/90 border border-[#D1C4E9] text-[#512D6D] hover:bg-white shadow-2xs transition-colors"
             >
-              <span className="flex text-amber-500 font-bold tracking-tighter text-xs" aria-hidden="true">★★★★★</span>
-              <span className="font-bold">{t.hero.googleReviewsBadge}</span>
+              <span className="flex text-amber-500 font-bold tracking-tighter text-xs" aria-hidden="true">
+                {'★'.repeat(Math.round(googleReviews.rating))}
+              </span>
+              <span className="font-bold">
+                {language === 'es'
+                  ? `${googleReviews.rating.toFixed(1)}/5 en Google (${googleReviews.userRatingsTotal} opiniones)`
+                  : `${googleReviews.rating.toFixed(1)}/5 sur Google (${googleReviews.userRatingsTotal} avis)`}
+              </span>
             </a>
           </div>
 

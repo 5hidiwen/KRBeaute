@@ -1,0 +1,44 @@
+name: Sync Google Reviews
+
+on:
+  schedule:
+    # Exécution automatique quotidienne à 03h00 UTC (04h00/05h00 heure de Paris)
+    - cron: '0 3 * * *'
+  workflow_dispatch: # Déclenchement manuel en 1 clic depuis l'onglet Actions GitHub
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Sync Google Maps Reviews & Rating
+        env:
+          GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
+        run: npx tsx scripts/sync-google-reviews.ts
+
+      - name: Commit & push if changed
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/data/googleReviews.json index.html
+          if git diff --staged --quiet; then
+            echo "Aucune modification détectée dans les avis Google."
+          else
+            git commit -m "chore(reviews): synchro automatique note et avis Google Maps"
+            git push origin main
+          fi

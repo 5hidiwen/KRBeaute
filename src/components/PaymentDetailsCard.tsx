@@ -32,10 +32,9 @@ export const PaymentDetailsCard: React.FC<PaymentDetailsCardProps> = ({
     >
       {/* Header banner inspired by the official flyer */}
       <div className="text-center pb-3 mb-4 border-b border-[#D1C4E9]/70">
-        <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#512D6D]/10 text-[#512D6D] text-[10px] sm:text-[11px] font-bold uppercase tracking-wider mb-1">
-          <Sparkles className="w-3 h-3 text-[#512D6D]" />
-          <span>{t.paymentDetails.kicker}</span>
-        </div>
+        <span className="block text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.18em] text-[#8B2651] mb-1">
+          {t.paymentDetails.kicker}
+        </span>
         <h3 className="font-serif text-lg sm:text-2xl font-bold text-[#512D6D] tracking-tight">
           {t.paymentDetails.title}
         </h3>

@@ -26,21 +26,18 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
   const { t } = useLanguage();
 
   return (
-    <footer className="bg-[#F9F6F0] border-t border-[#D1C4E9]/60 pt-6 pb-28 sm:py-6 text-[#5D4037]">
+    <footer className="bg-[#F9F6F0] border-t border-[#D1C4E9]/60 pt-3.5 pb-20 sm:pt-6 sm:pb-8 text-[#5D4037]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Sleek, lightweight single-tier bar */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 pb-4 border-b border-[#D1C4E9]/40">
-          
-          {/* Identity */}
+        {/* DESKTOP VIEW (md: & lg:) : Sleek single-tier horizontal bar */}
+        <div className="hidden md:flex flex-row items-center justify-between gap-4 pb-4 border-b border-[#D1C4E9]/40">
           <div>
             <span className="font-serif text-base font-bold text-[#512D6D]">
               Karina Robart
             </span>
           </div>
 
-          {/* Quick Contacts & Socials */}
-          <div className="flex flex-wrap items-center justify-center gap-3.5 text-xs text-[#5D4037]">
+          <div className="flex flex-wrap items-center justify-end gap-3.5 text-xs text-[#5D4037]">
             <span className="inline-flex items-center gap-1.5">
               <a 
                 href="tel:+33665566702" 
@@ -102,16 +99,67 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
               <span>{t.footer.farmasiShop}</span>
             </a>
           </div>
+        </div>
 
+        {/* MOBILE VIEW (< md) : Ultra-compact micro-bar with zero waste */}
+        <div className="md:hidden pb-2 border-b border-[#D1C4E9]/40 text-center">
+          <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[11px] text-[#5D4037]">
+            <a 
+              href="tel:+33665566702" 
+              className="font-bold text-[#512D6D] inline-flex items-center gap-1"
+              title="Appeler Karina"
+            >
+              <Phone className="w-3 h-3" />
+              <span>06 65 56 67 02</span>
+            </a>
+            <span className="text-[#D1C4E9]" aria-hidden="true">·</span>
+            <a 
+              href="mailto:karinarobart@krbeaute.com" 
+              className="inline-flex items-center gap-1 hover:text-[#512D6D]"
+              title="Envoyer un email"
+            >
+              <Mail className="w-3 h-3 text-[#512D6D]" />
+              <span>Email</span>
+            </a>
+            <span className="text-[#D1C4E9]" aria-hidden="true">·</span>
+            <a 
+              href="https://www.instagram.com/karinarobart" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="hover:text-[#512D6D] inline-flex items-center gap-1"
+            >
+              <Instagram className="w-3 h-3 text-[#512D6D]" />
+              <span>Instagram</span>
+            </a>
+            <span className="text-[#D1C4E9]" aria-hidden="true">·</span>
+            <a 
+              href="https://www.threads.net/@karinarobart" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="hover:text-[#512D6D] inline-flex items-center gap-1"
+            >
+              <ThreadsIcon className="w-3 h-3 text-[#512D6D]" />
+              <span>Threads</span>
+            </a>
+            <span className="text-[#D1C4E9]" aria-hidden="true">·</span>
+            <a 
+              href="https://www.fr.farmasi.com/karyrobart" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-[#512D6D] font-semibold hover:underline"
+            >
+              <span>{t.footer.farmasiShop}</span>
+            </a>
+          </div>
         </div>
 
         {/* Minimal Legal Links & Copyright */}
-        <div className="pt-3.5 flex flex-col sm:flex-row items-center justify-between gap-2.5 text-[11px] text-[#5D4037]/75">
+        <div className="pt-2.5 flex flex-col sm:flex-row items-center justify-between gap-1.5 text-[10.5px] sm:text-[11px] text-[#5D4037]/75 text-center sm:text-left">
           <div>
             © {new Date().getFullYear()} Karina Robart {t.footer.copyrightDiploma}
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center justify-center gap-2.5 sm:gap-3">
             <button
               onClick={() => onOpenLegal('mentions')}
               className="hover:text-[#512D6D] transition-colors cursor-pointer"

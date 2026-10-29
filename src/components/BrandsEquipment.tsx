@@ -1,10 +1,29 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { Cpu, Sun, Sparkles, ExternalLink, ShoppingBag } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 
 export const BrandsEquipment: React.FC = () => {
   const { t } = useLanguage();
   const farmasiAffiliateUrl = "https://www.fr.farmasi.com/karyrobart";
+  const [activeBrandIndex, setActiveBrandIndex] = useState(0);
+  const brandsSliderRef = useRef<HTMLDivElement>(null);
+
+  const handleBrandsScroll = () => {
+    if (brandsSliderRef.current) {
+      const scrollLeft = brandsSliderRef.current.scrollLeft;
+      const cardWidth = brandsSliderRef.current.offsetWidth * 0.75;
+      const index = Math.round(scrollLeft / cardWidth);
+      setActiveBrandIndex(Math.min(Math.max(index, 0), 3));
+    }
+  };
+
+  const scrollToBrand = (idx: number) => {
+    if (brandsSliderRef.current) {
+      const card = brandsSliderRef.current.children[idx] as HTMLElement;
+      card?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      setActiveBrandIndex(idx);
+    }
+  };
 
   return (
     <section id="marques" className="scroll-mt-20 sm:scroll-mt-24 py-6 sm:py-12 bg-white border-y border-[#D1C4E9]/40">
@@ -13,10 +32,9 @@ export const BrandsEquipment: React.FC = () => {
         {/* Section Header - Split Layout */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 sm:mb-8 pb-4 border-b border-[#D1C4E9]/40">
           <div>
-            <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#512D6D]/10 text-[#512D6D] text-[11px] font-semibold tracking-wide mb-1.5">
-              <Sparkles className="w-3 h-3 text-[#512D6D]" />
-              <span>{t.brands.kicker}</span>
-            </div>
+            <span className="block text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#8B2651] mb-1.5">
+              {t.brands.kicker}
+            </span>
 
             <h2 className="text-2xl sm:text-3xl font-serif font-semibold text-[#5D4037] tracking-tight">
               {t.brands.title}
@@ -39,11 +57,14 @@ export const BrandsEquipment: React.FC = () => {
           </a>
         </div>
 
-        {/* Brands Showcase Grid - Compact Luxury Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-5 sm:mb-6">
-          
+        {/* Brands Showcase: Horizontal Snap Slider on Mobile (< sm), Grid on Tablet & Desktop (sm+) */}
+        <div 
+          ref={brandsSliderRef}
+          onScroll={handleBrandsScroll}
+          className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 overflow-x-auto sm:overflow-visible snap-x snap-mandatory no-scrollbar pb-2 pt-1 -mx-4 px-4 sm:mx-0 sm:px-0 mb-2 sm:mb-6"
+        >
           {/* Nu Skin */}
-          <div className="bg-white rounded-2xl p-4 border border-[#D1C4E9]/70 shadow-2xs hover:shadow-xs transition-all flex flex-col justify-between">
+          <div className="w-[78vw] max-w-[280px] shrink-0 snap-center sm:w-auto sm:max-w-none sm:shrink bg-white rounded-2xl p-4 border border-[#D1C4E9]/70 shadow-2xs hover:shadow-xs transition-all flex flex-col justify-between">
             <div>
               <div className="mb-2.5">
                 <span className="inline-block text-[11px] font-bold text-[#512D6D] bg-[#D1C4E9]/40 px-2.5 py-0.5 rounded-full">
@@ -64,7 +85,7 @@ export const BrandsEquipment: React.FC = () => {
           </div>
 
           {/* Dr. Renaud Paris */}
-          <div className="bg-white rounded-2xl p-4 border border-[#D1C4E9]/70 shadow-2xs hover:shadow-xs transition-all flex flex-col justify-between">
+          <div className="w-[78vw] max-w-[280px] shrink-0 snap-center sm:w-auto sm:max-w-none sm:shrink bg-white rounded-2xl p-4 border border-[#D1C4E9]/70 shadow-2xs hover:shadow-xs transition-all flex flex-col justify-between">
             <div>
               <div className="mb-2.5">
                 <span className="inline-block text-[11px] font-bold text-[#512D6D] bg-[#D1C4E9]/40 px-2.5 py-0.5 rounded-full">
@@ -85,7 +106,7 @@ export const BrandsEquipment: React.FC = () => {
           </div>
 
           {/* Farmasi */}
-          <div className="bg-white rounded-2xl p-4 border border-[#512D6D]/40 shadow-2xs hover:shadow-xs transition-all flex flex-col justify-between relative">
+          <div className="w-[78vw] max-w-[280px] shrink-0 snap-center sm:w-auto sm:max-w-none sm:shrink bg-white rounded-2xl p-4 border border-[#512D6D]/40 shadow-2xs hover:shadow-xs transition-all flex flex-col justify-between relative">
             <div>
               <div className="mb-2.5">
                 <span className="inline-block text-[11px] font-bold text-[#512D6D] bg-[#D1C4E9] px-2.5 py-0.5 rounded-full">
@@ -115,7 +136,7 @@ export const BrandsEquipment: React.FC = () => {
           </div>
 
           {/* House of Peau */}
-          <div className="bg-white rounded-2xl p-4 border border-[#D1C4E9]/70 shadow-2xs hover:shadow-xs transition-all flex flex-col justify-between">
+          <div className="w-[78vw] max-w-[280px] shrink-0 snap-center sm:w-auto sm:max-w-none sm:shrink bg-white rounded-2xl p-4 border border-[#D1C4E9]/70 shadow-2xs hover:shadow-xs transition-all flex flex-col justify-between">
             <div>
               <div className="mb-2.5">
                 <span className="inline-block text-[11px] font-bold text-[#512D6D] bg-[#D1C4E9]/40 px-2.5 py-0.5 rounded-full">
@@ -134,7 +155,23 @@ export const BrandsEquipment: React.FC = () => {
               {t.brands.brands.houseOfPeau.footer}
             </div>
           </div>
+        </div>
 
+        {/* Mobile Swipe Pagination Dots (< sm) */}
+        <div className="flex sm:hidden items-center justify-center gap-1.5 mb-5">
+          {[0, 1, 2, 3].map((idx) => (
+            <button
+              key={idx}
+              type="button"
+              onClick={() => scrollToBrand(idx)}
+              className={`h-1.5 rounded-full transition-all duration-300 cursor-pointer ${
+                activeBrandIndex === idx
+                  ? 'w-6 bg-[#512D6D]'
+                  : 'w-2 bg-[#D1C4E9] hover:bg-[#512D6D]/40'
+              }`}
+              aria-label={`Marque ${idx + 1}`}
+            />
+          ))}
         </div>
 
         {/* Specialized Technologies Spotlight */}

@@ -31,9 +31,9 @@ export const HomeCtaBanner: React.FC<HomeCtaBannerProps> = ({ onOpenBooking }) =
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         
-        {/* Availability Badge */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-xs font-semibold tracking-wide mb-5">
-          <Clock className="w-3.5 h-3.5 text-emerald-300" />
+        {/* Availability */}
+        <div className="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-300/95 tracking-wide mb-4">
+          <Clock className="w-3.5 h-3.5" />
           <span>{ctaBanner.hours}</span>
         </div>
 
