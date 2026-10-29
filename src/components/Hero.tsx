@@ -9,7 +9,6 @@ import {
   Car
 } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
-import googleReviews from '../data/googleReviews.json';
 
 interface HeroProps {
   onOpenBooking: () => void;
@@ -40,20 +39,14 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onGoToServices }) => 
             </span>
             <span className="text-[#512D6D]/40">·</span>
             <a
-              href={googleReviews.placeUrl || "https://maps.app.goo.gl/LA6mRurL1Dnmb4Vn8"}
+              href="https://maps.app.goo.gl/LA6mRurL1Dnmb4Vn8"
               target="_blank"
               rel="noopener noreferrer"
               title={language === 'es' ? "Consultar las opiniones Google Maps de Karina Robart" : "Consulter les avis Google Maps de Karina Robart"}
               className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/90 border border-[#D1C4E9] text-[#512D6D] hover:bg-white shadow-2xs transition-colors"
             >
-              <span className="flex text-amber-500 font-bold tracking-tighter text-xs" aria-hidden="true">
-                {'★'.repeat(Math.round(googleReviews.rating))}
-              </span>
-              <span className="font-bold">
-                {language === 'es'
-                  ? `${googleReviews.rating.toFixed(1)}/5 en Google (${googleReviews.userRatingsTotal} opiniones)`
-                  : `${googleReviews.rating.toFixed(1)}/5 sur Google (${googleReviews.userRatingsTotal} avis)`}
-              </span>
+              <span className="flex text-amber-500 font-bold tracking-tighter text-xs" aria-hidden="true">★★★★★</span>
+              <span className="font-bold">{t.hero.googleReviewsBadge}</span>
             </a>
           </div>
 

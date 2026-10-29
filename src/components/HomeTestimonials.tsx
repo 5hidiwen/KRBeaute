@@ -1,10 +1,9 @@
 import React, { useState, useRef } from 'react';
 import { ExternalLink, ShieldCheck, HeartHandshake, Clock, Sparkles } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
-import googleReviews from '../data/googleReviews.json';
 
 export const HomeTestimonials: React.FC = () => {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
   const { testimonials } = t.home;
   const [activePillarIndex, setActivePillarIndex] = useState(0);
   const pillarsSliderRef = useRef<HTMLDivElement>(null);
@@ -67,25 +66,8 @@ export const HomeTestimonials: React.FC = () => {
             </svg>
           </div>
 
-          <div
-            className="flex items-center justify-center gap-1.5 text-amber-500 text-2xl font-bold mb-1 tracking-wide"
-            aria-label={`${googleReviews.rating} étoiles sur 5`}
-          >
-            {'★'.repeat(Math.round(googleReviews.rating))}
-          </div>
-
-          <p className="font-serif text-3xl sm:text-4xl font-bold text-[#512D6D] mb-1">
-            {googleReviews.rating.toFixed(1).replace('.', ',')} / 5
-          </p>
-
-          <p className="text-sm font-semibold text-[#5D4037] mb-2">
-            {googleReviews.rating >= 5.0
-              ? (language === 'es'
-                  ? `Puntuación máxima en Google · ${googleReviews.userRatingsTotal} opiniones certificadas`
-                  : `Note maximale sur Google · ${googleReviews.userRatingsTotal} avis clients certifiés`)
-              : (language === 'es'
-                  ? `Puntuación verificada en Google · ${googleReviews.userRatingsTotal} opiniones certificadas`
-                  : `Note Google vérifiée · ${googleReviews.userRatingsTotal} avis clients certifiés`)}
+          <p className="text-sm sm:text-base font-semibold text-[#5D4037] mb-2 max-w-lg mx-auto">
+            {testimonials.googleRatingSub}
           </p>
 
           <p className="text-xs sm:text-sm text-[#5D4037]/75 max-w-md mx-auto mb-6 leading-relaxed">
@@ -94,22 +76,18 @@ export const HomeTestimonials: React.FC = () => {
 
           <div className="flex flex-wrap items-center justify-center gap-3">
             <a
-              href={googleReviews.placeUrl || "https://maps.app.goo.gl/LA6mRurL1Dnmb4Vn8"}
+              href="https://maps.app.goo.gl/LA6mRurL1Dnmb4Vn8"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 min-h-[46px] rounded-full bg-[#512D6D] text-white text-xs sm:text-sm font-bold shadow-xs hover:bg-[#402257] active:scale-98 transition-all"
-              title={language === 'es' ? `Consultar las ${googleReviews.userRatingsTotal} opiniones reales en Google Maps` : `Consulter les ${googleReviews.userRatingsTotal} avis réels sur Google Maps`}
+              title="Consulter les avis réels en direct sur Google Maps"
             >
-              <span>
-                {language === 'es'
-                  ? `Ver las ${googleReviews.userRatingsTotal} opiniones en Google Maps`
-                  : `Lire les ${googleReviews.userRatingsTotal} avis sur Google Maps`}
-              </span>
+              <span>{testimonials.openGoogleBtn}</span>
               <ExternalLink className="w-4 h-4" />
             </a>
 
             <a
-              href={googleReviews.placeUrl || "https://maps.app.goo.gl/LA6mRurL1Dnmb4Vn8"}
+              href="https://maps.app.goo.gl/LA6mRurL1Dnmb4Vn8"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-5 py-3 min-h-[46px] rounded-full bg-white hover:bg-[#F9F6F0] border border-[#D1C4E9] text-[#512D6D] text-xs sm:text-sm font-semibold transition-all active:scale-98"
