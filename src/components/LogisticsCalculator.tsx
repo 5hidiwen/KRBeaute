@@ -103,7 +103,7 @@ export const LogisticsCalculator: React.FC<LogisticsCalculatorProps> = ({ onSele
                 <h3 className="font-serif text-base sm:text-lg font-bold text-[#512D6D]">
                   {t.logistics.updateNotice.title}
                 </h3>
-                <p className="text-xs sm:text-[13px] text-[#5D4037]/90 max-w-3xl leading-relaxed">
+                <p className="text-xs sm:text-[13px] text-[#5D4037]/90 max-w-3xl leading-relaxed whitespace-pre-line">
                   {t.logistics.updateNotice.message}
                 </p>
               </div>

@@ -14,8 +14,8 @@ export const AboutSection: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-12 items-center">
           
           {/* Left Column: Photo & Credentials Badge (5 cols) */}
-          <div className="kr-reveal lg:col-span-5">
-            <div className="relative mx-auto max-w-xs sm:max-w-sm lg:max-w-none">
+          <div className="kr-reveal lg:col-span-5 w-full">
+            <div className="relative w-full mx-auto max-w-md sm:max-w-lg lg:max-w-none">
               
               {/* Photo Frame Container */}
               <div className="kr-card-nacre relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#EAE2F2] via-[#F4EFF8] to-[#D1C4E9] border-2 border-[#D1C4E9] shadow-lg p-2.5 sm:p-3">

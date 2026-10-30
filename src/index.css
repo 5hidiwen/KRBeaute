@@ -229,10 +229,14 @@ body {
   display: none;
 }
 
+.print-only-recipient-guide {
+  display: none;
+}
+
 @media print {
   @page {
     size: A4 portrait;
-    margin: 12mm 15mm;
+    margin: 10mm 12mm;
   }
 
   html, body {
@@ -258,6 +262,14 @@ body {
     background: #ffffff !important;
   }
 
+  #print-root .print-only-recipient-guide {
+    display: block !important;
+  }
+
+  #print-root .giftcard-print-inner {
+    padding: 14px 16px !important;
+  }
+
   /* 3. Style du récépissé imprimable dans #print-root (flux normal, JAMAIS fixed) */
   #print-root .printable-summary {
     position: static !important;
@@ -265,7 +277,7 @@ body {
     width: 100% !important;
     max-width: 100% !important;
     margin: 0 !important;
-    padding: 20px 24px !important;
+    padding: 14px 18px !important;
     background: #ffffff !important;
     color: #1a1a1a !important;
     border: 1.5px solid #512D6D !important;
@@ -279,19 +291,19 @@ body {
   #print-root .summary-grid {
     display: grid !important;
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 10px !important;
+    gap: 8px !important;
   }
 
   /* 5. Éviter toute coupure interne sur les blocs */
   #print-root .summary-card-item {
     page-break-inside: avoid !important;
     break-inside: avoid !important;
-    padding: 10px 12px !important;
+    padding: 8px 10px !important;
     background: #ffffff !important;
     border: 1px solid #D1C4E9 !important;
     border-radius: 6px !important;
-    font-size: 11px !important;
-    line-height: 1.45 !important;
+    font-size: 10.5px !important;
+    line-height: 1.35 !important;
   }
 
   /* 6. Masquer tous les boutons interactifs lors de l'impression */

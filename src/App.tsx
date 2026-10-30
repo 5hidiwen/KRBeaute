@@ -4,11 +4,8 @@ import { Navbar, NavTab } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { HomeExperienceSteps } from './components/HomeExperienceSteps';
 import { ServicesMenu } from './components/ServicesMenu';
-import { BrandsEquipment } from './components/BrandsEquipment';
-import { AboutSection } from './components/AboutSection';
 import { LogisticsCalculator } from './components/LogisticsCalculator';
 import { HomeTestimonials } from './components/HomeTestimonials';
-import { FAQSection } from './components/FAQSection';
 import { HomeCtaBanner } from './components/HomeCtaBanner';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
@@ -17,12 +14,59 @@ import { ServiceItem } from './data/servicesData';
 import { LanguageProvider, useLanguage } from './i18n/LanguageContext';
 import { useScrollReveal } from './hooks/useScrollReveal';
 
+const BrandsEquipment = lazy(() => import('./components/BrandsEquipment').then(m => ({ default: m.BrandsEquipment })));
+const AboutSection = lazy(() => import('./components/AboutSection').then(m => ({ default: m.AboutSection })));
+const FAQSection = lazy(() => import('./components/FAQSection').then(m => ({ default: m.FAQSection })));
 const ClientSheetSection = lazy(() => import('./components/ClientSheetSection').then(m => ({ default: m.ClientSheetSection })));
+const GiftCardSection = lazy(() => import('./components/GiftCardSection').then(m => ({ default: m.GiftCardSection })));
 const LegalModal = lazy(() => import('./components/LegalModal').then(m => ({ default: m.LegalModal })));
+
+const DEDICATED_TABS: NavTab[] = ['faq', 'fiche-cliente', 'carte-cadeau', 'marques', 'a-propos'];
+const isDedicatedTab = (tab: NavTab): boolean => DEDICATED_TABS.includes(tab);
+
+const getTabFromUrl = (): NavTab | null => {
+  if (typeof window === 'undefined') return null;
+  const pathname = window.location.pathname.toLowerCase().replace(/^\/+|\/+$/g, '').trim();
+  const rawHash = window.location.hash.toLowerCase().replace(/^#/, '').trim();
+  const params = new URLSearchParams(window.location.search);
+  const pageParam = (params.get('page') || '').toLowerCase().trim();
+
+  const target = pathname || rawHash || pageParam;
+  if (!target) return null;
+
+  if (target === 'fiche-cliente' || target === 'fiche-client' || target === 'fiche' || target === 'diagnostic' || target === 'bilan') {
+    return 'fiche-cliente';
+  }
+  if (target === 'carte-cadeau' || target === 'cadeau' || target === 'bon-cadeau' || target === 'regalo') {
+    return 'carte-cadeau';
+  }
+  if (target === 'faq' || target === 'questions') {
+    return 'faq';
+  }
+  if (target === 'tarifs' || target === 'soins' || target === 'traitements') {
+    return 'soins';
+  }
+  if (target === 'marques' || target === 'technologies') {
+    return 'marques';
+  }
+  if (target === 'a-propos' || target === 'apropos' || target === 'karina' || target === 'sobre-karina') {
+    return 'a-propos';
+  }
+  if (target === 'secteur' || target === 'zone' || target === 'deplacement' || target === 'deplacements') {
+    return 'secteur';
+  }
+  if (target === 'contact' || target === 'contacto' || target === 'rdv' || target === 'reservation') {
+    return 'contact';
+  }
+  if (['accueil', 'soins', 'marques', 'a-propos', 'secteur', 'contact'].includes(target)) {
+    return target as NavTab;
+  }
+  return null;
+};
 
 function AppContent() {
   const { language } = useLanguage();
-  const [activeTab, setActiveTab] = useState<NavTab>('accueil');
+  const [activeTab, setActiveTab] = useState<NavTab>(() => getTabFromUrl() || 'accueil');
   const [selectedServices, setSelectedServices] = useState<ServiceItem[]>([]);
   const [selectedCommuneName, setSelectedCommuneName] = useState<string | null>(null);
   const [legalModalOpen, setLegalModalOpen] = useState(false);
@@ -30,11 +74,48 @@ function AppContent() {
 
   useScrollReveal([activeTab, language]);
 
+  // Deep linking: listen to URL changes and handle initial page load
+  useEffect(() => {
+    const handleUrlChange = (smooth = true) => {
+      const tabFromUrl = getTabFromUrl();
+      if (tabFromUrl) {
+        setActiveTab(tabFromUrl);
+        // Automatically normalize URL without '#' if hash was used
+        const targetCleanUrl = tabFromUrl === 'accueil' ? '/' : `/${tabFromUrl}`;
+        if (window.location.hash && window.history.replaceState) {
+          window.history.replaceState(null, '', targetCleanUrl);
+        }
+
+        if (isDedicatedTab(tabFromUrl) || tabFromUrl === 'accueil') {
+          window.scrollTo({ top: 0, behavior: smooth ? 'smooth' : 'auto' });
+        } else {
+          setTimeout(() => {
+            const el = document.getElementById(tabFromUrl);
+            if (el) el.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
+          }, smooth ? 100 : 250);
+        }
+      }
+    };
+
+    // Run on initial mount to scroll to section if URL was /soins, /secteur, etc.
+    handleUrlChange(false);
+
+    const onHashChange = () => handleUrlChange(true);
+    const onPopState = () => handleUrlChange(true);
+
+    window.addEventListener('hashchange', onHashChange);
+    window.addEventListener('popstate', onPopState);
+    return () => {
+      window.removeEventListener('hashchange', onHashChange);
+      window.removeEventListener('popstate', onPopState);
+    };
+  }, []);
+
   // ScrollSpy on main page scroll to keep activeTab synchronized with current viewport
   useEffect(() => {
-    if (activeTab === 'faq' || activeTab === 'fiche-cliente') return;
+    if (isDedicatedTab(activeTab)) return;
 
-    const sectionIds: NavTab[] = ['accueil', 'soins', 'marques', 'a-propos', 'secteur', 'contact'];
+    const sectionIds: NavTab[] = ['accueil', 'soins', 'secteur', 'contact'];
     
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 220;
@@ -56,14 +137,22 @@ function AppContent() {
   }, [activeTab]);
 
   const handleSelectTab = (tab: NavTab) => {
-    if (tab === 'faq' || tab === 'fiche-cliente') {
+    // Keep URL synchronized cleanly: /fiche-cliente, /soins, /marques, /a-propos, /faq without '#'
+    const targetUrl = tab === 'accueil' ? '/' : `/${tab}`;
+    if (window.location.pathname !== targetUrl || window.location.hash) {
+      if (window.history.pushState) {
+        window.history.pushState(null, '', targetUrl);
+      }
+    }
+
+    if (isDedicatedTab(tab)) {
       setActiveTab(tab);
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
 
-    // If currently on dedicated FAQ or Fiche Cliente page, transition back to home first
-    if (activeTab === 'faq' || activeTab === 'fiche-cliente') {
+    // If currently on a dedicated page, transition back to home first
+    if (isDedicatedTab(activeTab)) {
       setActiveTab(tab);
       setTimeout(() => {
         if (tab === 'accueil') {
@@ -140,7 +229,13 @@ function AppContent() {
             </div>
 
             {/* The Dedicated FAQ Component */}
-            <FAQSection />
+            <Suspense fallback={
+              <div className="py-24 text-center">
+                <div className="inline-block w-8 h-8 border-3 border-[#512D6D] border-t-transparent rounded-full animate-spin"></div>
+              </div>
+            }>
+              <FAQSection />
+            </Suspense>
 
             {/* Contact & Support Help Box */}
             <div className="kr-reveal max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 sm:mt-12">
@@ -173,7 +268,7 @@ function AppContent() {
             </div>
           </div>
         ) : activeTab === 'fiche-cliente' ? (
-          /* VIEW 2: DEDICATED FICHE CLIENTE PAGE (Clean & Focused like FAQ) */
+          /* VIEW 2: DEDICATED FICHE CLIENTE PAGE (Clean & Focused) */
           <div className="animate-fadeIn py-8 sm:py-14 bg-[#F9F6F0]">
             <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 mb-4">
               <button
@@ -195,14 +290,87 @@ function AppContent() {
               <ClientSheetSection />
             </Suspense>
           </div>
+        ) : activeTab === 'carte-cadeau' ? (
+          /* VIEW 2B: DEDICATED CARTE CADEAU PAGE (Clean & Focused) */
+          <div className="animate-fadeIn py-8 sm:py-12 bg-[#F9F6F0]">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-4">
+              <button
+                type="button"
+                onClick={() => handleSelectTab('accueil')}
+                className="inline-flex items-center gap-2 px-4 py-2 min-h-[44px] rounded-full bg-white hover:bg-white/90 border border-[#D1C4E9] text-xs font-semibold text-[#512D6D] shadow-xs cursor-pointer transition-all active:scale-95"
+              >
+                <ArrowLeft className="w-4 h-4 text-[#512D6D]" />
+                <span>{language === 'es' ? 'Volver al inicio' : "Retour à l'accueil"}</span>
+              </button>
+            </div>
+
+            <Suspense fallback={
+              <div className="py-24 text-center">
+                <div className="inline-block w-8 h-8 border-3 border-[#512D6D] border-t-transparent rounded-full animate-spin"></div>
+              </div>
+            }>
+              <GiftCardSection />
+            </Suspense>
+          </div>
+        ) : activeTab === 'marques' ? (
+          /* VIEW 3: DEDICATED TECHNOLOGIES & MARQUES PAGE */
+          <div className="animate-fadeIn pt-6 sm:pt-10 bg-[#F9F6F0]">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-4">
+              <button
+                type="button"
+                onClick={() => handleSelectTab('accueil')}
+                className="inline-flex items-center gap-2 px-4 py-2 min-h-[44px] rounded-full bg-white hover:bg-white/90 border border-[#D1C4E9] text-xs font-semibold text-[#512D6D] shadow-xs cursor-pointer transition-all active:scale-95"
+              >
+                <ArrowLeft className="w-4 h-4 text-[#512D6D]" />
+                <span>{language === 'es' ? 'Volver al inicio' : "Retour à l'accueil"}</span>
+              </button>
+            </div>
+
+            <Suspense fallback={
+              <div className="py-24 text-center">
+                <div className="inline-block w-8 h-8 border-3 border-[#512D6D] border-t-transparent rounded-full animate-spin"></div>
+              </div>
+            }>
+              <BrandsEquipment />
+            </Suspense>
+
+            <HomeCtaBanner onOpenBooking={() => handleOpenBooking()} />
+          </div>
+        ) : activeTab === 'a-propos' ? (
+          /* VIEW 4: DEDICATED À PROPOS DE KARINA PAGE */
+          <div className="animate-fadeIn pt-6 sm:pt-10 bg-[#F9F6F0]">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-2">
+              <button
+                type="button"
+                onClick={() => handleSelectTab('accueil')}
+                className="inline-flex items-center gap-2 px-4 py-2 min-h-[44px] rounded-full bg-white hover:bg-white/90 border border-[#D1C4E9] text-xs font-semibold text-[#512D6D] shadow-xs cursor-pointer transition-all active:scale-95"
+              >
+                <ArrowLeft className="w-4 h-4 text-[#512D6D]" />
+                <span>{language === 'es' ? 'Volver al inicio' : "Retour à l'accueil"}</span>
+              </button>
+            </div>
+
+            <Suspense fallback={
+              <div className="py-24 text-center">
+                <div className="inline-block w-8 h-8 border-3 border-[#512D6D] border-t-transparent rounded-full animate-spin"></div>
+              </div>
+            }>
+              <AboutSection />
+            </Suspense>
+
+            <HomeCtaBanner onOpenBooking={() => handleOpenBooking()} />
+          </div>
         ) : (
-          /* VIEW 3: UNIFIED ONE-PAGE FLOW WITH PERFECT COLOR ALTERNATION */
+          /* VIEW 5: STREAMLINED ONE-PAGE CONVERSION FLOW (-40% MOBILE SCROLL) */
           <div className="space-y-0">
             
             {/* 1. HERO HEADER (Beige #F9F6F0) */}
             <Hero 
               onOpenBooking={() => handleOpenBooking()} 
               onGoToServices={() => handleSelectTab('soins')}
+              onOpenBrands={() => handleSelectTab('marques')}
+              onOpenAbout={() => handleSelectTab('a-propos')}
+              onOpenGiftCard={() => handleSelectTab('carte-cadeau')}
             />
 
             {/* 2. RITUEL EN 3 ÉTAPES (Blanc bg-white) */}
@@ -211,21 +379,20 @@ function AppContent() {
               onGoToServices={() => handleSelectTab('soins')}
             />
 
-            {/* 3. SOINS & TARIFS (Beige #F9F6F0) */}
+            {/* 3. SOINS, DIAGNOSTIC EXPRESS & DUOS SIGNATURE (Beige #F9F6F0) */}
             <ServicesMenu 
               onSelectService={(service) => handleOpenBooking(service)}
+              onSelectRecommendedServices={(servicesList) => {
+                setSelectedServices(servicesList);
+                handleSelectTab('contact');
+              }}
               selectedServices={selectedServices}
               onToggleComboService={handleToggleComboService}
               onBookCombo={() => handleSelectTab('contact')}
+              onOpenGiftCard={() => handleSelectTab('carte-cadeau')}
             />
 
-            {/* 4. TECHNOLOGIES & MARQUES (Blanc bg-white) */}
-            <BrandsEquipment />
-
-            {/* 5. À PROPOS DE KARINA (Beige #F9F6F0) */}
-            <AboutSection />
-
-            {/* 6. RAYON D'ACTION & SECTEUR (Blanc bg-white) */}
+            {/* 4. RAYON D'ACTION & SECTEUR (Blanc bg-white) */}
             <LogisticsCalculator
               onSelectCommuneForBooking={(communeName) => {
                 setSelectedCommuneName(communeName);
@@ -233,15 +400,10 @@ function AppContent() {
               }}
             />
 
-            {/* 7. AVIS CLIENTES & GOOGLE MAPS (Beige #F9F6F0) */}
+            {/* 5. AVIS CLIENTES & GOOGLE MAPS (Beige #F9F6F0) */}
             <HomeTestimonials />
 
-            {/* 8. BANNIÈRE WARM CTA (Prune Foncé #512D6D) */}
-            <HomeCtaBanner 
-              onOpenBooking={() => handleOpenBooking()}
-            />
-
-            {/* 9. CONTACT & RÉSERVATION (Blanc bg-white) */}
+            {/* 6. CONTACT & RÉSERVATION (Blanc bg-white) */}
             <ContactSection 
               selectedService={selectedServices[0] || null}
               selectedServices={selectedServices}

@@ -13,6 +13,8 @@ export interface NavTranslations {
     aProposShort: string;
     ficheCliente: string;
     ficheClienteShort: string;
+    carteCadeau: string;
+    carteCadeauShort: string;
     faq: string;
     contact: string;
   };
@@ -77,6 +79,7 @@ export interface ServicesTranslations {
     all: string;
     visageRegard: string;
     piedsCorps: string;
+    duos: string;
   };
   categories: {
     regard: string;
@@ -114,6 +117,77 @@ export interface ServicesTranslations {
   comboFreeTravelBadge: string;
   comboBookSelectionBtn: string;
   comboTotalDurationLabel: string;
+  diagnostic: {
+    bannerBadge: string;
+    bannerTitle: string;
+    bannerSub: string;
+    startBtn: string;
+    closeBtn: string;
+    closeAria: string;
+    stepIndicator: string;
+    backBtn: string;
+    restartBtn: string;
+    q1Title: string;
+    q1Sub: string;
+    zones: {
+      visage: { title: string; sub: string };
+      regard: { title: string; sub: string };
+      piedsCorps: { title: string; sub: string };
+    };
+    q2Title: string;
+    q2Sub: string;
+    needs: {
+      visageDouceur: { title: string; sub: string; advice: string };
+      visagePurete: { title: string; sub: string; advice: string };
+      visageDetox: { title: string; sub: string; advice: string };
+      regardCils: { title: string; sub: string; advice: string };
+      piedsExpress: { title: string; sub: string; advice: string };
+      piedsComplet: { title: string; sub: string; advice: string };
+      corpsChaise: { title: string; sub: string; advice: string };
+    };
+    q3Title: string;
+    q3Sub: string;
+    formats: {
+      solo: { title: string; sub: string; badge: string };
+      duo: { title: string; sub: string; badge: string };
+    };
+    result: {
+      kicker: string;
+      titleSolo: string;
+      titleDuo: string;
+      karinaAdviceLabel: string;
+      duoBonusAdvice: string;
+      freeTravelApplied: string;
+      bookRecommendedBtn: string;
+      viewOnMenuBtn: string;
+    };
+  };
+  signatureDuos: {
+    kicker: string;
+    title: string;
+    subtitle: string;
+    freeTravelTag: string;
+    chooseDuoBtn: string;
+    selectedDuoBtn: string;
+    items: {
+      regardEclat: {
+        badge: string;
+        title: string;
+        desc: string;
+      };
+      coconVisageDos: {
+        badge: string;
+        title: string;
+        desc: string;
+      };
+      nuageLegerete: {
+        badge: string;
+        title: string;
+        desc: string;
+      };
+    };
+  };
+  giftCardCta: string;
 }
 
 export interface BrandsTranslations {
@@ -531,6 +605,8 @@ export interface ClientSheetTranslations {
   title: string;
   subtitle: string;
   confidentialBadge: string;
+  shareDirectLink: string;
+  shareDirectLinkCopied: string;
   confidentialText: string;
   step1Title: string;
   step1Sub: string;
@@ -637,6 +713,78 @@ export interface ClientSheetTranslations {
   };
 }
 
+export interface GiftCardTranslations {
+  kicker: string;
+  title: string;
+  subtitle: string;
+  validityBadge: string;
+  step1Title: string;
+  formatSoloBtn: string;
+  formatDuoBtn: string;
+  selectRitualLabel: string;
+  step2Title: string;
+  recipientLabel: string;
+  recipientPlaceholder: string;
+  senderLabel: string;
+  senderPlaceholder: string;
+  communeLabel: string;
+  freeTravelNote: string;
+  paidTravelNote: string;
+  messageLabel: string;
+  messagePlaceholder: string;
+  suggestionsLabel: string;
+  suggestions: {
+    birthday: { label: string; text: string };
+    cocooning: { label: string; text: string };
+    pleasure: { label: string; text: string };
+  };
+  previewKicker: string;
+  voucher: {
+    brandHeader: string;
+    voucherTitle: string;
+    voucherSubtitle: string;
+    forLabel: string;
+    fromLabel: string;
+    paidInFullBadge: string;
+    ritualLabel: string;
+    durationLabel: string;
+    locationLabel: string;
+    defaultRecipient: string;
+    defaultSender: string;
+    defaultMessage: string;
+    programIncludedTitle: string;
+    protocolStepsTitle: string;
+    recipientGuideHeader: string;
+    recipientBookingTitle: string;
+    recipientBookingSteps: [string, string, string];
+    recipientPrepTitle: string;
+    recipientPrepSteps: [string, string, string];
+    validityNote: string;
+    bookingNote: string;
+    signatureLine: string;
+    contactLine: string;
+  };
+  actions: {
+    orderWhatsAppBtn: string;
+    orderEmailBtn: string;
+    printVoucherBtn: string;
+    howItWorksTitle: string;
+    stepA: string;
+    stepB: string;
+    stepC: string;
+  };
+  whatsappTemplate: {
+    header: string;
+    ritual: string;
+    forRecipient: string;
+    fromSender: string;
+    commune: string;
+    total: string;
+    message: string;
+    closing: string;
+  };
+}
+
 export interface SiteTranslations {
   htmlLang: string;
   metaTitle: string;
@@ -651,6 +799,7 @@ export interface SiteTranslations {
   faq: FAQTranslations;
   contact: ContactTranslations;
   clientSheet: ClientSheetTranslations;
+  giftCard: GiftCardTranslations;
   paymentDetails: PaymentDetailsTranslations;
   footer: FooterTranslations;
   legal: LegalTranslations;

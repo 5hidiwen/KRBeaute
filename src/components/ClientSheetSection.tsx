@@ -13,7 +13,8 @@ import {
   Loader2,
   AlertCircle,
   Check,
-  Printer
+  Printer,
+  Share2
 } from 'lucide-react';
 import { COMMUNES_DATA } from '../data/communesData';
 import { useLanguage } from '../i18n/LanguageContext';
@@ -24,8 +25,30 @@ type SkinTypeKey = 'seche' | 'mixte' | 'grasse' | 'sensible' | 'mature' | 'deshy
 type GoalKey = 'eclat' | 'antiAge' | 'hydratation' | 'purete' | 'regard' | 'detente';
 
 export const ClientSheetSection: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const cs = t.clientSheet;
+
+  const [linkCopied, setLinkCopied] = useState(false);
+
+  const handleCopyDirectLink = async () => {
+    const directUrl = `${window.location.origin}/fiche-cliente`;
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(directUrl);
+      } else {
+        const textarea = document.createElement('textarea');
+        textarea.value = directUrl;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+      }
+      setLinkCopied(true);
+      setTimeout(() => setLinkCopied(false), 2500);
+    } catch {
+      // fallback
+    }
+  };
 
   const [formData, setFormData] = useState({
     fullName: '',
@@ -140,7 +163,8 @@ export const ClientSheetSection: React.FC = () => {
     const source = document.getElementById('clientsheet-summary-ticket');
     const printRoot = document.getElementById('print-root');
     if (source && printRoot) {
-      printRoot.innerHTML = source.outerHTML;
+      printRoot.textContent = '';
+      printRoot.appendChild(source.cloneNode(true));
     }
     window.print();
   };
@@ -150,7 +174,8 @@ export const ClientSheetSection: React.FC = () => {
       const source = document.getElementById('clientsheet-summary-ticket');
       const printRoot = document.getElementById('print-root');
       if (source && printRoot) {
-        printRoot.innerHTML = source.outerHTML;
+        printRoot.textContent = '';
+        printRoot.appendChild(source.cloneNode(true));
       }
     }
   }, [submitted]);
@@ -264,10 +289,31 @@ export const ClientSheetSection: React.FC = () => {
             {cs.subtitle}
           </p>
 
-          {/* Confidentiality Pill */}
-          <div className="mt-4 inline-flex flex-wrap items-center justify-center gap-2 px-4 py-2 rounded-2xl bg-white border border-[#D1C4E9] shadow-2xs text-[11px] sm:text-xs text-[#5D4037]">
-            <ShieldCheck className="w-4 h-4 text-[#512D6D] shrink-0" />
-            <span className="font-semibold text-[#512D6D]">{cs.confidentialBadge}</span>
+          {/* Action Pills : Confidentiality & Direct Link Copy */}
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-2.5">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-white border border-[#D1C4E9] shadow-2xs text-[11px] sm:text-xs text-[#5D4037]">
+              <ShieldCheck className="w-4 h-4 text-[#512D6D] shrink-0" />
+              <span className="font-semibold text-[#512D6D]">{cs.confidentialBadge}</span>
+            </div>
+
+            <button
+              type="button"
+              onClick={handleCopyDirectLink}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-white hover:bg-[#F9F6F0] border border-[#D1C4E9] text-[#512D6D] text-[11px] sm:text-xs font-semibold shadow-2xs transition-all active:scale-95 cursor-pointer"
+              title={cs.shareDirectLink}
+            >
+              {linkCopied ? (
+                <>
+                  <Check className="w-3.5 h-3.5 text-emerald-600" />
+                  <span className="text-emerald-700 font-bold">{cs.shareDirectLinkCopied}</span>
+                </>
+              ) : (
+                <>
+                  <Share2 className="w-3.5 h-3.5 text-[#512D6D]" />
+                  <span>{cs.shareDirectLink}</span>
+                </>
+              )}
+            </button>
           </div>
         </div>
 

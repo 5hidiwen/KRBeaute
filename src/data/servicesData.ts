@@ -164,7 +164,7 @@ export const SERVICES_FR: ServiceItem[] = [
     duration: '45 min',
     durationMinutes: 45,
     price: 55,
-    colorTheme: 'pink',
+    colorTheme: 'cyan',
     protocolSteps: [
       'Préparation détoxifiante et brumisation tonifiante',
       'Passage doux de la spatule ultrasonique désincrustante',
@@ -321,7 +321,7 @@ export const SERVICES_ES: ServiceItem[] = [
     duration: '45 min',
     durationMinutes: 45,
     price: 55,
-    colorTheme: 'pink',
+    colorTheme: 'cyan',
     protocolSteps: [
       'Preparación desintoxicante y bruma tonificante',
       'Paso suave de la espátula ultrasónica desincrustante',

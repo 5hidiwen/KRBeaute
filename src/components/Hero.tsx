@@ -13,9 +13,12 @@ import { useLanguage } from '../i18n/LanguageContext';
 interface HeroProps {
   onOpenBooking: () => void;
   onGoToServices?: () => void;
+  onOpenBrands?: () => void;
+  onOpenAbout?: () => void;
+  onOpenGiftCard?: () => void;
 }
 
-export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onGoToServices }) => {
+export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onGoToServices, onOpenBrands, onOpenAbout, onOpenGiftCard }) => {
   const { t, language } = useLanguage();
 
   return (
@@ -35,19 +38,14 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onGoToServices }) => 
         {/* Main Centered Content */}
         <div className="flex flex-col items-center text-center">
           
-          {/* Trust Kickers: certified + Google Maps 5.0 */}
-          <div className="flex flex-wrap items-center justify-center gap-2 text-[11px] sm:text-xs font-semibold tracking-wider text-[#512D6D] mb-4 sm:mb-5">
-            <span className="flex items-center gap-1.5 uppercase">
-              <Award className="w-3.5 h-3.5 text-[#512D6D]" />
-              {t.hero.certifiedKicker}
-            </span>
-            <span className="text-[#512D6D]/40">·</span>
+          {/* Trust Kicker: Google Maps Reviews */}
+          <div className="flex items-center justify-center mb-4 sm:mb-5">
             <a
               href="https://maps.app.goo.gl/LA6mRurL1Dnmb4Vn8"
               target="_blank"
               rel="noopener noreferrer"
               title={language === 'es' ? "Consultar las opiniones Google Maps de Karina Robart" : "Consulter les avis Google Maps de Karina Robart"}
-              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/90 border border-[#D1C4E9] text-[#512D6D] hover:bg-white shadow-2xs transition-colors"
+              className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/90 border border-[#D1C4E9] text-[#512D6D] hover:bg-white shadow-2xs text-[11px] sm:text-xs font-semibold tracking-wider transition-colors"
             >
               <span className="flex text-amber-500 font-bold tracking-tighter text-xs" aria-hidden="true">★★★★★</span>
               <span className="font-bold">{t.hero.googleReviewsBadge}</span>
@@ -187,10 +185,44 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking, onGoToServices }) => 
             </div>
           </div>
 
-          {/* Partner Brands Ribbon (Centered) */}
-          <div className="mt-8 sm:mt-10 pt-4 border-t border-[#D1C4E9]/50 flex flex-wrap items-center justify-center gap-2 text-xs sm:text-sm font-medium text-[#5D4037]/80">
-            <span className="font-semibold text-[#512D6D]">{t.hero.showcase.partnersTitle}</span>
-            <span>{t.hero.showcase.brandsBar}</span>
+          {/* Partner Brands Ribbon + Quick Links to Dedicated Brands & About Pages */}
+          <div className="mt-8 sm:mt-10 pt-4 border-t border-[#D1C4E9]/50 flex flex-col sm:flex-row flex-wrap items-center justify-center gap-3 text-xs sm:text-sm font-medium text-[#5D4037]/80">
+            <div className="flex flex-wrap items-center justify-center gap-2">
+              <span className="font-semibold text-[#512D6D]">{t.hero.showcase.partnersTitle}</span>
+              <span>{t.hero.showcase.brandsBar}</span>
+            </div>
+
+            {(onOpenBrands || onOpenAbout || onOpenGiftCard) && (
+              <div className="flex flex-wrap items-center justify-center gap-2">
+                {onOpenGiftCard && (
+                  <button
+                    type="button"
+                    onClick={onOpenGiftCard}
+                    className="min-h-[38px] px-3.5 py-1.5 rounded-full bg-[#F5E6EC]/80 hover:bg-[#F2DCE6] border border-[#7A2048]/30 text-[#7A2048] text-xs font-bold transition-all cursor-pointer active:scale-98 focus-visible:ring-2 focus-visible:ring-[#512D6D] focus-visible:outline-none"
+                  >
+                    <span>🎁 {t.nav.tabs.carteCadeauShort} →</span>
+                  </button>
+                )}
+                {onOpenBrands && (
+                  <button
+                    type="button"
+                    onClick={onOpenBrands}
+                    className="min-h-[38px] px-3.5 py-1.5 rounded-full bg-white hover:bg-[#F5EBF7] border border-[#D1C4E9] text-[#512D6D] text-xs font-semibold transition-all cursor-pointer active:scale-98 focus-visible:ring-2 focus-visible:ring-[#512D6D] focus-visible:outline-none"
+                  >
+                    <span>{t.nav.tabs.marques} →</span>
+                  </button>
+                )}
+                {onOpenAbout && (
+                  <button
+                    type="button"
+                    onClick={onOpenAbout}
+                    className="min-h-[38px] px-3.5 py-1.5 rounded-full bg-white hover:bg-[#F5EBF7] border border-[#D1C4E9] text-[#7A2048] text-xs font-semibold transition-all cursor-pointer active:scale-98 focus-visible:ring-2 focus-visible:ring-[#512D6D] focus-visible:outline-none"
+                  >
+                    <span>{t.nav.tabs.aPropos} →</span>
+                  </button>
+                )}
+              </div>
+            )}
           </div>
 
         </div>

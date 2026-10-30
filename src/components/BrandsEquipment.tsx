@@ -122,7 +122,7 @@ export const BrandsEquipment: React.FC = () => {
                   {t.brands.brands.farmasi.badge}
                 </span>
               </div>
-              <h3 className="font-serif text-base sm:text-lg font-bold text-[#512D6D]">Dr. Tuna</h3>
+              <h3 className="font-serif text-base sm:text-lg font-bold text-[#512D6D]">Dr. Tuna by Farmasi</h3>
               <p className="text-[11px] font-semibold text-[#5D4037]/70 uppercase tracking-wider mb-1.5">
                 {t.brands.brands.farmasi.category}
               </p>

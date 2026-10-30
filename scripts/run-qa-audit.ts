@@ -66,6 +66,16 @@ const forbiddenEmailRegex = /[\w.-]+@(?!krbeaute\.com)[a-zA-Z\d.-]+\.[a-zA-Z]{2,
 const forbiddenEmailsFound: string[] = [];
 let officialEmailFound = false;
 
+const IGNORED_DOMAINS = new Set([
+  'schema.org',
+  'web3forms.com',
+  'example.com',
+  'exemple.fr',
+  'ejemplo.com',
+  'google.com',
+]);
+const IGNORED_PREFIXES = ['@types', '@tailwindcss', '@vitejs', '@google'];
+
 for (const file of tsxAndHtmlFiles) {
   // Ignorer certains fichiers générés ou de configuration comme karinaPhotoData
   if (file.includes('karinaPhotoData.ts')) continue;
@@ -76,17 +86,13 @@ for (const file of tsxAndHtmlFiles) {
   const matches = content.match(forbiddenEmailRegex);
   if (matches) {
     for (const match of matches) {
-      // Exclure les faux positifs d'URL / imports / web3forms / schema.org
-      if (!match.includes('schema.org') && 
-          !match.includes('web3forms.com') && 
-          !match.includes('example.com') &&
-          !match.includes('exemple.fr') &&
-          !match.includes('ejemplo.com') &&
-          !match.includes('google.com') &&
-          !match.includes('@types') &&
-          !match.includes('@tailwindcss') &&
-          !match.includes('@vitejs') &&
-          !match.includes('@google')) {
+      // Exclure les faux positifs d'URL / imports / web3forms / schema.org via matching de domaine exact
+      const atIndex = match.lastIndexOf('@');
+      const domain = atIndex !== -1 ? match.slice(atIndex + 1).toLowerCase() : '';
+      const isIgnoredDomain = IGNORED_DOMAINS.has(domain);
+      const isPackageScope = IGNORED_PREFIXES.some((prefix) => match.includes(prefix));
+
+      if (!isIgnoredDomain && !isPackageScope) {
         forbiddenEmailsFound.push(`${path.relative(ROOT_DIR, file)}: ${match}`);
       }
     }
@@ -416,6 +422,7 @@ const whitelistedStrings = new Set([
   'Nu Skin',
   'Dr. Renaud Paris',
   'Dr. Tuna',
+  'Dr. Tuna by Farmasi',
   'House of Peau',
   'Threads',
   'Instagram',

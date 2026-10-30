@@ -203,7 +203,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
     const source = document.getElementById('contact-summary-ticket');
     const printRoot = document.getElementById('print-root');
     if (source && printRoot) {
-      printRoot.innerHTML = source.outerHTML;
+      printRoot.textContent = '';
+      printRoot.appendChild(source.cloneNode(true));
     }
     window.print();
   };
@@ -213,7 +214,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
       const source = document.getElementById('contact-summary-ticket');
       const printRoot = document.getElementById('print-root');
       if (source && printRoot) {
-        printRoot.innerHTML = source.outerHTML;
+        printRoot.textContent = '';
+        printRoot.appendChild(source.cloneNode(true));
       }
     }
   }, [submitted]);
