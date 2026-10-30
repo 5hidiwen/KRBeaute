@@ -65,6 +65,7 @@ export interface HeroTranslations {
     itemScentDesc: string;
     itemHygieneTitle: string;
     itemHygieneDesc: string;
+    partnersTitle: string;
   };
 }
 
@@ -99,6 +100,8 @@ export interface ServicesTranslations {
   comboTitle: string;
   comboDesc: string;
   comboBtn: string;
+  atHome: string;
+  sessionIncludes: string;
 }
 
 export interface BrandsTranslations {
@@ -334,6 +337,8 @@ export interface ContactTranslations {
       emailLabel: string;
       notesLabel: string;
       noneLabel: string;
+      printBrandTitle: string;
+      printBrandSub: string;
     };
   };
   whatsappTemplate: {
@@ -479,10 +484,13 @@ export interface PaymentDetailsTranslations {
   title: string;
   subtitle: string;
   weroTitle: string;
+  weroBadge: string;
   weroPhone: string;
+  weroPhoneLabel: string;
   weroSub: string;
   weroAction: string;
   weroCopied: string;
+  callBtn: string;
   transferTitle: string;
   bankName: string;
   beneficiaryLabel: string;
@@ -579,6 +587,19 @@ export interface ClientSheetTranslations {
     sectionHealth: string;
     sectionGoals: string;
     confidentialNotice: string;
+    recapLabels: {
+      name: string;
+      birth: string;
+      phone: string;
+      email: string;
+      commune: string;
+      address: string;
+      skinZones: string;
+      healthNotes: string;
+      routineLabel: string;
+      printBrandTitle: string;
+      printBrandSub: string;
+    };
   };
   whatsappTemplate: {
     header: string;

@@ -62,12 +62,12 @@ export const HomeExperienceSteps: React.FC<HomeExperienceStepsProps> = ({
       {/* Subtle background decoration */}
       <div 
         aria-hidden="true" 
-        className="pointer-events-none absolute -bottom-20 -left-20 w-80 h-80 rounded-full bg-[#D1C4E9]/20 blur-3xl -z-10" 
+        className="kr-ambient-float pointer-events-none absolute -bottom-20 -left-20 w-80 h-80 rounded-full bg-[#D1C4E9]/25 blur-3xl -z-10" 
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
+        <div className="kr-reveal text-center max-w-3xl mx-auto mb-10 sm:mb-16">
           <span className="block text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#8B2651] mb-2">
             {experience.kicker}
           </span>
@@ -88,7 +88,8 @@ export const HomeExperienceSteps: React.FC<HomeExperienceStepsProps> = ({
           {steps.map((step, idx) => (
             <div 
               key={step.num}
-              className="w-[84vw] max-w-[320px] shrink-0 snap-center md:w-auto md:max-w-none md:shrink relative flex flex-col justify-between bg-gradient-to-b from-[#F9F6F0] to-[#F3EDE2]/50 p-6 sm:p-7 rounded-3xl border border-[#D1C4E9]/70 shadow-xs hover:shadow-md transition-all group"
+              style={{ '--reveal-delay': `${idx * 110}ms` } as React.CSSProperties}
+              className="kr-reveal kr-card-nacre w-[84vw] max-w-[320px] shrink-0 snap-center md:w-auto md:max-w-none md:shrink relative flex flex-col justify-between bg-gradient-to-b from-[#F9F6F0] to-[#F3EDE2]/60 p-6 sm:p-7 rounded-3xl border border-[#D1C4E9]/75 group"
             >
               <div>
                 {/* Step indicator top bar */}
@@ -139,14 +140,14 @@ export const HomeExperienceSteps: React.FC<HomeExperienceStepsProps> = ({
         </div>
 
         {/* Bottom Fast Action Prompt: Dual Action (Discover Services + Book) */}
-        <div className="mt-10 sm:mt-12 flex flex-col sm:flex-row items-center justify-center gap-3.5 max-w-lg mx-auto">
+        <div className="kr-reveal mt-10 sm:mt-12 flex flex-col sm:flex-row items-center justify-center gap-3.5 max-w-lg mx-auto">
           {onGoToServices && (
             <button
               type="button"
               onClick={onGoToServices}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 min-h-[48px] rounded-full bg-[#512D6D] text-[#F9F6F0] hover:bg-[#402257] active:scale-98 text-xs sm:text-sm font-semibold shadow-xs hover:shadow transition-all cursor-pointer"
+              className="kr-btn-silk group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 min-h-[48px] rounded-full bg-[#512D6D] text-[#F9F6F0] hover:bg-[#402257] active:scale-98 text-xs sm:text-sm font-semibold shadow-xs hover:shadow transition-all cursor-pointer"
             >
-              <ArrowDown className="w-4 h-4 text-[#F9F6F0]" />
+              <ArrowDown className="w-4 h-4 text-[#F9F6F0] transition-transform duration-300 group-hover:translate-y-0.5" />
               <span>{experience.viewMenuBtn}</span>
             </button>
           )}

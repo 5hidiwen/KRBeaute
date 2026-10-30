@@ -30,7 +30,7 @@ export const HomeTestimonials: React.FC = () => {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
+        <div className="kr-reveal text-center max-w-2xl mx-auto mb-8 sm:mb-12">
           <span className="block text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#8B2651] mb-2">
             {testimonials.kicker}
           </span>
@@ -43,7 +43,7 @@ export const HomeTestimonials: React.FC = () => {
         </div>
 
         {/* Central Authentic Google Business Showcase Card */}
-        <div className="bg-white rounded-3xl p-6 sm:p-10 border border-[#D1C4E9] shadow-sm text-center max-w-2xl mx-auto mb-10">
+        <div className="kr-reveal kr-card-nacre bg-white rounded-3xl p-6 sm:p-10 border border-[#D1C4E9] text-center max-w-2xl mx-auto mb-10">
           
           <div className="inline-flex items-center justify-center p-3 rounded-2xl bg-[#F9F6F0] mb-3">
             <svg className="w-8 h-8" viewBox="0 0 24 24" aria-hidden="true">
@@ -79,7 +79,7 @@ export const HomeTestimonials: React.FC = () => {
               href="https://maps.app.goo.gl/LA6mRurL1Dnmb4Vn8"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 min-h-[46px] rounded-full bg-[#512D6D] text-white text-xs sm:text-sm font-bold shadow-xs hover:bg-[#402257] active:scale-98 transition-all"
+              className="kr-btn-silk inline-flex items-center gap-2 px-6 py-3 min-h-[46px] rounded-full bg-[#512D6D] text-white text-xs sm:text-sm font-bold shadow-xs hover:bg-[#402257] active:scale-98 transition-all"
               title="Consulter les avis réels en direct sur Google Maps"
             >
               <span>{testimonials.openGoogleBtn}</span>
@@ -105,7 +105,10 @@ export const HomeTestimonials: React.FC = () => {
           onScroll={handlePillarsScroll}
           className="flex md:grid md:grid-cols-3 gap-3.5 sm:gap-6 text-center overflow-x-auto md:overflow-visible snap-x snap-mandatory no-scrollbar pb-2 pt-1 -mx-4 px-4 sm:mx-0 sm:px-0"
         >
-          <div className="w-[78vw] max-w-[280px] shrink-0 snap-center md:w-auto md:max-w-none md:shrink bg-white p-5 rounded-2xl border border-[#D1C4E9]/60 shadow-2xs flex flex-col justify-between">
+          <div
+            style={{ '--reveal-delay': '0ms' } as React.CSSProperties}
+            className="kr-reveal kr-card-nacre w-[78vw] max-w-[280px] shrink-0 snap-center md:w-auto md:max-w-none md:shrink bg-white p-5 rounded-2xl border border-[#D1C4E9]/60 flex flex-col justify-between"
+          >
             <div>
               <div className="w-9 h-9 rounded-xl bg-[#D1C4E9]/30 text-[#512D6D] flex items-center justify-center mx-auto mb-3">
                 <ShieldCheck className="w-5 h-5" />
@@ -119,7 +122,10 @@ export const HomeTestimonials: React.FC = () => {
             </div>
           </div>
 
-          <div className="w-[78vw] max-w-[280px] shrink-0 snap-center md:w-auto md:max-w-none md:shrink bg-white p-5 rounded-2xl border border-[#D1C4E9]/60 shadow-2xs flex flex-col justify-between">
+          <div
+            style={{ '--reveal-delay': '90ms' } as React.CSSProperties}
+            className="kr-reveal kr-card-nacre w-[78vw] max-w-[280px] shrink-0 snap-center md:w-auto md:max-w-none md:shrink bg-white p-5 rounded-2xl border border-[#D1C4E9]/60 flex flex-col justify-between"
+          >
             <div>
               <div className="w-9 h-9 rounded-xl bg-[#D1C4E9]/30 text-[#512D6D] flex items-center justify-center mx-auto mb-3">
                 <HeartHandshake className="w-5 h-5 text-rose-600" />
@@ -133,7 +139,10 @@ export const HomeTestimonials: React.FC = () => {
             </div>
           </div>
 
-          <div className="w-[78vw] max-w-[280px] shrink-0 snap-center md:w-auto md:max-w-none md:shrink bg-white p-5 rounded-2xl border border-[#D1C4E9]/60 shadow-2xs flex flex-col justify-between">
+          <div
+            style={{ '--reveal-delay': '180ms' } as React.CSSProperties}
+            className="kr-reveal kr-card-nacre w-[78vw] max-w-[280px] shrink-0 snap-center md:w-auto md:max-w-none md:shrink bg-white p-5 rounded-2xl border border-[#D1C4E9]/60 flex flex-col justify-between"
+          >
             <div>
               <div className="w-9 h-9 rounded-xl bg-[#D1C4E9]/30 text-[#512D6D] flex items-center justify-center mx-auto mb-3">
                 <Clock className="w-5 h-5 text-emerald-600" />

@@ -59,14 +59,14 @@ export const PaymentDetailsCard: React.FC<PaymentDetailsCardProps> = ({
                     {t.paymentDetails.weroTitle}
                   </h4>
                   <span className="text-[10px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
-                    Instantané & sans frais
+                    {t.paymentDetails.weroBadge}
                   </span>
                 </div>
               </div>
             </div>
 
             <div className="mt-3 py-2 px-3 bg-[#F9F6F0] rounded-xl border border-[#D1C4E9]/60 text-center">
-              <p className="text-[11px] text-[#5D4037]/70 font-medium">Numéro de mobile associé :</p>
+              <p className="text-[11px] text-[#5D4037]/70 font-medium">{t.paymentDetails.weroPhoneLabel}</p>
               <p className="font-serif text-lg sm:text-xl font-bold text-[#512D6D] tracking-wider mt-0.5">
                 {t.paymentDetails.weroPhone}
               </p>
@@ -99,7 +99,7 @@ export const PaymentDetailsCard: React.FC<PaymentDetailsCardProps> = ({
               href="tel:+33665566702"
               className="inline-flex items-center justify-center px-3 py-2 rounded-full bg-[#512D6D] hover:bg-[#402257] text-white text-xs font-bold shadow-2xs transition-colors"
             >
-              Appeler
+              {t.paymentDetails.callBtn}
             </a>
           </div>
         </div>

@@ -21,8 +21,24 @@ interface SecondaryNavItem {
 export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
   const { t, language } = useLanguage();
   const [plusSheetOpen, setPlusSheetOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   const isEs = language === 'es';
+
+  useEffect(() => {
+    const onScroll = () => {
+      const y = window.scrollY;
+      setIsScrolled(y > 24);
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (docHeight > 0) {
+        setScrollProgress(Math.min(100, Math.max(0, (y / docHeight) * 100)));
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   // Prevent background scroll when mobile Plus bottom sheet is open
   useEffect(() => {
@@ -94,8 +110,22 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
       {/* =========================================================================
           1. TOP FLOATING NAVBAR (Desktop full menu + Mobile/Tablet streamlined)
          ========================================================================= */}
-      <div className="sticky top-0 sm:top-3.5 z-40 pt-2 sm:pt-0 pb-1 sm:pb-0 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full transition-all bg-[#F9F6F0]/95 sm:bg-transparent backdrop-blur-xs sm:backdrop-blur-none">
-        <header className="bg-[#F9F6F0]/95 backdrop-blur-md border border-[#D1C4E9]/80 rounded-full shadow-xs hover:shadow-sm transition-all px-3 sm:px-5 py-1.5 sm:py-2 flex items-center justify-between gap-2 sm:gap-4">
+      <div className="sticky top-0 sm:top-3.5 z-40 pt-2 sm:pt-0 pb-1 sm:pb-0 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full transition-all duration-300 bg-[#F9F6F0]/90 sm:bg-transparent backdrop-blur-xs sm:backdrop-blur-none">
+        <header className={`relative overflow-hidden backdrop-blur-xl rounded-full transition-all duration-300 px-3 sm:px-5 py-1.5 sm:py-2 flex items-center justify-between gap-2 sm:gap-4 ${
+          isScrolled
+            ? 'bg-white/92 border border-[#512D6D]/25 shadow-[0_10px_30px_-8px_rgba(81,45,109,0.14)]'
+            : 'bg-[#F9F6F0]/95 border border-[#D1C4E9]/80 shadow-xs hover:shadow-sm'
+        }`}>
+          {/* Subtle reading progress bar along bottom edge when scrolling */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute bottom-0 left-4 right-4 h-[2px] overflow-hidden rounded-full opacity-75"
+          >
+            <div
+              className="h-full bg-gradient-to-r from-[#512D6D] via-[#8B2651] to-[#D1C4E9] transition-[width] duration-150 ease-out"
+              style={{ width: `${isScrolled ? scrollProgress : 0}%` }}
+            />
+          </div>
           
           {/* Brand Mark (Left) */}
           <button 
@@ -159,7 +189,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
               href={whatsAppUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="min-h-[40px] min-w-[40px] inline-flex items-center justify-center gap-1.5 px-3 sm:px-3.5 py-2 rounded-full bg-[#512D6D] hover:bg-[#402257] active:scale-95 text-white text-xs font-semibold shadow-2xs transition-all focus-visible:ring-2 focus-visible:ring-[#512D6D] focus-visible:outline-none"
+              className="kr-btn-silk min-h-[40px] min-w-[40px] inline-flex items-center justify-center gap-1.5 px-3 sm:px-3.5 py-2 rounded-full bg-[#512D6D] hover:bg-[#402257] active:scale-95 text-white text-xs font-semibold shadow-2xs transition-all focus-visible:ring-2 focus-visible:ring-[#512D6D] focus-visible:outline-none"
               aria-label={t.nav.whatsappAria}
               title={t.nav.whatsappAria}
             >

@@ -253,7 +253,7 @@ export const ClientSheetSection: React.FC = () => {
     >
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+        <div className="kr-reveal text-center max-w-3xl mx-auto mb-8 sm:mb-10">
           <span className="block text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#8B2651] mb-2.5">
             {cs.kicker}
           </span>
@@ -272,7 +272,7 @@ export const ClientSheetSection: React.FC = () => {
         </div>
 
         {/* Main Card Container */}
-        <div className="bg-white rounded-3xl p-5 sm:p-8 border border-[#D1C4E9] shadow-sm">
+        <div className="kr-reveal kr-card-nacre bg-white rounded-3xl p-5 sm:p-8 border border-[#D1C4E9]">
           {submitted ? (
             <div className="max-w-3xl mx-auto py-6 px-2 sm:px-4 space-y-4 animate-fadeIn">
               {/* Success Header */}
@@ -300,8 +300,8 @@ export const ClientSheetSection: React.FC = () => {
                 <div className="hidden print:block border-b border-[#D1C4E9] pb-3 mb-2">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="font-serif text-base font-bold text-[#512D6D]">KRbeauté · Fiche Cliente & Bilan Beauté</p>
-                      <p className="text-[11px] text-[#5D4037]">Esthéticienne d'Exception à Domicile · Karina Robart</p>
+                      <p className="font-serif text-base font-bold text-[#512D6D]">{cs.success.recapLabels.printBrandTitle}</p>
+                      <p className="text-[11px] text-[#5D4037]">{cs.success.recapLabels.printBrandSub}</p>
                     </div>
                     <div className="text-right text-[10px] text-[#5D4037]/80">
                       <p>06 65 56 67 02</p>
@@ -330,13 +330,13 @@ export const ClientSheetSection: React.FC = () => {
                     <span className="text-[10px] uppercase font-bold text-[#512D6D] block border-b border-[#D1C4E9]/30 pb-1">
                       {cs.success.sectionIdentity}
                     </span>
-                    <p className="font-medium text-[#5D4037]"><span className="text-[#5D4037]/70">Nom :</span> {formData.fullName || cs.whatsappTemplate.none}</p>
-                    <p className="text-[#5D4037]"><span className="text-[#5D4037]/70">Âge / Naissance :</span> {formData.birthDate || cs.whatsappTemplate.none}</p>
-                    <p className="text-[#5D4037]"><span className="text-[#5D4037]/70">Téléphone :</span> {formData.phone || cs.whatsappTemplate.none}</p>
-                    <p className="text-[#5D4037]"><span className="text-[#5D4037]/70">Email :</span> {formData.email || cs.whatsappTemplate.none}</p>
-                    <p className="text-[#5D4037]"><span className="text-[#5D4037]/70">Commune :</span> {formData.commune}</p>
+                    <p className="font-medium text-[#5D4037]"><span className="text-[#5D4037]/70">{cs.success.recapLabels.name}</span> {formData.fullName || cs.whatsappTemplate.none}</p>
+                    <p className="text-[#5D4037]"><span className="text-[#5D4037]/70">{cs.success.recapLabels.birth}</span> {formData.birthDate || cs.whatsappTemplate.none}</p>
+                    <p className="text-[#5D4037]"><span className="text-[#5D4037]/70">{cs.success.recapLabels.phone}</span> {formData.phone || cs.whatsappTemplate.none}</p>
+                    <p className="text-[#5D4037]"><span className="text-[#5D4037]/70">{cs.success.recapLabels.email}</span> {formData.email || cs.whatsappTemplate.none}</p>
+                    <p className="text-[#5D4037]"><span className="text-[#5D4037]/70">{cs.success.recapLabels.commune}</span> {formData.commune}</p>
                     {formData.addressNote && (
-                      <p className="text-[#5D4037]"><span className="text-[#5D4037]/70">Adresse/Accès :</span> {formData.addressNote}</p>
+                      <p className="text-[#5D4037]"><span className="text-[#5D4037]/70">{cs.success.recapLabels.address}</span> {formData.addressNote}</p>
                     )}
                   </div>
 
@@ -348,7 +348,7 @@ export const ClientSheetSection: React.FC = () => {
                     <p className="font-medium text-[#512D6D]">{formatSkinSummary()}</p>
                     {formData.skinZones && (
                       <p className="text-[#5D4037] text-[11px] pt-1">
-                        <span className="text-[#5D4037]/70 block">Zones sensibles / Particularités :</span>
+                        <span className="text-[#5D4037]/70 block">{cs.success.recapLabels.skinZones}</span>
                         {formData.skinZones}
                       </p>
                     )}
@@ -362,7 +362,7 @@ export const ClientSheetSection: React.FC = () => {
                     <p className="font-medium text-[#5D4037]">{formatHealthSummary()}</p>
                     {formData.healthNotes && (
                       <p className="text-[#5D4037] text-[11px] pt-1">
-                        <span className="text-[#5D4037]/70 block">Précisions santé / allergies :</span>
+                        <span className="text-[#5D4037]/70 block">{cs.success.recapLabels.healthNotes}</span>
                         {formData.healthNotes}
                       </p>
                     )}
@@ -376,7 +376,7 @@ export const ClientSheetSection: React.FC = () => {
                     <p className="font-medium text-[#512D6D]">{formatGoalsSummary()}</p>
                     {formData.routine && (
                       <p className="text-[#5D4037] text-[11px] pt-1">
-                        <span className="text-[#5D4037]/70 block">Routine & Attentes :</span>
+                        <span className="text-[#5D4037]/70 block">{cs.success.recapLabels.routineLabel}</span>
                         {formData.routine}
                       </p>
                     )}
@@ -850,7 +850,7 @@ export const ClientSheetSection: React.FC = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className={`min-h-[48px] flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-[#512D6D] hover:bg-[#402257] active:scale-98 text-white text-xs sm:text-sm font-bold shadow-xs transition-all cursor-pointer ${
+                    className={`kr-btn-silk min-h-[48px] flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-[#512D6D] hover:bg-[#402257] active:scale-98 text-white text-xs sm:text-sm font-bold shadow-xs transition-all cursor-pointer ${
                       isSubmitting ? 'opacity-70 cursor-wait' : ''
                     }`}
                   >

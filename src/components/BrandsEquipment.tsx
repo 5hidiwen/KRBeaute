@@ -30,7 +30,7 @@ export const BrandsEquipment: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header - Split Layout */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 sm:mb-8 pb-4 border-b border-[#D1C4E9]/40">
+        <div className="kr-reveal flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 sm:mb-8 pb-4 border-b border-[#D1C4E9]/40">
           <div>
             <span className="block text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#8B2651] mb-1.5">
               {t.brands.kicker}
@@ -49,7 +49,7 @@ export const BrandsEquipment: React.FC = () => {
             href={farmasiAffiliateUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2 bg-[#512D6D] hover:bg-[#402257] active:scale-98 text-white rounded-full text-xs font-semibold shadow-2xs hover:shadow-xs transition-all shrink-0 self-start md:self-auto cursor-pointer"
+            className="kr-btn-silk inline-flex items-center gap-2 px-4 py-2 bg-[#512D6D] hover:bg-[#402257] active:scale-98 text-white rounded-full text-xs font-semibold shadow-2xs hover:shadow-xs transition-all shrink-0 self-start md:self-auto cursor-pointer"
           >
             <ShoppingBag className="w-3.5 h-3.5 text-[#D1C4E9]" />
             <span>{t.brands.farmasiShop}</span>
@@ -64,7 +64,10 @@ export const BrandsEquipment: React.FC = () => {
           className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 overflow-x-auto sm:overflow-visible snap-x snap-mandatory no-scrollbar pb-2 pt-1 -mx-4 px-4 sm:mx-0 sm:px-0 mb-2 sm:mb-6"
         >
           {/* Nu Skin */}
-          <div className="w-[78vw] max-w-[280px] shrink-0 snap-center sm:w-auto sm:max-w-none sm:shrink bg-white rounded-2xl p-4 border border-[#D1C4E9]/70 shadow-2xs hover:shadow-xs transition-all flex flex-col justify-between">
+          <div
+            style={{ '--reveal-delay': '0ms' } as React.CSSProperties}
+            className="kr-reveal kr-card-nacre w-[78vw] max-w-[280px] shrink-0 snap-center sm:w-auto sm:max-w-none sm:shrink bg-white rounded-2xl p-4 border border-[#D1C4E9]/70 flex flex-col justify-between"
+          >
             <div>
               <div className="mb-2.5">
                 <span className="inline-block text-[11px] font-bold text-[#512D6D] bg-[#D1C4E9]/40 px-2.5 py-0.5 rounded-full">
@@ -85,7 +88,10 @@ export const BrandsEquipment: React.FC = () => {
           </div>
 
           {/* Dr. Renaud Paris */}
-          <div className="w-[78vw] max-w-[280px] shrink-0 snap-center sm:w-auto sm:max-w-none sm:shrink bg-white rounded-2xl p-4 border border-[#D1C4E9]/70 shadow-2xs hover:shadow-xs transition-all flex flex-col justify-between">
+          <div
+            style={{ '--reveal-delay': '80ms' } as React.CSSProperties}
+            className="kr-reveal kr-card-nacre w-[78vw] max-w-[280px] shrink-0 snap-center sm:w-auto sm:max-w-none sm:shrink bg-white rounded-2xl p-4 border border-[#D1C4E9]/70 flex flex-col justify-between"
+          >
             <div>
               <div className="mb-2.5">
                 <span className="inline-block text-[11px] font-bold text-[#512D6D] bg-[#D1C4E9]/40 px-2.5 py-0.5 rounded-full">
@@ -106,7 +112,10 @@ export const BrandsEquipment: React.FC = () => {
           </div>
 
           {/* Farmasi */}
-          <div className="w-[78vw] max-w-[280px] shrink-0 snap-center sm:w-auto sm:max-w-none sm:shrink bg-white rounded-2xl p-4 border border-[#512D6D]/40 shadow-2xs hover:shadow-xs transition-all flex flex-col justify-between relative">
+          <div
+            style={{ '--reveal-delay': '160ms' } as React.CSSProperties}
+            className="kr-reveal kr-card-nacre w-[78vw] max-w-[280px] shrink-0 snap-center sm:w-auto sm:max-w-none sm:shrink bg-white rounded-2xl p-4 border border-[#512D6D]/40 flex flex-col justify-between relative"
+          >
             <div>
               <div className="mb-2.5">
                 <span className="inline-block text-[11px] font-bold text-[#512D6D] bg-[#D1C4E9] px-2.5 py-0.5 rounded-full">
@@ -136,7 +145,10 @@ export const BrandsEquipment: React.FC = () => {
           </div>
 
           {/* House of Peau */}
-          <div className="w-[78vw] max-w-[280px] shrink-0 snap-center sm:w-auto sm:max-w-none sm:shrink bg-white rounded-2xl p-4 border border-[#D1C4E9]/70 shadow-2xs hover:shadow-xs transition-all flex flex-col justify-between">
+          <div
+            style={{ '--reveal-delay': '240ms' } as React.CSSProperties}
+            className="kr-reveal kr-card-nacre w-[78vw] max-w-[280px] shrink-0 snap-center sm:w-auto sm:max-w-none sm:shrink bg-white rounded-2xl p-4 border border-[#D1C4E9]/70 flex flex-col justify-between"
+          >
             <div>
               <div className="mb-2.5">
                 <span className="inline-block text-[11px] font-bold text-[#512D6D] bg-[#D1C4E9]/40 px-2.5 py-0.5 rounded-full">
@@ -175,11 +187,11 @@ export const BrandsEquipment: React.FC = () => {
         </div>
 
         {/* Specialized Technologies Spotlight */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+        <div className="kr-reveal grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
           
           {/* Microcurrents */}
-          <div className="bg-white/90 hover:bg-white rounded-2xl p-4 border border-[#D1C4E9]/70 shadow-2xs flex items-center gap-3.5 transition-all">
-            <div className="w-10 h-10 rounded-xl bg-[#512D6D] text-white flex items-center justify-center shrink-0 shadow-2xs">
+          <div className="kr-card-nacre group bg-white/95 hover:bg-white rounded-2xl p-4 border border-[#D1C4E9]/70 flex items-center gap-3.5">
+            <div className="w-10 h-10 rounded-xl bg-[#512D6D] text-white flex items-center justify-center shrink-0 shadow-2xs transition-transform duration-300 group-hover:scale-105">
               <Cpu className="w-5 h-5" />
             </div>
             <div className="min-w-0 flex-1">
@@ -197,8 +209,8 @@ export const BrandsEquipment: React.FC = () => {
           </div>
 
           {/* LED Phototherapy */}
-          <div className="bg-white/90 hover:bg-white rounded-2xl p-4 border border-[#D1C4E9]/70 shadow-2xs flex items-center gap-3.5 transition-all">
-            <div className="w-10 h-10 rounded-xl bg-[#512D6D] text-white flex items-center justify-center shrink-0 shadow-2xs">
+          <div className="kr-card-nacre group bg-white/95 hover:bg-white rounded-2xl p-4 border border-[#D1C4E9]/70 flex items-center gap-3.5">
+            <div className="w-10 h-10 rounded-xl bg-[#512D6D] text-white flex items-center justify-center shrink-0 shadow-2xs transition-transform duration-300 group-hover:scale-105">
               <Sun className="w-5 h-5" />
             </div>
             <div className="min-w-0 flex-1">
@@ -216,8 +228,8 @@ export const BrandsEquipment: React.FC = () => {
           </div>
 
           {/* Galvanic Current */}
-          <div className="bg-white/90 hover:bg-white rounded-2xl p-4 border border-[#D1C4E9]/70 shadow-2xs flex items-center gap-3.5 transition-all">
-            <div className="w-10 h-10 rounded-xl bg-[#512D6D] text-white flex items-center justify-center shrink-0 shadow-2xs">
+          <div className="kr-card-nacre group bg-white/95 hover:bg-white rounded-2xl p-4 border border-[#D1C4E9]/70 flex items-center gap-3.5">
+            <div className="w-10 h-10 rounded-xl bg-[#512D6D] text-white flex items-center justify-center shrink-0 shadow-2xs transition-transform duration-300 group-hover:scale-105">
               <Zap className="w-5 h-5" />
             </div>
             <div className="min-w-0 flex-1">
@@ -235,8 +247,8 @@ export const BrandsEquipment: React.FC = () => {
           </div>
 
           {/* High Frequency */}
-          <div className="bg-white/90 hover:bg-white rounded-2xl p-4 border border-[#D1C4E9]/70 shadow-2xs flex items-center gap-3.5 transition-all">
-            <div className="w-10 h-10 rounded-xl bg-[#512D6D] text-white flex items-center justify-center shrink-0 shadow-2xs">
+          <div className="kr-card-nacre group bg-white/95 hover:bg-white rounded-2xl p-4 border border-[#D1C4E9]/70 flex items-center gap-3.5">
+            <div className="w-10 h-10 rounded-xl bg-[#512D6D] text-white flex items-center justify-center shrink-0 shadow-2xs transition-transform duration-300 group-hover:scale-105">
               <Sparkles className="w-5 h-5" />
             </div>
             <div className="min-w-0 flex-1">

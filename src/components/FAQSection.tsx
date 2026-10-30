@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MessageCircle, ChevronDown, ChevronUp, HelpCircle, CreditCard, Clock, Home, ShieldCheck, AlertCircle, RefreshCw } from 'lucide-react';
+import { MessageCircle, ChevronDown, HelpCircle, CreditCard, Clock, Home, ShieldCheck, AlertCircle, RefreshCw } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { PaymentDetailsCard } from './PaymentDetailsCard';
 
@@ -27,7 +27,7 @@ export const FAQSection: React.FC = () => {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header - Split Layout */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 sm:mb-8 pb-4 border-b border-[#D1C4E9]/40">
+        <div className="kr-reveal flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 sm:mb-8 pb-4 border-b border-[#D1C4E9]/40">
           <div>
             <span className="block text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#8B2651] mb-1.5">
               {t.faq.kicker}
@@ -64,37 +64,47 @@ export const FAQSection: React.FC = () => {
             return (
               <div
                 key={faq.id}
-                className="bg-white rounded-2xl border border-[#D1C4E9] overflow-hidden transition-all shadow-xs"
+                className="kr-card-nacre bg-white rounded-2xl border border-[#D1C4E9] overflow-hidden"
               >
                 <button
                   type="button"
                   onClick={() => toggle(index)}
-                  className="min-h-[50px] w-full flex items-center justify-between p-4 sm:p-5 text-left cursor-pointer focus:outline-none"
+                  className="min-h-[50px] w-full flex items-center justify-between p-4 sm:p-5 text-left cursor-pointer focus:outline-none group"
                   aria-expanded={isOpen}
                 >
                   <div className="flex items-center gap-3 pr-3">
-                    <div className="w-8 h-8 rounded-lg bg-[#D1C4E9]/40 flex items-center justify-center shrink-0">
+                    <div className="w-8 h-8 rounded-lg bg-[#D1C4E9]/40 flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-105">
                       {icon}
                     </div>
-                    <span className="font-serif text-[15px] sm:text-base font-semibold text-[#5D4037]">
+                    <span className="font-serif text-[15px] sm:text-base font-semibold text-[#5D4037] group-hover:text-[#512D6D] transition-colors">
                       {faq.question}
                     </span>
                   </div>
-                  <div className="w-7 h-7 rounded-full bg-[#F9F6F0] flex items-center justify-center text-[#512D6D] shrink-0 border border-[#D1C4E9]">
-                    {isOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                  <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 border transition-all duration-300 ${
+                    isOpen
+                      ? 'bg-[#512D6D] text-white border-[#512D6D]'
+                      : 'bg-[#F9F6F0] text-[#512D6D] border-[#D1C4E9] group-hover:bg-[#D1C4E9]/30'
+                  }`}>
+                    <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
                   </div>
                 </button>
 
-                {isOpen && (
-                  <div className="px-4 pb-4 sm:px-5 sm:pb-5 pt-0 text-sm sm:text-base text-[#5D4037]/85 leading-relaxed border-t border-[#D1C4E9]/30 mt-1">
-                    <p className="pt-3">{faq.answer}</p>
-                    {faq.id === 'confirmation-paiement' && (
-                      <div className="mt-4">
-                        <PaymentDetailsCard />
-                      </div>
-                    )}
+                <div
+                  aria-hidden={!isOpen}
+                  inert={!isOpen ? true : undefined}
+                  className={`kr-accordion-grid ${isOpen ? 'is-open' : ''}`}
+                >
+                  <div className="kr-accordion-inner">
+                    <div className="px-4 pb-4 sm:px-5 sm:pb-5 pt-0 text-sm sm:text-base text-[#5D4037]/85 leading-relaxed border-t border-[#D1C4E9]/30 mt-1">
+                      <p className="pt-3">{faq.answer}</p>
+                      {faq.id === 'confirmation-paiement' && (
+                        <div className="mt-4">
+                          <PaymentDetailsCard />
+                        </div>
+                      )}
+                    </div>
                   </div>
-                )}
+                </div>
               </div>
             );
           })}

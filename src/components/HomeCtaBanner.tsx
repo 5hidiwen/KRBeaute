@@ -22,14 +22,14 @@ export const HomeCtaBanner: React.FC<HomeCtaBannerProps> = ({ onOpenBooking }) =
       {/* Decorative ambient glows */}
       <div 
         aria-hidden="true" 
-        className="pointer-events-none absolute top-0 right-0 w-96 h-96 rounded-full bg-[#D1C4E9]/15 blur-3xl -z-10" 
+        className="kr-ambient-float pointer-events-none absolute top-0 right-0 w-96 h-96 rounded-full bg-[#D1C4E9]/15 blur-3xl -z-10" 
       />
       <div 
         aria-hidden="true" 
-        className="pointer-events-none absolute bottom-0 left-0 w-80 h-80 rounded-full bg-emerald-500/10 blur-3xl -z-10" 
+        className="kr-ambient-halo pointer-events-none absolute bottom-0 left-1/4 w-80 h-80 rounded-full bg-emerald-500/10 blur-3xl -z-10" 
       />
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div className="kr-reveal max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         
         {/* Availability */}
         <div className="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-300/95 tracking-wide mb-4">
@@ -52,7 +52,7 @@ export const HomeCtaBanner: React.FC<HomeCtaBannerProps> = ({ onOpenBooking }) =
             href={whatsAppUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 min-h-[48px] rounded-full bg-emerald-600 hover:bg-emerald-500 active:scale-98 text-white text-xs sm:text-sm font-bold shadow-md hover:shadow-lg transition-all"
+            className="kr-btn-silk inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 min-h-[48px] rounded-full bg-emerald-600 hover:bg-emerald-500 active:scale-98 text-white text-xs sm:text-sm font-bold shadow-md hover:shadow-lg transition-all"
           >
             <MessageCircle className="w-4 h-4" />
             <span>{ctaBanner.whatsappBtn}</span>

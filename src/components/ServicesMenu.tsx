@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Clock, MessageCircle, Sparkles, Heart, Eye, Footprints, ChevronDown, ChevronUp } from 'lucide-react';
+import { Clock, MessageCircle, Sparkles, Eye, Footprints, ChevronDown } from 'lucide-react';
 import { getServices, ServiceItem } from '../data/servicesData';
 import { useLanguage } from '../i18n/LanguageContext';
 
@@ -30,10 +30,10 @@ export const ServicesMenu: React.FC<ServicesMenuProps> = ({ onSelectService }) =
     return (
       <article
         key={service.id}
-        className={`bg-white rounded-2xl border transition-all duration-200 overflow-hidden shadow-2xs hover:shadow-xs ${
+        className={`kr-card-nacre animate-fadeIn bg-white rounded-2xl border overflow-hidden ${
           isExpanded
-            ? 'border-[#8B2651]/50 ring-1 ring-[#8B2651]/20 bg-[#FFFDFB]'
-            : 'border-[#E8DFD8] hover:border-[#8B2651]/30'
+            ? 'border-[#8B2651]/55 ring-1 ring-[#8B2651]/20 bg-[#FFFDFB]'
+            : 'border-[#E8DFD8] hover:border-[#8B2651]/35'
         }`}
       >
         {/* COMPACT MASTER HEADER ROW (Interactive Accordion Trigger) */}
@@ -97,84 +97,89 @@ export const ServicesMenu: React.FC<ServicesMenuProps> = ({ onSelectService }) =
                 {service.price}€
               </span>
               <span className="text-[10px] sm:text-[11px] text-[#5D4037]/60 font-medium">
-                à domicile
+                {t.services.atHome}
               </span>
             </div>
 
-            {/* Chevron Indicator */}
+            {/* Smooth Rotating Chevron Indicator */}
             <div
-              className={`w-8 h-8 rounded-full flex items-center justify-center border transition-all ${
+              className={`w-8 h-8 rounded-full flex items-center justify-center border transition-all duration-300 ${
                 isExpanded
-                  ? 'bg-[#7A2048] text-white border-[#7A2048]'
+                  ? 'bg-[#7A2048] text-white border-[#7A2048] shadow-2xs'
                   : 'bg-[#F9F6F0] text-[#7A2048] border-[#E8DFD8] group-hover:bg-[#8B2651]/10 group-hover:border-[#8B2651]/30'
               }`}
             >
-              {isExpanded ? (
-                <ChevronUp className="w-4 h-4" />
-              ) : (
-                <ChevronDown className="w-4 h-4" />
-              )}
+              <ChevronDown
+                className={`w-4 h-4 transition-transform duration-300 ${
+                  isExpanded ? 'rotate-180' : ''
+                }`}
+              />
             </div>
           </div>
         </button>
 
-        {/* EXPANDED CONTENT DRAWER (Smooth Accordion Panel) */}
-        {isExpanded && (
-          <div
-            id={`service-panel-${service.id}`}
-            className="px-4 sm:px-6 pb-4 sm:pb-5 pt-1 border-t border-[#E8DFD8]/70 bg-[#FCFAF8] animate-fadeIn"
-          >
-            {/* Tagline on mobile (since it was hidden in collapsed state) */}
-            <p className="sm:hidden text-xs font-medium text-[#7A2048] mt-2 mb-1.5">
-              {service.tagline}
-            </p>
+        {/* EXPANDED CONTENT DRAWER (Silky CSS Grid Height Interpolation + Stagger) */}
+        <div
+          id={`service-panel-${service.id}`}
+          aria-hidden={!isExpanded}
+          inert={!isExpanded ? true : undefined}
+          className={`kr-accordion-grid ${isExpanded ? 'is-open' : ''}`}
+        >
+          <div className="kr-accordion-inner">
+            <div className="px-4 sm:px-6 pb-4 sm:pb-5 pt-1 border-t border-[#E8DFD8]/70 bg-[#FCFAF8]">
+              {/* Tagline on mobile (since it was hidden in collapsed state) */}
+              <p className="sm:hidden text-xs font-medium text-[#7A2048] mt-2 mb-1.5">
+                {service.tagline}
+              </p>
 
-            {/* Full Sensory Description */}
-            <p className="text-xs sm:text-sm text-[#5D4037]/85 leading-relaxed mt-2 mb-3.5 max-w-3xl">
-              {service.description}
-            </p>
+              {/* Full Sensory Description */}
+              <p className="text-xs sm:text-sm text-[#5D4037]/85 leading-relaxed mt-2 mb-3.5 max-w-3xl">
+                {service.description}
+              </p>
 
-            {/* Protocol Steps / What's Included */}
-            {details.length > 0 && (
-              <div className="bg-white p-3.5 sm:p-4 rounded-xl border border-[#E8DFD8] mb-4 shadow-2xs">
-                <div className="flex items-center gap-1.5 text-xs font-serif font-bold text-[#7A2048] uppercase tracking-wider mb-2.5">
-                  <Sparkles className="w-3.5 h-3.5 text-[#8B2651]" />
-                  <span>{isProtocol ? t.services.protocolTitle : t.services.includedTitle}</span>
+              {/* Protocol Steps / What's Included */}
+              {details.length > 0 && (
+                <div className="bg-white p-3.5 sm:p-4 rounded-xl border border-[#E8DFD8] mb-4 shadow-2xs">
+                  <div className="flex items-center gap-1.5 text-xs font-serif font-bold text-[#7A2048] uppercase tracking-wider mb-2.5">
+                    <Sparkles className="w-3.5 h-3.5 text-[#8B2651]" />
+                    <span>{isProtocol ? t.services.protocolTitle : t.services.includedTitle}</span>
+                  </div>
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-[13px] text-[#5D4037]/90">
+                    {details.map((step, idx) => (
+                      <li
+                        key={idx}
+                        style={{ '--stagger-delay': `${60 + idx * 55}ms` } as React.CSSProperties}
+                        className="kr-stagger-item flex items-start gap-2 bg-[#F9F6F0]/60 p-2 sm:p-2.5 rounded-lg border border-[#E8DFD8]/50"
+                      >
+                        <span className="text-[#8B2651] font-bold text-xs shrink-0 mt-0.5">•</span>
+                        <span className="leading-snug">{step}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-[13px] text-[#5D4037]/90">
-                  {details.map((step, idx) => (
-                    <li
-                      key={idx}
-                      className="flex items-start gap-2 bg-[#F9F6F0]/60 p-2 sm:p-2.5 rounded-lg border border-[#E8DFD8]/50"
-                    >
-                      <span className="text-[#8B2651] font-bold text-xs shrink-0 mt-0.5">•</span>
-                      <span className="leading-snug">{step}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
+              )}
 
-            {/* Action Row: Reassurance pill + Big CTA Reserve Button */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2.5 border-t border-[#E8DFD8]/60">
-              <div className="flex items-center gap-2 text-xs text-[#5D4037]/80">
-                <Clock className="w-3.5 h-3.5 text-[#8B2651] shrink-0" />
-                <span>
-                  Séance de <strong>{service.duration}</strong> · Matériel professionnel inclus
-                </span>
-              </div>
+              {/* Action Row: Reassurance pill + Big CTA Reserve Button */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2.5 border-t border-[#E8DFD8]/60">
+                <div className="flex items-center gap-2 text-xs text-[#5D4037]/80">
+                  <Clock className="w-3.5 h-3.5 text-[#8B2651] shrink-0" />
+                  <span>
+                    {t.services.sessionIncludes.replace('{duration}', service.duration)}
+                  </span>
+                </div>
 
-              <button
-                type="button"
-                onClick={() => onSelectService(service)}
-                className="min-h-[44px] px-5 sm:px-6 py-2.5 rounded-full bg-[#7A2048] hover:bg-[#631839] active:scale-98 text-white text-xs sm:text-sm font-bold flex items-center justify-center gap-2 shadow-xs hover:shadow-md transition-all cursor-pointer shrink-0"
-              >
-                <MessageCircle className="w-4 h-4 text-emerald-300" />
-                <span>{t.services.reserveBtn} — {service.price}€</span>
-              </button>
+                <button
+                  type="button"
+                  onClick={() => onSelectService(service)}
+                  className="kr-btn-silk min-h-[44px] px-5 sm:px-6 py-2.5 rounded-full bg-[#7A2048] hover:bg-[#631839] active:scale-98 text-white text-xs sm:text-sm font-bold flex items-center justify-center gap-2 shadow-xs hover:shadow-md transition-all cursor-pointer shrink-0"
+                >
+                  <MessageCircle className="w-4 h-4 text-emerald-300" />
+                  <span>{t.services.reserveBtn} — {service.price}€</span>
+                </button>
+              </div>
             </div>
           </div>
-        )}
+        </div>
       </article>
     );
   };
@@ -184,7 +189,7 @@ export const ServicesMenu: React.FC<ServicesMenuProps> = ({ onSelectService }) =
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header - Split Layout */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 sm:mb-8 pb-4 border-b border-[#D1C4E9]/40">
+        <div className="kr-reveal flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6 sm:mb-8 pb-4 border-b border-[#D1C4E9]/40">
           <div>
             <span className="block text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#8B2651] mb-1.5">
               {t.services.kicker}
@@ -198,90 +203,104 @@ export const ServicesMenu: React.FC<ServicesMenuProps> = ({ onSelectService }) =
             </p>
           </div>
 
-          {/* Interactive Category Filter Tabs */}
-          <div className="inline-flex items-center gap-1 p-1 bg-[#D1C4E9]/30 rounded-2xl border border-[#D1C4E9]/60 self-start md:self-auto shrink-0">
+          {/* Interactive Category Filter Tabs with Sliding Pill */}
+          <div className="relative grid grid-cols-3 p-1 bg-white/85 backdrop-blur-xs rounded-2xl border border-[#D1C4E9]/80 shadow-2xs self-start md:self-auto shrink-0">
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute top-1 bottom-1 left-1 w-[calc((100%-0.5rem)/3)] rounded-xl bg-[#512D6D] shadow-xs transition-transform duration-300 ease-out"
+              style={{
+                transform:
+                  activeTab === 'all'
+                    ? 'translateX(0%)'
+                    : activeTab === 'visage-regard'
+                    ? 'translateX(100%)'
+                    : 'translateX(200%)',
+              }}
+            />
             <button
               type="button"
               onClick={() => setActiveTab('all')}
-              className={`min-h-[34px] px-3 py-1 text-xs sm:text-sm font-medium rounded-xl transition-all cursor-pointer ${
+              className={`relative z-10 min-h-[34px] px-2.5 sm:px-3.5 py-1 text-xs sm:text-sm rounded-xl transition-colors duration-200 cursor-pointer flex items-center justify-center whitespace-nowrap ${
                 activeTab === 'all'
-                  ? 'bg-[#512D6D] text-white font-semibold shadow-xs'
-                  : 'text-[#5D4037] hover:text-[#512D6D]'
+                  ? 'text-white font-semibold'
+                  : 'text-[#5D4037] font-medium hover:text-[#512D6D]'
               }`}
             >
-              {t.services.filters.all} ({services.length})
+              <span>{t.services.filters.all} ({services.length})</span>
             </button>
             <button
               type="button"
               onClick={() => setActiveTab('visage-regard')}
-              className={`min-h-[34px] px-3 py-1 text-xs sm:text-sm font-medium rounded-xl transition-all cursor-pointer flex items-center gap-1.5 ${
+              className={`relative z-10 min-h-[34px] px-2.5 sm:px-3.5 py-1 text-xs sm:text-sm rounded-xl transition-colors duration-200 cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap ${
                 activeTab === 'visage-regard'
-                  ? 'bg-[#512D6D] text-white font-semibold shadow-xs'
-                  : 'text-[#5D4037] hover:text-[#512D6D]'
+                  ? 'text-white font-semibold'
+                  : 'text-[#5D4037] font-medium hover:text-[#512D6D]'
               }`}
             >
-              <Eye className="w-3.5 h-3.5" />
+              <Eye className="w-3.5 h-3.5 shrink-0" />
               <span>{t.services.filters.visageRegard} ({visageRegardCount})</span>
             </button>
             <button
               type="button"
               onClick={() => setActiveTab('pieds-corps')}
-              className={`min-h-[34px] px-3 py-1 text-xs sm:text-sm font-medium rounded-xl transition-all cursor-pointer flex items-center gap-1.5 ${
+              className={`relative z-10 min-h-[34px] px-2.5 sm:px-3.5 py-1 text-xs sm:text-sm rounded-xl transition-colors duration-200 cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap ${
                 activeTab === 'pieds-corps'
-                  ? 'bg-[#512D6D] text-white font-semibold shadow-xs'
-                  : 'text-[#5D4037] hover:text-[#512D6D]'
+                  ? 'text-white font-semibold'
+                  : 'text-[#5D4037] font-medium hover:text-[#512D6D]'
               }`}
             >
-              <Footprints className="w-3.5 h-3.5" />
+              <Footprints className="w-3.5 h-3.5 shrink-0" />
               <span>{t.services.filters.piedsCorps} ({piedsCorpsCount})</span>
             </button>
           </div>
         </div>
 
-        {/* SECTION 1: VISAGE & REGARD */}
-        {(activeTab === 'all' || activeTab === 'visage-regard') && (
-          <div className="mb-8 sm:mb-12">
-            <div className="flex items-center justify-between mb-3.5 pb-2 border-b border-[#D1C4E9]/40">
-              <div className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-[#8B2651]" />
-                <h3 className="font-serif text-lg sm:text-xl font-bold text-[#5D4037]">
-                  {t.services.sectionVisage}
-                </h3>
+        <div className="kr-reveal">
+          {/* SECTION 1: VISAGE & REGARD */}
+          {(activeTab === 'all' || activeTab === 'visage-regard') && (
+            <div key={`visage-${activeTab}`} className="animate-fadeIn mb-8 sm:mb-12">
+              <div className="flex items-center justify-between mb-3.5 pb-2 border-b border-[#D1C4E9]/40">
+                <div className="flex items-center gap-2">
+                  <Sparkles className="w-4 h-4 text-[#8B2651]" />
+                  <h3 className="font-serif text-lg sm:text-xl font-bold text-[#5D4037]">
+                    {t.services.sectionVisage}
+                  </h3>
+                </div>
+                <span className="text-xs font-semibold text-[#8B2651]">
+                  {t.services.sectionVisageCount}
+                </span>
               </div>
-              <span className="text-xs font-semibold text-[#8B2651]">
-                {t.services.sectionVisageCount}
-              </span>
-            </div>
 
-            <div className="space-y-3">
-              {services.filter(s => s.group === 'visage-regard').map(renderServiceRow)}
-            </div>
-          </div>
-        )}
-
-        {/* SECTION 2: PIEDS & DETENTE CORPORELLE */}
-        {(activeTab === 'all' || activeTab === 'pieds-corps') && (
-          <div className="mb-8 sm:mb-12">
-            <div className="flex items-center justify-between mb-3.5 pb-2 border-b border-[#D1C4E9]/40">
-              <div className="flex items-center gap-2">
-                <Footprints className="w-4 h-4 text-[#8B2651]" />
-                <h3 className="font-serif text-lg sm:text-xl font-bold text-[#5D4037]">
-                  {t.services.sectionPieds}
-                </h3>
+              <div className="space-y-3">
+                {services.filter(s => s.group === 'visage-regard').map(renderServiceRow)}
               </div>
-              <span className="text-xs font-semibold text-[#8B2651]">
-                {t.services.sectionPiedsCount}
-              </span>
             </div>
+          )}
 
-            <div className="space-y-3">
-              {services.filter(s => s.group === 'pieds-corps').map(renderServiceRow)}
+          {/* SECTION 2: PIEDS & DETENTE CORPORELLE */}
+          {(activeTab === 'all' || activeTab === 'pieds-corps') && (
+            <div key={`pieds-${activeTab}`} className="animate-fadeIn mb-8 sm:mb-12">
+              <div className="flex items-center justify-between mb-3.5 pb-2 border-b border-[#D1C4E9]/40">
+                <div className="flex items-center gap-2">
+                  <Footprints className="w-4 h-4 text-[#8B2651]" />
+                  <h3 className="font-serif text-lg sm:text-xl font-bold text-[#5D4037]">
+                    {t.services.sectionPieds}
+                  </h3>
+                </div>
+                <span className="text-xs font-semibold text-[#8B2651]">
+                  {t.services.sectionPiedsCount}
+                </span>
+              </div>
+
+              <div className="space-y-3">
+                {services.filter(s => s.group === 'pieds-corps').map(renderServiceRow)}
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
 
         {/* Combination / Custom Session Callout */}
-        <div className="mt-6 sm:mt-10 max-w-4xl mx-auto bg-gradient-to-r from-[#F5E6EC]/70 via-[#FFFDF9] to-[#F5E6EC]/70 rounded-2xl p-4 sm:p-6 border border-[#8B2651]/25 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="kr-reveal kr-card-nacre mt-6 sm:mt-10 max-w-4xl mx-auto bg-gradient-to-r from-[#F5E6EC]/70 via-[#FFFDF9] to-[#F5E6EC]/70 rounded-2xl p-4 sm:p-6 border border-[#8B2651]/25 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3.5 text-center sm:text-left">
             <div className="w-10 h-10 rounded-xl bg-[#7A2048] text-white flex items-center justify-center shrink-0 shadow-xs">
               <Sparkles className="w-4 h-4 text-white" />

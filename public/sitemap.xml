@@ -3,11 +3,12 @@
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://krbeaute.com/</loc>
-    <lastmod>2026-10-24</lastmod>
+    <lastmod>2026-10-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://krbeaute.com/" />
     <xhtml:link rel="alternate" hreflang="es" href="https://krbeaute.com/" />
+    <xhtml:link rel="alternate" hreflang="es-MX" href="https://krbeaute.com/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://krbeaute.com/" />
   </url>
 </urlset>

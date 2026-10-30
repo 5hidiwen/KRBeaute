@@ -256,9 +256,9 @@ export const SERVICES_ES: ServiceItem[] = [
     colorTheme: 'cyan',
     protocolSteps: [
       'Doble limpieza suave adaptada a tu tipo de piel',
-      'Gommage à double action',
+      'Exfoliación suave de doble acción',
       'Mascarilla purificante y reequilibrante',
-      'Application d’un soin adapté'
+      'Aplicación de un tratamiento adaptado'
     ]
   },
   {

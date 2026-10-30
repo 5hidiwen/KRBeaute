@@ -35,6 +35,24 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService,
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [dateFocused, setDateFocused] = useState(false);
   const [isConditionsModalOpen, setIsConditionsModalOpen] = useState(false);
+  const [isCardHighlighted, setIsCardHighlighted] = useState(false);
+
+  const handleConditionsClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (typeof window !== 'undefined' && window.innerWidth >= 1024) {
+      setIsCardHighlighted(true);
+      const cardEl = document.getElementById('booking-conditions-card');
+      if (cardEl) {
+        cardEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+      setTimeout(() => {
+        setIsCardHighlighted(false);
+      }, 2000);
+    } else {
+      setIsConditionsModalOpen(true);
+    }
+  };
 
   const renderTermsLabel = () => {
     const fullText = t.contact.rightCard.termsLabel;
@@ -48,12 +66,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService,
         {parts[0]}
         <button
           type="button"
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            setIsConditionsModalOpen(true);
-          }}
-          className="text-[#512D6D] font-bold underline hover:text-[#8B2651] cursor-pointer inline-flex items-center gap-0.5"
+          onClick={handleConditionsClick}
+          className="text-[#512D6D] font-bold underline hover:text-[#8B2651] cursor-pointer inline-flex items-center gap-0.5 focus:outline-hidden focus:ring-2 focus:ring-[#512D6D]/30 rounded-xs"
           title={t.contact.leftCard.viewConditionsBtn}
         >
           <span>{boldText}</span>
@@ -247,11 +261,25 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService,
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6 items-stretch">
           
           {/* CARD 1 (LEFT): CONDITIONS DE RÉSERVATION & COORDONNÉES */}
-          <div className="order-2 lg:order-1 bg-white/95 rounded-3xl p-5 sm:p-6 border border-[#D1C4E9] shadow-sm flex flex-col justify-between h-full">
+          <div
+            id="booking-conditions-card"
+            style={{ '--reveal-delay': '0ms' } as React.CSSProperties}
+            className={`kr-reveal kr-card-nacre order-2 lg:order-1 bg-white/95 rounded-3xl p-5 sm:p-6 border transition-all duration-500 flex flex-col justify-between h-full ${
+              isCardHighlighted
+                ? 'border-[#512D6D] ring-4 ring-[#512D6D]/20 shadow-xl scale-[1.01]'
+                : 'border-[#D1C4E9]'
+            }`}
+          >
             <div>
               {/* DESKTOP VIEW: Full flyer layout */}
               <div className="hidden lg:block">
-                <div className="text-center pb-3 mb-3 border-b border-[#D1C4E9]/60">
+                <div
+                  className={`text-center pb-3 mb-3 border-b transition-all duration-500 ${
+                    isCardHighlighted
+                      ? 'border-[#512D6D]/40 bg-[#D1C4E9]/20 -mx-5 sm:-mx-6 px-5 sm:px-6 pt-2 rounded-t-3xl'
+                      : 'border-[#D1C4E9]/60'
+                  }`}
+                >
                   <span className="text-[10px] sm:text-xs font-bold tracking-wider uppercase text-[#8B2651] block mb-0.5">
                     {t.contact.leftCard.kicker}
                   </span>
@@ -401,7 +429,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService,
           </div>
 
           {/* CARD 2 (RIGHT): PRENDRE RENDEZ-VOUS (WHATSAPP + FORMULAIRE) */}
-          <div className="order-1 lg:order-2 bg-white/95 rounded-3xl p-5 sm:p-6 border border-[#D1C4E9] shadow-sm flex flex-col justify-between h-full">
+          <div
+            style={{ '--reveal-delay': '90ms' } as React.CSSProperties}
+            className="kr-reveal kr-card-nacre order-1 lg:order-2 bg-white/95 rounded-3xl p-5 sm:p-6 border border-[#D1C4E9] flex flex-col justify-between h-full"
+          >
             <div>
               {/* Quick WhatsApp Action Banner */}
               <div className="mb-4 p-3 sm:p-3.5 bg-gradient-to-r from-[#512D6D] via-[#633385] to-[#512D6D] text-white rounded-2xl shadow-xs flex flex-col sm:flex-row items-center justify-between gap-2.5">
@@ -470,8 +501,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService,
                     <div className="hidden print:block border-b border-[#D1C4E9] pb-3 mb-2">
                       <div className="flex items-center justify-between">
                         <div>
-                          <p className="font-serif text-base font-bold text-[#512D6D]">KRbeauté</p>
-                          <p className="text-[11px] text-[#5D4037]">Soins Esthétiques d'Exception à Domicile · Karina Robart</p>
+                          <p className="font-serif text-base font-bold text-[#512D6D]">{t.contact.rightCard.success.printBrandTitle}</p>
+                          <p className="text-[11px] text-[#5D4037]">{t.contact.rightCard.success.printBrandSub}</p>
                         </div>
                         <div className="text-right text-[10px] text-[#5D4037]/80">
                           <p>06 65 56 67 02</p>
@@ -783,7 +814,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService,
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className={`min-h-[42px] flex-1 inline-flex items-center justify-center gap-2 px-5 py-2 text-xs font-bold text-white bg-[#512D6D] hover:bg-[#402257] active:scale-98 rounded-full shadow-xs transition-transform cursor-pointer ${
+                      className={`kr-btn-silk min-h-[42px] flex-1 inline-flex items-center justify-center gap-2 px-5 py-2 text-xs font-bold text-white bg-[#512D6D] hover:bg-[#402257] active:scale-98 rounded-full shadow-xs transition-transform cursor-pointer ${
                         isSubmitting ? 'opacity-70 cursor-wait' : ''
                       }`}
                     >

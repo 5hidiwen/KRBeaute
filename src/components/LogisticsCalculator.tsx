@@ -58,7 +58,7 @@ export const LogisticsCalculator: React.FC = () => {
         {/* =========================================================================
             HEADER - Clean & Airy (Full max-w-7xl Width)
            ========================================================================= */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-[#D1C4E9]/50">
+        <div className="kr-reveal flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-[#D1C4E9]/50">
           <div>
             <span className="block text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#8B2651] mb-2">
               {t.logistics.kicker}
@@ -86,7 +86,7 @@ export const LogisticsCalculator: React.FC = () => {
         {/* =========================================================================
             OPTION 1: BANNIÈRE BIENVEILLANTE MISE À JOUR EN COURS
            ========================================================================= */}
-        <div className="bg-gradient-to-r from-[#D1C4E9]/35 via-white to-[#D1C4E9]/35 p-5 sm:p-6 rounded-3xl border border-[#512D6D]/30 shadow-xs">
+        <div className="kr-reveal kr-card-nacre bg-gradient-to-r from-[#D1C4E9]/35 via-white to-[#D1C4E9]/35 p-5 sm:p-6 rounded-3xl border border-[#512D6D]/30">
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
             <div className="flex items-start gap-3.5">
               <div className="w-10 h-10 rounded-2xl bg-[#512D6D] text-white flex items-center justify-center shrink-0 shadow-xs mt-0.5">
@@ -110,7 +110,7 @@ export const LogisticsCalculator: React.FC = () => {
                 href={`https://wa.me/33665566702?text=${encodeURIComponent(t.logistics.updateNotice.whatsappGreeting)}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="min-h-[44px] flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-[#512D6D] hover:bg-[#402257] active:scale-98 text-white text-xs font-bold shadow-xs transition-all"
+                className="kr-btn-silk min-h-[44px] flex-1 sm:flex-none inline-flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-[#512D6D] hover:bg-[#402257] active:scale-98 text-white text-xs font-bold shadow-xs transition-all"
               >
                 <MessageCircle className="w-3.5 h-3.5 text-emerald-300" />
                 <span>{t.logistics.updateNotice.whatsappBtn}</span>
@@ -132,7 +132,10 @@ export const LogisticsCalculator: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6 items-stretch">
           
           {/* COLUMN 1 : ZONE 1 (≤ 7 km) - DÉPLACEMENT OFFERT */}
-          <div className="bg-white rounded-3xl p-5 sm:p-6 border-2 border-emerald-500/30 shadow-xs flex flex-col hover:shadow-md transition-shadow">
+          <div
+            style={{ '--reveal-delay': '0ms' } as React.CSSProperties}
+            className="kr-reveal kr-card-nacre bg-white rounded-3xl p-5 sm:p-6 border-2 border-emerald-500/30 flex flex-col"
+          >
             {/* Card Header */}
             <div className="flex items-center justify-between gap-2 mb-4">
               <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold">
@@ -156,9 +159,9 @@ export const LogisticsCalculator: React.FC = () => {
                   key={commune.name}
                   type="button"
                   onClick={() => setSelectedCommune(commune)}
-                  className={`px-2.5 py-1 text-xs rounded-lg transition-colors cursor-pointer text-left ${
+                  className={`px-2.5 py-1 text-xs rounded-lg transition-all duration-200 cursor-pointer text-left ${
                     selectedCommune?.name === commune.name
-                      ? 'bg-[#512D6D] text-white font-bold'
+                      ? 'bg-[#512D6D] text-white font-bold shadow-2xs scale-[1.02]'
                       : 'bg-[#F9F6F0] text-[#5D4037] hover:bg-[#D1C4E9]/40 border border-[#D1C4E9]/50'
                   }`}
                 >
@@ -169,7 +172,10 @@ export const LogisticsCalculator: React.FC = () => {
           </div>
 
           {/* COLUMN 2 : ZONE 2 (7 à 12 km) - +8,50 € */}
-          <div className="bg-white rounded-3xl p-5 sm:p-6 border border-[#D1C4E9] shadow-xs flex flex-col hover:shadow-md transition-shadow">
+          <div
+            style={{ '--reveal-delay': '90ms' } as React.CSSProperties}
+            className="kr-reveal kr-card-nacre bg-white rounded-3xl p-5 sm:p-6 border border-[#D1C4E9] flex flex-col"
+          >
             {/* Card Header */}
             <div className="flex items-center justify-between gap-2 mb-4">
               <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#D1C4E9]/40 border border-[#D1C4E9] text-[#512D6D] text-xs font-bold">
@@ -193,9 +199,9 @@ export const LogisticsCalculator: React.FC = () => {
                   key={commune.name}
                   type="button"
                   onClick={() => setSelectedCommune(commune)}
-                  className={`px-2.5 py-1 text-xs rounded-lg transition-colors cursor-pointer text-left ${
+                  className={`px-2.5 py-1 text-xs rounded-lg transition-all duration-200 cursor-pointer text-left ${
                     selectedCommune?.name === commune.name
-                      ? 'bg-[#512D6D] text-white font-bold'
+                      ? 'bg-[#512D6D] text-white font-bold shadow-2xs scale-[1.02]'
                       : 'bg-[#F9F6F0] text-[#5D4037] hover:bg-[#D1C4E9]/40 border border-[#D1C4E9]/50'
                   }`}
                 >
@@ -210,7 +216,7 @@ export const LogisticsCalculator: React.FC = () => {
         {/* =========================================================================
             SEARCH TOOL & INSTANT COMMUNE CHECKER (Full max-w-7xl Width)
            ========================================================================= */}
-        <div className="bg-white rounded-3xl p-5 sm:p-7 border border-[#D1C4E9] shadow-xs">
+        <div className="kr-reveal kr-card-nacre bg-white rounded-3xl p-5 sm:p-7 border border-[#D1C4E9]">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
             <div>
               <h3 className="font-serif text-base sm:text-lg font-bold text-[#5D4037]">
@@ -321,7 +327,7 @@ export const LogisticsCalculator: React.FC = () => {
         {/* =========================================================================
             CHECK-LIST SÉRÉNITÉ POUR M'ACCUEILLIR (Bienveillant & Rassurant)
            ========================================================================= */}
-        <div className="bg-[#F9F6F0] rounded-3xl p-5 sm:p-8 border border-[#D1C4E9]/80 shadow-xs">
+        <div className="kr-reveal bg-[#F9F6F0] rounded-3xl p-5 sm:p-8 border border-[#D1C4E9]/80 shadow-xs">
           <div className="text-center max-w-xl mx-auto mb-4 sm:mb-6">
             <h3 className="font-serif text-lg sm:text-2xl font-bold text-[#5D4037]">
               {t.logistics.checklist.title}
@@ -334,7 +340,7 @@ export const LogisticsCalculator: React.FC = () => {
             onScroll={handleChecklistScroll}
             className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4 overflow-x-auto sm:overflow-visible snap-x snap-mandatory no-scrollbar pb-2 pt-1 -mx-2 px-2 sm:mx-0 sm:px-0"
           >
-            <div className="w-[80vw] max-w-[280px] shrink-0 snap-center sm:w-auto sm:max-w-none sm:shrink bg-white p-4 sm:p-5 rounded-2xl border border-[#D1C4E9]/60 shadow-2xs flex flex-col justify-between">
+            <div className="kr-card-nacre w-[80vw] max-w-[280px] shrink-0 snap-center sm:w-auto sm:max-w-none sm:shrink bg-white p-4 sm:p-5 rounded-2xl border border-[#D1C4E9]/60 flex flex-col justify-between">
               <div>
                 <div className="w-8 h-8 rounded-xl bg-[#D1C4E9]/30 text-[#512D6D] flex items-center justify-center mb-2.5">
                   <Home className="w-4 h-4" />
@@ -348,7 +354,7 @@ export const LogisticsCalculator: React.FC = () => {
               </div>
             </div>
 
-            <div className="w-[80vw] max-w-[280px] shrink-0 snap-center sm:w-auto sm:max-w-none sm:shrink bg-white p-4 sm:p-5 rounded-2xl border border-[#D1C4E9]/60 shadow-2xs flex flex-col justify-between">
+            <div className="kr-card-nacre w-[80vw] max-w-[280px] shrink-0 snap-center sm:w-auto sm:max-w-none sm:shrink bg-white p-4 sm:p-5 rounded-2xl border border-[#D1C4E9]/60 flex flex-col justify-between">
               <div>
                 <div className="w-8 h-8 rounded-xl bg-[#D1C4E9]/30 text-[#512D6D] flex items-center justify-center mb-2.5">
                   <Car className="w-4 h-4" />
@@ -362,7 +368,7 @@ export const LogisticsCalculator: React.FC = () => {
               </div>
             </div>
 
-            <div className="w-[80vw] max-w-[280px] shrink-0 snap-center sm:w-auto sm:max-w-none sm:shrink bg-white p-4 sm:p-5 rounded-2xl border border-[#D1C4E9]/60 shadow-2xs flex flex-col justify-between">
+            <div className="kr-card-nacre w-[80vw] max-w-[280px] shrink-0 snap-center sm:w-auto sm:max-w-none sm:shrink bg-white p-4 sm:p-5 rounded-2xl border border-[#D1C4E9]/60 flex flex-col justify-between">
               <div>
                 <div className="w-8 h-8 rounded-xl bg-[#D1C4E9]/30 text-[#512D6D] flex items-center justify-center mb-2.5">
                   <Sparkles className="w-4 h-4 text-amber-600" />
@@ -376,7 +382,7 @@ export const LogisticsCalculator: React.FC = () => {
               </div>
             </div>
 
-            <div className="w-[80vw] max-w-[280px] shrink-0 snap-center sm:w-auto sm:max-w-none sm:shrink bg-white p-4 sm:p-5 rounded-2xl border border-[#D1C4E9]/60 shadow-2xs flex flex-col justify-between">
+            <div className="kr-card-nacre w-[80vw] max-w-[280px] shrink-0 snap-center sm:w-auto sm:max-w-none sm:shrink bg-white p-4 sm:p-5 rounded-2xl border border-[#D1C4E9]/60 flex flex-col justify-between">
               <div>
                 <div className="w-8 h-8 rounded-xl bg-[#D1C4E9]/30 text-[#512D6D] flex items-center justify-center mb-2.5">
                   <Heart className="w-4 h-4 text-rose-600" />

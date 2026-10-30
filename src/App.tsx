@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { ArrowLeft, Phone } from 'lucide-react';
 import { Navbar, NavTab } from './components/Navbar';
 import { Hero } from './components/Hero';
@@ -11,11 +11,14 @@ import { HomeTestimonials } from './components/HomeTestimonials';
 import { FAQSection } from './components/FAQSection';
 import { HomeCtaBanner } from './components/HomeCtaBanner';
 import { ContactSection } from './components/ContactSection';
-import { ClientSheetSection } from './components/ClientSheetSection';
 import { Footer } from './components/Footer';
-import { LegalModal, LegalTab } from './components/LegalModal';
+import type { LegalTab } from './components/LegalModal';
 import { ServiceItem } from './data/servicesData';
 import { LanguageProvider, useLanguage } from './i18n/LanguageContext';
+import { useScrollReveal } from './hooks/useScrollReveal';
+
+const ClientSheetSection = lazy(() => import('./components/ClientSheetSection').then(m => ({ default: m.ClientSheetSection })));
+const LegalModal = lazy(() => import('./components/LegalModal').then(m => ({ default: m.LegalModal })));
 
 function AppContent() {
   const { language } = useLanguage();
@@ -23,6 +26,8 @@ function AppContent() {
   const [selectedService, setSelectedService] = useState<ServiceItem | null>(null);
   const [legalModalOpen, setLegalModalOpen] = useState(false);
   const [legalTab, setLegalTab] = useState<LegalTab>('mentions');
+
+  useScrollReveal([activeTab, language]);
 
   // ScrollSpy on main page scroll to keep activeTab synchronized with current viewport
   useEffect(() => {
@@ -126,8 +131,8 @@ function AppContent() {
             <FAQSection />
 
             {/* Contact & Support Help Box */}
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 sm:mt-12">
-              <div className="bg-white p-6 sm:p-8 rounded-3xl border border-[#D1C4E9] shadow-xs text-center">
+            <div className="kr-reveal max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 sm:mt-12">
+              <div className="kr-card-nacre bg-white p-6 sm:p-8 rounded-3xl border border-[#D1C4E9] text-center">
                 <h3 className="font-serif text-lg sm:text-xl font-bold text-[#5D4037] mb-2">
                   {language === 'es' ? '¿Tienes alguna otra duda?' : 'Vous avez une question particulière ?'}
                 </h3>
@@ -140,7 +145,7 @@ function AppContent() {
                   <button
                     type="button"
                     onClick={() => handleOpenBooking()}
-                    className="inline-flex items-center gap-2 px-6 py-3 min-h-[46px] rounded-full bg-[#512D6D] text-white text-xs font-bold shadow-xs hover:bg-[#402257] active:scale-98 cursor-pointer"
+                    className="kr-btn-silk inline-flex items-center gap-2 px-6 py-3 min-h-[46px] rounded-full bg-[#512D6D] text-white text-xs font-bold shadow-xs hover:bg-[#402257] active:scale-98 cursor-pointer"
                   >
                     <span>{language === 'es' ? 'Agendar o consultar' : 'Poser une question / Réserver'}</span>
                   </button>
@@ -170,7 +175,13 @@ function AppContent() {
             </div>
 
             {/* The Dedicated Fiche Cliente Component */}
-            <ClientSheetSection />
+            <Suspense fallback={
+              <div className="py-24 text-center">
+                <div className="inline-block w-8 h-8 border-3 border-[#512D6D] border-t-transparent rounded-full animate-spin"></div>
+              </div>
+            }>
+              <ClientSheetSection />
+            </Suspense>
           </div>
         ) : (
           /* VIEW 3: UNIFIED ONE-PAGE FLOW WITH PERFECT COLOR ALTERNATION */
@@ -229,11 +240,15 @@ function AppContent() {
       />
 
       {/* Legal Pages Modal (Mentions Légales, CGV, RGPD) */}
-      <LegalModal
-        isOpen={legalModalOpen}
-        initialTab={legalTab}
-        onClose={() => setLegalModalOpen(false)}
-      />
+      {legalModalOpen && (
+        <Suspense fallback={null}>
+          <LegalModal
+            isOpen={legalModalOpen}
+            initialTab={legalTab}
+            onClose={() => setLegalModalOpen(false)}
+          />
+        </Suspense>
+      )}
 
     </div>
   );

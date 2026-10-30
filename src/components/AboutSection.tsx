@@ -14,14 +14,14 @@ export const AboutSection: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-12 items-center">
           
           {/* Left Column: Photo & Credentials Badge (5 cols) */}
-          <div className="lg:col-span-5">
+          <div className="kr-reveal lg:col-span-5">
             <div className="relative mx-auto max-w-xs sm:max-w-sm lg:max-w-none">
               
               {/* Photo Frame Container */}
-              <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#EAE2F2] via-[#F4EFF8] to-[#D1C4E9] border-2 border-[#D1C4E9] shadow-lg p-2.5 sm:p-3">
+              <div className="kr-card-nacre relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#EAE2F2] via-[#F4EFF8] to-[#D1C4E9] border-2 border-[#D1C4E9] shadow-lg p-2.5 sm:p-3">
                 
                 {/* Photo Display Area (Emplacement carré 1:1) */}
-                <div className="relative w-full aspect-square rounded-2xl overflow-hidden bg-[#2B1B36] shadow-inner">
+                <div className="relative w-full aspect-square rounded-2xl overflow-hidden bg-[#2B1B36] shadow-inner group">
                   <img 
                     src={KARINA_PHOTO_BASE64} 
                     alt={t.about.photoAlt}
@@ -31,7 +31,7 @@ export const AboutSection: React.FC = () => {
                         target.src = '/Karina.jpg';
                       }
                     }}
-                    className="w-full h-full object-cover block"
+                    className="w-full h-full object-cover block transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                   />
                 </div>
 
@@ -92,7 +92,10 @@ export const AboutSection: React.FC = () => {
           </div>
 
           {/* Right Column: Philosophy & Bio (7 cols) */}
-          <div className="lg:col-span-7 flex flex-col items-start">
+          <div
+            style={{ '--reveal-delay': '100ms' } as React.CSSProperties}
+            className="kr-reveal lg:col-span-7 flex flex-col items-start"
+          >
             
             <span className="block text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#8B2651] mb-2">
               {t.about.kicker}
@@ -122,7 +125,7 @@ export const AboutSection: React.FC = () => {
             {/* Philosophy Pillars */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-6 w-full">
               
-              <div className="p-3.5 bg-white rounded-2xl border border-[#D1C4E9] shadow-xs">
+              <div className="kr-card-nacre p-3.5 bg-white rounded-2xl border border-[#D1C4E9]">
                 <div className="w-7 h-7 rounded-lg bg-[#D1C4E9]/50 flex items-center justify-center text-[#512D6D] mb-2">
                   <Heart className="w-4 h-4" />
                 </div>
@@ -134,7 +137,7 @@ export const AboutSection: React.FC = () => {
                 </p>
               </div>
 
-              <div className="p-3.5 bg-white rounded-2xl border border-[#D1C4E9] shadow-xs">
+              <div className="kr-card-nacre p-3.5 bg-white rounded-2xl border border-[#D1C4E9]">
                 <div className="w-7 h-7 rounded-lg bg-[#D1C4E9]/50 flex items-center justify-center text-[#512D6D] mb-2">
                   <ShieldCheck className="w-4 h-4" />
                 </div>
@@ -146,7 +149,7 @@ export const AboutSection: React.FC = () => {
                 </p>
               </div>
 
-              <div className="p-3.5 bg-white rounded-2xl border border-[#D1C4E9] shadow-xs">
+              <div className="kr-card-nacre p-3.5 bg-white rounded-2xl border border-[#D1C4E9]">
                 <div className="w-7 h-7 rounded-lg bg-[#D1C4E9]/50 flex items-center justify-center text-[#512D6D] mb-2">
                   <UserCheck className="w-4 h-4" />
                 </div>
@@ -166,7 +169,7 @@ export const AboutSection: React.FC = () => {
 
         {/* Dedicated Online Workshops Banner (Visible uniquement pour la version espagnole) */}
         {language === 'es' && (
-          <div className="mt-8 sm:mt-12 bg-gradient-to-br from-white via-[#F9F6F0] to-[#EAE2F2]/70 rounded-3xl border border-[#D1C4E9] p-5 sm:p-7 shadow-xs">
+          <div className="kr-reveal kr-card-nacre mt-8 sm:mt-12 bg-gradient-to-br from-white via-[#F9F6F0] to-[#EAE2F2]/70 rounded-3xl border border-[#D1C4E9] p-5 sm:p-7">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-5 sm:gap-6">
               <div className="flex items-start gap-3.5 sm:gap-4">
                 <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#512D6D] text-[#F9F6F0] flex items-center justify-center shrink-0 shadow-xs mt-0.5">
@@ -190,7 +193,7 @@ export const AboutSection: React.FC = () => {
                   href={workshopsWhatsAppUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-5 py-3 min-h-[44px] rounded-full bg-emerald-600 hover:bg-emerald-500 active:scale-98 text-white text-xs sm:text-sm font-bold shadow-xs hover:shadow-md transition-all cursor-pointer"
+                  className="kr-btn-silk inline-flex items-center justify-center gap-2 px-5 py-3 min-h-[44px] rounded-full bg-emerald-600 hover:bg-emerald-500 active:scale-98 text-white text-xs sm:text-sm font-bold shadow-xs hover:shadow-md transition-all cursor-pointer"
                 >
                   <MessageCircle className="w-4 h-4 shrink-0" />
                   <span>{t.about.workshopsBox.cta}</span>
