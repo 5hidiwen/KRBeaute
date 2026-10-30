@@ -102,6 +102,18 @@ export interface ServicesTranslations {
   comboBtn: string;
   atHome: string;
   sessionIncludes: string;
+  idealForLabel: string;
+  timelineStep1Title: string;
+  timelineStep1Sub: string;
+  timelineStep2Title: string;
+  timelineStep2Sub: string;
+  timelineStep3Title: string;
+  timelineStep3Sub: string;
+  addToComboBtn: string;
+  inComboBtn: string;
+  comboFreeTravelBadge: string;
+  comboBookSelectionBtn: string;
+  comboTotalDurationLabel: string;
 }
 
 export interface BrandsTranslations {
@@ -232,6 +244,7 @@ export interface LogisticsTranslations {
   distanceLabel: string;
   feeLabel: string;
   feeFree: string;
+  bookInCommuneBtn: string;
   infoHours: string;
   infoHoursBold: string;
   infoSpace: string;
@@ -320,6 +333,17 @@ export interface ContactTranslations {
     errorTitle: string;
     errorGeneric: string;
     whatsappBtn: string;
+    liveRecapKicker: string;
+    liveRecapLocation: string;
+    liveRecapFeeFree: string;
+    liveRecapFeePaid: string;
+    liveRecapTotalLabel: string;
+    addSecondServiceLabel: string;
+    addServicePlaceholder: string;
+    removeServiceTitle: string;
+    comboBadgeTitle: string;
+    comboFeeFreeApplied: string;
+    comboTipZone2: string;
     success: {
       thanks: string;
       body: string;

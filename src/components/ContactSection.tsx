@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, MessageCircle, Mail, MapPin, Send, CheckCircle2, Instagram, Loader2, AlertCircle, Calendar, ClipboardCheck, Printer, FileText } from 'lucide-react';
+import { Phone, MessageCircle, Mail, MapPin, Send, CheckCircle2, Instagram, Loader2, AlertCircle, Calendar, ClipboardCheck, Printer, FileText, X } from 'lucide-react';
 import { getServices, ServiceItem } from '../data/servicesData';
 import { COMMUNES_DATA } from '../data/communesData';
 import { useLanguage } from '../i18n/LanguageContext';
@@ -10,10 +10,27 @@ import { BookingConditionsModal } from './BookingConditionsModal';
 
 interface ContactSectionProps {
   selectedService?: ServiceItem | null;
+  selectedServices?: ServiceItem[];
+  onChangeSelectedServices?: (services: ServiceItem[]) => void;
+  selectedCommuneName?: string | null;
   onOpenClientSheet?: () => void;
 }
 
-export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService, onOpenClientSheet }) => {
+const formatDurationMinutes = (minutes: number): string => {
+  const h = Math.floor(minutes / 60);
+  const m = minutes % 60;
+  if (h > 0 && m > 0) return `${h} h ${m} min`;
+  if (h > 0) return `${h} h`;
+  return `${m} min`;
+};
+
+export const ContactSection: React.FC<ContactSectionProps> = ({
+  selectedService,
+  selectedServices = [],
+  onChangeSelectedServices,
+  selectedCommuneName,
+  onOpenClientSheet,
+}) => {
   const { t, language } = useLanguage();
   const currentServices = getServices(language);
 
@@ -44,6 +61,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService,
       setIsCardHighlighted(true);
       const cardEl = document.getElementById('booking-conditions-card');
       if (cardEl) {
+        cardEl.dataset.krVisible = 'true';
+        cardEl.classList.add('is-visible');
         cardEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
       setTimeout(() => {
@@ -77,38 +96,95 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService,
     );
   };
 
-  // Synchronize when selectedService changes
-  useEffect(() => {
-    if (selectedService) {
-      const match = currentServices.find(s => s.id === selectedService.id) || selectedService;
-      setFormData(prev => ({
-        ...prev,
-        serviceId: match.id,
-        serviceTitle: match.title
-      }));
-    }
-  }, [selectedService, currentServices]);
+  const [selectedServiceIds, setSelectedServiceIds] = useState<string[]>(() => {
+    if (selectedServices.length > 0) return selectedServices.map(s => s.id);
+    if (selectedService) return [selectedService.id];
+    return [currentServices[0].id];
+  });
 
-  // Synchronize serviceTitle if language changes
+  // Synchronize when selectedServices or selectedService changes from parent
   useEffect(() => {
-    const matchedService = currentServices.find(s => s.id === formData.serviceId);
-    if (matchedService) {
+    if (selectedServices.length > 0) {
+      setSelectedServiceIds(selectedServices.map(s => s.id));
+    } else if (selectedService) {
+      setSelectedServiceIds([selectedService.id]);
+    }
+  }, [selectedServices, selectedService]);
+
+  // Synchronize when selectedCommuneName changes from LogisticsCalculator
+  useEffect(() => {
+    if (selectedCommuneName) {
       setFormData(prev => ({
         ...prev,
-        serviceTitle: matchedService.title
+        commune: selectedCommuneName
       }));
     }
-  }, [language, currentServices, formData.serviceId]);
+  }, [selectedCommuneName]);
+
+  const selectedServicesList: ServiceItem[] = (() => {
+    const resolved = selectedServiceIds
+      .map(id => currentServices.find(s => s.id === id))
+      .filter((s): s is ServiceItem => !!s);
+    return resolved.length > 0 ? resolved : [currentServices[0]];
+  })();
+
+  const isCombo = selectedServicesList.length >= 2;
+  const servicesSubtotal = selectedServicesList.reduce((sum, s) => sum + s.price, 0);
+  const totalDurationMinutes = selectedServicesList.reduce((sum, s) => sum + s.durationMinutes, 0);
+  const formattedTotalDuration = formatDurationMinutes(totalDurationMinutes);
+
+  const activeCommune = COMMUNES_DATA.find(c => c.name === formData.commune) || COMMUNES_DATA[0];
+  const baseCommuneFee = activeCommune.feeEuro;
+  // Rule: Travel fee is 100% free if >= 2 services (Combo) at the same address
+  const effectiveFee = isCombo ? 0 : baseCommuneFee;
+  const estimatedTotal = servicesSubtotal + effectiveFee;
+  const formattedTotal = estimatedTotal.toString().replace('.', ',');
+  const formattedBaseFee = baseCommuneFee.toString().replace('.', ',');
+
+  const combinedServiceTitle = isCombo
+    ? `${selectedServicesList.map(s => s.title).join(' + ')} (Combo ${selectedServicesList.length} · ${formattedTotalDuration})`
+    : selectedServicesList[0].title;
+
+  // Keep formData.serviceTitle & serviceId synchronized with selectedServicesList & language
+  useEffect(() => {
+    setFormData(prev => ({
+      ...prev,
+      serviceId: selectedServicesList[0].id,
+      serviceTitle: combinedServiceTitle,
+    }));
+  }, [combinedServiceTitle, selectedServicesList]);
+
+  const syncParentServices = (nextIds: string[]) => {
+    setSelectedServiceIds(nextIds);
+    if (onChangeSelectedServices) {
+      const nextItems = nextIds
+        .map(id => currentServices.find(s => s.id === id))
+        .filter((s): s is ServiceItem => !!s);
+      onChangeSelectedServices(nextItems);
+    }
+  };
+
+  const handlePrimaryServiceChange = (newPrimaryTitle: string) => {
+    const matched = currentServices.find(s => s.title === newPrimaryTitle);
+    if (!matched) return;
+    const restIds = selectedServiceIds.slice(1).filter(id => id !== matched.id);
+    syncParentServices([matched.id, ...restIds]);
+  };
+
+  const handleAddComboService = (serviceIdToAdd: string) => {
+    if (!serviceIdToAdd || selectedServiceIds.includes(serviceIdToAdd)) return;
+    syncParentServices([...selectedServiceIds, serviceIdToAdd]);
+  };
+
+  const handleRemoveComboService = (serviceIdToRemove: string) => {
+    if (selectedServiceIds.length <= 1) return;
+    syncParentServices(selectedServiceIds.filter(id => id !== serviceIdToRemove));
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     if (name === 'serviceTitle') {
-      const matched = currentServices.find(s => s.title === value);
-      setFormData(prev => ({
-        ...prev,
-        serviceTitle: value,
-        serviceId: matched ? matched.id : prev.serviceId
-      }));
+      handlePrimaryServiceChange(value);
     } else {
       setFormData(prev => ({
         ...prev,
@@ -615,6 +691,79 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService,
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-3 text-sm">
                   
+                  {/* Live Smart Recap Banner (Service(s) + Commune + Combo Free Travel + Total Estimé) */}
+                  <div className="p-3 sm:p-3.5 rounded-2xl bg-gradient-to-r from-[#F9F6F0] via-[#FFFDF9] to-[#D1C4E9]/25 border border-[#D1C4E9] shadow-2xs space-y-1.5">
+                    <div className="flex flex-wrap items-center justify-between gap-1.5">
+                      <span className="block text-[10px] font-bold uppercase tracking-wider text-[#8B2651]">
+                        {t.contact.rightCard.liveRecapKicker}
+                      </span>
+                      {isCombo && (
+                        <span className="px-2 py-0.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-[10px] font-bold">
+                          {t.contact.rightCard.comboBadgeTitle
+                            .replace('{count}', String(selectedServicesList.length))
+                            .replace('{duration}', formattedTotalDuration)}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Selected service(s) breakdown */}
+                    <div className="space-y-1">
+                      {selectedServicesList.map((srv, idx) => (
+                        <div key={srv.id} className="flex items-center justify-between gap-2 text-xs text-[#5D4037]">
+                          <span className="font-semibold truncate">
+                            {idx > 0 ? `+ ${srv.title}` : srv.title} ({srv.duration})
+                          </span>
+                          <span className="font-bold text-[#7A2048] shrink-0">
+                            {srv.price} €
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Commune & Travel Fee (0 € if Combo or Zone 1) */}
+                    <div className="flex items-center justify-between gap-2 text-[11px] sm:text-xs text-[#5D4037]/85">
+                      <span className="truncate">
+                        {t.contact.rightCard.liveRecapLocation.replace('{commune}', activeCommune.name)}
+                      </span>
+                      <span
+                        className={`font-semibold shrink-0 ${
+                          effectiveFee === 0 ? 'text-emerald-700' : 'text-[#512D6D]'
+                        }`}
+                      >
+                        {isCombo ? (
+                          <>
+                            {baseCommuneFee > 0 && (
+                              <span className="line-through text-[#5D4037]/50 mr-1.5 font-normal">
+                                +{formattedBaseFee} €
+                              </span>
+                            )}
+                            <span>{t.contact.rightCard.comboFeeFreeApplied}</span>
+                          </>
+                        ) : baseCommuneFee === 0 ? (
+                          t.contact.rightCard.liveRecapFeeFree
+                        ) : (
+                          t.contact.rightCard.liveRecapFeePaid.replace('{fee}', formattedBaseFee)
+                        )}
+                      </span>
+                    </div>
+
+                    {/* Helpful tip when in Zone 2 with only 1 service */}
+                    {!isCombo && baseCommuneFee > 0 && (
+                      <p className="text-[11px] text-[#512D6D] bg-[#D1C4E9]/35 px-2.5 py-1 rounded-lg font-medium">
+                        {t.contact.rightCard.comboTipZone2.replace('{fee}', formattedBaseFee)}
+                      </p>
+                    )}
+
+                    <div className="pt-1.5 border-t border-[#D1C4E9]/60 flex items-center justify-between gap-2">
+                      <span className="text-xs font-bold text-[#512D6D]">
+                        {t.contact.rightCard.liveRecapTotalLabel} ({formattedTotalDuration})
+                      </span>
+                      <span className="font-serif text-base sm:text-lg font-bold text-[#7A2048]">
+                        {formattedTotal} €
+                      </span>
+                    </div>
+                  </div>
+
                   {/* Name & Phone */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                     <div>
@@ -686,15 +835,15 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService,
                     </div>
                   </div>
 
-                  {/* Service Selection */}
-                  <div>
-                    <label htmlFor="contact-service" className="block text-xs sm:text-[13px] font-semibold text-[#5D4037] mb-1">
+                  {/* Service Selection (Single or Multi-Soin Combo) */}
+                  <div className="space-y-2">
+                    <label htmlFor="contact-service" className="block text-xs sm:text-[13px] font-semibold text-[#5D4037]">
                       {t.contact.rightCard.serviceLabel}
                     </label>
                     <select
                       id="contact-service"
                       name="serviceTitle"
-                      value={formData.serviceTitle}
+                      value={selectedServicesList[0].title}
                       onChange={handleChange}
                       className="min-h-[42px] w-full px-3 py-2 bg-[#F9F6F0] border border-[#D1C4E9] rounded-xl text-sm text-[#5D4037] focus:outline-none focus:border-[#512D6D] font-medium"
                     >
@@ -704,6 +853,59 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ selectedService,
                         </option>
                       ))}
                     </select>
+
+                    {/* Selected Combo Services Pills (when >= 2 services selected) */}
+                    {selectedServicesList.length >= 2 && (
+                      <div className="flex flex-wrap gap-1.5 pt-0.5">
+                        {selectedServicesList.map((srv, idx) => (
+                          <span
+                            key={srv.id}
+                            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#512D6D]/10 border border-[#512D6D]/30 text-xs font-semibold text-[#512D6D]"
+                          >
+                            <span>
+                              {idx + 1}. {srv.title} ({srv.price} €)
+                            </span>
+                            <button
+                              type="button"
+                              onClick={() => handleRemoveComboService(srv.id)}
+                              aria-label={t.contact.rightCard.removeServiceTitle}
+                              title={t.contact.rightCard.removeServiceTitle}
+                              className="text-[#512D6D]/70 hover:text-[#7A2048] cursor-pointer"
+                            >
+                              <X className="w-3.5 h-3.5" />
+                            </button>
+                          </span>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Add Additional Service for Combo */}
+                    {selectedServicesList.length < currentServices.length && (
+                      <div className="pt-0.5">
+                        <label htmlFor="contact-combo-add" className="block text-[11px] font-bold text-[#7A2048] mb-1">
+                          {t.contact.rightCard.addSecondServiceLabel}
+                        </label>
+                        <select
+                          id="contact-combo-add"
+                          value=""
+                          onChange={(e) => {
+                            if (e.target.value) {
+                              handleAddComboService(e.target.value);
+                            }
+                          }}
+                          className="min-h-[38px] w-full px-3 py-1.5 bg-white border border-dashed border-[#8B2651]/45 rounded-xl text-xs sm:text-[13px] text-[#512D6D] font-medium focus:outline-none focus:border-[#512D6D] cursor-pointer"
+                        >
+                          <option value="">{t.contact.rightCard.addServicePlaceholder}</option>
+                          {currentServices
+                            .filter((s) => !selectedServiceIds.includes(s.id))
+                            .map((s) => (
+                              <option key={s.id} value={s.id}>
+                                + {s.title} — {s.duration} ({s.price} €)
+                              </option>
+                            ))}
+                        </select>
+                      </div>
+                    )}
                   </div>
 
                   {/* Date & Time Slot */}

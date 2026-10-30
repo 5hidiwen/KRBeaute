@@ -115,7 +115,8 @@ body {
     will-change: opacity, transform, filter;
   }
 
-  html.js-reveal-ready .kr-reveal.is-visible {
+  html.js-reveal-ready .kr-reveal.is-visible,
+  html.js-reveal-ready .kr-reveal[data-kr-visible="true"] {
     opacity: 1;
     transform: translate3d(0, 0, 0);
     filter: blur(0);

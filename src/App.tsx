@@ -23,7 +23,8 @@ const LegalModal = lazy(() => import('./components/LegalModal').then(m => ({ def
 function AppContent() {
   const { language } = useLanguage();
   const [activeTab, setActiveTab] = useState<NavTab>('accueil');
-  const [selectedService, setSelectedService] = useState<ServiceItem | null>(null);
+  const [selectedServices, setSelectedServices] = useState<ServiceItem[]>([]);
+  const [selectedCommuneName, setSelectedCommuneName] = useState<string | null>(null);
   const [legalModalOpen, setLegalModalOpen] = useState(false);
   const [legalTab, setLegalTab] = useState<LegalTab>('mentions');
 
@@ -88,9 +89,20 @@ function AppContent() {
     }
   };
 
+  const handleToggleComboService = (service: ServiceItem) => {
+    setSelectedServices(prev =>
+      prev.some(s => s.id === service.id)
+        ? prev.filter(s => s.id !== service.id)
+        : [...prev, service]
+    );
+  };
+
   const handleOpenBooking = (service?: ServiceItem) => {
     if (service) {
-      setSelectedService(service);
+      setSelectedServices(prev => {
+        if (prev.some(s => s.id === service.id)) return prev;
+        return prev.length > 0 ? [...prev, service] : [service];
+      });
     }
     handleSelectTab('contact');
   };
@@ -201,7 +213,10 @@ function AppContent() {
 
             {/* 3. SOINS & TARIFS (Beige #F9F6F0) */}
             <ServicesMenu 
-              onSelectService={(service) => handleOpenBooking(service)} 
+              onSelectService={(service) => handleOpenBooking(service)}
+              selectedServices={selectedServices}
+              onToggleComboService={handleToggleComboService}
+              onBookCombo={() => handleSelectTab('contact')}
             />
 
             {/* 4. TECHNOLOGIES & MARQUES (Blanc bg-white) */}
@@ -211,7 +226,12 @@ function AppContent() {
             <AboutSection />
 
             {/* 6. RAYON D'ACTION & SECTEUR (Blanc bg-white) */}
-            <LogisticsCalculator />
+            <LogisticsCalculator
+              onSelectCommuneForBooking={(communeName) => {
+                setSelectedCommuneName(communeName);
+                handleSelectTab('contact');
+              }}
+            />
 
             {/* 7. AVIS CLIENTES & GOOGLE MAPS (Beige #F9F6F0) */}
             <HomeTestimonials />
@@ -223,7 +243,10 @@ function AppContent() {
 
             {/* 9. CONTACT & RÉSERVATION (Blanc bg-white) */}
             <ContactSection 
-              selectedService={selectedService} 
+              selectedService={selectedServices[0] || null}
+              selectedServices={selectedServices}
+              onChangeSelectedServices={setSelectedServices}
+              selectedCommuneName={selectedCommuneName}
               onOpenClientSheet={() => handleSelectTab('fiche-cliente')}
             />
 

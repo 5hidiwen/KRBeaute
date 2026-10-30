@@ -18,7 +18,11 @@ import { COMMUNES_DATA, CommuneItem } from '../data/communesData';
 import { useLanguage } from '../i18n/LanguageContext';
 import { filterCommunes } from '../utils/logisticsUtils';
 
-export const LogisticsCalculator: React.FC = () => {
+interface LogisticsCalculatorProps {
+  onSelectCommuneForBooking?: (communeName: string) => void;
+}
+
+export const LogisticsCalculator: React.FC<LogisticsCalculatorProps> = ({ onSelectCommuneForBooking }) => {
   const { t, language } = useLanguage();
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCommune, setSelectedCommune] = useState<CommuneItem | null>(null);
@@ -302,11 +306,22 @@ export const LogisticsCalculator: React.FC = () => {
                 </div>
               </div>
 
-              <div className="flex items-center gap-4 w-full sm:w-auto justify-between sm:justify-end pt-2 sm:pt-0 border-t sm:border-t-0 border-[#D1C4E9]/50">
-                <span className="text-xs text-[#5D4037]/80 font-medium">{t.logistics.feeLabel}</span>
-                <span className="text-xl sm:text-2xl font-serif font-bold text-[#512D6D]">
-                  {selectedCommune.feeEuro === 0 ? t.logistics.feeFree : `+${selectedCommune.feeEuro.toString().replace('.', ',')} €`}
-                </span>
+              <div className="flex flex-wrap items-center gap-3 sm:gap-4 w-full sm:w-auto justify-between sm:justify-end pt-2 sm:pt-0 border-t sm:border-t-0 border-[#D1C4E9]/50">
+                <div className="flex items-center gap-2">
+                  <span className="text-xs text-[#5D4037]/80 font-medium">{t.logistics.feeLabel}</span>
+                  <span className="text-xl sm:text-2xl font-serif font-bold text-[#512D6D]">
+                    {selectedCommune.feeEuro === 0 ? t.logistics.feeFree : `+${selectedCommune.feeEuro.toString().replace('.', ',')} €`}
+                  </span>
+                </div>
+                {onSelectCommuneForBooking && (
+                  <button
+                    type="button"
+                    onClick={() => onSelectCommuneForBooking(selectedCommune.name)}
+                    className="kr-btn-silk min-h-[40px] px-4 py-2 rounded-full bg-[#512D6D] hover:bg-[#402257] active:scale-98 text-white text-xs font-bold shadow-xs transition-all cursor-pointer"
+                  >
+                    <span>{t.logistics.bookInCommuneBtn.replace('{commune}', selectedCommune.name)}</span>
+                  </button>
+                )}
               </div>
             </div>
           )}
