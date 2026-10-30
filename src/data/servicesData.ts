@@ -47,7 +47,7 @@ export const SERVICES_FR: ServiceItem[] = [
     group: 'pieds-corps',
     title: 'Soin des pieds',
     tagline: 'Nettoyage en profondeur, masque & massage japonais 10 min',
-    description: 'Le rituel d’excellence pour une rénovation complète des pieds et un délassement intense.',
+    description: 'Le rituel complet pour une rénovation soignée des pieds et un délassement profond.',
     idealFor: 'Vos pieds sont fatigués ou secs et réclament une régénération profonde avec massage.',
     benefits: ['🌸 Nutrition intense', '💆‍♀️ Massage japonais', '🪶 Délassement'],
     duration: '1 h',

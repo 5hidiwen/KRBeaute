@@ -259,7 +259,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
       formData.message ? `• Précisions éventuelles : ${formData.message}` : `• Précisions : Aucune`,
       ``,
       `Coordonnées officielles de Karina Robart :`,
-      `Soins esthétiques d'exception à domicile — Rennes et alentours`,
+      `Soins esthétiques sur-mesure à domicile — Rennes et alentours`,
       `Téléphone : 06 65 56 67 02`,
       `E-mail : karinarobart@krbeaute.com`,
       `Site web : https://www.krbeaute.com`,
