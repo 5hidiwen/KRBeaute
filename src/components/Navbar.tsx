@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, MessageCircle, Home, Sparkles, MapPin, HelpCircle, Award, Cpu, Mail, Menu, X, ChevronRight, Clock, ClipboardCheck } from 'lucide-react';
+import { Phone, MessageCircle, Home, Sparkles, MapPin, HelpCircle, Award, Cpu, Mail, Menu, X, ChevronRight, Clock, ClipboardCheck, Gift } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 import { LanguageSelector } from './LanguageSelector';
 
-export type NavTab = 'accueil' | 'soins' | 'marques' | 'a-propos' | 'secteur' | 'fiche-cliente' | 'faq' | 'contact';
+export type NavTab = 'accueil' | 'soins' | 'marques' | 'a-propos' | 'secteur' | 'fiche-cliente' | 'carte-cadeau' | 'faq' | 'contact';
 
 interface NavbarProps {
   activeTab: NavTab;
@@ -52,19 +52,26 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
     };
   }, [plusSheetOpen]);
 
-  // Desktop Primary Links (≥ lg) - Synchronized with One-Page flow, with dedicated FAQ at the end
-  const primaryLinks: { id: NavTab; label: string }[] = [
-    { id: 'soins', label: isEs ? 'Tratamientos & Tarifas' : 'Soins & Tarifs' },
-    { id: 'marques', label: isEs ? 'Tecnologías' : 'Technologies & Marques' },
-    { id: 'a-propos', label: isEs ? 'Sobre Karina' : 'À Propos' },
-    { id: 'secteur', label: isEs ? 'Zona (7 km)' : 'Secteur (7 km)' },
+  // Desktop Primary Links (≥ lg) - Synchronized with One-Page flow (left) and Dedicated Pages (right)
+  const primaryLinks: { id: NavTab; label: string; isDedicatedPage?: boolean }[] = [
+    { id: 'soins', label: t.nav.tabs.soins },
+    { id: 'secteur', label: t.nav.tabs.secteurShort },
     { id: 'contact', label: isEs ? 'Contacto' : 'Contact' },
-    { id: 'fiche-cliente', label: t.nav.tabs.ficheClienteShort },
-    { id: 'faq', label: isEs ? 'FAQ' : 'FAQ' },
+    { id: 'carte-cadeau', label: `🎁 ${t.nav.tabs.carteCadeauShort}`, isDedicatedPage: true },
+    { id: 'marques', label: t.nav.tabs.marquesShort, isDedicatedPage: true },
+    { id: 'a-propos', label: t.nav.tabs.aProposShort, isDedicatedPage: true },
+    { id: 'fiche-cliente', label: t.nav.tabs.ficheClienteShort, isDedicatedPage: true },
+    { id: 'faq', label: t.nav.tabs.faq, isDedicatedPage: true },
   ];
 
   // Secondary items displayed inside the "Plus" Bottom Sheet on mobile/tablet
   const secondaryNavItems: SecondaryNavItem[] = [
+    {
+      id: 'carte-cadeau',
+      label: t.nav.tabs.carteCadeau,
+      sub: isEs ? 'Regala un facial o Dúo Signature en casa (válido 6 meses)' : 'Offrez un soin ou Duo Signature à domicile (valable 6 mois)',
+      icon: <Gift className="w-4 h-4 text-[#7A2048]" />
+    },
     {
       id: 'fiche-cliente',
       label: t.nav.tabs.ficheCliente,
@@ -74,7 +81,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
     {
       id: 'marques',
       label: isEs ? 'Tecnologías y Marcas' : 'Technologies & Grandes Maisons',
-      sub: isEs ? 'Nu Skin, Dr. Renaud, Dr. Tuna, LED' : 'Nu Skin, Dr. Renaud Paris, Dr. Tuna, LED',
+      sub: isEs ? 'Nu Skin, Dr. Renaud, Dr. Tuna by Farmasi, LED' : 'Nu Skin, Dr. Renaud Paris, Dr. Tuna by Farmasi, LED',
       icon: <Cpu className="w-4 h-4 text-[#512D6D]" />
     },
     {
@@ -103,7 +110,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
   const whatsAppUrl = `https://wa.me/33665566702?text=${encodeURIComponent(whatsAppGreeting)}`;
 
   // Whether a secondary tab (displayed inside "Plus" sheet) is currently active
-  const isSecondaryTabActive = activeTab === 'fiche-cliente' || activeTab === 'marques' || activeTab === 'a-propos' || activeTab === 'faq';
+  const isSecondaryTabActive = activeTab === 'carte-cadeau' || activeTab === 'fiche-cliente' || activeTab === 'marques' || activeTab === 'a-propos' || activeTab === 'faq';
 
   return (
     <>
@@ -111,7 +118,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
           1. TOP FLOATING NAVBAR (Desktop full menu + Mobile/Tablet streamlined)
          ========================================================================= */}
       <div className="sticky top-0 sm:top-3.5 z-40 pt-2 sm:pt-0 pb-1 sm:pb-0 px-3 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full transition-all duration-300 bg-[#F9F6F0]/90 sm:bg-transparent backdrop-blur-xs sm:backdrop-blur-none">
-        <header className={`relative overflow-hidden backdrop-blur-xl rounded-full transition-all duration-300 px-3 sm:px-5 py-1.5 sm:py-2 flex items-center justify-between gap-2 sm:gap-4 ${
+        <header className={`relative overflow-hidden backdrop-blur-xl rounded-full transition-all duration-300 px-3 sm:px-4 xl:px-5 py-1.5 sm:py-2 flex items-center justify-between gap-2 xl:gap-3 ${
           isScrolled
             ? 'bg-white/92 border border-[#512D6D]/25 shadow-[0_10px_30px_-8px_rgba(81,45,109,0.14)]'
             : 'bg-[#F9F6F0]/95 border border-[#D1C4E9]/80 shadow-xs hover:shadow-sm'
@@ -149,22 +156,29 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
           </button>
 
           {/* Desktop Primary Links (Center) - Visible on lg+ */}
-          <nav className="hidden lg:flex items-center gap-1 xl:gap-1.5" aria-label="Navigation principale">
-            {primaryLinks.map((link) => {
+          <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1" aria-label="Navigation principale">
+            {primaryLinks.map((link, idx) => {
               const isActive = activeTab === link.id;
+              const showSeparator = link.isDedicatedPage && !primaryLinks[idx - 1]?.isDedicatedPage;
               return (
-                <button
-                  key={link.id}
-                  type="button"
-                  onClick={() => handleTabClick(link.id)}
-                  className={`px-2.5 xl:px-3 py-1.5 text-xs font-medium rounded-full transition-colors cursor-pointer whitespace-nowrap focus-visible:ring-2 focus-visible:ring-[#512D6D] focus-visible:outline-none ${
-                    isActive
-                      ? 'bg-[#512D6D] text-white shadow-2xs font-semibold'
-                      : 'text-[#5D4037] hover:text-[#512D6D] hover:bg-[#D1C4E9]/30'
-                  }`}
-                >
-                  {link.label}
-                </button>
+                <React.Fragment key={link.id}>
+                  {showSeparator && (
+                    <span aria-hidden="true" className="h-4 w-[1px] bg-[#D1C4E9]/80 mx-1" />
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => handleTabClick(link.id)}
+                    className={`px-2 xl:px-2.5 py-1.5 text-xs font-medium rounded-full transition-colors cursor-pointer whitespace-nowrap focus-visible:ring-2 focus-visible:ring-[#512D6D] focus-visible:outline-none ${
+                      isActive
+                        ? 'bg-[#512D6D] text-white shadow-2xs font-semibold'
+                        : link.isDedicatedPage
+                        ? 'text-[#7A2048] hover:text-[#512D6D] hover:bg-[#D1C4E9]/30 font-semibold'
+                        : 'text-[#5D4037] hover:text-[#512D6D] hover:bg-[#D1C4E9]/30'
+                    }`}
+                  >
+                    {link.label}
+                  </button>
+                </React.Fragment>
               );
             })}
           </nav>
@@ -268,7 +282,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
               <MapPin className="w-5.5 h-5.5" />
             </div>
             <span className="text-[11px] leading-none tracking-tight truncate max-w-full font-medium">
-              {isEs ? 'Zona 7 km' : 'Secteur'}
+              {t.nav.tabs.secteurShort}
             </span>
           </button>
 
