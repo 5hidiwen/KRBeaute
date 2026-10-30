@@ -215,8 +215,7 @@ export const ClientSheetSection: React.FC = () => {
       'E-mail : karinarobart@krbeaute.com',
       'Site web : https://www.krbeaute.com',
     ];
-    const targetEmail = formData.email || 'karinarobart@krbeaute.com';
-    return `mailto:${targetEmail}?cc=karinarobart@krbeaute.com&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
+    return `mailto:karinarobart@krbeaute.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -446,14 +445,17 @@ export const ClientSheetSection: React.FC = () => {
                   <span>{cs.success.printBtn}</span>
                 </button>
 
-                <a
-                  href={generateMailtoUrl()}
-                  className="min-h-[48px] inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-[#F9F6F0] hover:bg-[#D1C4E9]/35 border border-[#D1C4E9] text-[#512D6D] text-xs sm:text-sm font-semibold transition-all active:scale-98"
+                <button
+                  type="button"
+                  onClick={() => {
+                    window.location.href = generateMailtoUrl();
+                  }}
+                  className="min-h-[48px] inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full bg-[#F9F6F0] hover:bg-[#D1C4E9]/35 border border-[#D1C4E9] text-[#512D6D] text-xs sm:text-sm font-semibold transition-all active:scale-98 cursor-pointer"
                   title={cs.success.mailtoCta}
                 >
                   <Mail className="w-4 h-4 text-[#512D6D]" />
                   <span>{cs.success.mailtoCta}</span>
-                </a>
+                </button>
 
                 <a
                   href={generateWhatsAppUrl()}
@@ -925,13 +927,16 @@ export const ClientSheetSection: React.FC = () => {
                   </a>
 
                   {/* Fallback Direct Mailto Action */}
-                  <a
-                    href={generateMailtoUrl()}
-                    className="min-h-[48px] inline-flex items-center justify-center gap-2 px-4 py-3 rounded-full bg-[#F9F6F0] hover:bg-[#D1C4E9]/30 border border-[#D1C4E9] text-[#5D4037] text-xs font-semibold transition-colors"
+                  <button
+                    type="button"
+                    onClick={() => {
+                      window.location.href = generateMailtoUrl();
+                    }}
+                    className="min-h-[48px] inline-flex items-center justify-center gap-2 px-4 py-3 rounded-full bg-[#F9F6F0] hover:bg-[#D1C4E9]/30 border border-[#D1C4E9] text-[#5D4037] text-xs font-semibold transition-colors cursor-pointer"
                   >
                     <Mail className="w-4 h-4 text-[#512D6D]" />
                     <span>{cs.mailtoFallbackBtn}</span>
-                  </a>
+                  </button>
                 </div>
               </div>
             </form>

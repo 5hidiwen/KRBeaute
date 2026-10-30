@@ -266,8 +266,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
       `E-mail : karinarobart@krbeaute.com`,
       `Site web : https://www.krbeaute.com`,
     ];
-    const targetEmail = formData.email || 'karinarobart@krbeaute.com';
-    return `mailto:${targetEmail}?cc=karinarobart@krbeaute.com&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
+    return `mailto:karinarobart@krbeaute.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -658,14 +657,17 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
                       <span>{t.contact.rightCard.success.printBtn}</span>
                     </button>
 
-                    <a
-                      href={generateSelfCopyMailto()}
-                      className="min-h-[44px] inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-white hover:bg-[#F9F6F0] border border-[#D1C4E9] text-[#512D6D] rounded-full text-xs font-semibold shadow-2xs transition-all active:scale-98"
+                    <button
+                      type="button"
+                      onClick={() => {
+                        window.location.href = generateSelfCopyMailto();
+                      }}
+                      className="min-h-[44px] inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-white hover:bg-[#F9F6F0] border border-[#D1C4E9] text-[#512D6D] rounded-full text-xs font-semibold shadow-2xs transition-all active:scale-98 cursor-pointer"
                       title={t.contact.rightCard.success.emailCopyBtn}
                     >
                       <Mail className="w-3.5 h-3.5 text-[#512D6D]" />
                       <span>{t.contact.rightCard.success.emailCopyBtn}</span>
-                    </a>
+                    </button>
 
                     <a
                       href={generateWhatsAppUrl()}
