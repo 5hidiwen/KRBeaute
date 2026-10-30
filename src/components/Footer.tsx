@@ -94,7 +94,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal }) => {
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1 font-semibold text-[#512D6D] hover:underline"
-              title="Boutique Farmasi Karina Robart"
+              title="Boutique Dr. Tuna Karina Robart"
             >
               <span>{t.footer.farmasiShop}</span>
             </a>

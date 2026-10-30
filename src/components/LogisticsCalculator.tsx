@@ -131,93 +131,77 @@ export const LogisticsCalculator: React.FC = () => {
            ========================================================================= */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 lg:gap-6 items-stretch">
           
-          {/* COLUMN 1 : ZONE 1 (≤ 7 km) - 0 € OFFERT */}
-          <div className="bg-white rounded-3xl p-5 sm:p-6 border-2 border-emerald-500/30 shadow-xs flex flex-col justify-between hover:shadow-md transition-shadow">
-            <div>
-              {/* Card Header */}
-              <div className="flex items-center justify-between gap-2 mb-4">
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-                  <span>{t.logistics.zones.zone1Tag}</span>
-                </div>
-                <span className="text-[11px] font-semibold text-[#5D4037]/60">0 - 7 km</span>
+          {/* COLUMN 1 : ZONE 1 (≤ 7 km) - DÉPLACEMENT OFFERT */}
+          <div className="bg-white rounded-3xl p-5 sm:p-6 border-2 border-emerald-500/30 shadow-xs flex flex-col hover:shadow-md transition-shadow">
+            {/* Card Header */}
+            <div className="flex items-center justify-between gap-2 mb-4">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold">
+                <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+                <span>{t.logistics.zones.zone1Tag}</span>
               </div>
-
-              <h3 className="font-serif text-lg sm:text-xl font-bold text-[#5D4037] mb-1">
-                {t.logistics.zones.zone1Title}
-              </h3>
-              <p className="text-xs text-[#5D4037]/75 mb-4">
-                {t.logistics.zones.zone1Sub}
-              </p>
-
-              {/* Commune Pills */}
-              <div className="flex flex-wrap gap-1.5 mb-6">
-                {zone1Communes.map((commune) => (
-                  <button
-                    key={commune.name}
-                    type="button"
-                    onClick={() => setSelectedCommune(commune)}
-                    className={`px-2.5 py-1 text-xs rounded-lg transition-colors cursor-pointer text-left ${
-                      selectedCommune?.name === commune.name
-                        ? 'bg-[#512D6D] text-white font-bold'
-                        : 'bg-[#F9F6F0] text-[#5D4037] hover:bg-[#D1C4E9]/40 border border-[#D1C4E9]/50'
-                    }`}
-                  >
-                    {commune.name}
-                  </button>
-                ))}
-              </div>
+              <span className="text-[11px] font-semibold text-[#5D4037]/60">0 - 7 km</span>
             </div>
 
-            {/* Bottom Note */}
-            <div className="pt-3 border-t border-[#D1C4E9]/50 flex items-center gap-2 text-xs font-medium text-emerald-800">
-              <Check className="w-4 h-4 text-emerald-600 shrink-0" />
-              <span>{isEs ? 'Traslado 100% sin costo' : 'Déplacement systématiquement offert'}</span>
+            <h3 className="font-serif text-lg sm:text-xl font-bold text-[#5D4037] mb-1">
+              {t.logistics.zones.zone1Title}
+            </h3>
+            <p className="text-xs text-[#5D4037]/75 mb-4">
+              {t.logistics.zones.zone1Sub}
+            </p>
+
+            {/* Commune Pills */}
+            <div className="flex flex-wrap gap-1.5">
+              {zone1Communes.map((commune) => (
+                <button
+                  key={commune.name}
+                  type="button"
+                  onClick={() => setSelectedCommune(commune)}
+                  className={`px-2.5 py-1 text-xs rounded-lg transition-colors cursor-pointer text-left ${
+                    selectedCommune?.name === commune.name
+                      ? 'bg-[#512D6D] text-white font-bold'
+                      : 'bg-[#F9F6F0] text-[#5D4037] hover:bg-[#D1C4E9]/40 border border-[#D1C4E9]/50'
+                  }`}
+                >
+                  {commune.name}
+                </button>
+              ))}
             </div>
           </div>
 
-          {/* COLUMN 2 : ZONE 2 (7 à 20 km) - +5 € */}
-          <div className="bg-white rounded-3xl p-5 sm:p-6 border border-[#D1C4E9] shadow-xs flex flex-col justify-between hover:shadow-md transition-shadow">
-            <div>
-              {/* Card Header */}
-              <div className="flex items-center justify-between gap-2 mb-4">
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#D1C4E9]/40 border border-[#D1C4E9] text-[#512D6D] text-xs font-bold">
-                  <Car className="w-3.5 h-3.5 text-[#512D6D]" />
-                  <span>{t.logistics.zones.zone2Tag}</span>
-                </div>
-                <span className="text-[11px] font-semibold text-[#5D4037]/60">7 - 12 km</span>
+          {/* COLUMN 2 : ZONE 2 (7 à 12 km) - +8,50 € */}
+          <div className="bg-white rounded-3xl p-5 sm:p-6 border border-[#D1C4E9] shadow-xs flex flex-col hover:shadow-md transition-shadow">
+            {/* Card Header */}
+            <div className="flex items-center justify-between gap-2 mb-4">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#D1C4E9]/40 border border-[#D1C4E9] text-[#512D6D] text-xs font-bold">
+                <Car className="w-3.5 h-3.5 text-[#512D6D]" />
+                <span>{t.logistics.zones.zone2Tag}</span>
               </div>
-
-              <h3 className="font-serif text-lg sm:text-xl font-bold text-[#5D4037] mb-1">
-                {t.logistics.zones.zone2Title}
-              </h3>
-              <p className="text-xs text-[#5D4037]/75 mb-4">
-                {t.logistics.zones.zone2Sub}
-              </p>
-
-              {/* Commune Pills */}
-              <div className="flex flex-wrap gap-1.5 mb-6">
-                {zone2Communes.map((commune) => (
-                  <button
-                    key={commune.name}
-                    type="button"
-                    onClick={() => setSelectedCommune(commune)}
-                    className={`px-2.5 py-1 text-xs rounded-lg transition-colors cursor-pointer text-left ${
-                      selectedCommune?.name === commune.name
-                        ? 'bg-[#512D6D] text-white font-bold'
-                        : 'bg-[#F9F6F0] text-[#5D4037] hover:bg-[#D1C4E9]/40 border border-[#D1C4E9]/50'
-                    }`}
-                  >
-                    {commune.name}
-                  </button>
-                ))}
-              </div>
+              <span className="text-[11px] font-semibold text-[#5D4037]/60">7 - 12 km</span>
             </div>
 
-            {/* Bottom Note */}
-            <div className="pt-3 border-t border-[#D1C4E9]/50 flex items-center gap-2 text-xs font-medium text-[#5D4037]/80">
-              <Check className="w-4 h-4 text-[#512D6D] shrink-0" />
-              <span>{isEs ? 'Tarifa fija por traslado' : 'Forfait fixe par déplacement'}</span>
+            <h3 className="font-serif text-lg sm:text-xl font-bold text-[#5D4037] mb-1">
+              {t.logistics.zones.zone2Title}
+            </h3>
+            <p className="text-xs text-[#5D4037]/75 mb-4">
+              {t.logistics.zones.zone2Sub}
+            </p>
+
+            {/* Commune Pills */}
+            <div className="flex flex-wrap gap-1.5">
+              {zone2Communes.map((commune) => (
+                <button
+                  key={commune.name}
+                  type="button"
+                  onClick={() => setSelectedCommune(commune)}
+                  className={`px-2.5 py-1 text-xs rounded-lg transition-colors cursor-pointer text-left ${
+                    selectedCommune?.name === commune.name
+                      ? 'bg-[#512D6D] text-white font-bold'
+                      : 'bg-[#F9F6F0] text-[#5D4037] hover:bg-[#D1C4E9]/40 border border-[#D1C4E9]/50'
+                  }`}
+                >
+                  {commune.name}
+                </button>
+              ))}
             </div>
           </div>
 
@@ -283,7 +267,7 @@ export const LogisticsCalculator: React.FC = () => {
                 >
                   <span className="font-semibold truncate">{c.name}</span>
                   <span className="text-[11px] font-bold text-[#512D6D] shrink-0 ml-1">
-                    {c.feeEuro === 0 ? '0 €' : `+${c.feeEuro.toString().replace('.', ',')} €`}
+                    {c.feeEuro === 0 ? (isEs ? 'Sin costo' : 'Offert') : `+${c.feeEuro.toString().replace('.', ',')} €`}
                   </span>
                 </button>
               ))}

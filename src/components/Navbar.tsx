@@ -58,7 +58,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activeTab, onSelectTab }) => {
     {
       id: 'marques',
       label: isEs ? 'Tecnologías y Marcas' : 'Technologies & Grandes Maisons',
-      sub: isEs ? 'Nu Skin, Dr. Renaud, Farmasi, LED' : 'Nu Skin, Dr. Renaud Paris, Farmasi, LED',
+      sub: isEs ? 'Nu Skin, Dr. Renaud, Dr. Tuna, LED' : 'Nu Skin, Dr. Renaud Paris, Dr. Tuna, LED',
       icon: <Cpu className="w-4 h-4 text-[#512D6D]" />
     },
     {

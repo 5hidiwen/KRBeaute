@@ -146,6 +146,18 @@ export interface BrandsTranslations {
       title: string;
       desc: string;
     };
+    galvanic: {
+      tag: string;
+      note: string;
+      title: string;
+      desc: string;
+    };
+    highFrequency: {
+      tag: string;
+      note: string;
+      title: string;
+      desc: string;
+    };
   };
 }
 

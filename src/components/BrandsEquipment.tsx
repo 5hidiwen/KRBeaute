@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Cpu, Sun, Sparkles, ExternalLink, ShoppingBag } from 'lucide-react';
+import { Cpu, Sun, Sparkles, Zap, ExternalLink, ShoppingBag } from 'lucide-react';
 import { useLanguage } from '../i18n/LanguageContext';
 
 export const BrandsEquipment: React.FC = () => {
@@ -113,7 +113,7 @@ export const BrandsEquipment: React.FC = () => {
                   {t.brands.brands.farmasi.badge}
                 </span>
               </div>
-              <h3 className="font-serif text-base sm:text-lg font-bold text-[#512D6D]">Farmasi</h3>
+              <h3 className="font-serif text-base sm:text-lg font-bold text-[#512D6D]">Dr. Tuna</h3>
               <p className="text-[11px] font-semibold text-[#5D4037]/70 uppercase tracking-wider mb-1.5">
                 {t.brands.brands.farmasi.category}
               </p>
@@ -211,6 +211,44 @@ export const BrandsEquipment: React.FC = () => {
               </h3>
               <p className="text-xs sm:text-[13px] text-[#5D4037]/85 leading-relaxed mt-0.5 line-clamp-2">
                 {t.brands.tech.led.desc}
+              </p>
+            </div>
+          </div>
+
+          {/* Galvanic Current */}
+          <div className="bg-white/90 hover:bg-white rounded-2xl p-4 border border-[#D1C4E9]/70 shadow-2xs flex items-center gap-3.5 transition-all">
+            <div className="w-10 h-10 rounded-xl bg-[#512D6D] text-white flex items-center justify-center shrink-0 shadow-2xs">
+              <Zap className="w-5 h-5" />
+            </div>
+            <div className="min-w-0 flex-1">
+              <div className="flex items-center gap-2 mb-0.5">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#512D6D]">{t.brands.tech.galvanic.tag}</span>
+                <span className="text-[11px] text-[#5D4037]/60">{t.brands.tech.galvanic.note}</span>
+              </div>
+              <h3 className="font-serif text-base sm:text-lg font-bold text-[#5D4037]">
+                {t.brands.tech.galvanic.title}
+              </h3>
+              <p className="text-xs sm:text-[13px] text-[#5D4037]/85 leading-relaxed mt-0.5 line-clamp-2">
+                {t.brands.tech.galvanic.desc}
+              </p>
+            </div>
+          </div>
+
+          {/* High Frequency */}
+          <div className="bg-white/90 hover:bg-white rounded-2xl p-4 border border-[#D1C4E9]/70 shadow-2xs flex items-center gap-3.5 transition-all">
+            <div className="w-10 h-10 rounded-xl bg-[#512D6D] text-white flex items-center justify-center shrink-0 shadow-2xs">
+              <Sparkles className="w-5 h-5" />
+            </div>
+            <div className="min-w-0 flex-1">
+              <div className="flex items-center gap-2 mb-0.5">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#512D6D]">{t.brands.tech.highFrequency.tag}</span>
+                <span className="text-[11px] text-[#5D4037]/60">{t.brands.tech.highFrequency.note}</span>
+              </div>
+              <h3 className="font-serif text-base sm:text-lg font-bold text-[#5D4037]">
+                {t.brands.tech.highFrequency.title}
+              </h3>
+              <p className="text-xs sm:text-[13px] text-[#5D4037]/85 leading-relaxed mt-0.5 line-clamp-2">
+                {t.brands.tech.highFrequency.desc}
               </p>
             </div>
           </div>

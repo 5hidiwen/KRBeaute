@@ -46,7 +46,7 @@ export const SERVICES_FR: ServiceItem[] = [
     description: 'Le rituel d’excellence pour une rénovation complète des pieds et un délassement intense.',
     duration: '1 h',
     durationMinutes: 60,
-    price: 50,
+    price: 55,
     badge: 'Complet & Relaxant',
     colorTheme: 'plum',
     comprend: [
@@ -64,15 +64,15 @@ export const SERVICES_FR: ServiceItem[] = [
     category: 'corps',
     group: 'pieds-corps',
     title: 'Modelage en chaise',
-    tagline: 'Massage assis ergonomique : épaules, nuque & bras',
+    tagline: 'Massage assis ergonomique : dos haut et bas, épaules, bras, nuque & cuir chevelu',
     description: 'Massage décontractant sur chaise ergonomique professionnelle apportée chez vous pour dénouer immédiatement le haut du corps sans déshabillage.',
     duration: '20 min',
     durationMinutes: 20,
-    price: 30,
+    price: 35,
     badge: 'Détente Express',
     colorTheme: 'plum',
     comprend: [
-      'Massage doux, épaules, nuque et bras',
+      'Massage dos haut et bas, épaules, bras, nuque et cuir chevelu',
       'Détente musculaire',
       'Soulagement des tensions',
       'Bien-être immédiat'
@@ -86,7 +86,7 @@ export const SERVICES_FR: ServiceItem[] = [
     group: 'visage-regard',
     title: 'Rehaussement + Teinte de Cils',
     tagline: 'Regard sublimé, courbure naturelle & teinture longue durée',
-    description: 'Rehaussement délicat des cils naturels cil à cil dès la racine combiné à une teinture noire/brune intense pour ouvrir le regard sans mascara pendant 6 à 8 semaines.',
+    description: 'Rehaussement délicat des cils naturels cil à cil dès la racine combiné à une teinture noire/brune intense pour ouvrir le regard sans mascara pendant 4 à 6 semaines selon le diagnostic réalisé au début de la séance.',
     duration: '60 min',
     durationMinutes: 60,
     price: 45,
@@ -113,10 +113,9 @@ export const SERVICES_FR: ServiceItem[] = [
     colorTheme: 'cyan',
     protocolSteps: [
       'Double nettoyage doux adapté à votre typologie cutanée',
-      'Gommage enzymatique dermo-nettoyant',
-      'Désincrustation douce et élimination ciblée des impuretés',
+      'Gommage à double action',
       'Masque purifiant et rééquilibrant',
-      'Application d’un soin hydratant matifiant et protecteur'
+      'Application d’un soin adapté'
     ]
   },
   {
@@ -190,7 +189,7 @@ export const SERVICES_ES: ServiceItem[] = [
     description: 'El ritual ideal para consentir y renovar tus pies por completo con un alivio reconfortante.',
     duration: '1 h',
     durationMinutes: 60,
-    price: 50,
+    price: 55,
     badge: 'Completo y Relajante',
     colorTheme: 'plum',
     comprend: [
@@ -208,15 +207,15 @@ export const SERVICES_ES: ServiceItem[] = [
     category: 'corps',
     group: 'pieds-corps',
     title: 'Masaje en silla ergonómica',
-    tagline: 'Masaje sentado ergonómico: hombros, cuello y brazos',
+    tagline: 'Masaje sentado ergonómico: espalda alta y baja, hombros, brazos, cuello y cuero cabelludo',
     description: 'Masaje descontracturante en silla ergonómica profesional en la comodidad de tu casa para liberar la tensión en hombros, cuello y espalda, sin necesidad de desvestirte.',
     duration: '20 min',
     durationMinutes: 20,
-    price: 30,
+    price: 35,
     badge: 'Relajación Exprés',
     colorTheme: 'plum',
     comprend: [
-      'Masaje relajante en hombros, cuello y brazos',
+      'Masaje en espalda alta y baja, hombros, brazos, cuello y cuero cabelludo',
       'Alivio y descanso muscular',
       'Liberación de tensiones acumuladas',
       'Sensación inmediata de bienestar y ligereza'
@@ -230,7 +229,7 @@ export const SERVICES_ES: ServiceItem[] = [
     group: 'visage-regard',
     title: 'Lifting + Tinte de Pestañas',
     tagline: 'Mirada abierta, curvatura natural y tinte de larga duración',
-    description: 'Lifting delicado de pestañas naturales pestaña por pestaña desde la raíz, combinado con un tinte negro o castaño intenso para abrir tu mirada sin necesidad de rímel durante 6 a 8 semanas.',
+    description: 'Lifting delicado de pestañas naturales pestaña por pestaña desde la raíz, combinado con un tinte negro o castaño intenso para abrir tu mirada sin necesidad de rímel durante 4 a 6 semanas dependiendo del diagnóstico realizado al inicio de la sesión.',
     duration: '60 min',
     durationMinutes: 60,
     price: 45,
@@ -257,10 +256,9 @@ export const SERVICES_ES: ServiceItem[] = [
     colorTheme: 'cyan',
     protocolSteps: [
       'Doble limpieza suave adaptada a tu tipo de piel',
-      'Exfoliación enzimática dermo-purificante',
-      'Desincrustación suave y extracción selectiva de impurezas',
+      'Gommage à double action',
       'Mascarilla purificante y reequilibrante',
-      'Aplicación de crema hidratante matificante y protectora'
+      'Application d’un soin adapté'
     ]
   },
   {
